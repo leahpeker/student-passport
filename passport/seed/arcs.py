@@ -1104,6 +1104,10 @@ FILLER_GUARDIANS = [
      'students': ['f18', 'f15']},
     {'first': 'Anneke', 'last': 'Halvorsen', 'relationship': 'mother',
      'students': ['f22', 'f11']},
+    # The guardian account used for demos: two students, neither of them a
+    # hero arc, so their passports can be changed without disturbing one.
+    {'first': 'Rosa', 'last': 'Delgado', 'relationship': 'mother',
+     'students': ['f09', 'f24']},
 ]
 
 FILLER_ASSESSMENT_KINDS = [

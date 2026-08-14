@@ -1189,7 +1189,7 @@ const accounts = new Map<string, MockAccount>([
   // fixtures or the real API are in play.
   teacherAccount(101, 't.elena.ramirez', 'Elena', 'Ramirez', 'Ms. Rivera'),
   teacherAccount(102, 'm.halloran', 'Dermot', 'Halloran', 'Mr. Halloran'),
-  guardianAccount(201, 'g.tanisha.carter', 'Tanisha', 'Carter', [2, 7]),
+  guardianAccount(201, 'g.rosa.delgado', 'Rosa', 'Delgado', [2, 7]),
   guardianAccount(202, 'e.whitaker', 'Erin', 'Whitaker', [4]),
   studentAccount(11, 's.maya.okonkwo', 1),
   studentAccount(14, 's.whitaker', 4),
@@ -1200,7 +1200,7 @@ export const DEMO_LOGINS: { username: string; role: Role; note: string }[] = [
   // These must match the seeded accounts in passport/seed/, or the one-click
   // demo logins fail against the real API.
   { username: 't.elena.ramirez', role: 'teacher', note: 'Two classrooms, 21 students' },
-  { username: 'g.tanisha.carter', role: 'guardian', note: 'Deshawn and Nia Carter' },
+  { username: 'g.rosa.delgado', role: 'guardian', note: 'Fatima Haddad and Talia Mensah' },
   { username: 's.maya.okonkwo', role: 'student', note: 'Their own passport' },
 ];
 

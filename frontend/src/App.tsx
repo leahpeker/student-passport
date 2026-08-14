@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, type ReactElement } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { getMe, logout } from './api/client';
-import type { Me } from './api/types';
+import type { Me, Role } from './api/types';
 import { Layout } from './components/Layout';
+import { landingPath } from './lib/access';
 import { GuardianView } from './views/GuardianView';
 import { LoginView } from './views/LoginView';
 import { PassportView } from './views/PassportView';
@@ -10,14 +11,31 @@ import { TeacherView } from './views/TeacherView';
 
 /** Sends each role to the view it starts in. */
 function Landing({ me }: { me: Me }) {
-  if (me.role === 'teacher') return <Navigate to="/teacher" replace />;
-  if (me.role === 'guardian') return <Navigate to="/guardian" replace />;
-  if (me.student_id != null) return <Navigate to={`/students/${me.student_id}`} replace />;
-  return (
-    <p className="p-8 text-muted">
-      This account is not linked to a student record.
-    </p>
-  );
+  if (me.role === 'student' && me.student_id == null) {
+    return (
+      <p className="p-8 text-muted">
+        This account is not linked to a student record.
+      </p>
+    );
+  }
+  return <Navigate to={landingPath(me)} replace />;
+}
+
+/**
+ * Keeps one role out of another's view. A guardian who lands on /teacher is
+ * sent to their own students rather than told they teach nothing.
+ */
+function RequireRole({
+  me,
+  role,
+  children,
+}: {
+  me: Me;
+  role: Role;
+  children: ReactElement;
+}) {
+  if (me.role !== role) return <Navigate to={landingPath(me)} replace />;
+  return children;
 }
 
 export default function App() {
@@ -60,8 +78,22 @@ export default function App() {
         <Layout me={me} onSignOut={signOut}>
           <Routes>
             <Route path="/" element={<Landing me={me} />} />
-            <Route path="/teacher" element={<TeacherView />} />
-            <Route path="/guardian" element={<GuardianView me={me} />} />
+            <Route
+              path="/teacher"
+              element={
+                <RequireRole me={me} role="teacher">
+                  <TeacherView />
+                </RequireRole>
+              }
+            />
+            <Route
+              path="/guardian"
+              element={
+                <RequireRole me={me} role="guardian">
+                  <GuardianView me={me} />
+                </RequireRole>
+              }
+            />
             <Route path="/students/:studentId" element={<PassportView me={me} />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
