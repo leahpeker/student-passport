@@ -51,6 +51,20 @@ A teacher observation is body-only and leaves `data` empty.
 `Guardianship` is many-to-many rather than one guardian per student, so two
 parents is representable.
 
+## Tolerant by design
+
+The API makes no assumptions about which records exist or what shape they
+take. It groups whatever is there by source, passes free text through as
+free text, and reads `data` only where it is present. A student with no
+guardian input, no AI tutor history, or no engagement samples still produces
+a valid passport — those sections are simply thinner.
+
+This is the point of one record table rather than eight: a new source can be
+added without touching the API, and a source that never arrives costs
+nothing. Passport sections and the question box are built to degrade, never
+to require. No endpoint should fail because an expected record kind is
+missing.
+
 ## Permissions
 
 One `can_view_student(user, student)` helper, called by every student-scoped
