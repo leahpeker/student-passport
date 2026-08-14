@@ -48,6 +48,20 @@ SYSTEM = (
     'not show something, say so plainly.\n'
     '- Describe the pattern, not a verdict. No labels, no medical or legal advice.\n'
     '- Plain English. Short sentences. No headings, no bullet lists, no markdown.\n'
+    'Write it the way a colleague would say it out loud:\n'
+    '- Lead with the thing that matters. First sentence is what the next adult '
+    'most needs to know, not a recap of who the student is or what they are '
+    'enrolled in.\n'
+    '- Evidence carries the sentence; it is not the subject of it. Say "he is '
+    'sharpest after lunch and flat first thing" and let one number back it. Never '
+    'write a sentence whose content is a statistic, and never stack several.\n'
+    '- Drop the instrumentation. No sample sizes, no "mean", no "across N '
+    'samples", no parenthesised metrics. Round naturally: "about four in five", '
+    '"most Mondays".\n'
+    '- Name periods and subjects the way a person would — "fifth period", "in '
+    'the lab" — not as a list of numbers.\n'
+    '- Say less rather than padding. If a section has little to go on, two honest '
+    'sentences beat five hedged ones.\n'
     'The records are synthetic, written for a demonstration.'
 )
 
@@ -248,18 +262,21 @@ exactly these keys:
   "behavior": "..."
 }}
 
-- overview.teacher_voice: 3-5 sentences. What a teacher who knows {name} would
-  tell the next teacher. Name the pattern the records show and the evidence for it.
-- overview.guardian_voice: 2-4 sentences, written from the guardian records only.
-  If there are none, say so in one sentence and stop.
-- overview.student_voice: 2-4 sentences, from the student's own words and their
-  tutor sessions. If they have written nothing, say so and stop.
-- how_they_learn: 3-5 sentences on conditions, times of day and formats where the
-  work goes well, with the periods and numbers that show it.
-- performance: 3-5 sentences on the direction of travel per subject, with real
-  scores and dates.
-- behavior: 3-5 sentences on what the behaviour and attendance records show,
-  including when and where entries cluster. This section is read by adults only.
+- overview.teacher_voice: 2-4 sentences. What a teacher who knows {name} would
+  actually say to the next teacher over coffee. Start with what to expect from
+  them, not with their enrolment.
+- overview.guardian_voice: 1-3 sentences, from the guardian records only, in the
+  spirit of what home has asked the school to understand. If there are none, say
+  so in one sentence and stop.
+- overview.student_voice: 1-3 sentences, from the student's own words and their
+  tutor sessions. Prefer their phrasing over a summary of it. If they have
+  written nothing, say so and stop.
+- how_they_learn: 2-4 sentences on when and how the work goes well, and what to
+  do with that. Concrete and usable — a reader should know what to change.
+- performance: 2-4 sentences on the direction of travel. Which way each subject
+  is going and roughly how far; a couple of real scores, not a table in prose.
+- behavior: 2-4 sentences on what the behaviour and attendance records show and
+  where they cluster. Adults only, so be direct without being clinical.
 
 Every other section may be read by the student themselves, so keep them true but
 supportive, and keep disciplinary detail out of them.
@@ -360,10 +377,12 @@ ASK_PROMPT = """{context}
 {narrative}
 QUESTION FROM A {role}: {question}
 
-Answer in 3 to 6 sentences, for someone who has not read these records. Quote
-the specific dates, scores, periods and phrases you relied on — an answer that
-would fit any other student is wrong. If the records cannot answer the question,
-say exactly that and say what is missing.
+Answer in 2 to 5 sentences, for someone who has not read these records and is
+reading between lessons. Answer the question asked, first sentence, before any
+context. An answer that would fit any other student is wrong, so lean on the
+specific dates, scores, periods and phrases — but weave them into normal
+sentences rather than listing them, and skip sample sizes and averages. If the
+records cannot answer the question, say exactly that and say what is missing.
 
 End with one final line in exactly this form, listing the record ids you used:
 RECORDS: 12, 45, 88
