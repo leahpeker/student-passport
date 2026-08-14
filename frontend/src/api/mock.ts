@@ -1185,19 +1185,23 @@ function teacherAccount(
 }
 
 const accounts = new Map<string, MockAccount>([
-  teacherAccount(101, 't.rivera', 'Elena', 'Rivera', 'Ms. Rivera'),
+  // Usernames match the seeded accounts so the same demo logins work whether
+  // fixtures or the real API are in play.
+  teacherAccount(101, 't.elena.ramirez', 'Elena', 'Ramirez', 'Ms. Rivera'),
   teacherAccount(102, 'm.halloran', 'Dermot', 'Halloran', 'Mr. Halloran'),
-  guardianAccount(201, 'r.carter', 'Renata', 'Carter', [2, 7]),
+  guardianAccount(201, 'g.tanisha.carter', 'Tanisha', 'Carter', [2, 7]),
   guardianAccount(202, 'e.whitaker', 'Erin', 'Whitaker', [4]),
-  studentAccount(11, 's.okonkwo', 1),
+  studentAccount(11, 's.maya.okonkwo', 1),
   studentAccount(14, 's.whitaker', 4),
 ]);
 
 /** Shown on the login form so a demo audience can sign in. */
 export const DEMO_LOGINS: { username: string; role: Role; note: string }[] = [
-  { username: 't.rivera', role: 'teacher', note: 'Three classrooms, 20 students' },
-  { username: 'r.carter', role: 'guardian', note: 'Two students' },
-  { username: 's.okonkwo', role: 'student', note: 'Their own passport' },
+  // These must match the seeded accounts in passport/seed/, or the one-click
+  // demo logins fail against the real API.
+  { username: 't.elena.ramirez', role: 'teacher', note: 'Two classrooms, 21 students' },
+  { username: 'g.tanisha.carter', role: 'guardian', note: 'Deshawn and Nia Carter' },
+  { username: 's.maya.okonkwo', role: 'student', note: 'Their own passport' },
 ];
 
 export const DEMO_PASSWORD = 'demo12345';

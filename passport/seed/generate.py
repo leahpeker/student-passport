@@ -520,8 +520,13 @@ def run(reset=False):
         rooms[code].students.set(roster)
 
     # --- write records -----------------------------------------------------
-    StudentRecord.objects.filter(student__in=students.values()).exclude(
-        source=SR.QUESTION).delete()
+    # Mark what the seeder owns, then replace only that. Anything written at
+    # runtime — a question asked in the demo, a note a guardian or student
+    # added — carries no marker and survives a reseed.
+    for record in records:
+        record.data = {**(record.data or {}), 'seeded': True}
+    StudentRecord.objects.filter(
+        student__in=students.values(), data__seeded=True).delete()
     StudentRecord.objects.bulk_create(records, batch_size=500)
 
     return {
