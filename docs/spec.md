@@ -14,10 +14,10 @@ that travels with the student and can be handed to a person or another tool.
 
 | Layer | Choice |
 | --- | --- |
-| Backend | Django 6 + Django REST Framework, SQLite |
+| Backend | Django 6 + Django REST Framework |
 | Auth | Django session auth, seeded users |
 | Frontend | React + Vite + TypeScript + Tailwind, Recharts |
-| LLM | Claude `anthropic.claude-opus-5` via AWS Bedrock (`AnthropicBedrockMantle`) |
+| LLM | Claude `claude-opus-5`, Anthropic API (`ANTHROPIC_API_KEY`) |
 | Speech | Browser-native Web Speech API |
 
 ## Data model

@@ -27,9 +27,8 @@ DEBUG = os.getenv('DJANGO_DEBUG', '1') == '1'
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
-# Claude via AWS Bedrock. Model IDs on Bedrock take the `anthropic.` prefix.
-BEDROCK_REGION = os.getenv('BEDROCK_REGION', 'us-west-2')
-BEDROCK_MODEL = os.getenv('BEDROCK_MODEL', 'anthropic.claude-opus-5')
+ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY')
+CLAUDE_MODEL = os.getenv('CLAUDE_MODEL', 'claude-opus-5')
 
 
 # Application definition
