@@ -48,7 +48,7 @@ export function BehaviorSection({
             {topPeriod && topPeriod.count > 0 && (
               <>
                 , with the largest cluster in{' '}
-                <span className="font-medium text-slate-900">
+                <span className="font-medium text-text">
                   period {topPeriod.period}
                 </span>{' '}
                 ({topPeriod.count} of them)
@@ -68,20 +68,20 @@ export function BehaviorSection({
             margin={{ top: 20, right: 16, bottom: 0, left: -16 }}
             accessibilityLayer={false}
           >
-            <CartesianGrid stroke="#e2e8f0" vertical={false} />
-            <XAxis dataKey="month" stroke="#94a3b8" tickLine={false} fontSize={12} />
+            <CartesianGrid stroke="#3f424d" vertical={false} />
+            <XAxis dataKey="month" stroke="#75798c" tickLine={false} fontSize={12} />
             <YAxis
               allowDecimals={false}
-              stroke="#94a3b8"
+              stroke="#75798c"
               tickLine={false}
               fontSize={12}
             />
-            <Bar dataKey="incidents" fill="#b45309" radius={[4, 4, 0, 0]}>
+            <Bar dataKey="incidents" fill="#5d5294" radius={[4, 4, 0, 0]}>
               <LabelList
                 dataKey="incidents"
                 position="top"
                 fontSize={12}
-                fill="#334155"
+                fill="#e9e9ed"
               />
             </Bar>
           </BarChart>
@@ -89,14 +89,14 @@ export function BehaviorSection({
       </ChartFigure>
 
       {absences > 0 && topWeekday && (
-        <p className="mt-6 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700">
-          <span className="font-medium text-slate-900">Attendance:</span>{' '}
+        <p className="mt-6 rounded-lg bg-[var(--surface-well)] px-4 py-3 text-[13px] text-text/85">
+          <span className="font-medium text-text">Attendance:</span>{' '}
           {absences} full-day absences on record. {topWeekday[0]} accounts for{' '}
           {topWeekday[1]} of them, more than any other weekday.
         </p>
       )}
 
-      <h3 className="mt-8 mb-3 font-medium text-slate-900">
+      <h3 className="mt-8 mb-3 text-[14px] font-medium text-text">
         Most recent entries and observations
       </h3>
       <RecordList records={entries} empty="Nothing on record." />

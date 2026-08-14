@@ -71,44 +71,41 @@ export function QuestionBox({
       lead={`Questions are answered from ${student.first_name}'s records, and each exchange is kept in the passport so the next person can see what was asked.`}
     >
       <form onSubmit={onSubmit}>
-        <label
-          htmlFor="question"
-          className="block text-sm font-medium text-slate-700"
-        >
-          Your question
-        </label>
-        <div className="mt-1.5 flex items-start gap-2">
-          <textarea
-            id="question"
-            name="question"
-            rows={3}
-            value={question}
-            onChange={(e) => setQuestion(e.target.value)}
-            placeholder="What helps this student most in the morning?"
-            className="w-full rounded-md border border-slate-300 px-3 py-2 text-slate-900 placeholder:text-slate-400 focus:border-indigo-600"
-          />
-          {dictation.supported && (
-            <button
-              type="button"
-              aria-pressed={dictation.listening}
-              aria-label={
-                dictation.listening
-                  ? 'Stop dictating your question'
-                  : 'Dictate your question'
-              }
-              onClick={dictation.listening ? dictation.stop : dictation.start}
-              className={`shrink-0 rounded-md border p-2.5 ${
-                dictation.listening
-                  ? 'border-red-500 bg-red-50 text-red-700'
-                  : 'border-slate-300 text-slate-600 hover:border-slate-400 hover:bg-slate-50'
-              }`}
-            >
-              <MicIcon active={dictation.listening} />
-            </button>
-          )}
+        <div className="field">
+          <label htmlFor="question">Your question</label>
+          <div className="flex items-start gap-2">
+            <textarea
+              id="question"
+              name="question"
+              rows={3}
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
+              placeholder="What helps this student most in the morning?"
+              className="input"
+            />
+            {dictation.supported && (
+              <button
+                type="button"
+                aria-pressed={dictation.listening}
+                aria-label={
+                  dictation.listening
+                    ? 'Stop dictating your question'
+                    : 'Dictate your question'
+                }
+                onClick={dictation.listening ? dictation.stop : dictation.start}
+                className={`btn shrink-0 p-2.5 ${
+                  dictation.listening
+                    ? 'border-red-500 bg-red-950/40 text-red-300'
+                    : 'btn-secondary'
+                }`}
+              >
+                <MicIcon active={dictation.listening} />
+              </button>
+            )}
+          </div>
         </div>
         {dictation.listening && (
-          <p role="status" className="mt-2 text-sm text-red-700">
+          <p role="status" className="mt-2 text-[13px] text-red-300">
             Listening. Speak your question, then press the microphone again.
           </p>
         )}
@@ -119,7 +116,7 @@ export function QuestionBox({
               <button
                 type="button"
                 onClick={() => setQuestion(suggestion)}
-                className="rounded-full border border-slate-200 px-3 py-1 text-sm text-slate-600 hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-800"
+                className="tag tag-outline cursor-pointer"
               >
                 {suggestion}
               </button>
@@ -130,7 +127,7 @@ export function QuestionBox({
         <button
           type="submit"
           disabled={pending || question.trim() === ''}
-          className="mt-4 rounded-md bg-indigo-700 px-4 py-2 font-medium text-white hover:bg-indigo-800 disabled:opacity-50"
+          className="btn btn-primary mt-4"
         >
           {pending ? 'Asking…' : 'Ask'}
         </button>
@@ -139,7 +136,7 @@ export function QuestionBox({
       {error && (
         <p
           role="alert"
-          className="mt-4 rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800"
+          className="mt-4 rounded-md bg-red-950/40 px-3 py-2 text-[13px] text-red-300"
         >
           {error}
         </p>
@@ -149,11 +146,16 @@ export function QuestionBox({
         {answers.map((answer) => (
           <article
             key={answer.record.id}
-            className="rounded-lg border border-indigo-200 bg-indigo-50/60 p-4"
+            className="rounded-lg p-4"
+            style={{ background: 'var(--surface-well)' }}
           >
-            <h3 className="font-medium text-slate-900">{answer.question}</h3>
-            <p className="mt-2 leading-relaxed text-slate-700">{answer.answer}</p>
-            <p className="mt-3 text-sm text-slate-500">
+            <h3 className="text-[12.5px] font-medium text-accent">
+              {answer.question}
+            </h3>
+            <p className="mt-2 text-[12.5px] leading-relaxed text-text/80">
+              {answer.answer}
+            </p>
+            <p className="mt-3 text-[11px] text-muted">
               Answered from {answer.cited_record_ids.length} records. Saved to the
               passport.
             </p>

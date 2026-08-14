@@ -32,24 +32,20 @@ export function ChartFigure({
       <div aria-hidden="true" className="h-64 w-full">
         {children}
       </div>
-      <figcaption className="mt-3 text-sm leading-relaxed text-slate-600">
-        <span className="font-medium text-slate-900">{caption}</span> {summary}
+      <figcaption className="mt-3 text-[13px] leading-relaxed text-muted">
+        <span className="font-medium text-text">{caption}</span> {summary}
       </figcaption>
-      <details className="mt-3 rounded-lg border border-slate-200 bg-slate-50 px-4 py-2">
-        <summary className="cursor-pointer text-sm font-medium text-slate-700">
+      <details className="mt-3 rounded-lg bg-[var(--surface-well)] px-4 py-2">
+        <summary className="cursor-pointer text-[13px] font-medium text-text/80">
           Show these figures as a table
         </summary>
         <div className="overflow-x-auto pb-2">
-          <table className="mt-3 w-full border-collapse text-sm">
+          <table className="table mt-3">
             <caption className="sr-only">{caption}</caption>
             <thead>
               <tr>
                 {table.headers.map((header) => (
-                  <th
-                    key={header}
-                    scope="col"
-                    className="border-b border-slate-300 px-3 py-2 text-left font-semibold text-slate-900"
-                  >
+                  <th key={header} scope="col">
                     {header}
                   </th>
                 ))}
@@ -63,15 +59,12 @@ export function ChartFigure({
                       <th
                         key={j}
                         scope="row"
-                        className="border-b border-slate-200 px-3 py-2 text-left font-medium text-slate-700"
+                        className="text-left font-medium text-text/85"
                       >
                         {cell}
                       </th>
                     ) : (
-                      <td
-                        key={j}
-                        className="border-b border-slate-200 px-3 py-2 text-slate-600 tabular-nums"
-                      >
+                      <td key={j} className="text-muted tabular-nums">
                         {cell}
                       </td>
                     ),

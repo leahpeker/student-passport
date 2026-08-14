@@ -20,16 +20,11 @@ export function OverviewSection({
       title="Overview"
       lead={`The same student, described by the three people who know different parts of ${student.first_name}.`}
     >
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
         {VOICES.map((voice) => (
-          <article
-            key={voice.key}
-            className="rounded-lg border border-slate-200 bg-slate-50/70 p-4"
-          >
-            <h3 className="text-sm font-semibold tracking-wide text-indigo-800 uppercase">
-              {voice.label}
-            </h3>
-            <p className="mt-3 leading-relaxed text-slate-700">
+          <article key={voice.key} className="card">
+            <h3 className="card-title">{voice.label}</h3>
+            <p className="card-body leading-relaxed">
               {sections.overview[voice.key]}
             </p>
           </article>

@@ -15,10 +15,10 @@ import { Section } from '../Section';
 
 /** Each series gets its own colour *and* its own line style. */
 const SERIES = [
-  { stroke: '#4338ca', dash: '0' },
-  { stroke: '#0f766e', dash: '7 4' },
-  { stroke: '#b45309', dash: '2 3' },
-  { stroke: '#9d174d', dash: '10 3 2 3' },
+  { stroke: '#968ae0', dash: '0' },
+  { stroke: '#d2cefd', dash: '7 4' },
+  { stroke: '#5d5294', dash: '2 3' },
+  { stroke: '#9690c9', dash: '10 3 2 3' },
 ];
 
 function describe(change: number): string {
@@ -39,7 +39,7 @@ export function PerformanceSection({
   return (
     <Section id="performance" title="Performance over time" lead={narrative}>
       {points.length === 0 ? (
-        <p className="text-sm text-slate-500">No assessment scores on record.</p>
+        <p className="text-[13px] text-muted">No assessment scores on record.</p>
       ) : (
         <ChartFigure
           caption="Assessment scores by month, out of 100."
@@ -49,7 +49,7 @@ export function PerformanceSection({
               {subjects.map((subject, i) => (
                 <span key={subject}>
                   {i > 0 && '; '}
-                  <span className="font-medium text-slate-900">{subject}</span> is{' '}
+                  <span className="font-medium text-text">{subject}</span> is{' '}
                   {describe(change[subject])}
                 </span>
               ))}
@@ -72,21 +72,30 @@ export function PerformanceSection({
               margin={{ top: 8, right: 16, bottom: 0, left: -16 }}
               accessibilityLayer={false}
             >
-              <CartesianGrid stroke="#e2e8f0" vertical={false} />
+              <CartesianGrid stroke="#3f424d" vertical={false} />
               <XAxis
                 dataKey="month"
-                stroke="#94a3b8"
+                stroke="#75798c"
                 tickLine={false}
                 fontSize={12}
               />
               <YAxis
                 domain={[0, 100]}
-                stroke="#94a3b8"
+                stroke="#75798c"
                 tickLine={false}
                 fontSize={12}
               />
-              <Tooltip />
-              <Legend />
+              <Tooltip
+                contentStyle={{
+                  background: '#232532',
+                  border: '1px solid #3f424d',
+                  borderRadius: 8,
+                  fontSize: 13,
+                }}
+                labelStyle={{ color: '#e9e9ed' }}
+                itemStyle={{ color: '#e9e9ed' }}
+              />
+              <Legend wrapperStyle={{ fontSize: 12, color: '#e9e9ed' }} />
               {subjects.map((subject, i) => {
                 const style = SERIES[i % SERIES.length];
                 return (

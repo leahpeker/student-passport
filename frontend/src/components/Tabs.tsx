@@ -58,7 +58,11 @@ export function Tabs({
         role="tablist"
         aria-label={label}
         onKeyDown={onKeyDown}
-        className="flex flex-wrap gap-2 border-b border-slate-200 pb-px"
+        className="flex flex-wrap items-end gap-0.5"
+        style={{
+          background:
+            'linear-gradient(to right, transparent, var(--color-divider) 48px, var(--color-divider) calc(100% - 48px), transparent) no-repeat bottom / 100% 1px',
+        }}
       >
         {tabs.map((tab) => {
           const selected = tab.id === activeId;
@@ -72,15 +76,23 @@ export function Tabs({
               aria-controls={`panel-${tab.id}`}
               tabIndex={selected ? 0 : -1}
               onClick={() => onChange(tab.id)}
-              className={`-mb-px rounded-t-md border-b-2 px-4 py-2.5 text-left text-sm transition-colors ${
+              className={`flex flex-col gap-0.5 rounded-t-lg border-b-2 px-4 pt-2.5 pb-2.5 text-left transition-colors ${
                 selected
-                  ? 'border-indigo-600 bg-white font-semibold text-indigo-700'
-                  : 'border-transparent font-medium text-slate-600 hover:border-slate-300 hover:text-slate-900'
+                  ? 'border-accent text-text'
+                  : 'border-transparent text-muted hover:text-text'
               }`}
+              style={
+                selected
+                  ? {
+                      background:
+                        'linear-gradient(180deg, rgba(145,132,217,0.10), transparent)',
+                    }
+                  : undefined
+              }
             >
-              <span className="block">{tab.label}</span>
+              <span className="text-[13.5px] font-medium">{tab.label}</span>
               {tab.hint && (
-                <span className="block text-xs font-normal text-slate-500">
+                <span className="text-[11.5px] font-normal text-muted">
                   {tab.hint}
                 </span>
               )}
@@ -93,7 +105,7 @@ export function Tabs({
         role="tabpanel"
         aria-labelledby={`tab-${activeId}`}
         tabIndex={0}
-        className="pt-6 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-indigo-600"
+        className="pt-6 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
       >
         {children}
       </div>

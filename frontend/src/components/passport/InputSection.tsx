@@ -62,54 +62,49 @@ export function InputSection({
       <RecordList records={records} empty="Nothing has been added yet." />
 
       {canWrite && (
-        <form
-          onSubmit={onSubmit}
-          className="mt-6 rounded-lg border border-slate-200 bg-slate-50 p-4"
-        >
-          <h3 className="font-medium text-slate-900">{formLabel}</h3>
+        <form onSubmit={onSubmit} className="card mt-6 gap-4 p-4">
+          <h3 className="text-[14px] font-medium text-text">{formLabel}</h3>
 
-          <label
-            htmlFor={`${id}-title`}
-            className="mt-4 block text-sm font-medium text-slate-700"
-          >
-            Title <span className="font-normal text-slate-500">(optional)</span>
-          </label>
-          <input
-            id={`${id}-title`}
-            type="text"
-            value={heading}
-            onChange={(e) => setHeading(e.target.value)}
-            className="mt-1.5 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 focus:border-indigo-600"
-          />
+          <div className="field">
+            <label htmlFor={`${id}-title`}>
+              Title <span className="font-normal text-muted">(optional)</span>
+            </label>
+            <input
+              id={`${id}-title`}
+              type="text"
+              value={heading}
+              onChange={(e) => setHeading(e.target.value)}
+              className="input"
+            />
+          </div>
 
-          <label
-            htmlFor={`${id}-body`}
-            className="mt-4 block text-sm font-medium text-slate-700"
-          >
-            What would you like the next teacher to know?
-          </label>
-          <textarea
-            id={`${id}-body`}
-            rows={4}
-            required
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
-            className="mt-1.5 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 focus:border-indigo-600"
-          />
+          <div className="field">
+            <label htmlFor={`${id}-body`}>
+              What would you like the next teacher to know?
+            </label>
+            <textarea
+              id={`${id}-body`}
+              rows={4}
+              required
+              value={body}
+              onChange={(e) => setBody(e.target.value)}
+              className="input"
+            />
+          </div>
 
           <button
             type="submit"
             disabled={pending || body.trim() === ''}
-            className="mt-4 rounded-md bg-indigo-700 px-4 py-2 font-medium text-white hover:bg-indigo-800 disabled:opacity-50"
+            className="btn btn-primary self-start"
           >
             {pending ? 'Saving…' : 'Add to the passport'}
           </button>
 
-          <p aria-live="polite" className="mt-3 text-sm text-slate-600">
+          <p aria-live="polite" className="text-[13px] text-muted">
             {saved && !pending && 'Saved. It now appears above.'}
           </p>
           {error && (
-            <p role="alert" className="mt-1 text-sm text-red-800">
+            <p role="alert" className="text-[13px] text-red-300">
               {error}
             </p>
           )}

@@ -28,16 +28,16 @@ export function HowTheyLearnSection({
   return (
     <Section id="how-they-learn" title="How they learn" lead={narrative}>
       {points.length === 0 ? (
-        <p className="text-sm text-slate-500">No engagement samples on record.</p>
+        <p className="text-[13px] text-muted">No engagement samples on record.</p>
       ) : (
         <ChartFigure
           caption="Average engagement rating by period, out of 5."
           summary={
             <>
               Highest in{' '}
-              <span className="font-medium text-slate-900">{best.period}</span> at{' '}
+              <span className="font-medium text-text">{best.period}</span> at{' '}
               {best.rating.toFixed(1)} and lowest in{' '}
-              <span className="font-medium text-slate-900">{worst.period}</span> at{' '}
+              <span className="font-medium text-text">{worst.period}</span> at{' '}
               {worst.rating.toFixed(1)}, from {samples} samples across the year.
               Each bar is printed with its own value.
             </>
@@ -53,20 +53,20 @@ export function HowTheyLearnSection({
               margin={{ top: 20, right: 16, bottom: 0, left: -16 }}
               accessibilityLayer={false}
             >
-              <CartesianGrid stroke="#e2e8f0" vertical={false} />
+              <CartesianGrid stroke="#3f424d" vertical={false} />
               <XAxis
                 dataKey="period"
-                stroke="#94a3b8"
+                stroke="#75798c"
                 tickLine={false}
                 fontSize={12}
               />
-              <YAxis domain={[0, 5]} stroke="#94a3b8" tickLine={false} fontSize={12} />
-              <Bar dataKey="rating" fill="#4338ca" radius={[4, 4, 0, 0]}>
+              <YAxis domain={[0, 5]} stroke="#75798c" tickLine={false} fontSize={12} />
+              <Bar dataKey="rating" fill="#968ae0" radius={[4, 4, 0, 0]}>
                 <LabelList
                   dataKey="rating"
                   position="top"
                   fontSize={12}
-                  fill="#334155"
+                  fill="#e9e9ed"
                 />
               </Bar>
             </BarChart>

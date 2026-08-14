@@ -8,9 +8,7 @@ export function GuardianView({ me }: { me: Me }) {
 
   if (me.students.length === 0) {
     return (
-      <p className="text-slate-600">
-        No students are linked to this account yet.
-      </p>
+      <p className="text-muted">No students are linked to this account yet.</p>
     );
   }
 
@@ -19,10 +17,10 @@ export function GuardianView({ me }: { me: Me }) {
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold tracking-tight text-slate-900">
+      <h1 className="text-[26px] font-medium tracking-[-0.02em] text-text">
         Your students
       </h1>
-      <p className="mt-2 mb-6 text-slate-600">
+      <p className="mt-2 mb-6 text-[13.5px] leading-relaxed text-muted">
         Everything the school records about your children, in the same view
         their teachers see — and a place to add what only you know.
       </p>

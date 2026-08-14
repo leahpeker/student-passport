@@ -12,7 +12,7 @@ export function AsyncState({
     return (
       <p
         role="alert"
-        className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-red-800"
+        className="rounded-lg border border-red-800/60 bg-red-950/40 px-4 py-3 text-red-300"
       >
         {label} could not be loaded. {error}
       </p>
@@ -20,7 +20,7 @@ export function AsyncState({
   }
   if (loading) {
     return (
-      <p role="status" className="py-8 text-slate-500">
+      <p role="status" className="py-8 text-muted">
         Loading {label}…
       </p>
     );

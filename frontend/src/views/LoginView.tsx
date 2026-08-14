@@ -22,30 +22,30 @@ export function LoginView({ onSignedIn }: { onSignedIn: (me: Me) => void }) {
   }
 
   return (
-    <main className="mx-auto flex min-h-screen max-w-lg flex-col justify-center px-6 py-12">
-      <h1 className="text-3xl font-semibold tracking-tight text-slate-900">
-        Student Passport
-      </h1>
-      <p className="mt-3 leading-relaxed text-slate-600">
+    <main className="mx-auto flex min-h-screen max-w-lg flex-col justify-center bg-bg px-6 py-12 text-text">
+      <div className="flex items-center gap-2.5">
+        <span
+          aria-hidden="true"
+          className="flex h-[22px] w-[22px] items-center justify-center rounded-[6px] border border-accent text-[11px] text-accent"
+        >
+          P
+        </span>
+        <h1 className="text-[26px] font-medium tracking-[-0.02em] text-text">
+          Student Passport
+        </h1>
+      </div>
+      <p className="mt-3 text-[13.5px] leading-relaxed text-muted">
         One portable view of a student, gathered from every source that already
         describes them — and handed to whoever needs it next.
       </p>
 
-      <form
-        onSubmit={onSubmit}
-        className="mt-8 rounded-xl border border-slate-200 bg-white p-6 shadow-sm"
-      >
-        <h2 className="text-lg font-semibold tracking-tight text-slate-900">
+      <form onSubmit={onSubmit} className="card elev-sm mt-8 gap-4 p-[19px]">
+        <h2 className="text-[17px] font-medium tracking-[-0.015em] text-text">
           Sign in
         </h2>
 
-        <div className="mt-5">
-          <label
-            htmlFor="username"
-            className="block text-sm font-medium text-slate-700"
-          >
-            Username
-          </label>
+        <div className="field">
+          <label htmlFor="username">Username</label>
           <input
             id="username"
             name="username"
@@ -54,17 +54,12 @@ export function LoginView({ onSignedIn }: { onSignedIn: (me: Me) => void }) {
             required
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="mt-1.5 w-full rounded-md border border-slate-300 px-3 py-2 text-slate-900 placeholder:text-slate-400 focus:border-indigo-600"
+            className="input"
           />
         </div>
 
-        <div className="mt-4">
-          <label
-            htmlFor="password"
-            className="block text-sm font-medium text-slate-700"
-          >
-            Password
-          </label>
+        <div className="field">
+          <label htmlFor="password">Password</label>
           <input
             id="password"
             name="password"
@@ -73,43 +68,30 @@ export function LoginView({ onSignedIn }: { onSignedIn: (me: Me) => void }) {
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="mt-1.5 w-full rounded-md border border-slate-300 px-3 py-2 text-slate-900 focus:border-indigo-600"
+            className="input"
           />
         </div>
 
         {error && (
-          <p
-            role="alert"
-            className="mt-4 rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800"
-          >
+          <p role="alert" className="rounded-md bg-red-950/40 px-3 py-2 text-[13px] text-red-300">
             {error}
           </p>
         )}
 
-        <button
-          type="submit"
-          disabled={pending}
-          className="mt-6 w-full rounded-md bg-indigo-700 px-4 py-2.5 font-medium text-white hover:bg-indigo-800 disabled:opacity-60"
-        >
+        <button type="submit" disabled={pending} className="btn btn-primary w-full">
           {pending ? 'Signing in…' : 'Sign in'}
         </button>
       </form>
 
-      <section
-        aria-labelledby="demo-accounts"
-        className="mt-6 rounded-xl border border-slate-200 bg-white p-6"
-      >
-        <h2
-          id="demo-accounts"
-          className="text-sm font-semibold tracking-tight text-slate-900"
-        >
+      <section aria-labelledby="demo-accounts" className="card elev-sm mt-6 p-[19px]">
+        <h2 id="demo-accounts" className="card-title">
           Demo accounts
         </h2>
-        <p className="mt-1 text-sm text-slate-600">
+        <p className="text-[13px] text-muted">
           All use the password <code className="font-mono">{DEMO_PASSWORD}</code>.
           Every account and every student behind it is synthetic.
         </p>
-        <ul className="mt-4 space-y-2">
+        <ul className="mt-2 space-y-2">
           {DEMO_LOGINS.map((account) => (
             <li key={account.username}>
               <button
@@ -118,13 +100,13 @@ export function LoginView({ onSignedIn }: { onSignedIn: (me: Me) => void }) {
                   setUsername(account.username);
                   setPassword(DEMO_PASSWORD);
                 }}
-                className="flex w-full items-baseline gap-3 rounded-md border border-slate-200 px-3 py-2 text-left text-sm hover:border-indigo-300 hover:bg-indigo-50"
+                className="flex w-full items-baseline gap-3 rounded-md bg-[var(--surface-well)] px-3 py-2 text-left text-[13px] hover:opacity-80"
               >
-                <span className="font-mono font-medium text-slate-900">
+                <span className="font-mono font-medium text-text">
                   {account.username}
                 </span>
-                <span className="text-slate-500">{account.note}</span>
-                <span className="ml-auto text-xs font-medium text-indigo-700">
+                <span className="text-muted">{account.note}</span>
+                <span className="ml-auto text-[11px] font-medium text-accent">
                   Use
                 </span>
               </button>

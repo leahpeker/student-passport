@@ -14,10 +14,10 @@ import { QuestionBox } from './QuestionBox';
 function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <dt className="text-xs font-medium tracking-wide text-slate-500 uppercase">
+      <dt className="text-[10.5px] font-medium tracking-[0.08em] text-muted uppercase">
         {label}
       </dt>
-      <dd className="mt-1 text-slate-900">{value}</dd>
+      <dd className="mt-1 text-[13px] text-text">{value}</dd>
     </div>
   );
 }
@@ -61,32 +61,34 @@ export function PassportPanel({ studentId, me }: { studentId: number; me: Me }) 
   const { student, sections, records, guardians } = data;
   const sourceCount = new Set(records.map((r) => r.source)).size;
 
+  const initials = `${student.first_name[0] ?? ''}${student.last_name[0] ?? ''}`.toUpperCase();
+
   return (
     <article className="space-y-6">
-      <header className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+      <header className="elev-sm rounded-lg bg-surface p-[19px]">
         <div className="flex flex-wrap items-start gap-4">
+          <span aria-hidden="true" className="avatar h-[54px] w-[54px] text-[19px]">
+            {initials}
+          </span>
           <div>
-            <h1 className="text-2xl font-semibold tracking-tight text-slate-900">
+            <h1 className="text-[26px] font-medium tracking-[-0.02em] text-text">
               {student.name}
             </h1>
-            <p className="mt-1 text-slate-600">
+            <p className="mt-1 text-[12.5px] text-muted">
               Grade {student.grade} · {student.pronouns}
             </p>
           </div>
-          <button
-            type="button"
-            onClick={onExport}
-            className="ml-auto rounded-md border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 hover:border-indigo-400 hover:bg-indigo-50 hover:text-indigo-800"
-          >
+          <button type="button" onClick={onExport} className="btn btn-secondary ml-auto">
             Export as JSON
           </button>
         </div>
         {exportError && (
-          <p role="alert" className="mt-3 text-sm text-red-800">
+          <p role="alert" className="mt-3 text-[13px] text-red-300">
             {exportError}
           </p>
         )}
-        <dl className="mt-5 grid grid-cols-2 gap-4 border-t border-slate-100 pt-5 sm:grid-cols-4">
+        <hr className="hr mt-5" />
+        <dl className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-4">
           <Stat label="Records" value={String(records.length)} />
           <Stat label="Sources" value={String(sourceCount)} />
           <Stat

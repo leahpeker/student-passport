@@ -14,7 +14,7 @@ function Landing({ me }: { me: Me }) {
   if (me.role === 'guardian') return <Navigate to="/guardian" replace />;
   if (me.student_id != null) return <Navigate to={`/students/${me.student_id}`} replace />;
   return (
-    <p className="p-8 text-slate-600">
+    <p className="p-8 text-muted">
       This account is not linked to a student record.
     </p>
   );
@@ -48,7 +48,7 @@ export default function App() {
 
   if (checking) {
     return (
-      <p role="status" className="p-8 text-slate-600">
+      <p role="status" className="min-h-screen bg-bg p-8 text-muted">
         Loading…
       </p>
     );
