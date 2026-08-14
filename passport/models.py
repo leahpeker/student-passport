@@ -79,6 +79,7 @@ class StudentRecord(models.Model):
     BEHAVIOR = 'behavior'
     DOCUMENT = 'document'
     AI_TUTOR = 'ai_tutor'
+    ENGAGEMENT = 'engagement'
     OBSERVATION = 'observation'
     PARENT_INPUT = 'parent_input'
     STUDENT_INPUT = 'student_input'
@@ -90,6 +91,7 @@ class StudentRecord(models.Model):
         (BEHAVIOR, 'Behavior'),
         (DOCUMENT, 'Document (IEP, 504, report card)'),
         (AI_TUTOR, 'AI tutor interaction'),
+        (ENGAGEMENT, 'Engagement sample'),
         (OBSERVATION, 'Teacher observation'),
         (PARENT_INPUT, 'Guardian input'),
         (STUDENT_INPUT, 'Student input'),
