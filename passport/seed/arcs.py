@@ -133,8 +133,11 @@ ENGAGEMENT_NOTES = {
 #
 # Each arc dict may carry:
 #   key, first, last, pronouns, grade, dob, seed, classrooms, guardians
+#   start / end: iso|None. The window this student is on this school's roll.
+#     Every generated record — attendance, behaviour, engagement — is drawn
+#     from it, and assessments dated outside it get no author from here.
 #   engagement: {'base': {period: float}, 'trend': float, 'jitter': float,
-#                'per_week': int, 'start': iso|None}
+#                'per_week': int}
 #   absences:   {'count': int, 'weights': weightspec, 'tardies': int,
 #                'tardy_weights': weightspec}
 #   behavior:   {'count': int, 'period_weights': {p: w}, 'weights': weightspec,
@@ -151,7 +154,7 @@ ARCS = [
     # 1. Maya Okonkwo — high achiever masking anxiety.
     # Signals: scores stay at the top all year while engagement decays;
     # tutor sessions migrate to 11pm-2am and shift from content to
-    # sufficiency; health-office visits land the day before every
+    # sufficiency; health-office visits land one to three days before every
     # assessment; one observation of crying before a test she then aced.
     # -----------------------------------------------------------------
     {
@@ -181,7 +184,7 @@ ARCS = [
             {'date': '2025-09-19', 'subject': 'Mathematics', 'kind': 'Unit 1 test',
              'format': 'timed_test', 'score': 97,
              'body': 'Finished first. Every step shown, twice in places.'},
-            {'date': '2025-10-17', 'subject': 'English', 'kind': 'Analytical essay',
+            {'date': '2025-10-21', 'subject': 'English', 'kind': 'Analytical essay',
              'format': 'project', 'score': 96,
              'body': 'Third submitted draft. The first two were already passing.'},
             {'date': '2025-11-14', 'subject': 'Social Studies', 'kind': 'Unit 3 exam',
@@ -196,7 +199,7 @@ ARCS = [
              'format': 'project', 'score': 97, 'body': 'Argument is a year ahead of the rubric.'},
             {'date': '2026-03-27', 'subject': 'Mathematics', 'kind': 'Unit 6 test',
              'format': 'timed_test', 'score': 96, 'body': 'Left ten minutes of the period unused, checking.'},
-            {'date': '2026-04-24', 'subject': 'Social Studies', 'kind': 'Document-based question',
+            {'date': '2026-04-22', 'subject': 'Social Studies', 'kind': 'Document-based question',
              'format': 'timed_test', 'score': 97, 'body': 'Cited six of the seven documents.'},
             {'date': '2026-05-22', 'subject': 'Mathematics', 'kind': 'Final exam',
              'format': 'timed_test', 'score': 97, 'body': 'Consistent with every other assessment this year.'},
@@ -204,31 +207,31 @@ ARCS = [
         'sis': [
             {'date': '2025-09-02', 'kind': 'enrollment', 'title': 'Enrolled, grade 10',
              'body': 'Continuing student. Schedule: periods 1, 3, 4, 6, 8. Honors track in mathematics and English.'},
-            {'date': '2025-09-18', 'kind': 'health_office', 'title': 'Health office visit',
+            {'date': '2025-09-17', 'kind': 'health_office', 'title': 'Health office visit',
              'body': 'Reported stomach ache during period 3. Rested 25 minutes. No fever. Returned to class.',
              'data': {'minutes_out': 25, 'period': 3}},
-            {'date': '2025-10-16', 'kind': 'health_office', 'title': 'Health office visit',
+            {'date': '2025-10-20', 'kind': 'health_office', 'title': 'Health office visit',
              'body': 'Headache. Water and 20 minutes in the quiet room. Declined a call home.',
              'data': {'minutes_out': 20, 'period': 4}},
-            {'date': '2025-11-13', 'kind': 'health_office', 'title': 'Health office visit',
+            {'date': '2025-11-12', 'kind': 'health_office', 'title': 'Health office visit',
              'body': 'Nausea, no fever, no other symptoms. Asked whether she could stay through the period.',
              'data': {'minutes_out': 35, 'period': 3}},
-            {'date': '2025-12-11', 'kind': 'health_office', 'title': 'Health office visit',
-             'body': 'Stomach ache again. Vitals normal. Third visit this term, all on a Thursday.',
+            {'date': '2025-12-09', 'kind': 'health_office', 'title': 'Health office visit',
+             'body': 'Stomach ache again. Vitals normal. Asked to go back before the rest period was up.',
              'data': {'minutes_out': 30, 'period': 4}},
             {'date': '2026-01-29', 'kind': 'health_office', 'title': 'Health office visit',
              'body': 'Reported feeling shaky and cold. Warm, no fever. Rested and returned.',
              'data': {'minutes_out': 25, 'period': 3}},
-            {'date': '2026-02-26', 'kind': 'health_office', 'title': 'Health office visit',
+            {'date': '2026-02-25', 'kind': 'health_office', 'title': 'Health office visit',
              'body': 'Stomach ache. Asked twice whether the visit would be recorded anywhere teachers could see.',
              'data': {'minutes_out': 20, 'period': 4}},
-            {'date': '2026-03-26', 'kind': 'health_office', 'title': 'Health office visit',
+            {'date': '2026-03-24', 'kind': 'health_office', 'title': 'Health office visit',
              'body': 'Headache and light sensitivity. Reported four hours of sleep.',
              'data': {'minutes_out': 40, 'period': 3}},
-            {'date': '2026-04-23', 'kind': 'health_office', 'title': 'Health office visit',
+            {'date': '2026-04-21', 'kind': 'health_office', 'title': 'Health office visit',
              'body': 'Nausea. Vitals normal. Returned to class before the bell on her own.',
              'data': {'minutes_out': 20, 'period': 4}},
-            {'date': '2026-05-21', 'kind': 'health_office', 'title': 'Health office visit',
+            {'date': '2026-05-20', 'kind': 'health_office', 'title': 'Health office visit',
              'body': 'Stomach ache. Ninth visit this year. No pattern of illness in the record.',
              'data': {'minutes_out': 25, 'period': 3}},
         ],
@@ -256,24 +259,24 @@ ARCS = [
                      'she is sure how it ends. Today she erased a good drawing twice.'},
         ],
         'ai_tutor': [
-            {'date': '2025-09-18', 'hour': 22, 'minute': 40,
+            {'date': '2025-09-17', 'hour': 22, 'minute': 40,
              'body': 'Can you check my proof for problem 14? I think step three is wrong.'},
-            {'date': '2025-10-16', 'hour': 23, 'minute': 12,
+            {'date': '2025-10-20', 'hour': 23, 'minute': 12,
              'body': 'Is this thesis statement strong enough or does it read like I did it fast?'},
-            {'date': '2025-11-13', 'hour': 23, 'minute': 48,
+            {'date': '2025-11-11', 'hour': 23, 'minute': 48,
              'body': 'I have gone through the study guide four times. What else should I be doing.'},
-            {'date': '2025-12-11', 'hour': 0, 'minute': 55,
+            {'date': '2025-12-09', 'hour': 0, 'minute': 55,
              'body': 'If I got a 95 on this exam what would that do to my average.'},
-            {'date': '2026-01-29', 'hour': 1, 'minute': 20,
+            {'date': '2026-01-28', 'hour': 1, 'minute': 20,
              'body': 'Can you tell from my essay whether it sounds like I tried hard enough?'},
-            {'date': '2026-02-26', 'hour': 1, 'minute': 47,
+            {'date': '2026-02-25', 'hour': 1, 'minute': 47,
              'body': 'Is a 94 bad. Be honest.'},
-            {'date': '2026-03-26', 'hour': 2, 'minute': 5,
+            {'date': '2026-03-24', 'hour': 2, 'minute': 5,
              'body': 'How do people know when their work is good enough to stop.'},
-            {'date': '2026-04-23', 'hour': 0, 'minute': 38,
+            {'date': '2026-04-20', 'hour': 0, 'minute': 38,
              'body': 'I already finished this. Can you give me harder versions of the same problems '
                      'so I know I actually understand it and did not just memorise it.'},
-            {'date': '2026-05-21', 'hour': 1, 'minute': 12,
+            {'date': '2026-05-20', 'hour': 1, 'minute': 12,
              'body': 'What happens to someone who was good at school and then stops being good at it.'},
         ],
         'ai_tutor_fill': {
@@ -386,8 +389,10 @@ ARCS = [
         ],
         'documents': [
             {'date': '2026-01-16', 'kind': 'report_card', 'title': 'Semester 1 report card',
+             # {absences}/{tardies} are filled from the generated rows at seed time.
              'body': 'Biology A-. World Literature B. U.S. History C+. Geometry A. Studio Art A-. '
-                     'Attendance: 14 absences, 6 tardies. Teacher comment (Ramirez): "Attendance is '
+                     'Attendance: {absences} absences, {tardies} tardies. '
+                     'Teacher comment (Ramirez): "Attendance is '
                      'the only thing between Deshawn and the honor roll. In fifth period he is one '
                      'of the two strongest students I have."'},
         ],
@@ -398,12 +403,15 @@ ARCS = [
                      'Ms. Ramirez says he is a different student in fifth.'},
             {'date': '2026-01-27', 'teacher': 'ramirez', 'title': 'Fifth period',
              'body': 'He came in first, before the bell, and had the warm-up done before I finished '
-                     'taking roll. He asked for the extension problems. This is the same student who '
-                     'has three referrals from the period before lunch.'},
+                     'taking roll. He asked for the extension problems. I offered to move his '
+                     'make-up test to after school instead of lunch and he said lunch was better.'},
+            {'date': '2025-10-28', 'teacher': 'okafor', 'title': 'Sixth period',
+             'body': 'Slow to start today and very quiet, which is not him. He put his head on the '
+                     'bench for the first twenty minutes, then worked straight through to the bell '
+                     'and stayed to wash the brushes.'},
             {'date': '2026-03-24', 'teacher': 'okafor', 'title': 'Sixth period, end of March',
-             'body': 'Quiet and slow to start this week, which is not like him for a Tuesday. Picked '
-                     'up after about twenty minutes. This is the third time I have written a note '
-                     'like this in the last week of a month.'},
+             'body': 'Quiet and slow to start again this week. Picked up after about twenty minutes '
+                     'and finished the piece. I have written this same note before, in October.'},
         ],
         'ai_tutor': [
             {'date': '2025-10-06', 'hour': 6, 'minute': 42,
@@ -528,8 +536,9 @@ ARCS = [
             {'date': '2025-09-30', 'kind': 'el_plan', 'title': 'English learner services plan',
              'body': 'Goals: academic vocabulary in content classes; extended time on reading '
                      'assessments; bilingual glossary permitted in mathematics and science. '
-                     'Note from the ELD teacher: "Her mathematics is well ahead of her English. Do '
-                     'not read a low reading score as a low ceiling."'},
+                     'Note from the ELD teacher: "She finished the mathematics screener in half the '
+                     'time allowed. On the way out she asked me for the English words for the parts '
+                     'of a fraction, and wrote them on her hand."'},
             {'date': '2026-01-16', 'kind': 'report_card', 'title': 'Semester 1 report card',
              'body': 'Biology B+. World Literature C. U.S. History C-. Geometry A. Studio Art A. '
                      'Teacher comment (Chen): "Her lab write-ups are better science than most of the '
@@ -691,7 +700,8 @@ ARCS = [
                      'When I switched to the group task they ran their table and finished first.'},
             {'date': '2026-01-13', 'teacher': 'okafor', 'title': 'Sixth period studio',
              'body': 'Forty minutes without looking up, then asked to stay through lunch to finish '
-                     'the mould. I have never written them up. Mr. Boyd has written them up nine times.'},
+                     'the mould. They cleaned their station and someone else\'s. In two terms I '
+                     'have not once had cause to write them up in here.'},
             {'date': '2026-05-07', 'teacher': 'ramirez', 'title': 'First period',
              'body': 'On the whiteboard at the back of the room they solved the extension problem I '
                      'had not taught yet. On the test the week before they scored a 71. I do not '
@@ -726,8 +736,10 @@ ARCS = [
              'body': 'Timed tests wreck them. They knew all of that material at the kitchen table the '
                      'night before, out loud, unprompted, while building something out of cardboard.'},
             {'date': '2026-03-17', 'author': 0, 'title': 'Note from home',
-             'body': 'The referrals all come from the same two class periods. I have the emails. I am '
-                     'not saying anyone is wrong, I am saying it is the same two periods every time.'},
+             'body': 'They will build something at the kitchen table for three hours and not get up '
+                     'once. Then they cannot sit through twenty minutes of a reading with me in the '
+                     'same room. I have kept every email the school has sent me since September in '
+                     'one folder. I am not saying anyone is wrong.'},
         ],
         'student_input': [
             {'date': '2025-11-11', 'title': 'What I want you to know',
@@ -751,6 +763,10 @@ ARCS = [
         'key': 'sam',
         'first': 'Sam', 'last': 'Nakamura', 'pronouns': 'he/him',
         'grade': '11', 'dob': '2009-04-18', 'seed': 1005,
+        # On this school's roll from the transfer date. Every generated record
+        # is drawn from that window; the transfer file's own records are dated
+        # earlier on purpose and carry no author from this school.
+        'start': '2025-12-01',
         'classrooms': ['lit', 'hist', 'art', 'phys', 'cs'],
         'guardians': [
             {'first': 'Yuki', 'last': 'Nakamura', 'relationship': 'mother'},
@@ -759,7 +775,6 @@ ARCS = [
         'engagement': {
             'base': {3: 2.2, 4: 2.1, 6: 2.3, 7: 2.4, 8: 2.2},
             'trend': 0.7, 'jitter': 0.2, 'per_week': 3,
-            'start': '2025-12-01',
         },
         'absences': {
             'count': 11,
@@ -814,8 +829,9 @@ ARCS = [
              'body': 'Last day of attendance 2025-11-21. Reason recorded on the transfer form: family '
                      'relocation, out of district.'},
             {'date': '2025-12-01', 'kind': 'enrollment', 'title': f'Enrolled at {SCHOOL_NAME}, grade 11',
-             'body': 'Mid-year transfer. Schedule: periods 3, 4, 6, 7, 8. Course sequence does not '
-                     'align with the prior school in physics or English; no bridging plan on file.'},
+             'body': 'Mid-year transfer. Schedule: periods 3, 4, 6, 7, 8. Placed into each section '
+                     'at the point the class had already reached. Transcript requested from the '
+                     'sending school. No placement review requested by the office or by a teacher.'},
         ],
         'documents': [
             {'date': '2025-12-03', 'kind': 'transfer_record', 'title': 'Transcript received from Fairbrook High School',
@@ -971,25 +987,28 @@ ARCS = [
         ],
         'documents': [
             {'date': '2025-09-25', 'kind': 'advanced_learner_plan', 'title': 'Advanced learner plan',
-             'body': 'Identification: grade 4, verbal and quantitative reasoning both above the 99th '
-                     'percentile. Plan: acceleration where scheduling allows; independent study '
+             'body': 'Identification: grade 4, district advanced learner criteria met in both the '
+                     'verbal and the quantitative strand. Plan: acceleration where scheduling '
+                     'allows; independent study '
                      'option in mathematics and computer science; enrichment in place of repeated '
                      'practice where mastery is already demonstrated. Note: the independent study '
                      'option was not scheduled this year, no seat.'},
             {'date': '2026-01-16', 'kind': 'report_card', 'title': 'Semester 1 report card',
-             'body': 'Algebra II B (test average 99, homework average 36). World Literature C+. '
+             'body': 'Algebra II B. World Literature C+. '
                      'U.S. History C. Physics B+. Computer Science A. Teacher comment (Okafor): '
                      '"In period 8 she is the most alive student in the building. I have read what '
                      'her other teachers wrote and I do not recognise the student they describe."'},
         ],
         'observations': [
             {'date': '2025-11-06', 'teacher': 'ramirez', 'title': 'First period',
-             'body': 'She has a 99 test average and a 36 per cent homework completion rate. I asked '
-                     'her about it. She said the homework was already answered by the test.'},
+             'body': 'Handed the unit test back. She had turned it in twenty-two minutes into the '
+                     'period and she did not look at the mark. I asked about the homework folder, '
+                     'which is empty. She said the test had already answered it.'},
             {'date': '2026-02-11', 'teacher': 'boyd', 'title': 'Third period',
-             'body': 'She has never once been rude and I have written her up four times. It is always '
-                     'the same thing: she is done, and there are thirty minutes left, and there is '
-                     'nothing in this room for her to do.'},
+             'body': 'She has never once been rude to me. She finished the packet before I had '
+                     'handed out the last copy, and then sat with her hands flat on the desk and '
+                     'watched the clock for half an hour. I have written her up for it more than '
+                     'once and I am no longer sure what I am writing up.'},
             {'date': '2026-03-18', 'teacher': 'okafor', 'title': 'Eighth period',
              'body': 'She stayed ninety minutes after the bell to argue about type systems. She has '
                      'not handed in a single worksheet all year and she has shipped four things '

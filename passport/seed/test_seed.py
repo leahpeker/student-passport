@@ -8,7 +8,9 @@ Plain asserts on purpose. If one of these fails, the demo has lost its point.
 
 import os
 import sys
+import re
 from collections import Counter
+from datetime import date
 
 if __name__ == '__main__':  # standalone: bootstrap Django before the app imports
     sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(
@@ -67,12 +69,147 @@ class SeedTests(TransactionTestCase):
                if d not in DAY_SET]
         assert not bad, f'{len(bad)} record dates fall outside the school year or on a weekend'
 
+        self.check_pronouns()
+        self.check_enrolment_window()
+        self.check_named_teachers()
+        self.check_no_hand_written_counts()
+        self.check_cited_attendance()
+
         self.check_deshawn()
         self.check_maya()
         self.check_jordan()
         self.check_alina()
         self.check_sam()
         self.check_priya()
+
+    # -- cross-arc consistency ---------------------------------------------
+
+    def check_pronouns(self):
+        """Every student carries pronouns, and a hero's are the ones the arc authored."""
+        authored = {(a['first'], a['last']): a['pronouns'] for a in arcs.ARCS}
+        for s in Student.objects.all():
+            found = {r.data['pronouns'] for r in s.records.filter(source=SR.SIS)
+                     if 'pronouns' in (r.data or {})}
+            assert len(found) == 1, (
+                f'{s.first_name} {s.last_name} has pronouns {found or "nowhere"} in the SIS '
+                f'record; the file header renders blank without exactly one'
+            )
+            want = authored.get((s.first_name, s.last_name))
+            assert want is None or found == {want}, (
+                f'{s.first_name} {s.last_name} seeded as {found}, arc says {want}'
+            )
+
+    def check_enrolment_window(self):
+        """Nothing this school wrote may predate the day the student arrived.
+
+        The arrival date is read back out of the seeded rows, not out of the arc
+        dict, so dropping the arc's `start` key trips this too. A transferred
+        student's file legitimately holds earlier records — the transfer file —
+        but those carry no author here and no attendance, behaviour or
+        engagement row of ours.
+        """
+        ours = {SR.ATTENDANCE, SR.BEHAVIOR, SR.ENGAGEMENT}
+        checked = 0
+        for s in Student.objects.all():
+            arrivals = [r.date for r in s.records.filter(source=SR.SIS, kind='enrollment')
+                        if arcs.SCHOOL_NAME in r.title]
+            if not arrivals:
+                continue
+            checked += 1
+            start = max(arrivals)
+            early = [(r.source, r.kind, r.date.isoformat()) for r in s.records.all()
+                     if r.date < start and (r.source in ours or r.author_id is not None)]
+            assert not early, (
+                f'{s.first_name} {s.last_name} enrolled here {start} but has {len(early)} '
+                f'of this school\'s records before that: {early[:6]}'
+            )
+        assert checked, 'no transferred student in the seed; this check tested nothing'
+
+    def check_named_teachers(self):
+        """A teacher an observation names must actually have records for the student.
+
+        Covers both the author (a note about a student they never see) and any
+        colleague the note points at (a claim about someone else's referrals).
+        """
+        by_key = {t['key']: t['last'] for t in arcs.TEACHERS}
+        for arc in arcs.ARCS:
+            s = Student.objects.get(first_name=arc['first'], last_name=arc['last'])
+            authored = Counter(
+                r.author.last_name
+                for r in s.records.filter(author__isnull=False).select_related('author')
+            )
+            firsthand = Counter(
+                r.author.last_name
+                for r in s.records.filter(author__isnull=False,
+                                          source__in=[SR.OBSERVATION, SR.BEHAVIOR])
+                .select_related('author')
+            )
+            for e in arc.get('observations', []):
+                writer = by_key[e['teacher']]
+                assert authored[writer] > 1, (
+                    f'{arc["key"]}: {writer} wrote an observation on {e["date"]} but has '
+                    f'no other record for this student'
+                )
+                for last in by_key.values():
+                    if last == writer or last not in e['body']:
+                        continue
+                    assert firsthand[last] > 0, (
+                        f'{arc["key"]}: the {e["date"]} observation talks about {last}, who '
+                        f'has written nothing about this student'
+                    )
+
+    def check_no_hand_written_counts(self):
+        """Authored prose must not assert a tally the stochastic rows decide.
+
+        "Three referrals" or "nine times" in a hand-written note is a claim the
+        generator has no reason to honour. Say "more than once", or leave a
+        `{...}` placeholder and let `cite_attendance` fill in the real number.
+        """
+        num = (r'(?:one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|\d+)')
+        patterns = [
+            # "three referrals", "14 absences"
+            re.compile(rf'\b{num}\s+(?:referrals?|write[-\s]ups?|absences?|tardies)\b', re.I),
+            # "written them up nine times"
+            re.compile(rf'\b(?:wrote|writes|written|logged|flagged|referred)\b'
+                       rf'[^.]{{0,60}}\b{num}\s+times\b', re.I),
+            # "the third time I have written a note like this"
+            re.compile(r'\b(?:second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth)\s+'
+                       r'(?:time|referral|note|write[-\s]up)\b', re.I),
+        ]
+        offenders = []
+        for arc in arcs.ARCS:
+            for field in ('observations', 'documents', 'parent_input', 'student_input'):
+                for e in arc.get(field, []):
+                    for pattern in patterns:
+                        hit = pattern.search(e['body'])
+                        if hit:
+                            offenders.append(
+                                f'{arc["key"]}/{field} {e["date"]}: "{hit.group(0)}"')
+        assert not offenders, (
+            'authored prose asserts counts the generator does not produce:\n  '
+            + '\n  '.join(offenders)
+        )
+
+    def check_cited_attendance(self):
+        """Where a document cites absence and tardy counts, they are the real ones."""
+        seen = 0
+        for arc in arcs.ARCS:
+            s = Student.objects.get(first_name=arc['first'], last_name=arc['last'])
+            for e in arc.get('documents', []):
+                if '{absences}' not in e['body']:
+                    continue
+                seen += 1
+                upto = date.fromisoformat(e['date'])
+                real = Counter(
+                    s.records.filter(source=SR.ATTENDANCE, date__lte=upto)
+                    .values_list('kind', flat=True))
+                body = s.records.get(source=SR.DOCUMENT, date=upto, title=e['title']).body
+                assert e['body'].format(absences=real['absence'],
+                                        tardies=real['tardy']) == body, (
+                    f'{arc["key"]} document on {e["date"]} cites counts the rows do not '
+                    f'support (absences {real["absence"]}, tardies {real["tardy"]}): {body}'
+                )
+        assert seen, 'no document cites attendance counts; the substitution path is untested'
 
     # -- arc signals -------------------------------------------------------
 
@@ -126,6 +263,16 @@ class SeedTests(TransactionTestCase):
                if any((a - d).days in (1, 2, 3) for a in assessment_dates)]
         assert len(eve) >= 0.8 * len(visits), (
             f'only {len(eve)}/{len(visits)} of Maya\'s health visits precede an assessment'
+        )
+
+        # The cadence should read as a life, not as a generator: the gap varies
+        # and no single weekday owns the pattern.
+        gaps = {min((a - d).days for a in assessment_dates if (a - d).days > 0)
+                for d in visits}
+        assert len(gaps) > 1, f'every health visit sits the same distance from a test: {gaps}'
+        weekdays = Counter(d.weekday() for d in visits)
+        assert max(weekdays.values()) <= 0.6 * len(visits), (
+            f'Maya\'s health visits are locked to one weekday: {dict(weekdays)}'
         )
 
         # Scores stay top while engagement decays.

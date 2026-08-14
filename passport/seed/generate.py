@@ -12,6 +12,7 @@ written at runtime by someone using the app.
 
 import random
 import unicodedata
+from collections import Counter
 from datetime import date, timedelta
 
 from django.contrib.auth.models import User
@@ -98,6 +99,18 @@ def parse_day(iso):
     return d
 
 
+def enrolled_days(arc):
+    """School days this student was on this school's roll.
+
+    An arc may carry 'start' and/or 'end'. Every generated record — attendance,
+    behaviour, engagement — is drawn from this list, so a mid-year transfer
+    cannot pick up a referral from before they walked in the door.
+    """
+    start = parse_day(arc['start']) if arc.get('start') else SCHOOL_YEAR_START
+    end = parse_day(arc['end']) if arc.get('end') else SCHOOL_YEAR_END
+    return [d for d in SCHOOL_DAYS if start <= d <= end]
+
+
 # ---------------------------------------------------------------------------
 # Weighted picking
 # ---------------------------------------------------------------------------
@@ -173,7 +186,7 @@ def slug(first, last):
 # Record builders. Each returns a list of unsaved StudentRecord objects.
 # ---------------------------------------------------------------------------
 
-def engagement_records(student, rng, spec, rooms, teachers):
+def engagement_records(student, rng, spec, rooms, teachers, enrolled=None):
     """Several samples per week across the year.
 
     Rating is a per-period baseline plus a linear drift across the year plus
@@ -182,11 +195,11 @@ def engagement_records(student, rng, spec, rooms, teachers):
     """
     base, trend, jitter = spec['base'], spec.get('trend', 0.0), spec.get('jitter', 0.4)
     per_week = spec.get('per_week', 3)
-    start = parse_day(spec['start']) if spec.get('start') else SCHOOL_YEAR_START
+    on_roll = DAY_SET if enrolled is None else set(enrolled)
     periods = sorted(base)
     out = []
     for week in WEEKS:
-        days = [d for d in week if d >= start]
+        days = [d for d in week if d in on_roll]
         if not days:
             continue
         for period in sorted(rng.sample(periods, min(per_week, len(periods)))):
@@ -206,9 +219,13 @@ def engagement_records(student, rng, spec, rooms, teachers):
     return out
 
 
-def attendance_records(student, rng, spec):
-    absences = pick_days(rng, SCHOOL_DAYS, spec.get('count', 0), spec.get('weights'))
-    remaining = [d for d in SCHOOL_DAYS if d not in set(absences)]
+def attendance_records(student, rng, spec, enrolled=None, in_school=()):
+    """`in_school` are days an authored record already puts the student in the
+    building, so a full-day absence can never contradict one."""
+    days_on_roll = SCHOOL_DAYS if enrolled is None else enrolled
+    absences = pick_days(rng, [d for d in days_on_roll if d not in in_school],
+                         spec.get('count', 0), spec.get('weights'))
+    remaining = [d for d in days_on_roll if d not in set(absences)]
     tardies = pick_days(rng, remaining, spec.get('tardies', 0), spec.get('tardy_weights'))
     out = []
     for d in absences:
@@ -229,7 +246,7 @@ def attendance_records(student, rng, spec):
 
     absent_set, tardy_set = set(absences), set(tardies)
     months = {}
-    for d in SCHOOL_DAYS:
+    for d in days_on_roll:
         months.setdefault((d.year, d.month), []).append(d)
     for (_, _), days in months.items():
         absent = sum(1 for d in days if d in absent_set)
@@ -247,8 +264,9 @@ def attendance_records(student, rng, spec):
     return out
 
 
-def behavior_records(student, rng, spec, rooms, teachers):
-    days = pick_days(rng, SCHOOL_DAYS, spec.get('count', 0), spec.get('weights'))
+def behavior_records(student, rng, spec, rooms, teachers, enrolled=None):
+    days = pick_days(rng, SCHOOL_DAYS if enrolled is None else enrolled,
+                     spec.get('count', 0), spec.get('weights'))
     period_weights = {p: w for p, w in spec['period_weights'].items() if p in rooms}
     bodies = spec['bodies']
     kind, severity = spec.get('kind', 'minor'), spec.get('severity', 1)
@@ -266,17 +284,21 @@ def behavior_records(student, rng, spec, rooms, teachers):
     return out
 
 
-def assessment_records(student, entries, teachers):
+def assessment_records(student, entries, teachers, enrolled=None):
+    """Scores sat before the student joined came in on a transfer file, so no
+    teacher here can be their author."""
+    first_day = SCHOOL_YEAR_START if enrolled is None else enrolled[0]
     out = []
     for e in entries:
         data = {'score': e['score'], 'max': 100, 'percent': e['score'],
                 'format': e['format'], 'subject': e['subject']}
         data.update(e.get('data', {}))
+        d = parse_day(e['date'])
         out.append(SR(
             student=student, source=SR.ASSESSMENT, kind=e['format'],
-            date=parse_day(e['date']), title=f'{e["kind"]} — {e["subject"]}',
+            date=d, title=f'{e["kind"]} — {e["subject"]}',
             body=e.get('body', ''), data=data,
-            author=teachers.get(SUBJECT_TEACHER.get(e['subject'])),
+            author=teachers.get(SUBJECT_TEACHER.get(e['subject'])) if d >= first_day else None,
         ))
     return out
 
@@ -301,6 +323,35 @@ def tutor_records(student, rng, authored, fill):
                 body=bodies[rng.randrange(len(bodies))],
                 data={'hour': hour, 'minute': minute},
             ))
+    return out
+
+
+DEFAULT_PRONOUNS = 'they/them'
+
+
+def with_pronouns(entries, pronouns):
+    """Hang the student's pronouns off their enrolment record.
+
+    The model has no column for it and prose is the wrong place for a
+    structured attribute, so it rides in the enrolment record's `data`, which
+    is where readers of the file look for who this student is.
+    """
+    return [dict(e, data={**e.get('data', {}), 'pronouns': pronouns})
+            if e.get('kind') == 'enrollment' else e
+            for e in entries]
+
+
+def cite_attendance(entries, attendance):
+    """Fill `{absences}` / `{tardies}` in an authored body with the real counts
+    up to that record's own date, so a report card cannot cite a number the
+    generator did not produce."""
+    out = []
+    for e in entries:
+        if '{absences}' in e['body'] or '{tardies}' in e['body']:
+            upto = date.fromisoformat(e['date'])
+            n = Counter(r.kind for r in attendance if r.date <= upto)
+            e = dict(e, body=e['body'].format(absences=n['absence'], tardies=n['tardy']))
+        out.append(e)
     return out
 
 
@@ -402,14 +453,32 @@ def run(reset=False):
             for other in g.get('also_guardian_of', []):
                 extra_guardianships.append((user, g['relationship'], other))
 
-        records += simple_records(student, arc.get('sis', []), SR.SIS)
-        records += assessment_records(student, arc.get('assessments', []), teachers)
-        records += attendance_records(student, rng, arc.get('absences', {}))
-        records += behavior_records(student, rng, arc['behavior'], period_rooms, teachers)
-        records += simple_records(student, arc.get('documents', []), SR.DOCUMENT)
+        enrolled = enrolled_days(arc)
+        # Days an authored record puts them in the building: a nurse saw them, a
+        # teacher watched them work, they sat a paper. None can also be a full-day
+        # absence. Homework-completion rows are period summaries, not a day.
+        in_school = (
+            {parse_day(e['date']) for e in arc.get('sis', [])
+             if e.get('kind') == 'health_office'}
+            | {parse_day(e['date']) for e in arc.get('observations', [])}
+            | {parse_day(e['date']) for e in arc.get('assessments', [])
+               if e['format'] != 'homework'}
+        )
+
+        attendance = attendance_records(student, rng, arc.get('absences', {}), enrolled,
+                                        in_school)
+        records += simple_records(student, with_pronouns(arc.get('sis', []), arc['pronouns']),
+                                  SR.SIS)
+        records += assessment_records(student, arc.get('assessments', []), teachers, enrolled)
+        records += attendance
+        records += behavior_records(student, rng, arc['behavior'], period_rooms, teachers,
+                                    enrolled)
+        records += simple_records(
+            student, cite_attendance(arc.get('documents', []), attendance), SR.DOCUMENT)
         records += tutor_records(student, rng, arc.get('ai_tutor', []),
                                  arc.get('ai_tutor_fill'))
-        records += engagement_records(student, rng, arc['engagement'], period_rooms, teachers)
+        records += engagement_records(student, rng, arc['engagement'], period_rooms, teachers,
+                                      enrolled)
         for e in arc.get('observations', []):
             records.append(SR(
                 student=student, source=SR.OBSERVATION, kind=e.get('kind', 'note'),
@@ -474,6 +543,7 @@ def filler_records(student, rng, period_rooms, teachers, f):
         title=f'Enrolled, grade {f["grade"]}',
         body='Continuing student. Schedule: periods '
              + ', '.join(str(p) for p in sorted(period_rooms)) + '.',
+        data={'pronouns': f.get('pronouns', DEFAULT_PRONOUNS)},
     )]
 
     baseline = rng.randint(62, 95)
