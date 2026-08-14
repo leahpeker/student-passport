@@ -26,7 +26,9 @@ export const MONTH_LABELS = [
 ];
 
 /** Period 1 to 7. Lunch falls between period 4 and period 5. */
-export const PERIODS = [1, 2, 3, 4, 5, 6, 7];
+/** The backend runs an 8-period day; period 8 is the engagement peak for
+ *  two of the six demo students, so a short range silently loses their arc. */
+export const PERIODS = [1, 2, 3, 4, 5, 6, 7, 8];
 
 export const WEEKDAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 
@@ -177,7 +179,8 @@ export function absencesByWeekday(records: StudentRecord[]): Record<string, numb
   );
   for (const record of records) {
     if (record.source !== 'attendance') continue;
-    if (stringField(record, 'status') !== 'absent') continue;
+    // The backend marks a whole-day absence with kind, not a data field.
+    if (record.kind !== 'absence') continue;
     const day = weekdayOf(record.date);
     if (day in counts) counts[day] += 1;
   }

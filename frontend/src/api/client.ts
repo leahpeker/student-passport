@@ -51,15 +51,31 @@ function settle<T>(value: T): Promise<T> {
   return new Promise((resolve) => setTimeout(() => resolve(value), 180));
 }
 
+/** Django's CSRF cookie. Set by POST /api/login/ and GET /api/me/. */
+function csrfToken(): string {
+  const match = document.cookie.match(/(?:^|;\s*)csrftoken=([^;]*)/);
+  return match ? decodeURIComponent(match[1]) : '';
+}
+
+const SAFE_METHODS = new Set(['GET', 'HEAD', 'OPTIONS', 'TRACE']);
+
 async function fetchJson<T>(path: string, init: RequestInit): Promise<T> {
+  const method = init.method ?? 'GET';
+  const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+  // DRF's SessionAuthentication enforces CSRF on unsafe methods; without this
+  // header every POST is rejected with 403.
+  if (!SAFE_METHODS.has(method.toUpperCase())) headers['X-CSRFToken'] = csrfToken();
+
   const response = await fetch(`${API_BASE_URL}${path}`, {
     credentials: 'include',
-    headers: { 'Content-Type': 'application/json' },
     ...init,
+    headers: { ...headers, ...init.headers },
   });
   if (!response.ok) {
-    throw new ApiError(`${init.method ?? 'GET'} ${path} failed`, response.status);
+    throw new ApiError(`${method} ${path} failed`, response.status);
   }
+  // Django's logout returns 204 with no body.
+  if (response.status === 204) return undefined as T;
   return (await response.json()) as T;
 }
 

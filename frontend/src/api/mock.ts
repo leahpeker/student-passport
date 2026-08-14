@@ -977,7 +977,9 @@ function generateRecords(arc: ArcSpec): StudentRecord[] {
   // Engagement samples: one per period per month.
   for (let m = 0; m < MONTH_LABELS.length; m++) {
     const days = daysByMonth[m];
-    for (const period of PERIODS) {
+    // Iterate the arc's own curve, not the chart's PERIODS constant: a display
+    // constant must not decide what data exists, or widening it yields NaN.
+    for (let period = 1; period <= arc.engagement_by_period.length; period++) {
       const step = arc.engagement_step && m >= arc.engagement_step.month ? arc.engagement_step.delta : 0;
       const mean =
         arc.engagement_by_period[period - 1] + (arc.engagement_trend ?? 0) * m + step;
