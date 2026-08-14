@@ -34,9 +34,10 @@ ALLOWED_HOSTS += [h for h in os.getenv('DJANGO_ALLOWED_HOSTS', '').split(',') if
 # and sends it as a bearer token; it refuses to combine it with AWS profile
 # credentials, so the key replaces them entirely.
 BEDROCK_REGION = os.getenv('BEDROCK_REGION', 'us-west-2')
-# On-demand invocation needs the `us.` inference-profile ID, not the bare
-# `anthropic.claude-opus-5` foundation-model ID, which Bedrock rejects.
-BEDROCK_MODEL = os.getenv('BEDROCK_MODEL', 'us.anthropic.claude-opus-5')
+# On-demand invocation needs the `us.` inference-profile ID; the bare
+# `anthropic.*` foundation-model ID is rejected. Opus is not enabled on this
+# account, so Sonnet 4.6 is the ceiling here.
+BEDROCK_MODEL = os.getenv('BEDROCK_MODEL', 'us.anthropic.claude-sonnet-4-6')
 
 
 # Application definition
