@@ -44,21 +44,22 @@ reach another family's student.
 
 ## Stack
 
-Django + Django REST Framework on the backend, React + Vite + TypeScript on the
-frontend, Claude (`claude-opus-5`) for the narrative sections and the question
-box.
+Django + Django REST Framework + Postgres on the backend, React + Vite +
+TypeScript on the frontend, Claude Opus 5 on Amazon Bedrock for the narrative
+sections and the question box. Deployed on Railway.
 
 ## Running it
 
 ```bash
 python3.13 -m venv .venv && .venv/bin/pip install -r requirements.txt
-cp .env.example .env   # then add your ANTHROPIC_API_KEY
+cp .env.example .env   # then add your Bedrock API key
+createdb student_passport
 .venv/bin/python manage.py migrate
 .venv/bin/python manage.py runserver
 ```
 
-Everything except the narrative sections and the question box works without an
-API key.
+Everything except the narrative sections and the question box works without a
+Bedrock key.
 
 ## Status
 

@@ -30,8 +30,13 @@ DEBUG = os.getenv('DJANGO_DEBUG', '1') == '1'
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.railway.app']
 ALLOWED_HOSTS += [h for h in os.getenv('DJANGO_ALLOWED_HOSTS', '').split(',') if h]
 
-ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY')
-CLAUDE_MODEL = os.getenv('CLAUDE_MODEL', 'claude-opus-5')
+# Claude via Amazon Bedrock. The SDK reads the key from AWS_BEARER_TOKEN_BEDROCK
+# and sends it as a bearer token; it refuses to combine it with AWS profile
+# credentials, so the key replaces them entirely.
+BEDROCK_REGION = os.getenv('BEDROCK_REGION', 'us-west-2')
+# On-demand invocation needs the `us.` inference-profile ID, not the bare
+# `anthropic.claude-opus-5` foundation-model ID, which Bedrock rejects.
+BEDROCK_MODEL = os.getenv('BEDROCK_MODEL', 'us.anthropic.claude-opus-5')
 
 
 # Application definition

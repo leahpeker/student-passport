@@ -14,10 +14,15 @@ that travels with the student and can be handed to a person or another tool.
 
 | Layer | Choice |
 | --- | --- |
-| Backend | Django 6 + Django REST Framework |
+| Backend | Django 6 + Django REST Framework, Postgres |
 | Auth | Django session auth, seeded users |
 | Frontend | React + Vite + TypeScript + Tailwind, Recharts |
-| LLM | Claude `claude-opus-5`, Anthropic API (`ANTHROPIC_API_KEY`) |
+| LLM | Claude `anthropic.claude-opus-5` on Amazon Bedrock |
+| Hosting | Railway (web + Postgres), single service |
+
+Bedrock auth is a Bedrock API key in `AWS_BEARER_TOKEN_BEDROCK`, which the SDK
+sends as a bearer token. It cannot be combined with AWS profile credentials —
+the key replaces them.
 | Speech | Browser-native Web Speech API |
 
 ## Data model
