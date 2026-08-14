@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 import os
 from pathlib import Path
 
+import dj_database_url
 from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +26,9 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-hackathon-demo-key'
 
 DEBUG = os.getenv('DJANGO_DEBUG', '1') == '1'
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+# Railway injects RAILWAY_PUBLIC_DOMAIN; add any extra hosts via DJANGO_ALLOWED_HOSTS.
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.railway.app']
+ALLOWED_HOSTS += [h for h in os.getenv('DJANGO_ALLOWED_HOSTS', '').split(',') if h]
 
 ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY')
 CLAUDE_MODEL = os.getenv('CLAUDE_MODEL', 'claude-opus-5')
@@ -48,6 +51,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -80,10 +84,10 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default=os.getenv('DATABASE_URL', 'postgres://localhost/student_passport'),
+        conn_max_age=600,
+    )
 }
 
 
@@ -122,11 +126,30 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STORAGES = {
+    'default': {'BACKEND': 'django.core.files.storage.FileSystemStorage'},
+    'staticfiles': {'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage'},
+}
 
-# Vite dev server.
-CORS_ALLOWED_ORIGINS = ['http://localhost:5173']
+# Vite dev server, plus the deployed frontend via FRONTEND_ORIGIN.
+_origins = ['http://localhost:5173']
+_origins += [o for o in os.getenv('FRONTEND_ORIGIN', '').split(',') if o]
+CORS_ALLOWED_ORIGINS = _origins
 CORS_ALLOW_CREDENTIALS = True
-CSRF_TRUSTED_ORIGINS = ['http://localhost:5173']
+CSRF_TRUSTED_ORIGINS = _origins + ['https://*.railway.app']
+
+# Cross-site cookies: the Vercel frontend and Railway backend are different origins.
+SESSION_COOKIE_SAMESITE = 'None' if not DEBUG else 'Lax'
+SESSION_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SAMESITE = SESSION_COOKIE_SAMESITE
+CSRF_COOKIE_SECURE = not DEBUG
+
+if not DEBUG:
+    # Railway terminates TLS at its proxy.
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = True
+    # No HSTS: railway.app is already on the browser preload list.
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -135,14 +158,4 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ],
-}
-
-
-# Email
-# https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
-
-MAILERS = {
-    'default': {
-        'BACKEND': 'django.core.mail.backends.console.EmailBackend',
-    },
 }
