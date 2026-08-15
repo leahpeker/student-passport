@@ -2,14 +2,18 @@
  * The daily/weekly "pulse" — a red / amber / green read on where a student is,
  * with the signals and context behind it.
  *
- * This is the one thing the passport does NOT yet get from the backend. The
- * shape here is written the way that feed will arrive: a `Pulse` per student,
- * assembled server-side from the same records the rest of the passport reads.
- * Until that endpoint exists, `getPulse` returns an authored fixture for the
- * six hero students and a steady-green default for everyone else — so swapping
- * to the real feed is a change in this file and nowhere else, exactly like
- * `api/client.ts` is for the rest of the data.
+ * `getPulse`/`pulseTone` are an authored fixture for the six hero students and
+ * a steady-green default for everyone else — used only by the mock data layer
+ * (`api/mock.ts`) so the demo still looks intentional with `VITE_USE_MOCKS`.
+ * Real callers use `pulseFromDigest`, which builds the same `Pulse` shape from
+ * the backend's actual one-day triage (`GET /students/<id>/digest/`) — the
+ * only real signal the backend computes today. That triage covers app-tutor
+ * activity alone, so it is a narrower read than the fixture's "wellbeing /
+ * attendance / grades" framing implies; widening it to a genuinely holistic
+ * weekly pulse is backend work, not done here.
  */
+
+import type { Digest, DigestAction } from '../api/types';
 
 export type PulseTone = 'red' | 'amber' | 'green';
 
@@ -225,4 +229,52 @@ export function getPulse(studentId: number): Pulse {
 /** Just the colour — cheap enough to call per roster row for the nav dots. */
 export function pulseTone(studentId: number): PulseTone {
   return (PULSES[studentId] ?? { tone: 'green' as const }).tone;
+}
+
+// Mirrors passport/narrative.py's ACCURACY_CONCERN / ACCURACY_WATCH exactly —
+// context coloring should agree with the thresholds that produced the flags.
+const ACCURACY_CONCERN = 0.5;
+const ACCURACY_WATCH = 0.7;
+
+const ACTION_TONE: Record<DigestAction, PulseTone> = {
+  intervene: 'red',
+  check_in: 'amber',
+  celebrate: 'green',
+};
+
+const ACTION_HEADLINE: Record<DigestAction, string> = {
+  intervene: 'Needs intervention',
+  check_in: 'Check in',
+  celebrate: 'On track',
+};
+
+/**
+ * The real-data path. Turns one day's computed triage from the backend
+ * (`GET /students/<id>/digest/`) into the same `Pulse` shape the UI already
+ * renders — `action` decides the tone, `flags` become signals, `topics`
+ * become context. Nothing here re-judges what the backend already decided.
+ */
+export function pulseFromDigest(digest: Digest, firstName: string): Pulse {
+  const tone = ACTION_TONE[digest.action];
+  return {
+    tone,
+    headline: ACTION_HEADLINE[digest.action],
+    trendNote: digest.headline,
+    why: digest.narrative || digest.headline || `No recent app activity on file for ${firstName}.`,
+    since: {
+      asOf: digest.date ?? 'unknown',
+      changes: (digest.insights ?? []).map((text) => ({ direction: 'new' as const, text })),
+    },
+    signals: digest.flags.map((flag) => ({
+      label: `${flag.topic} (${flag.kind})`,
+      detail: flag.detail,
+      trend: flag.kind === 'pace' ? 'down' : 'flat',
+      concerning: true,
+    })),
+    context: digest.topics.map((t) => ({
+      label: t.topic,
+      value: `${t.correct}/${t.attempted}`,
+      tone: t.accuracy < ACCURACY_CONCERN ? 'bad' : t.accuracy < ACCURACY_WATCH ? 'neutral' : 'good',
+    })),
+  };
 }

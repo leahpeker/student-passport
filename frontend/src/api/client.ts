@@ -22,6 +22,7 @@
 import type {
   Answer,
   Classroom,
+  Digest,
   InputSubmission,
   Me,
   Passport,
@@ -194,6 +195,27 @@ export function getRecords(
     const records = mock.recordsFor(studentId);
     return source ? records.filter((r) => r.source === source) : records;
   });
+}
+
+/**
+ * `GET /api/students/<id>/digest/` — one day's deterministic app-tutor
+ * triage: `action`/`flags` computed from real accuracy and pace, never left
+ * to the model. Teacher-only on the backend, because the narrative can quote
+ * behaviour and observation records a guardian or student may not read.
+ * Resolves to `null` for those roles rather than throwing — that 404 is an
+ * expected permission boundary, not a failure — so a caller without a real
+ * signal can fall back to a neutral pulse instead of showing an error.
+ */
+export async function getDigest(studentId: number, date?: string): Promise<Digest | null> {
+  const query = date ? `?date=${date}` : '';
+  try {
+    return await request<Digest>(`/api/students/${studentId}/digest/${query}`, {}, () =>
+      mock.digestFor(studentId),
+    );
+  } catch (error) {
+    if (error instanceof ApiError && error.status === 404) return null;
+    throw error;
+  }
 }
 
 /**

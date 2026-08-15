@@ -146,3 +146,41 @@ export interface InputSubmission {
   title: string;
   body: string;
 }
+
+/** The one-day computed triage behind a `Digest`. Never invented by the model. */
+export interface DigestFlag {
+  topic: string;
+  kind: 'accuracy' | 'pace';
+  severity: 'concern' | 'watch';
+  detail: string;
+}
+
+export interface DigestTopic {
+  topic: string;
+  attempted: number;
+  correct: number;
+  accuracy: number;
+  avg_seconds: number;
+}
+
+export type DigestAction = 'intervene' | 'check_in' | 'celebrate';
+
+/**
+ * `GET /api/students/<id>/digest/` — one day's AI-tutor/practice-session
+ * activity, triaged deterministically from `flags` (`action` is never left to
+ * the model). `date`/`generated_at` are null and `narrative` is empty when the
+ * student has no app-integration activity on file at all. `insights` is only
+ * present once a day has been narrated, so treat it as optional.
+ */
+export interface Digest {
+  student_id: number;
+  date: string | null;
+  generated_at: string | null;
+  record_count: number;
+  action: DigestAction;
+  headline: string;
+  narrative: string;
+  topics: DigestTopic[];
+  flags: DigestFlag[];
+  insights?: string[];
+}

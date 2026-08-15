@@ -15,6 +15,8 @@
 import type {
   Answer,
   Classroom,
+  Digest,
+  DigestAction,
   Guardian,
   Me,
   Passport,
@@ -23,6 +25,7 @@ import type {
   Student,
   StudentRecord,
 } from './types';
+import { getPulse } from '../lib/pulse';
 import {
   MONTH_LABELS,
   PERIODS,
@@ -1237,6 +1240,40 @@ export function passportFor(studentId: number): Passport | null {
     generated_at: '2026-06-05T09:00:00Z',
     record_count: records.length,
     records,
+  };
+}
+
+/**
+ * Stands in for `GET /api/students/<id>/digest/`. There is no app-integration
+ * session data in these fixtures to compute a real triage from, so this
+ * reshapes the authored `pulse.ts` fixture into the same wire shape the real
+ * endpoint returns — the mock stays visually rich, and `pulseFromDigest` is
+ * exercised the same way whether the data came from here or from Django.
+ */
+export function digestFor(studentId: number): Digest {
+  const pulse = getPulse(studentId);
+  const action: DigestAction =
+    pulse.tone === 'red' ? 'intervene' : pulse.tone === 'amber' ? 'check_in' : 'celebrate';
+  return {
+    student_id: studentId,
+    date: pulse.since.asOf,
+    generated_at: '2026-08-15T09:00:00Z',
+    record_count: pulse.signals.length,
+    action,
+    headline: pulse.trendNote,
+    narrative: pulse.why,
+    topics: [],
+    // Mirrors the backend: `celebrate` never carries a flag.
+    flags:
+      pulse.tone === 'green'
+        ? []
+        : pulse.signals.map((s) => ({
+            topic: s.label,
+            kind: 'accuracy',
+            severity: pulse.tone === 'red' ? 'concern' : 'watch',
+            detail: s.detail,
+          })),
+    insights: pulse.since.changes.map((c) => c.text),
   };
 }
 

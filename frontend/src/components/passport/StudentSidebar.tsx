@@ -1,10 +1,29 @@
 import { useCallback, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getClassrooms } from '../../api/client';
+import { getClassrooms, getDigest } from '../../api/client';
 import type { Classroom, Me, Student } from '../../api/types';
 import { useAsync } from '../../lib/useAsync';
-import { pulseTone } from '../../lib/pulse';
+import { pulseFromDigest, pulseTone, type PulseTone } from '../../lib/pulse';
 import { toneDot } from './tone';
+
+/**
+ * The dot's colour for one roster row. Real when the backend has a computed
+ * digest for this viewer (teacher only — see `getDigest`); the authored
+ * fixture otherwise, so a guardian, a student, or a still-loading row never
+ * renders as a broken or missing dot.
+ */
+function useRosterTone(studentId: number): PulseTone {
+  const load = useCallback(() => getDigest(studentId), [studentId]);
+  const { data: digest } = useAsync(load);
+  return digest ? pulseFromDigest(digest, '').tone : pulseTone(studentId);
+}
+
+/** One roster dot. Its own component so `useRosterTone` gets one hook
+ * instance per student rather than being called inside a `.map()`. */
+function RosterDot({ studentId, className }: { studentId: number; className: string }) {
+  const tone = useRosterTone(studentId);
+  return <span aria-hidden="true" className={`${className} ${toneDot[tone]}`} />;
+}
 
 /**
  * A persistent roster rail. It lets a teacher move between students — and
@@ -135,10 +154,7 @@ function SidebarGroup({
                       : 'hover:bg-neutral-800/40'
                   }`}
                 >
-                  <span
-                    aria-hidden="true"
-                    className={`h-2 w-2 shrink-0 rounded-full ${toneDot[pulseTone(student.id)]}`}
-                  />
+                  <RosterDot studentId={student.id} className="h-2 w-2 shrink-0 rounded-full" />
                   <span
                     className={`truncate text-[12.5px] ${active ? 'font-medium text-text' : 'text-text/85'}`}
                   >
@@ -189,8 +205,9 @@ function CollapsedRail({
             aria-current={active ? 'page' : undefined}
             className="grid place-items-center"
           >
-            <span
-              className={`h-2.5 w-2.5 rounded-full ${toneDot[pulseTone(student.id)]} ${
+            <RosterDot
+              studentId={student.id}
+              className={`h-2.5 w-2.5 rounded-full ${
                 active ? 'ring-2 ring-accent ring-offset-2 ring-offset-surface' : ''
               }`}
             />

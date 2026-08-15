@@ -1,9 +1,9 @@
 import { useCallback, useMemo, useRef, useState } from 'react';
-import { exportPassport, getPassport } from '../../api/client';
+import { exportPassport, getDigest, getPassport } from '../../api/client';
 import type { Me, Passport, StudentRecord } from '../../api/types';
 import { useAsync } from '../../lib/useAsync';
 import { formatDate } from '../../lib/school';
-import { getPulse } from '../../lib/pulse';
+import { getPulse, pulseFromDigest } from '../../lib/pulse';
 import { showsBehavior } from '../../lib/access';
 import { AsyncState } from '../AsyncState';
 import { Tabs, type TabItem } from '../Tabs';
@@ -29,6 +29,10 @@ function Stat({ label, value }: { label: string; value: string }) {
 export function PassportPanel({ studentId, me }: { studentId: number; me: Me }) {
   const load = useCallback(() => getPassport(studentId), [studentId]);
   const { data, error, loading, setData } = useAsync(load);
+  // Teacher-only on the backend and null for anyone else — see getDigest.
+  // Falls back to the authored fixture below rather than showing an error.
+  const loadDigest = useCallback(() => getDigest(studentId), [studentId]);
+  const { data: digest } = useAsync(loadDigest);
   const [exportError, setExportError] = useState<string | null>(null);
   const [tab, setTab] = useState('overview');
   const assistantRef = useRef<AssistantHandle>(null);
@@ -76,7 +80,7 @@ export function PassportPanel({ studentId, me }: { studentId: number; me: Me }) 
   if (!data) return null;
 
   const { student, sections, records, guardians } = data;
-  const pulse = getPulse(studentId);
+  const pulse = digest ? pulseFromDigest(digest, student.first_name) : getPulse(studentId);
   const sourceCount = new Set(records.map((r) => r.source)).size;
   const initials = `${student.first_name[0] ?? ''}${student.last_name[0] ?? ''}`.toUpperCase();
 
