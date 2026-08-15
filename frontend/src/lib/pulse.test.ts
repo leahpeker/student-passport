@@ -9,7 +9,7 @@
  */
 
 import assert from 'node:assert/strict';
-import { HERO_STUDENT_IDS } from '../api/mock';
+import { HERO_STUDENT_NAMES } from '../api/mock';
 import { getPulse, pulseTone, type PulseTone } from './pulse';
 
 let checks = 0;
@@ -21,34 +21,39 @@ function check(label: string, run: () => void): void {
 
 const TONES: PulseTone[] = ['red', 'amber', 'green'];
 
-check('Maya (1) reads red — the intervention case', () => {
-  assert.equal(getPulse(1).tone, 'red');
-  assert.equal(pulseTone(1), 'red');
+check('Maya Okonkwo reads red — the intervention case', () => {
+  assert.equal(getPulse('Maya Okonkwo').tone, 'red');
+  assert.equal(pulseTone('Maya Okonkwo'), 'red');
+});
+
+check('Priya Raghunathan reads red — 6 unexamined AI offloads', () => {
+  assert.equal(getPulse('Priya Raghunathan').tone, 'red');
+  assert.equal(pulseTone('Priya Raghunathan'), 'red');
 });
 
 check('pulseTone agrees with getPulse().tone', () => {
-  for (const id of [...HERO_STUDENT_IDS, 999]) {
-    assert.equal(pulseTone(id), getPulse(id).tone);
+  for (const name of [...HERO_STUDENT_NAMES, 'Nobody Really']) {
+    assert.equal(pulseTone(name), getPulse(name).tone);
   }
 });
 
 check('every hero pulse is well-formed', () => {
-  for (const id of HERO_STUDENT_IDS) {
-    const pulse = getPulse(id);
-    assert.ok(TONES.includes(pulse.tone), `bad tone for ${id}`);
-    assert.ok(pulse.headline.length > 0, `no headline for ${id}`);
-    assert.ok(pulse.why.length > 0, `no why for ${id}`);
-    assert.ok(pulse.signals.length >= 1, `no signals for ${id}`);
-    assert.ok(pulse.context.length >= 1, `no context for ${id}`);
-    assert.ok(pulse.since.changes.length >= 1, `no changes for ${id}`);
+  for (const name of HERO_STUDENT_NAMES) {
+    const pulse = getPulse(name);
+    assert.ok(TONES.includes(pulse.tone), `bad tone for ${name}`);
+    assert.ok(pulse.headline.length > 0, `no headline for ${name}`);
+    assert.ok(pulse.why.length > 0, `no why for ${name}`);
+    assert.ok(pulse.signals.length >= 1, `no signals for ${name}`);
+    assert.ok(pulse.context.length >= 1, `no context for ${name}`);
+    assert.ok(pulse.since.changes.length >= 1, `no changes for ${name}`);
     for (const s of pulse.signals) {
-      assert.ok(['up', 'down', 'flat'].includes(s.trend), `bad trend for ${id}`);
+      assert.ok(['up', 'down', 'flat'].includes(s.trend), `bad trend for ${name}`);
     }
   }
 });
 
 check('an unknown student falls back to a steady green', () => {
-  const pulse = getPulse(4242);
+  const pulse = getPulse('Nobody Really');
   assert.equal(pulse.tone, 'green');
   assert.ok(pulse.signals.length >= 1);
 });

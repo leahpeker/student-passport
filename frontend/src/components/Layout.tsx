@@ -71,7 +71,7 @@ export function Layout({
         </button>
       </header>
 
-      <p className="bg-neutral-900 px-6 py-2 text-center text-sm text-amber-300/90">
+      <p className="bg-amber-500/10 px-6 py-2 text-center text-sm text-amber-500">
         Demonstration build. Every student, record and note shown here is
         synthetic and describes no real person.
       </p>

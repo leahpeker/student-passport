@@ -36,7 +36,9 @@ from .serializers import (
 
 # A teacher's note about a student's home life reads very differently to the
 # student it is about. The frontend hides these; this is the real boundary.
-HIDDEN_FROM_STUDENT = (StudentRecord.BEHAVIOR, StudentRecord.OBSERVATION)
+HIDDEN_FROM_STUDENT = (
+    StudentRecord.BEHAVIOR, StudentRecord.OBSERVATION, StudentRecord.COGNITIVE_ANALYSIS,
+)
 
 # What a role may contribute, and under which source.
 INPUT_BY_ROLE = {
@@ -196,7 +198,7 @@ def passport_payload(request, student, with_records):
     refresh = request.query_params.get('refresh') in ('1', 'true', 'yes')
     sections, generated_at, record_count = cached_sections(student, refresh=refresh)
     if role_of(request.user) == Profile.STUDENT:
-        sections = {**sections, 'behavior': ''}
+        sections = {**sections, 'behavior': '', 'how_they_use_ai': ''}
 
     guardianships = Guardianship.objects.filter(student=student).select_related('guardian')
     payload = {

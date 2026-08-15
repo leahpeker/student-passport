@@ -3,12 +3,13 @@ import { exportPassport, getDigest, getPassport } from '../../api/client';
 import type { Me, Passport, StudentRecord } from '../../api/types';
 import { useAsync } from '../../lib/useAsync';
 import { formatDate } from '../../lib/school';
-import { getPulse, pulseFromDigest } from '../../lib/pulse';
-import { showsBehavior } from '../../lib/access';
+import { getPulse, hasDigestActivity, pulseFromDigest } from '../../lib/pulse';
+import { showsAiUse, showsBehavior } from '../../lib/access';
 import { AsyncState } from '../AsyncState';
 import { Tabs, type TabItem } from '../Tabs';
 import { BehaviorSection } from './BehaviorSection';
 import { HowTheyLearnSection } from './HowTheyLearnSection';
+import { HowTheyUseAiSection } from './HowTheyUseAiSection';
 import { InputSection } from './InputSection';
 import { OverviewSection } from './OverviewSection';
 import { PerformanceSection } from './PerformanceSection';
@@ -54,6 +55,7 @@ export function PassportPanel({ studentId, me }: { studentId: number; me: Me }) 
       { id: 'performance', label: 'Performance over time' },
     ];
     if (showsBehavior(me.role)) list.push({ id: 'behavior', label: 'Behaviour' });
+    if (showsAiUse(me.role)) list.push({ id: 'ai-use', label: 'How they use AI' });
     return list;
   }, [me.role]);
 
@@ -80,7 +82,7 @@ export function PassportPanel({ studentId, me }: { studentId: number; me: Me }) 
   if (!data) return null;
 
   const { student, sections, records, guardians } = data;
-  const pulse = digest ? pulseFromDigest(digest, student.first_name) : getPulse(studentId);
+  const pulse = hasDigestActivity(digest) ? pulseFromDigest(digest, student.first_name) : getPulse(student.name);
   const sourceCount = new Set(records.map((r) => r.source)).size;
   const initials = `${student.first_name[0] ?? ''}${student.last_name[0] ?? ''}`.toUpperCase();
 
@@ -165,6 +167,9 @@ export function PassportPanel({ studentId, me }: { studentId: number; me: Me }) 
           )}
           {active === 'behavior' && (
             <BehaviorSection records={records} narrative={sections.behavior} />
+          )}
+          {active === 'ai-use' && (
+            <HowTheyUseAiSection records={records} narrative={sections.how_they_use_ai} />
           )}
         </Tabs>
       </div>

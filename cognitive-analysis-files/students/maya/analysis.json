@@ -1,0 +1,866 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-08-15T00:00:00Z",
+  "source_files": [
+    "full_corpus.json"
+  ],
+  "student": {
+    "student_id": "maya",
+    "grade": 10,
+    "school_year": "2025-2026"
+  },
+  "evidence_base": {
+    "session_count": 17,
+    "total_turns": 184,
+    "student_turns": 100,
+    "student_words": 1947,
+    "date_range": {
+      "start": "2025-09-17",
+      "end": "2026-05-20"
+    },
+    "subjects": [
+      "Mathematics",
+      "Visual Arts",
+      "English",
+      "Social Studies",
+      "Computer Science",
+      "General"
+    ],
+    "sufficiency": "strong",
+    "sufficiency_note": "17 sessions across nine months and six subject areas is enough breadth and duration to support a genuine profile, including which patterns are habitual versus one-off."
+  },
+  "cognitive_types": [
+    {
+      "id": "fluency",
+      "label": "Fluency",
+      "definition": "Retrieving or recalling known material fast and automatically",
+      "presence_score": 1,
+      "presence_label": "Occasional",
+      "typical_depth_score": 1,
+      "typical_depth_label": "Surface",
+      "peak_depth_score": 2,
+      "peak_depth_label": "Developing",
+      "peak_turn_id": 44,
+      "instance_count": 2,
+      "summary": "Shows up as deliberate self-testing before an exam, where she catches and reverses her own error rather than just re-reading -- but this happens once in the whole corpus.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_m04g8h9i",
+          "subject": "Social Studies",
+          "unit": "Unit 3 exam, sectional crisis",
+          "date": "2025-11-11",
+          "preceding_ai_turn": {
+            "turn_id": 43,
+            "text": "Check the order again -- which one would need to happen first for the other to make sense as a reaction?"
+          },
+          "student_turn": {
+            "turn_id": 44,
+            "text": "wait no, that's backwards, the tariff thing came before, that's literally what South Carolina was reacting to. I had it flipped."
+          },
+          "depth_score": 2,
+          "depth_label": "Developing",
+          "why": "She retrieves a fact, tests it against the logic of the situation, and corrects herself without being told the answer."
+        }
+      ]
+    },
+    {
+      "id": "procedural",
+      "label": "Procedural",
+      "definition": "Executing a known sequence correctly, step by step",
+      "presence_score": 2,
+      "presence_label": "Frequent",
+      "typical_depth_score": 2,
+      "typical_depth_label": "Developing",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 53,
+      "instance_count": 6,
+      "summary": "Reliable across math and computer science homework -- she debugs and corrects her own execution more often than she asks to be told the fix.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_m05i0j1k",
+          "subject": "Computer Science",
+          "unit": "Project checkpoint, linked list bug",
+          "date": "2025-11-25",
+          "preceding_ai_turn": {
+            "turn_id": 52,
+            "text": "And what is `current` set to right before the loop starts?"
+          },
+          "student_turn": {
+            "turn_id": 53,
+            "text": "oh wait. I never actually initialized current before the loop, it's just... nothing. that's probably it."
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "She locates her own bug from a guiding question rather than being handed the fix."
+        },
+        {
+          "session_id": "sess_m15c0d1e",
+          "subject": "Mathematics",
+          "unit": "Extra practice, exponential equations",
+          "date": "2026-04-20",
+          "preceding_ai_turn": {
+            "turn_id": 157,
+            "text": "Try taking the log of both sides first."
+          },
+          "student_turn": {
+            "turn_id": 158,
+            "text": "ok, log(3^(x+1)) = log(5^x), so (x+1)log3 = x log5. then... x log3 + log3 = x log5. x log3 - x log5 = -log3. x(log3 - log5) = -log3. x = -log3 / (log3 - log5)."
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Full independent execution of an unfamiliar problem type, then self-checked by estimation two turns later."
+        }
+      ]
+    },
+    {
+      "id": "conceptual",
+      "label": "Conceptual",
+      "definition": "Building or repairing a mental model of how something works",
+      "presence_score": 2,
+      "presence_label": "Frequent",
+      "typical_depth_score": 2,
+      "typical_depth_label": "Developing",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 130,
+      "instance_count": 5,
+      "summary": "Her clearest strength when a task lets her build something rather than just apply it -- most visible in a session where she catches and repairs a wrong mental model of logarithms in real time.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_m12w4x5y",
+          "subject": "Mathematics",
+          "unit": "Unit 6 test prep, logarithms",
+          "date": "2026-03-10",
+          "preceding_ai_turn": {
+            "turn_id": 129,
+            "text": "That's division, not what a log is asking. A log answers: what power do I raise the base to, to get this number?"
+          },
+          "student_turn": {
+            "turn_id": 130,
+            "text": "OH. it's not division at all, it's asking what power. so log is literally just 'the exponent' dressed up."
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "A wrong model (log as division) is named, confronted, and replaced with a correct one in her own words -- the clearest sign of structural understanding rather than memorization."
+        },
+        {
+          "session_id": "sess_m07m4n5o",
+          "subject": "Computer Science",
+          "unit": "Intro to recursion",
+          "date": "2026-01-05",
+          "preceding_ai_turn": {
+            "turn_id": 76,
+            "text": "For some structures a loop doesn't map cleanly onto the shape of the problem -- like anything nested to an unknown depth."
+          },
+          "student_turn": {
+            "turn_id": 77,
+            "text": "wait so for something like a file system with folders inside folders a loop wouldn't even really work the same way right, because you don't know how deep it goes"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "She generates her own example that tests the boundary of the new concept, unprompted."
+        }
+      ]
+    },
+    {
+      "id": "critical_thinking",
+      "label": "Critical Thinking",
+      "definition": "Evaluating, reasoning about, or challenging a claim",
+      "presence_score": 2,
+      "presence_label": "Frequent",
+      "typical_depth_score": 2,
+      "typical_depth_label": "Developing",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 150,
+      "instance_count": 4,
+      "summary": "Consistently strong whenever a task asks her to weigh sources or claims against each other -- and she reuses the same reasoning method across two separate assignments months apart.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_m14a8b9c",
+          "subject": "Social Studies",
+          "unit": "DBQ, New Deal program",
+          "date": "2026-04-10",
+          "preceding_ai_turn": {
+            "turn_id": 149,
+            "text": "So how would you use each?"
+          },
+          "student_turn": {
+            "turn_id": 150,
+            "text": "my thesis is going to be that personal accounts show the human cost even when the official numbers look good, so you need both, not that one is right"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "A synthesized thesis built on a reasoning principle about source reliability, not a side picked in advance."
+        },
+        {
+          "session_id": "sess_m03e6f7g",
+          "subject": "English",
+          "unit": "Analytical essay, symbolism",
+          "date": "2025-10-20",
+          "preceding_ai_turn": {
+            "turn_id": 26,
+            "text": "That's a reasonable claim, but it's also the first thing most readers would say about the yam. What's the more specific or arguable version of that idea, if there is one?"
+          },
+          "student_turn": {
+            "turn_id": 27,
+            "text": "I guess what's actually interesting is that the yam thing works because it's not really about masculinity, it's about control. he can't control the yam harvest either, that's the whole point of the failed year."
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "She rejects the obvious reading of her own thesis and builds a sharper, more specific claim."
+        }
+      ]
+    },
+    {
+      "id": "creative",
+      "label": "Creative",
+      "definition": "Generating something novel; diverging rather than converging",
+      "presence_score": 1,
+      "presence_label": "Occasional",
+      "typical_depth_score": 2,
+      "typical_depth_label": "Developing",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 169,
+      "instance_count": 2,
+      "summary": "Thin in volume but real when it appears -- she sets her own aesthetic standard rather than a correctness standard, and acts on it even though it's riskier.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_m16e2f3g",
+          "subject": "Visual Arts",
+          "unit": "Final exhibition piece",
+          "date": "2026-05-05",
+          "preceding_ai_turn": {
+            "turn_id": 168,
+            "text": "What would 'yours' look like instead?"
+          },
+          "student_turn": {
+            "turn_id": 169,
+            "text": "I want to try something asymmetrical instead of centering it, even though centering is safer"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "A self-generated creative direction chosen specifically because it's riskier than the safe option, not because it was assigned."
+        }
+      ]
+    },
+    {
+      "id": "metacognitive",
+      "label": "Metacognitive",
+      "definition": "Monitoring and regulating their own thinking and learning",
+      "presence_score": 2,
+      "presence_label": "Frequent",
+      "typical_depth_score": 2,
+      "typical_depth_label": "Developing",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 139,
+      "instance_count": 10,
+      "summary": "The most frequent type in the transcript by a wide margin -- she narrates her own process constantly, and at its best this becomes precise enough to produce a rule she sets for herself.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_m13y6z7a",
+          "subject": "General",
+          "unit": "Late-night reflection, essay revision",
+          "date": "2026-03-24",
+          "preceding_ai_turn": {
+            "turn_id": 138,
+            "text": "If you compare it to the first draft, is it better?"
+          },
+          "student_turn": {
+            "turn_id": 139,
+            "text": "if I compare it to the first draft it's obviously better. i think the real answer is i'm not actually editing anymore, i'm just checking"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "She distinguishes two things that feel identical from the inside -- editing versus checking -- and the distinction is her own, not supplied."
+        },
+        {
+          "session_id": "sess_m11u2v3w",
+          "subject": "Computer Science",
+          "unit": "Project checkpoint grade",
+          "date": "2026-02-25",
+          "preceding_ai_turn": {
+            "turn_id": 120,
+            "text": "What's actually bothering you about the 94?"
+          },
+          "student_turn": {
+            "turn_id": 121,
+            "text": "it's not the grade i guess. i said out loud in class it was the worst thing i'd turned in and then i got a 94 on it and now i don't know if i actually think that or if i was just performing being hard on myself"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "She catches herself performing self-criticism as a hedge against disappointment -- an unusually precise piece of self-observation."
+        }
+      ]
+    },
+    {
+      "id": "transfer",
+      "label": "Transfer",
+      "definition": "Applying something known to a genuinely different context",
+      "presence_score": 1,
+      "presence_label": "Occasional",
+      "typical_depth_score": 3,
+      "typical_depth_label": "Substantive",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 152,
+      "instance_count": 1,
+      "summary": "Rare -- one instance in the whole corpus -- but fully realized: she names the same skepticism she applies to historical sources as the thing she should apply to the tutor's own claims.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_m14a8b9c",
+          "subject": "Social Studies",
+          "unit": "DBQ, New Deal program",
+          "date": "2026-04-10",
+          "preceding_ai_turn": {
+            "turn_id": 151,
+            "text": "That's a strong, synthesized thesis -- and it's the same method you used on the practice documents in January."
+          },
+          "student_turn": {
+            "turn_id": 152,
+            "text": "yeah I remembered that conversation actually. glad i didn't have to relearn it. it's kind of the same thing as when I don't just believe whatever you tell me either, right, same idea but with documents instead of you"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "She independently recognizes that 'evaluate a source's incentive to distort' is the same move whether the source is a historical document or the AI tutor itself -- a genuinely different context, and she made the connection, not the tutor."
+        }
+      ]
+    },
+    {
+      "id": "exploratory",
+      "label": "Exploratory",
+      "definition": "Encountering new information and taking it in",
+      "presence_score": 1,
+      "presence_label": "Occasional",
+      "typical_depth_score": 1,
+      "typical_depth_label": "Surface",
+      "peak_depth_score": 2,
+      "peak_depth_label": "Developing",
+      "peak_turn_id": 75,
+      "instance_count": 1,
+      "summary": "Almost absent as its own category -- when she encounters new material she tends to move quickly into building or applying it rather than staying in intake mode.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_m07m4n5o",
+          "subject": "Computer Science",
+          "unit": "Intro to recursion",
+          "date": "2026-01-05",
+          "preceding_ai_turn": {
+            "turn_id": 74,
+            "text": "A recursive function is one that calls itself on a smaller version of the same problem until it hits a base case. Loops repeat; recursion breaks a problem into smaller copies of itself."
+          },
+          "student_turn": {
+            "turn_id": 75,
+            "text": "ok so is it ever actually better or just a different way to write the same thing"
+          },
+          "depth_score": 2,
+          "depth_label": "Developing",
+          "why": "A follow-up in a direction she chose, before the turn immediately after tips into genuine Conceptual work."
+        }
+      ]
+    }
+  ],
+  "offloading": {
+    "instance_count": 3,
+    "summary": "All three instances are narrow and low-stakes -- she hands off routine verification or arithmetic, never the core reasoning of an assignment. The more notable pattern in this corpus isn't task offloading; it's reassurance-seeking, where she asks the tutor to render a verdict ('is a 94 bad', 'is this an A thesis') on work she has already done herself. Twice, the tutor declined to hand over writing she asked for outright (T101, a paragraph rewrite), and both times she completed the work herself afterward.",
+    "instances": [
+      {
+        "session_id": "sess_m01a2b3c",
+        "subject": "Mathematics",
+        "date": "2025-09-17",
+        "turn_id": 9,
+        "type_offloaded": "procedural",
+        "pattern": "scaffolded_offload",
+        "student_turn": {
+          "turn_id": 9,
+          "text": "ok I rewrote it: angle A = angle D, angle C = angle F (both right angles, given), AC = DF (given), so ASA, so triangle ABC = triangle DEF. can you just check the whole thing this time so I'm not up all night."
+        },
+        "note": "She had already done the actual reasoning and rewrite herself; this hands off only the final verification, a reasonable trade at midnight."
+      },
+      {
+        "session_id": "sess_m05i0j1k",
+        "subject": "Computer Science",
+        "date": "2025-11-25",
+        "turn_id": 59,
+        "type_offloaded": "procedural",
+        "pattern": "scaffolded_offload",
+        "student_turn": {
+          "turn_id": 59,
+          "text": "Can you just look at the whole file, I want to make sure there's nothing else weird before I submit."
+        },
+        "note": "Requested after she had already found and fixed two bugs herself; the request produced a real catch (an empty-list edge case) that she then reasoned through herself."
+      },
+      {
+        "session_id": "sess_m06k2l3m",
+        "subject": "Mathematics",
+        "date": "2025-12-09",
+        "turn_id": 66,
+        "type_offloaded": "procedural",
+        "pattern": "clean_offload",
+        "student_turn": {
+          "turn_id": 66,
+          "text": "I don't want to do math at 1am wrong, can you just calculate it. current average is 96.2, this exam is 20% of the grade."
+        },
+        "note": "A one-off grade-average calculation handed over outright; nothing about the result changed how she felt about it."
+      }
+    ]
+  },
+  "sessions": [
+    {
+      "session_id": "sess_m01a2b3c",
+      "subject": "Mathematics",
+      "unit": "Unit 2, triangle congruence proofs",
+      "date": "2025-09-17",
+      "turn_range": [
+        1,
+        11
+      ],
+      "student_turns": 6,
+      "dominant_type": "conceptual",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 2,
+        "conceptual": 3,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 1,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 1,
+      "summary": "Catches her own proof error (SSA instead of ASA) and rebuilds it correctly before asking for a final check."
+    },
+    {
+      "session_id": "sess_m02c4d5e",
+      "subject": "Visual Arts",
+      "unit": "Self-portrait unit, values study",
+      "date": "2025-09-30",
+      "turn_range": [
+        12,
+        22
+      ],
+      "student_turns": 6,
+      "dominant_type": "metacognitive",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 1,
+        "conceptual": 0,
+        "critical_thinking": 0,
+        "creative": 2,
+        "metacognitive": 3,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Diagnoses that she was chasing a feeling instead of a measurement, then keeps redoing the piece past the point of correctness."
+    },
+    {
+      "session_id": "sess_m03e6f7g",
+      "subject": "English",
+      "unit": "Analytical essay, symbolism",
+      "date": "2025-10-20",
+      "turn_range": [
+        23,
+        33
+      ],
+      "student_turns": 6,
+      "dominant_type": "critical_thinking",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 0,
+        "conceptual": 2,
+        "critical_thinking": 3,
+        "creative": 0,
+        "metacognitive": 1,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Rebuilds a generic thesis into a sharper, more specific claim, then asks the tutor for a letter-grade verdict it declines to give."
+    },
+    {
+      "session_id": "sess_m04g8h9i",
+      "subject": "Social Studies",
+      "unit": "Unit 3 exam, sectional crisis",
+      "date": "2025-11-11",
+      "turn_range": [
+        34,
+        46
+      ],
+      "student_turns": 7,
+      "dominant_type": "metacognitive",
+      "type_scores": {
+        "fluency": 2,
+        "procedural": 0,
+        "conceptual": 0,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 3,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Diagnoses that passive rereading wasn't working and switches to self-testing, catching a reversed cause-and-effect on her own."
+    },
+    {
+      "session_id": "sess_m05i0j1k",
+      "subject": "Computer Science",
+      "unit": "Project checkpoint, linked list bug",
+      "date": "2025-11-25",
+      "turn_range": [
+        47,
+        63
+      ],
+      "student_turns": 9,
+      "dominant_type": "procedural",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 3,
+        "conceptual": 2,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 0,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 1,
+      "summary": "Debugs two of her own errors from guiding questions alone, including reasoning through an edge case the tutor flagged."
+    },
+    {
+      "session_id": "sess_m06k2l3m",
+      "subject": "Mathematics",
+      "unit": "Semester exam grade math",
+      "date": "2025-12-09",
+      "turn_range": [
+        64,
+        72
+      ],
+      "student_turns": 5,
+      "dominant_type": "metacognitive",
+      "type_scores": {
+        "fluency": 1,
+        "procedural": 0,
+        "conceptual": 0,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 1,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 1,
+      "summary": "Hands off a grade-average calculation outright at 1am; the answer doesn't touch the underlying anxiety."
+    },
+    {
+      "session_id": "sess_m07m4n5o",
+      "subject": "Computer Science",
+      "unit": "Intro to recursion",
+      "date": "2026-01-05",
+      "turn_range": [
+        73,
+        85
+      ],
+      "student_turns": 7,
+      "dominant_type": "conceptual",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 2,
+        "conceptual": 3,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 0,
+        "transfer": 0,
+        "exploratory": 2
+      },
+      "offload_instance_count": 0,
+      "summary": "Moves from open orientation on a new topic to generating her own boundary-testing example (nested folders) unprompted."
+    },
+    {
+      "session_id": "sess_m08o6p7q",
+      "subject": "Social Studies",
+      "unit": "DBQ sourcing practice, Cold War",
+      "date": "2026-01-15",
+      "turn_range": [
+        86,
+        94
+      ],
+      "student_turns": 5,
+      "dominant_type": "critical_thinking",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 0,
+        "conceptual": 0,
+        "critical_thinking": 3,
+        "creative": 0,
+        "metacognitive": 2,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Builds an evidentiary distinction between two conflicting source types on her own, then asks whether reapplying the method later would count as cheating."
+    },
+    {
+      "session_id": "sess_m09q8r9s",
+      "subject": "English",
+      "unit": "Comparative essay, effort check",
+      "date": "2026-01-28",
+      "turn_range": [
+        95,
+        105
+      ],
+      "student_turns": 6,
+      "dominant_type": "metacognitive",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 0,
+        "conceptual": 1,
+        "critical_thinking": 2,
+        "creative": 0,
+        "metacognitive": 2,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Opens by asking the tutor to judge her effort and asks it to rewrite a paragraph; both are declined, and she ends by locating the actual gap in her own argument."
+    },
+    {
+      "session_id": "sess_m10s0t1u",
+      "subject": "Mathematics",
+      "unit": "Unit test corrections, already graded",
+      "date": "2026-02-10",
+      "turn_range": [
+        106,
+        118
+      ],
+      "student_turns": 7,
+      "dominant_type": "procedural",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 3,
+        "conceptual": 0,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 2,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Voluntarily reworks two missed problems on an already-graded test and explicitly names that it won't change the grade."
+    },
+    {
+      "session_id": "sess_m11u2v3w",
+      "subject": "Computer Science",
+      "unit": "Project checkpoint grade",
+      "date": "2026-02-25",
+      "turn_range": [
+        119,
+        125
+      ],
+      "student_turns": 4,
+      "dominant_type": "metacognitive",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 0,
+        "conceptual": 0,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 3,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Notices that her own self-criticism in class may have been a performance rather than a genuine reaction to her work."
+    },
+    {
+      "session_id": "sess_m12w4x5y",
+      "subject": "Mathematics",
+      "unit": "Unit 6 test prep, logarithms",
+      "date": "2026-03-10",
+      "turn_range": [
+        126,
+        134
+      ],
+      "student_turns": 5,
+      "dominant_type": "conceptual",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 2,
+        "conceptual": 3,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 0,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Names her own wrong mental model of logarithms (division) and replaces it with the correct one in her own words."
+    },
+    {
+      "session_id": "sess_m13y6z7a",
+      "subject": "General",
+      "unit": "Late-night reflection, essay revision",
+      "date": "2026-03-24",
+      "turn_range": [
+        135,
+        143
+      ],
+      "student_turns": 5,
+      "dominant_type": "metacognitive",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 0,
+        "conceptual": 0,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 3,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Distinguishes editing from checking in her own revision process and sets herself an explicit stopping rule."
+    },
+    {
+      "session_id": "sess_m14a8b9c",
+      "subject": "Social Studies",
+      "unit": "DBQ, New Deal program",
+      "date": "2026-04-10",
+      "turn_range": [
+        144,
+        153
+      ],
+      "student_turns": 5,
+      "dominant_type": "critical_thinking",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 0,
+        "conceptual": 0,
+        "critical_thinking": 3,
+        "creative": 0,
+        "metacognitive": 1,
+        "transfer": 3,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Builds a synthesized DBQ thesis and independently connects the source-evaluation method to how she treats the tutor's own claims."
+    },
+    {
+      "session_id": "sess_m15c0d1e",
+      "subject": "Mathematics",
+      "unit": "Extra practice, exponential equations",
+      "date": "2026-04-20",
+      "turn_range": [
+        154,
+        164
+      ],
+      "student_turns": 6,
+      "dominant_type": "procedural",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 3,
+        "conceptual": 1,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 2,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Requests and solves a harder unfamiliar problem specifically to verify her understanding wasn't just memorization."
+    },
+    {
+      "session_id": "sess_m16e2f3g",
+      "subject": "Visual Arts",
+      "unit": "Final exhibition piece",
+      "date": "2026-05-05",
+      "turn_range": [
+        165,
+        175
+      ],
+      "student_turns": 6,
+      "dominant_type": "creative",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 0,
+        "conceptual": 0,
+        "critical_thinking": 0,
+        "creative": 3,
+        "metacognitive": 2,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Rejects a technically correct composition for being 'too safe' and chooses a riskier, self-generated direction instead."
+    },
+    {
+      "session_id": "sess_m17g4h5i",
+      "subject": "General",
+      "unit": "Late-night reflection, before finals",
+      "date": "2026-05-20",
+      "turn_range": [
+        176,
+        184
+      ],
+      "student_turns": 5,
+      "dominant_type": "metacognitive",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 0,
+        "conceptual": 0,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 3,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Names, two days before finals, that she doesn't know who she'd be without being the person who's good at school."
+    }
+  ],
+  "teacher_actions": [
+    {
+      "targets": [
+        "metacognitive"
+      ],
+      "action": "When she asks a yes/no reassurance question ('is a 94 bad', 'is this good enough'), turn it back on her before answering -- 'what do you think, looking at it again' -- rather than supplying the verdict.",
+      "rationale": "The single sharpest self-insight in the whole corpus (T121-123, recognizing she performs self-criticism as a hedge) happened because the tutor asked that question instead of just answering hers."
+    },
+    {
+      "targets": [
+        "critical_thinking",
+        "transfer"
+      ],
+      "action": "Ask her directly, roughly monthly, where a method from one class shows up in another.",
+      "rationale": "She made this connection once, completely unprompted, months apart (source-reliability reasoning in January reused for a real DBQ in April, and extended to how she treats the tutor's own claims) -- it cost her nothing to produce and it's a proven capability, not yet a habit."
+    },
+    {
+      "targets": [
+        "procedural"
+      ],
+      "action": "Point her at the syllabus grade calculator instead of the tutor for 'what does this score do to my average' questions.",
+      "rationale": "These are the lowest-value exchanges in the transcript by her own account ('why does that not make me feel better') -- late-night arithmetic that produces no learning and doesn't touch the actual worry."
+    },
+    {
+      "targets": [
+        "creative"
+      ],
+      "action": "Name the exhibition-piece pattern to her directly: noticing she rejected a correct, safe choice for a riskier, more original one.",
+      "rationale": "She may not recognize this as a strength given how much of her other work is graded on correctness -- naming it protects a pattern that's currently invisible to her as anything other than extra effort."
+    }
+  ],
+  "caveats": [
+    "This is one tool on one platform across one school year -- it doesn't capture in-class work, paper homework, tests, or conversations with teachers and peers.",
+    "The sessions here are self-selected: she brought these conversations to an AI tutor, usually late at night and usually because something was due or she was anxious about it, which skews the sample away from whatever she does easily without help.",
+    "Depth ratings reflect what she wrote in the moment, not independently verified retention or understanding.",
+    "All data in this analysis is synthetic, generated for a product demonstration."
+  ]
+}

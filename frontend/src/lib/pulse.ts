@@ -2,15 +2,28 @@
  * The daily/weekly "pulse" — a red / amber / green read on where a student is,
  * with the signals and context behind it.
  *
- * `getPulse`/`pulseTone` are an authored fixture for the six hero students and
- * a steady-green default for everyone else — used only by the mock data layer
- * (`api/mock.ts`) so the demo still looks intentional with `VITE_USE_MOCKS`.
- * Real callers use `pulseFromDigest`, which builds the same `Pulse` shape from
- * the backend's actual one-day triage (`GET /students/<id>/digest/`) — the
- * only real signal the backend computes today. That triage covers app-tutor
- * activity alone, so it is a narrower read than the fixture's "wellbeing /
+ * `pulseFromDigest` is the real-data path: it builds a `Pulse` from the
+ * backend's actual one-day triage (`GET /students/<id>/digest/`), the only
+ * real signal the backend computes today. That triage covers app-tutor
+ * activity alone, so it is a narrower read than the pulse card's "wellbeing /
  * attendance / grades" framing implies; widening it to a genuinely holistic
  * weekly pulse is backend work, not done here.
+ *
+ * `getPulse`/`pulseTone` are the authored fixture behind it — a hand-written
+ * pulse for the six hero students and a steady-green default for everyone
+ * else. They are still live in two places, not dead demo code: the mock data
+ * layer (`api/mock.ts`, under `VITE_USE_MOCKS`), and as the fallback wherever
+ * no digest is available — guardian and student roles, for whom the digest
+ * endpoint is deliberately teacher-only, plus any still-loading row.
+ *
+ * The fixture is keyed by full name, not id. The six hero students' database
+ * ids are whatever order `passport/seed/` happened to create them in (31-36
+ * in a fresh seed, not 1-6), while the mock fixtures use 1-6. An id-keyed map
+ * silently misses one set or the other and falls back to the green default
+ * for every hero student on whichever side it doesn't match — which is
+ * exactly what the fallback path did against the real API. Name is the one
+ * identifier both sides already agree on (`Student.name` on the backend,
+ * `${first_name} ${last_name}` in `api/mock.ts`).
  */
 
 import type { Digest, DigestAction } from '../api/types';
@@ -54,9 +67,9 @@ export interface Pulse {
   context: PulseContext[];
 }
 
-const PULSES: Record<number, Pulse> = {
-  // 1 — Maya Okonkwo: high achiever burning out. The intervention showcase.
-  1: {
+const PULSES: Record<string, Pulse> = {
+  // Maya Okonkwo: high achiever burning out. The intervention showcase.
+  'Maya Okonkwo': {
     tone: 'red',
     headline: 'Needs intervention',
     trendNote: 'Wellbeing down 3 weeks',
@@ -81,8 +94,8 @@ const PULSES: Record<number, Pulse> = {
       { label: 'Wellbeing', value: 'Down 3 wks', tone: 'bad' },
     ],
   },
-  // 2 — Deshawn Carter: capable, but mornings and Mondays are hard.
-  2: {
+  // Deshawn Carter: capable, but mornings and Mondays are hard.
+  'Deshawn Carter': {
     tone: 'amber',
     headline: 'Watch',
     trendNote: 'Attendance pattern, not ability',
@@ -105,8 +118,8 @@ const PULSES: Record<number, Pulse> = {
       { label: 'Afternoon engagement', value: 'High', tone: 'good' },
     ],
   },
-  // 3 — Alina Restrepo: newcomer closing the reading gap fast.
-  3: {
+  // Alina Restrepo: newcomer closing the reading gap fast.
+  'Alina Restrepo': {
     tone: 'green',
     headline: 'On track',
     trendNote: 'Strongest reading gain in her year',
@@ -128,8 +141,8 @@ const PULSES: Record<number, Pulse> = {
       { label: 'Behaviour', value: 'Clear', tone: 'good' },
     ],
   },
-  // 4 — Jordan Whitaker: format-dependent; referrals cluster in lectures.
-  4: {
+  // Jordan Whitaker: format-dependent; referrals cluster in lectures.
+  'Jordan Whitaker': {
     tone: 'amber',
     headline: 'Watch',
     trendNote: 'Format, not content',
@@ -152,8 +165,8 @@ const PULSES: Record<number, Pulse> = {
       { label: 'Lab periods', value: 'Incident-free', tone: 'good' },
     ],
   },
-  // 5 — Sam Nakamura: mid-year transfer dip, now recovering.
-  5: {
+  // Sam Nakamura: mid-year transfer dip, now recovering.
+  'Sam Nakamura': {
     tone: 'amber',
     headline: 'Watch',
     trendNote: 'Recovering since the transfer',
@@ -176,20 +189,24 @@ const PULSES: Record<number, Pulse> = {
       { label: 'Behaviour', value: 'Clear', tone: 'good' },
     ],
   },
-  // 6 — Priya Raghunathan: gifted; top tests, floor-level homework.
-  6: {
-    tone: 'amber',
-    headline: 'Watch',
-    trendNote: 'Under-challenged, not underperforming',
-    why: 'Top of every test, bottom of every homework list — she will not repeat practice she considers already learned. The advanced-learner plan is unactioned.',
+  // Priya Raghunathan: gifted, but six clean AI offloads land right where
+  // she's most disengaged — including asking the tutor to fabricate and
+  // disguise unread work as her own. See cognitive-analysis-files/students/priya.
+  'Priya Raghunathan': {
+    tone: 'red',
+    headline: 'Needs intervention',
+    trendNote: '6 offloaded assignments this term',
+    why: 'Top of every test, bottom of every homework list — and the AI tutor log shows why: six offloads this term, five of them clean handoffs with no inspection, concentrated in writing tasks and math she has already mastered elsewhere. One asked the tutor to fabricate content she had not read and disguise it as her own.',
     since: {
       asOf: 'Aug 8',
       changes: [
+        { direction: 'new', text: 'AI tutor log flags a 6th offloaded assignment' },
         { direction: 'down', text: 'Two more homework sets not handed in' },
         { direction: 'up', text: 'Arrived early to studio again' },
       ],
     },
     signals: [
+      { label: 'AI offloading', detail: '6 instances this term, 5 with no inspection of the returned work', trend: 'up', concerning: true },
       { label: 'Homework completion', detail: 'Scores in the 40s and 50s', trend: 'down', concerning: true },
       { label: 'Academic engagement', detail: 'Low and flat outside her elective', trend: 'flat', concerning: true },
       { label: 'Gifted plan', detail: 'Eligible for acceleration, not yet actioned', trend: 'flat', concerning: true },
@@ -197,6 +214,7 @@ const PULSES: Record<number, Pulse> = {
     context: [
       { label: 'Test scores', value: 'Mid-high 90s', tone: 'good' },
       { label: 'Homework', value: '40s–50s', tone: 'bad' },
+      { label: 'AI offloads', value: '6 this term', tone: 'bad' },
       { label: 'Elective', value: 'Fully engaged', tone: 'good' },
     ],
   },
@@ -222,13 +240,30 @@ function defaultPulse(): Pulse {
 }
 
 /** The full pulse for a student. Authored for heroes, steady-green otherwise. */
-export function getPulse(studentId: number): Pulse {
-  return PULSES[studentId] ?? defaultPulse();
+export function getPulse(studentName: string): Pulse {
+  return PULSES[studentName] ?? defaultPulse();
 }
 
 /** Just the colour — cheap enough to call per roster row for the nav dots. */
-export function pulseTone(studentId: number): PulseTone {
-  return (PULSES[studentId] ?? { tone: 'green' as const }).tone;
+export function pulseTone(studentName: string): PulseTone {
+  return (PULSES[studentName] ?? { tone: 'green' as const }).tone;
+}
+
+/**
+ * Whether a digest actually describes a day of app activity.
+ *
+ * The endpoint is tolerant by design: a student with no app-integration
+ * activity at all still gets a well-formed body back, with `date` null and
+ * `action` defaulted to `check_in` (see `digest()` in passport/views.py).
+ * Read literally that would paint every such student amber "Check in" — a
+ * verdict about a student the backend has no data on, which is worse than
+ * saying nothing. So a dateless digest counts as "no signal" and callers fall
+ * back to `getPulse`, the same fallback they already use for the roles the
+ * endpoint doesn't serve. Once real session data is seeded, `date` is set and
+ * the real triage takes over on its own.
+ */
+export function hasDigestActivity(digest: Digest | null | undefined): digest is Digest {
+  return Boolean(digest && digest.date);
 }
 
 // Mirrors passport/narrative.py's ACCURACY_CONCERN / ACCURACY_WATCH exactly —

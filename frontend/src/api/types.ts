@@ -18,6 +18,7 @@ export type RecordSource =
   | 'behavior'
   | 'document'
   | 'ai_tutor'
+  | 'cognitive_analysis'
   | 'engagement'
   | 'observation'
   | 'parent_input'
@@ -31,6 +32,7 @@ export const SOURCE_LABELS: Record<RecordSource, string> = {
   behavior: 'Behavior',
   document: 'Document',
   ai_tutor: 'AI tutor interaction',
+  cognitive_analysis: 'AI use analysis',
   engagement: 'Engagement sample',
   observation: 'Teacher observation',
   parent_input: 'Guardian input',
@@ -61,6 +63,8 @@ export interface Student {
   date_of_birth: string | null;
   /** How the student refers to themselves, e.g. "she/her". */
   pronouns: string;
+  /** Whether a `cognitive_analysis` record exists for this student. */
+  has_ai_analysis: boolean;
 }
 
 /** `Guardianship`, flattened onto the student it concerns. */
@@ -117,6 +121,64 @@ export interface PassportSections {
   how_they_learn: string;
   performance: string;
   behavior: string;
+  how_they_use_ai: string;
+}
+
+/** One row of the cognitive-task-analysis skill's `cognitive_types` array. */
+export interface CognitiveType {
+  id: string;
+  label: string;
+  presence_score: number;
+  presence_label: string;
+  typical_depth_score: number;
+  typical_depth_label: string;
+  peak_depth_score: number;
+  peak_depth_label: string;
+  instance_count: number;
+}
+
+/** One flagged offload in the cognitive-task-analysis skill's `offloading.instances`. */
+export interface OffloadingInstance {
+  session_id: string;
+  subject: string;
+  date: string;
+  turn_id: number;
+  type_offloaded: string;
+  /** One of `clean_offload`, `offload_with_inspection`, `scaffolded_offload`, `escalating_offload`. */
+  pattern: string;
+  student_turn: { turn_id: number; text: string };
+  note: string;
+}
+
+/** One row of the cognitive-task-analysis skill's `sessions` array. */
+export interface CognitiveSession {
+  session_id: string;
+  subject: string;
+  unit: string;
+  date: string;
+  dominant_type: string;
+  /** Depth score 0-3 per cognitive type id. */
+  type_scores: Record<string, number>;
+  summary: string;
+}
+
+/**
+ * The `data` bag of a `cognitive_analysis` record: the cognitive-task-analysis
+ * skill's `analysis.json`, in full. Only the fields the passport reads are
+ * typed here — read the rest through the record's raw `data` if ever needed.
+ */
+export interface CognitiveAnalysis {
+  cognitive_types: CognitiveType[];
+  offloading: {
+    instance_count: number;
+    summary: string;
+    instances: OffloadingInstance[];
+  };
+  evidence_base: {
+    session_count: number;
+    sufficiency: string;
+  };
+  sessions: CognitiveSession[];
 }
 
 /** `Passport`, plus the student it belongs to and the records behind it. */

@@ -34,7 +34,7 @@ export function canViewStudent(me: Me, studentId: number): boolean {
  * section where one was removed.
  */
 const HIDDEN_FROM: Partial<Record<Role, ReadonlySet<StudentRecord['source']>>> = {
-  student: new Set(['behavior', 'observation'] as const),
+  student: new Set(['behavior', 'observation', 'cognitive_analysis'] as const),
 };
 
 export function hiddenSources(role: Role): ReadonlySet<StudentRecord['source']> {
@@ -44,4 +44,9 @@ export function hiddenSources(role: Role): ReadonlySet<StudentRecord['source']> 
 /** Whether the behaviour section should render at all for this role. */
 export function showsBehavior(role: Role): boolean {
   return !hiddenSources(role).has('behavior');
+}
+
+/** Whether the "How they use AI" section should render at all for this role. */
+export function showsAiUse(role: Role): boolean {
+  return !hiddenSources(role).has('cognitive_analysis');
 }

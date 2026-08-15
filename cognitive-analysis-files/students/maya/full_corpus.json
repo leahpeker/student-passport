@@ -1,0 +1,878 @@
+[
+  {
+    "session_id": "sess_m01a2b3c",
+    "subject": "Mathematics",
+    "unit": "Unit 2, triangle congruence proofs",
+    "date": "2025-09-17",
+    "messages": [
+      {
+        "role": "student",
+        "text": "Can you check my proof for problem 14? I think step three is wrong."
+      },
+      {
+        "role": "ai",
+        "text": "Sure -- paste what you have and I'll look at step three specifically before anything else."
+      },
+      {
+        "role": "student",
+        "text": "Step 1: angle A = angle D (given). Step 2: AB = DE (given). Step 3: BC = EF so triangles are congruent by SAS. Step 4: therefore angle B = angle E."
+      },
+      {
+        "role": "ai",
+        "text": "Look at where the angle sits relative to the two sides you're using in step 3. Is it between AB and BC, or somewhere else?"
+      },
+      {
+        "role": "student",
+        "text": "wait so it's not SAS because the angle isn't between the two sides I'm using. I have angle A between AB and AD-ish stuff but BC isn't touching angle A at all."
+      },
+      {
+        "role": "ai",
+        "text": "Right -- that's SSA, which isn't a valid congruence shortcut in general. What do you actually have that you could use instead?"
+      },
+      {
+        "role": "student",
+        "text": "I have the two sides and the non-included angle, but I also know the third angle from the triangle sum since it's given the triangle has a right angle. So I could get ASA using the third angle instead."
+      },
+      {
+        "role": "ai",
+        "text": "That works. Want to try rewriting steps 3 and 4 with that instead?"
+      },
+      {
+        "role": "student",
+        "text": "ok I rewrote it: angle A = angle D, angle C = angle F (both right angles, given), AC = DF (given), so ASA, so triangle ABC = triangle DEF. can you just check the whole thing this time so I'm not up all night."
+      },
+      {
+        "role": "ai",
+        "text": "That's correct and cleanly written -- the logic holds all the way through."
+      },
+      {
+        "role": "student",
+        "text": "ok good. sorry it's late, I just didn't want to leave it wrong overnight."
+      }
+    ]
+  },
+  {
+    "session_id": "sess_m02c4d5e",
+    "subject": "Visual Arts",
+    "unit": "Self-portrait unit, values study",
+    "date": "2025-09-30",
+    "messages": [
+      {
+        "role": "student",
+        "text": "i'm supposed to be shading a self portrait but i've redone the eyes 4 times and it's not right"
+      },
+      {
+        "role": "ai",
+        "text": "What specifically feels off about them right now?"
+      },
+      {
+        "role": "student",
+        "text": "i don't know that's the problem. they just don't look right"
+      },
+      {
+        "role": "ai",
+        "text": "Instead of judging the whole thing at once, try comparing three measurements to your reference photo: the distance between the eyes, the height of each eye relative to the other, and the angle of the eyelid line."
+      },
+      {
+        "role": "student",
+        "text": "ok the left eye is like 2mm higher than the right actually, looking at the ref photo. i think i was trying to fix a feeling instead of a measurement."
+      },
+      {
+        "role": "ai",
+        "text": "That's a really useful thing to notice. Do you want to fix that measurement, or is the asymmetry something you're keeping on purpose?"
+      },
+      {
+        "role": "student",
+        "text": "fix it. i don't want it to look wrong, i want it to look like i decided that on purpose"
+      },
+      {
+        "role": "ai",
+        "text": "Fair. Try lightly re-blocking just the left eye's position before you touch any shading again, so you're not redoing work you'll have to redo a second time."
+      },
+      {
+        "role": "student",
+        "text": "ok i moved it. still not going to submit until i redo the shading under it too"
+      },
+      {
+        "role": "ai",
+        "text": "The piece was already strong before this -- your call whether to keep going tonight or pick it up fresh tomorrow."
+      },
+      {
+        "role": "student",
+        "text": "no i'll keep going, i have time"
+      }
+    ]
+  },
+  {
+    "session_id": "sess_m03e6f7g",
+    "subject": "English",
+    "unit": "Analytical essay, symbolism",
+    "date": "2025-10-20",
+    "messages": [
+      {
+        "role": "student",
+        "text": "Is this thesis statement strong enough or does it read like I did it fast?"
+      },
+      {
+        "role": "ai",
+        "text": "Paste it and I'll tell you what it's actually arguing."
+      },
+      {
+        "role": "student",
+        "text": "\"Achebe uses the symbol of the yam to represent Okonkwo's masculinity, which ultimately becomes his downfall.\""
+      },
+      {
+        "role": "ai",
+        "text": "That's a reasonable claim, but it's also the first thing most readers would say about the yam. What's the more specific or arguable version of that idea, if there is one?"
+      },
+      {
+        "role": "student",
+        "text": "I guess what's actually interesting is that the yam thing works because it's not really about masculinity, it's about control. he can't control the yam harvest either, that's the whole point of the failed year."
+      },
+      {
+        "role": "ai",
+        "text": "That's sharper -- it gives you something to actually prove rather than just illustrate. Want to try rewriting the thesis around control instead?"
+      },
+      {
+        "role": "student",
+        "text": "\"Okonkwo's obsession with the yam harvest reveals that his masculinity was always a performance of control, which is why losing control of the harvest breaks him before anything else does.\" is that better or am I overcomplicating a five paragraph essay"
+      },
+      {
+        "role": "ai",
+        "text": "It's better, and it's still a normal scope for the assignment -- one claim, provable with the text you already have in mind."
+      },
+      {
+        "role": "student",
+        "text": "ok. can you just tell me honestly if it's an A thesis or a B thesis"
+      },
+      {
+        "role": "ai",
+        "text": "I'm not going to grade it, but I'll say this: it's the strongest thesis you've shown me this semester, and the rubric is asking for exactly the kind of argument you just built."
+      },
+      {
+        "role": "student",
+        "text": "ok. thanks. I'm going to reread the whole thing one more time before I submit"
+      }
+    ]
+  },
+  {
+    "session_id": "sess_m04g8h9i",
+    "subject": "Social Studies",
+    "unit": "Unit 3 exam, sectional crisis",
+    "date": "2025-11-11",
+    "messages": [
+      {
+        "role": "student",
+        "text": "I have gone through the study guide four times. What else should I be doing."
+      },
+      {
+        "role": "ai",
+        "text": "What does going through it actually look like for you?"
+      },
+      {
+        "role": "student",
+        "text": "reading it and highlighting stuff I already knew I guess"
+      },
+      {
+        "role": "ai",
+        "text": "Try closing it and writing down everything you remember from one section, then check what you missed. It'll feel worse than reading. It works better."
+      },
+      {
+        "role": "student",
+        "text": "ok wait that's uncomfortable, I got like half of it just from memory and had to check the rest"
+      },
+      {
+        "role": "ai",
+        "text": "That's normal, and it's more useful than it feels. Which half did you miss?"
+      },
+      {
+        "role": "student",
+        "text": "I keep mixing up the causes and effects of the sectional crisis stuff, like which caused which"
+      },
+      {
+        "role": "ai",
+        "text": "Want to go through two or three of those chains together right now?"
+      },
+      {
+        "role": "student",
+        "text": "ok, the tariff of abominations came after the nullification crisis right"
+      },
+      {
+        "role": "ai",
+        "text": "Check the order again -- which one would need to happen first for the other to make sense as a reaction?"
+      },
+      {
+        "role": "student",
+        "text": "wait no, that's backwards, the tariff thing came before, that's literally what South Carolina was reacting to. I had it flipped."
+      },
+      {
+        "role": "ai",
+        "text": "Right."
+      },
+      {
+        "role": "student",
+        "text": "ok I'm going to bed. this was more useful than the fourth read-through honestly"
+      }
+    ]
+  },
+  {
+    "session_id": "sess_m05i0j1k",
+    "subject": "Computer Science",
+    "unit": "Project checkpoint, linked list bug",
+    "date": "2025-11-25",
+    "messages": [
+      {
+        "role": "student",
+        "text": "my project checkpoint code isn't compiling and I don't understand the error"
+      },
+      {
+        "role": "ai",
+        "text": "Paste the error message and the function it's pointing to."
+      },
+      {
+        "role": "student",
+        "text": "it says NullPointerException on line 14, that's inside my loop that adds nodes to the list"
+      },
+      {
+        "role": "ai",
+        "text": "Before we touch the code -- walk me through what you expect line 14 to do, in your own words."
+      },
+      {
+        "role": "student",
+        "text": "it's supposed to set current.next to the new node, then move current forward"
+      },
+      {
+        "role": "ai",
+        "text": "And what is `current` set to right before the loop starts?"
+      },
+      {
+        "role": "student",
+        "text": "oh wait. I never actually initialized current before the loop, it's just... nothing. that's probably it."
+      },
+      {
+        "role": "ai",
+        "text": "That'll do it. What should it point to before the loop runs?"
+      },
+      {
+        "role": "student",
+        "text": "the head of the list, so it has something to start from. let me fix that."
+      },
+      {
+        "role": "ai",
+        "text": "Try it."
+      },
+      {
+        "role": "student",
+        "text": "ok it compiles now but I got a different error on line 22"
+      },
+      {
+        "role": "ai",
+        "text": "What does 22 do?"
+      },
+      {
+        "role": "student",
+        "text": "that's the part where it returns the size of the list after adding everything. it's throwing an index error though, weird.\n\nCan you just look at the whole file, I want to make sure there's nothing else weird before I submit."
+      },
+      {
+        "role": "ai",
+        "text": "Looking at the whole thing -- one thing worth checking: what happens in your size-counting loop if the list is empty when this function is called?"
+      },
+      {
+        "role": "student",
+        "text": "oh that's actually a good point, I didn't think about what happens if the list is empty. it would probably try to read the head node's fields and there'd be nothing there."
+      },
+      {
+        "role": "ai",
+        "text": "Right -- worth a guard clause for that case."
+      },
+      {
+        "role": "student",
+        "text": "ok I added one. I think it's solid now. thank you"
+      }
+    ]
+  },
+  {
+    "session_id": "sess_m06k2l3m",
+    "subject": "Mathematics",
+    "unit": "Semester exam grade math",
+    "date": "2025-12-09",
+    "messages": [
+      {
+        "role": "student",
+        "text": "If I got a 95 on this exam what would that do to my average."
+      },
+      {
+        "role": "ai",
+        "text": "Want to try the calculation, or do you have your current grades handy so I can just run it?"
+      },
+      {
+        "role": "student",
+        "text": "I don't want to do math at 1am wrong, can you just calculate it. current average is 96.2, this exam is 20% of the grade."
+      },
+      {
+        "role": "ai",
+        "text": "0.962 x 0.8 + 0.95 x 0.2 = 0.9596, so about 96.0 -- basically no change either way."
+      },
+      {
+        "role": "student",
+        "text": "ok so basically nothing changes either way"
+      },
+      {
+        "role": "ai",
+        "text": "Right, you're well past the point where one exam moves the number much."
+      },
+      {
+        "role": "student",
+        "text": "why does that not make me feel better"
+      },
+      {
+        "role": "ai",
+        "text": "That's a fair thing to notice, but it's 1am the night before an exam, which isn't the moment to sort out. Worth sleeping on."
+      },
+      {
+        "role": "student",
+        "text": "yeah. going to bed"
+      }
+    ]
+  },
+  {
+    "session_id": "sess_m07m4n5o",
+    "subject": "Computer Science",
+    "unit": "Intro to recursion",
+    "date": "2026-01-05",
+    "messages": [
+      {
+        "role": "student",
+        "text": "we're starting recursion this week, i don't really get why you'd use it over just a loop"
+      },
+      {
+        "role": "ai",
+        "text": "A recursive function is one that calls itself on a smaller version of the same problem until it hits a base case. Loops repeat; recursion breaks a problem into smaller copies of itself."
+      },
+      {
+        "role": "student",
+        "text": "ok so is it ever actually better or just a different way to write the same thing"
+      },
+      {
+        "role": "ai",
+        "text": "For some structures a loop doesn't map cleanly onto the shape of the problem -- like anything nested to an unknown depth."
+      },
+      {
+        "role": "student",
+        "text": "wait so for something like a file system with folders inside folders a loop wouldn't even really work the same way right, because you don't know how deep it goes"
+      },
+      {
+        "role": "ai",
+        "text": "Exactly that. You don't know in advance how many levels of loop you'd need, but a function that calls itself on 'whatever is inside this folder' doesn't care how deep it goes."
+      },
+      {
+        "role": "student",
+        "text": "ok that actually makes sense now. can you give me one to try on my own"
+      },
+      {
+        "role": "ai",
+        "text": "Write a function that sums all the numbers in a list using recursion instead of a loop."
+      },
+      {
+        "role": "student",
+        "text": "def sum_list(lst): return lst[0] + sum_list(lst[1:])  -- I think that's it?"
+      },
+      {
+        "role": "ai",
+        "text": "Try running it. What happens when the list is empty?"
+      },
+      {
+        "role": "student",
+        "text": "oh it would crash trying to grab lst[0] from nothing. the base case needs to come first or it never stops. let me add that."
+      },
+      {
+        "role": "ai",
+        "text": "That'll fix it."
+      },
+      {
+        "role": "student",
+        "text": "ok got it, added the empty-list check first. makes sense now."
+      }
+    ]
+  },
+  {
+    "session_id": "sess_m08o6p7q",
+    "subject": "Social Studies",
+    "unit": "DBQ sourcing practice, Cold War",
+    "date": "2026-01-15",
+    "messages": [
+      {
+        "role": "student",
+        "text": "we have practice documents for the DBQ and I have to say which source is more reliable, a US government memo or a Soviet newspaper article, both about the same event"
+      },
+      {
+        "role": "ai",
+        "text": "What do you notice about each one, separately from which you'd trust more?"
+      },
+      {
+        "role": "student",
+        "text": "the memo is internal so there's less reason to lie to itself, but it's also written to justify a policy decision that already happened. the newspaper is obviously propaganda but it might still get some facts right even if the interpretation is biased"
+      },
+      {
+        "role": "ai",
+        "text": "Good. So which would you actually cite, and for what?"
+      },
+      {
+        "role": "student",
+        "text": "I think I'd use the memo for what actually happened and the newspaper only for what the Soviets wanted people to believe, not as a fact source"
+      },
+      {
+        "role": "ai",
+        "text": "That's a strong distinction -- you're not picking a winner, you're using each source for what it's actually good for."
+      },
+      {
+        "role": "student",
+        "text": "ok can I use that same idea for the actual DBQ in April or is that cheating to reuse the reasoning"
+      },
+      {
+        "role": "ai",
+        "text": "That's not reusing an answer, that's a method -- 'ask what a source is for, not just whether it's biased' works on any set of documents. Reapply it."
+      },
+      {
+        "role": "student",
+        "text": "ok good, I was worried it would look like I didn't actually think about the new documents"
+      }
+    ]
+  },
+  {
+    "session_id": "sess_m09q8r9s",
+    "subject": "English",
+    "unit": "Comparative essay, effort check",
+    "date": "2026-01-28",
+    "messages": [
+      {
+        "role": "student",
+        "text": "Can you tell from my essay whether it sounds like I tried hard enough?"
+      },
+      {
+        "role": "ai",
+        "text": "\"Tried hard enough\" isn't really something I can read off the page. What would that look like to you if you saw it?"
+      },
+      {
+        "role": "student",
+        "text": "I don't know, that's why I'm asking you"
+      },
+      {
+        "role": "ai",
+        "text": "Let's look at something more specific instead -- organization, evidence, voice. Paste it and I'll tell you what I actually see."
+      },
+      {
+        "role": "student",
+        "text": "[pastes essay]"
+      },
+      {
+        "role": "ai",
+        "text": "Paragraph three makes a claim about the two poems sharing a theme of isolation, but the quotes you picked are both about nature imagery, not isolation directly. The connection isn't stated."
+      },
+      {
+        "role": "student",
+        "text": "ok can you fix that paragraph"
+      },
+      {
+        "role": "ai",
+        "text": "I'm not going to write it for you, but I can ask you the question that would fix it: what do you think the nature imagery is doing, if not just describing nature?"
+      },
+      {
+        "role": "student",
+        "text": "..."
+      },
+      {
+        "role": "student",
+        "text": "I guess I never said why the second example matters, I just listed it. the fog imagery in the second poem is describing not being able to see anything, which is kind of literally isolation, I just never wrote that connection down."
+      },
+      {
+        "role": "ai",
+        "text": "That's the missing sentence. Want to add it?"
+      },
+      {
+        "role": "student",
+        "text": "ok fine. I'll do it. I really thought this one was done though"
+      }
+    ]
+  },
+  {
+    "session_id": "sess_m10s0t1u",
+    "subject": "Mathematics",
+    "unit": "Unit test corrections, already graded",
+    "date": "2026-02-10",
+    "messages": [
+      {
+        "role": "student",
+        "text": "i got a 96 back on the unit test today and i want to go through the ones i got wrong even though it's already graded"
+      },
+      {
+        "role": "ai",
+        "text": "Which ones?"
+      },
+      {
+        "role": "student",
+        "text": "number 6 and number 11"
+      },
+      {
+        "role": "ai",
+        "text": "Start with 6 -- what was the problem, and what did you do?"
+      },
+      {
+        "role": "student",
+        "text": "it was solving a rational equation, and I distributed the negative sign wrong on one side, I only flipped the first term instead of both"
+      },
+      {
+        "role": "ai",
+        "text": "Right, that's the classic version of that mistake. What about 11?"
+      },
+      {
+        "role": "student",
+        "text": "let me redo it -- ok, factor the numerator, cancel the common term, then... yeah I get the right answer this time. I think I just rushed it during the test."
+      },
+      {
+        "role": "ai",
+        "text": "Both make sense now, then."
+      },
+      {
+        "role": "student",
+        "text": "ok both make sense now. I know it doesn't change the grade"
+      },
+      {
+        "role": "ai",
+        "text": "Understanding the miss is still worth something on its own -- most students don't come back to a graded test at all."
+      },
+      {
+        "role": "student",
+        "text": "is that weird"
+      },
+      {
+        "role": "ai",
+        "text": "No. It's just not common."
+      },
+      {
+        "role": "student",
+        "text": "ok. thanks."
+      }
+    ]
+  },
+  {
+    "session_id": "sess_m11u2v3w",
+    "subject": "Computer Science",
+    "unit": "Project checkpoint grade",
+    "date": "2026-02-25",
+    "messages": [
+      {
+        "role": "student",
+        "text": "Is a 94 bad. Be honest."
+      },
+      {
+        "role": "ai",
+        "text": "What's actually bothering you about the 94?"
+      },
+      {
+        "role": "student",
+        "text": "it's not the grade i guess. i said out loud in class it was the worst thing i'd turned in and then i got a 94 on it and now i don't know if i actually think that or if i was just performing being hard on myself"
+      },
+      {
+        "role": "ai",
+        "text": "Looking at it again now, away from that moment -- what do you think?"
+      },
+      {
+        "role": "student",
+        "text": "honestly looking at it again it's fine. i think i say that stuff before i even see the grade so it doesn't count against me later"
+      },
+      {
+        "role": "ai",
+        "text": "That's a useful thing to notice about yourself."
+      },
+      {
+        "role": "student",
+        "text": "ok. yeah. not really a question I guess. thanks"
+      }
+    ]
+  },
+  {
+    "session_id": "sess_m12w4x5y",
+    "subject": "Mathematics",
+    "unit": "Unit 6 test prep, logarithms",
+    "date": "2026-03-10",
+    "messages": [
+      {
+        "role": "student",
+        "text": "wait why does log base 2 of 8 equal 3, i thought logs were about multiplying not counting"
+      },
+      {
+        "role": "ai",
+        "text": "What do you mean by 'counting'?"
+      },
+      {
+        "role": "student",
+        "text": "like i keep thinking of it as how many times 2 goes into 8 which is 4 not 3, so i'm doing something wrong in my head"
+      },
+      {
+        "role": "ai",
+        "text": "That's division, not what a log is asking. A log answers: what power do I raise the base to, to get this number?"
+      },
+      {
+        "role": "student",
+        "text": "OH. it's not division at all, it's asking what power. so log is literally just 'the exponent' dressed up."
+      },
+      {
+        "role": "ai",
+        "text": "That's exactly it."
+      },
+      {
+        "role": "student",
+        "text": "ok so log base 2 of 32 would be 5 because 2^5 is 32"
+      },
+      {
+        "role": "ai",
+        "text": "Right."
+      },
+      {
+        "role": "student",
+        "text": "ok that's going to save me on the test. why did nobody just say it like that"
+      }
+    ]
+  },
+  {
+    "session_id": "sess_m13y6z7a",
+    "subject": "General",
+    "unit": "Late-night reflection, essay revision",
+    "date": "2026-03-24",
+    "messages": [
+      {
+        "role": "student",
+        "text": "How do people know when their work is good enough to stop."
+      },
+      {
+        "role": "ai",
+        "text": "What prompted that tonight?"
+      },
+      {
+        "role": "student",
+        "text": "i've rewritten the same paragraph like six times and i don't know if it's actually still improving or if i just don't trust myself to know when it's done"
+      },
+      {
+        "role": "ai",
+        "text": "If you compare it to the first draft, is it better?"
+      },
+      {
+        "role": "student",
+        "text": "if I compare it to the first draft it's obviously better. i think the real answer is i'm not actually editing anymore, i'm just checking"
+      },
+      {
+        "role": "ai",
+        "text": "That's a real distinction. One option: read it twice more, and if nothing changes on either read, it's done, regardless of how it feels."
+      },
+      {
+        "role": "student",
+        "text": "ok i'm going to do that. two more read throughs and then i'm done regardless of how i feel about it"
+      },
+      {
+        "role": "ai",
+        "text": "Sounds like a plan."
+      },
+      {
+        "role": "student",
+        "text": "ok. going to bed after this."
+      }
+    ]
+  },
+  {
+    "session_id": "sess_m14a8b9c",
+    "subject": "Social Studies",
+    "unit": "DBQ, New Deal program",
+    "date": "2026-04-10",
+    "messages": [
+      {
+        "role": "student",
+        "text": "ok i'm doing the practice DBQ for real this time, same idea as before right, which source to trust more"
+      },
+      {
+        "role": "ai",
+        "text": "What are the documents this time?"
+      },
+      {
+        "role": "student",
+        "text": "a government pamphlet about a New Deal program and a worker's diary entry about the same program"
+      },
+      {
+        "role": "ai",
+        "text": "What do you notice?"
+      },
+      {
+        "role": "student",
+        "text": "the pamphlet is going to make the program look good no matter what, that's its whole job. the diary is one person's experience so it might not represent everyone, but it's not trying to sell me anything"
+      },
+      {
+        "role": "ai",
+        "text": "So how would you use each?"
+      },
+      {
+        "role": "student",
+        "text": "my thesis is going to be that personal accounts show the human cost even when the official numbers look good, so you need both, not that one is right"
+      },
+      {
+        "role": "ai",
+        "text": "That's a strong, synthesized thesis -- and it's the same method you used on the practice documents in January."
+      },
+      {
+        "role": "student",
+        "text": "yeah I remembered that conversation actually. glad i didn't have to relearn it. it's kind of the same thing as when I don't just believe whatever you tell me either, right, same idea but with documents instead of you"
+      },
+      {
+        "role": "ai",
+        "text": "That's exactly the same move, applied to a different kind of source."
+      }
+    ]
+  },
+  {
+    "session_id": "sess_m15c0d1e",
+    "subject": "Mathematics",
+    "unit": "Extra practice, exponential equations",
+    "date": "2026-04-20",
+    "messages": [
+      {
+        "role": "student",
+        "text": "I already finished this. Can you give me harder versions of the same problems so I know I actually understand it and did not just memorise it."
+      },
+      {
+        "role": "ai",
+        "text": "Here's one: solve for x where 3^(x+1) = 5^x."
+      },
+      {
+        "role": "student",
+        "text": "wait this one has a variable in the exponent on both sides, we didn't do that"
+      },
+      {
+        "role": "ai",
+        "text": "Try taking the log of both sides first."
+      },
+      {
+        "role": "student",
+        "text": "ok, log(3^(x+1)) = log(5^x), so (x+1)log3 = x log5. then... x log3 + log3 = x log5. x log3 - x log5 = -log3. x(log3 - log5) = -log3. x = -log3 / (log3 - log5)."
+      },
+      {
+        "role": "ai",
+        "text": "Check the sign -- does that final form look right against the original equation for a rough estimate?"
+      },
+      {
+        "role": "student",
+        "text": "let me plug in roughly, log3 is about .48 and log5 is about .7, so -.48 / (.48-.7) = -.48/-.22 which is positive, about 2.2. that seems plausible."
+      },
+      {
+        "role": "ai",
+        "text": "That's correct."
+      },
+      {
+        "role": "student",
+        "text": "ok got it. that's harder than anything on the actual test will be probably"
+      },
+      {
+        "role": "ai",
+        "text": "Probably, yes."
+      },
+      {
+        "role": "student",
+        "text": "ok good. now i actually believe i know this and not just the version we practiced"
+      }
+    ]
+  },
+  {
+    "session_id": "sess_m16e2f3g",
+    "subject": "Visual Arts",
+    "unit": "Final exhibition piece",
+    "date": "2026-05-05",
+    "messages": [
+      {
+        "role": "student",
+        "text": "i'm supposed to be done with my exhibition piece but i erased the whole background twice today"
+      },
+      {
+        "role": "ai",
+        "text": "What was wrong with it?"
+      },
+      {
+        "role": "student",
+        "text": "nothing was technically wrong. it just felt too safe I guess. like it would get an A but it wouldn't be mine"
+      },
+      {
+        "role": "ai",
+        "text": "What would 'yours' look like instead?"
+      },
+      {
+        "role": "student",
+        "text": "I want to try something asymmetrical instead of centering it, even though centering is safer"
+      },
+      {
+        "role": "ai",
+        "text": "Nothing stopping you from trying it as a study first, low stakes."
+      },
+      {
+        "role": "student",
+        "text": "ok I tried it off to the side instead of centered. I actually like this a lot more."
+      },
+      {
+        "role": "ai",
+        "text": "Good."
+      },
+      {
+        "role": "student",
+        "text": "ok this is actually better and also terrifying because now I can't blame the assignment if it doesn't work"
+      },
+      {
+        "role": "ai",
+        "text": "That's usually what it means when a piece is actually yours."
+      },
+      {
+        "role": "student",
+        "text": "ok keeping it. not erasing this one."
+      }
+    ]
+  },
+  {
+    "session_id": "sess_m17g4h5i",
+    "subject": "General",
+    "unit": "Late-night reflection, before finals",
+    "date": "2026-05-20",
+    "messages": [
+      {
+        "role": "student",
+        "text": "What happens to someone who was good at school and then stops being good at it."
+      },
+      {
+        "role": "ai",
+        "text": "Did something specific prompt that tonight?"
+      },
+      {
+        "role": "student",
+        "text": "not really. I just realized I don't actually know what I'd be if I wasn't the person who's good at this"
+      },
+      {
+        "role": "ai",
+        "text": "What do you think you'd want to be true instead, if you could pick?"
+      },
+      {
+        "role": "student",
+        "text": "I don't know. I think I want to find out but not by testing it on purpose"
+      },
+      {
+        "role": "ai",
+        "text": "That's a reasonable thing to not want to test on purpose, especially this week."
+      },
+      {
+        "role": "student",
+        "text": "yeah. I have a final in two days. I should probably not be thinking about this right now"
+      },
+      {
+        "role": "ai",
+        "text": "Probably fair. Get some sleep."
+      },
+      {
+        "role": "student",
+        "text": "ok. thanks for not just telling me I'll be fine."
+      }
+    ]
+  }
+]
