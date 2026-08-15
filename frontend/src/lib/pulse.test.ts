@@ -10,7 +10,7 @@
 
 import assert from 'node:assert/strict';
 import { HERO_STUDENT_NAMES } from '../api/mock';
-import { getPulse, pulseTone, type PulseTone } from './pulse';
+import { getPulse, hasAuthoredPulse, pulseTone, type PulseTone } from './pulse';
 
 let checks = 0;
 function check(label: string, run: () => void): void {
@@ -56,6 +56,16 @@ check('an unknown student falls back to a steady green', () => {
   const pulse = getPulse('Nobody Really');
   assert.equal(pulse.tone, 'green');
   assert.ok(pulse.signals.length >= 1);
+});
+
+// Guards the fix in PassportPanel/StudentSidebar: the six story-arc students
+// must never hand off to a live digest, even once ordinary AI-tutor activity
+// starts showing up for them on the deployed app.
+check('every hero student has an authored pulse to pin to', () => {
+  for (const name of HERO_STUDENT_NAMES) {
+    assert.equal(hasAuthoredPulse(name), true, `${name} should be pinned to its authored pulse`);
+  }
+  assert.equal(hasAuthoredPulse('Nobody Really'), false);
 });
 
 console.log(`\n${checks} checks passed.`);
