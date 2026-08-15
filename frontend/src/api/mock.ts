@@ -1229,7 +1229,6 @@ export const DEMO_LOGINS: { username: string; role: Role; note: string }[] = [
   // These must match the seeded accounts in passport/seed/, or the one-click
   // demo logins fail against the real API.
   { username: 't.elena.ramirez', role: 'teacher', note: 'Two classrooms, 21 students' },
-  { username: 'g.rosa.delgado', role: 'guardian', note: 'Fatima Haddad and Talia Mensah' },
   { username: 's.maya.okonkwo', role: 'student', note: 'Their own passport' },
 ];
 
