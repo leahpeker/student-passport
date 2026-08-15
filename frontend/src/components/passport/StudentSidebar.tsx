@@ -3,21 +3,22 @@ import { Link } from 'react-router-dom';
 import { getClassrooms, getDigest } from '../../api/client';
 import type { Classroom, Me, Student } from '../../api/types';
 import { useAsync } from '../../lib/useAsync';
-import { pulseFromDigest, pulseTone, type PulseTone } from '../../lib/pulse';
+import { hasDigestActivity, pulseFromDigest, pulseTone, type PulseTone } from '../../lib/pulse';
 import { toneDot } from './tone';
 import { AiBadge } from '../AiBadge';
 
 /**
- * The dot's colour for one roster row. Real when the backend has a computed
- * digest for this viewer (teacher only — see `getDigest`); the authored
- * fixture otherwise, so a guardian, a student, or a still-loading row never
- * renders as a broken or missing dot. The fallback is keyed by name rather
- * than id — see `lib/pulse.ts` for why an id misses against the real API.
+ * The dot's colour for one roster row. Real when the backend has a digest with
+ * actual activity behind it (teacher only — see `getDigest`); the authored
+ * fixture otherwise, so a guardian, a student, a still-loading row, or a
+ * student with no app activity on file never renders as a broken, missing, or
+ * falsely amber dot. The fallback is keyed by name rather than id — see
+ * `lib/pulse.ts` for why an id misses against the real API.
  */
 function useRosterTone(studentId: number, studentName: string): PulseTone {
   const load = useCallback(() => getDigest(studentId), [studentId]);
   const { data: digest } = useAsync(load);
-  return digest ? pulseFromDigest(digest, '').tone : pulseTone(studentName);
+  return hasDigestActivity(digest) ? pulseFromDigest(digest, '').tone : pulseTone(studentName);
 }
 
 /** One roster dot. Its own component so `useRosterTone` gets one hook

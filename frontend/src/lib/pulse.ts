@@ -249,6 +249,23 @@ export function pulseTone(studentName: string): PulseTone {
   return (PULSES[studentName] ?? { tone: 'green' as const }).tone;
 }
 
+/**
+ * Whether a digest actually describes a day of app activity.
+ *
+ * The endpoint is tolerant by design: a student with no app-integration
+ * activity at all still gets a well-formed body back, with `date` null and
+ * `action` defaulted to `check_in` (see `digest()` in passport/views.py).
+ * Read literally that would paint every such student amber "Check in" — a
+ * verdict about a student the backend has no data on, which is worse than
+ * saying nothing. So a dateless digest counts as "no signal" and callers fall
+ * back to `getPulse`, the same fallback they already use for the roles the
+ * endpoint doesn't serve. Once real session data is seeded, `date` is set and
+ * the real triage takes over on its own.
+ */
+export function hasDigestActivity(digest: Digest | null | undefined): digest is Digest {
+  return Boolean(digest && digest.date);
+}
+
 // Mirrors passport/narrative.py's ACCURACY_CONCERN / ACCURACY_WATCH exactly —
 // context coloring should agree with the thresholds that produced the flags.
 const ACCURACY_CONCERN = 0.5;
