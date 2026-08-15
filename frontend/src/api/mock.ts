@@ -160,6 +160,8 @@ const HERO_ARCS: ArcSpec[] = [
         'Scores are high and stable across all three subjects, with no month below 90. Achievement is not the signal to watch here — the surrounding records move while the scores do not.',
       behavior:
         'No referrals and no conflict on record. The only behaviour-adjacent entries are health-office visits, which fall almost entirely on the school day before a scheduled assessment.',
+      how_they_use_ai:
+        'Most of her tutor sessions are her strongest work, self-checked and self-corrected — but a growing share are her asking the tutor to confirm a finished answer is "good enough" rather than to help her think, and both times the tutor declined to just reassure her, that refusal produced her best writing.',
     },
     extras: [
       {
@@ -275,6 +277,8 @@ const HERO_ARCS: ArcSpec[] = [
         'Scores climb steadily in both subjects across the year, from the low 80s to the high 80s in Algebra. Performance tracks attendance rather than difficulty — the material is not the obstacle.',
       behavior:
         'Incidents are frequent but narrow. Almost every flag falls in fourth period, and the record after lunch is close to clean. None of the entries describe conflict; most describe withdrawal or irritability.',
+      how_they_use_ai:
+        'Sessions cluster around catching up after an absence, and the catching-up is real work — he rebuilds a missed lesson from a worked example rather than asking for the answer outright, with one exception the night before a test that lines up with his lowest score of the year.',
     },
     extras: [
       {
@@ -374,6 +378,8 @@ const HERO_ARCS: ArcSpec[] = [
         'Reading has climbed steeply and consistently, from the low 50s in September to the low 80s by June — the steepest sustained gain in her year group. Mathematics has been in the 90s throughout and is not a concern.',
       behavior:
         'Nothing on record beyond a single off-task note. She has twice been observed translating for a classmate without being asked.',
+      how_they_use_ai:
+        'She is unusually precise about telling a language gap from a content gap, and her two strongest sessions — a source-comparison method, an original metaphor for an artist\'s statement — both arrived once she was allowed to reason in Spanish before switching to English.',
     },
     extras: [
       {
@@ -481,6 +487,8 @@ const HERO_ARCS: ArcSpec[] = [
         'Assessment scores swing by roughly thirty points depending on format. Projects and practicals land in the mid 90s; timed written tests on the same content land in the low 60s. Reading the average alone would badly misdescribe what Jordan knows.',
       behavior:
         'Referrals cluster almost entirely in first and third period, the two long lecture blocks. Lab and studio periods are close to incident-free across the whole year.',
+      how_they_use_ai:
+        'Depth tracks the format of the conversation, not the difficulty of the material — strongest when asked to diagram or build something, thinnest when rehearsing for a timed test — and they have independently carried the same self-built study strategy across four different subjects.',
     },
     extras: [
       {
@@ -578,6 +586,8 @@ const HERO_ARCS: ArcSpec[] = [
         'A clear three-phase shape. Steady mid 80s through November, a sharp drop through December to February bottoming near 68, and a partial recovery from March to the high 70s by June. The recovery began before any formal intervention.',
       behavior:
         'No conflict on record. Two entries note non-participation rather than disruption, both in the weeks straight after the transfer.',
+      how_they_use_ai:
+        'Tutor use traces the same three-phase shape as his grades: confident and technical before the move, thin and short in the months after it, recovering through the spring alongside anything physics- or robotics-related specifically.',
     },
     extras: [
       {
@@ -681,6 +691,8 @@ const HERO_ARCS: ArcSpec[] = [
         'Two separate stories under one average. Test scores sit in the mid to high 90s all year, homework completion scores in the 40s and 50s. Any single grade that blends the two describes neither.',
       behavior:
         'Steady low-level off-task notes across academic periods, none involving conflict with staff or peers. The recurring word in the entries is "finished" rather than "refused".',
+      how_they_use_ai:
+        'AI use splits sharply in two: sustained, self-directed depth on questions nobody assigned her, and clean offloading — short exchanges, little follow-through — on the homework that was.',
     },
     extras: [
       {
@@ -813,6 +825,7 @@ function fillerArc(
       how_they_learn: `${them} works comfortably alone or in a pair, with no strong preference showing in the engagement samples. Attention is even across the timetable.`,
       performance: 'Scores sit in a narrow band across both subjects with a mild upward trend over the year.',
       behavior: 'Very little on record. Nothing recurring and nothing involving conflict.',
+      how_they_use_ai: 'No AI-use analysis is on file for this student yet.',
     },
     extras: [
       {

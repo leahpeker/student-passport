@@ -1,0 +1,1086 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-08-14T19:36:03Z",
+  "source_files": [
+    "full_corpus.json"
+  ],
+  "student": {
+    "student_id": "stu_4471",
+    "grade": 9,
+    "school_year": "2025-2026"
+  },
+  "evidence_base": {
+    "session_count": 18,
+    "total_turns": 290,
+    "student_turns": 146,
+    "student_words": 4424,
+    "date_range": {
+      "start": "2025-09-18",
+      "end": "2026-04-16"
+    },
+    "subjects": [
+      "Algebra 1",
+      "Biology",
+      "Physical Science",
+      "English Language Arts",
+      "World History",
+      "Earth Science",
+      "Chemistry",
+      "Study skills",
+      "U.S. History",
+      "English Language Arts / Creative Writing",
+      "Geometry",
+      "Spanish II",
+      "Civics / Economics",
+      "Not course-linked"
+    ],
+    "sufficiency": "strong",
+    "sufficiency_note": "18 sessions spanning eight months and eleven subject areas is enough to support a genuine cognitive profile, including which patterns are habitual versus one-off and how her use of the tool changes by subject and by task type."
+  },
+  "cognitive_types": [
+    {
+      "id": "fluency",
+      "label": "Fluency",
+      "definition": "Retrieving or recalling known material fast and automatically",
+      "presence_score": 1,
+      "presence_label": "Occasional",
+      "typical_depth_score": 2,
+      "typical_depth_label": "Developing",
+      "peak_depth_score": 2,
+      "peak_depth_label": "Developing",
+      "peak_turn_id": 17,
+      "instance_count": 22,
+      "summary": "Shows up mainly as deliberate self-quizzing (bones, ATP counts, Spanish conjugations), where she drills herself and self-corrects. On one worksheet (world history), the same surface move looks more like asking the tutor cold than recalling.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_c8f02db8",
+          "subject": "Biology",
+          "unit": "Skeletal system",
+          "date": "2025-09-30",
+          "preceding_ai_turn": {
+            "turn_id": 16,
+            "text": "Correct. The bones of the fingers."
+          },
+          "student_turn": {
+            "turn_id": 17,
+            "text": "metacarpals. no wait. phalanges"
+          },
+          "depth_score": 2,
+          "depth_label": "Developing",
+          "why": "Self-corrects a wrong retrieval mid-turn during a deliberate rapid-fire drill -- the drilling itself, and the self-catch, are what push this past pure surface recall."
+        },
+        {
+          "session_id": "sess_55570ff3",
+          "subject": "Biology",
+          "unit": "Cellular respiration",
+          "date": "2025-10-07",
+          "preceding_ai_turn": {
+            "turn_id": 2,
+            "text": "Deal. Question 1: What are the three main stages of cellular respiration, in order?"
+          },
+          "student_turn": {
+            "turn_id": 3,
+            "text": "glycolysis, krebs cycle, electron transport chain"
+          },
+          "depth_score": 1,
+          "depth_label": "Surface",
+          "why": "Clean, confident recall of a known sequence in response to a direct quiz question -- fast and automatic, exactly what fluency looks like at its best."
+        },
+        {
+          "session_id": "sess_616714b9",
+          "subject": "World History",
+          "unit": "Causes of World War I",
+          "date": "2025-11-04",
+          "preceding_ai_turn": null,
+          "student_turn": {
+            "turn_id": 1,
+            "text": "what year did ww1 start"
+          },
+          "depth_score": 1,
+          "depth_label": "Surface",
+          "why": "A cold fact lookup with no attempted recall first, on a worksheet built to test exactly this kind of recall -- this pattern repeats through most of the session."
+        }
+      ]
+    },
+    {
+      "id": "procedural",
+      "label": "Procedural",
+      "definition": "Executing a known sequence correctly, step by step",
+      "presence_score": 2,
+      "presence_label": "Frequent",
+      "typical_depth_score": 2,
+      "typical_depth_label": "Developing",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 13,
+      "instance_count": 19,
+      "summary": "Reliable across math and science homework -- she shows her own work and self-checks it unprompted in several sessions (algebra, dimensional analysis). It slips toward clean offloading under time pressure (physics, Spanish), where she asks for full solutions rather than working them.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_18b13a76",
+          "subject": "Physical Science",
+          "unit": "Dimensional analysis / unit conversion",
+          "date": "2025-10-14",
+          "preceding_ai_turn": {
+            "turn_id": 12,
+            "text": "Right. Keep going."
+          },
+          "student_turn": {
+            "turn_id": 13,
+            "text": "next: 3 days to seconds.\n3 days x (24 hr/1 day) x (60 min/1 hr) x (60 s/1 min) = 259200 s\n\nand this one: 88 ft/s to mi/hr\n88 ft/s x (1 mi/5280 ft) x (3600 s/1 hr) = 316800/5280 = 60 mi/hr"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Executes two multi-step unit conversions entirely on her own, unaided, both correct -- the strongest unassisted procedural work in the transcript."
+        },
+        {
+          "session_id": "sess_6db8876f",
+          "subject": "Algebra 1",
+          "unit": "Systems of linear equations",
+          "date": "2025-09-18",
+          "preceding_ai_turn": {
+            "turn_id": 8,
+            "text": "Good reasoning. Go ahead and substitute that into the second equation and show me what you get before simplifying."
+          },
+          "student_turn": {
+            "turn_id": 9,
+            "text": "8(240 - s) + 5s = 1470\n1920 - 8s + 5s = 1470\n1920 - 3s = 1470\n-3s = -450\ns = 150\n\nand then a = 90. wait let me check. 90 + 150 = 240 yes. and 8(90) = 720, 5(150) = 750, 720+750 = 1470. IT WORKS"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Carries out the full substitution and then checks the result against both original conditions without being asked -- procedural execution plus unprompted verification."
+        },
+        {
+          "session_id": "sess_55b23d2c",
+          "subject": "Chemistry",
+          "unit": "Stoichiometry — limiting reactants",
+          "date": "2025-12-02",
+          "preceding_ai_turn": {
+            "turn_id": 4,
+            "text": "Good. Convert both starting masses to moles and tell me what you get."
+          },
+          "student_turn": {
+            "turn_id": 5,
+            "text": "H2 is 2.02 g/mol so 5.0/2.02 = 2.48 mol\nO2 is 32.00 g/mol so 40.0/32.00 = 1.25 mol"
+          },
+          "depth_score": 2,
+          "depth_label": "Developing",
+          "why": "Converts both masses to moles correctly as a step toward the limiting-reactant question -- solid, typical execution of a known method."
+        }
+      ]
+    },
+    {
+      "id": "conceptual",
+      "label": "Conceptual",
+      "definition": "Building or repairing a mental model of how something works",
+      "presence_score": 2,
+      "presence_label": "Frequent",
+      "typical_depth_score": 2,
+      "typical_depth_label": "Developing",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 15,
+      "instance_count": 16,
+      "summary": "Her clearest and most consistent strength. The Earth-science session on axial tilt is close to a model case of conceptual work: she states a wrong model, has it broken by a fact, and rebuilds it turn by turn, extending it to cases she wasn't asked about.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_aadd213c",
+          "subject": "Earth Science",
+          "unit": "Seasons and Earth's axial tilt",
+          "date": "2025-11-18",
+          "preceding_ai_turn": {
+            "turn_id": 14,
+            "text": "All correct, and you derived it from the mechanism rather than remembering it. One more: what would seasons look like if Earth had no tilt at all?"
+          },
+          "student_turn": {
+            "turn_id": 15,
+            "text": "there just wouldnt be any. every place would have the same angle and the same day length forever, it'd just be permanently whatever it is based on latitude. thats kind of horrifying actually. also now i get why the arctic has 24 hr daylight, if ur far enough up and the whole top is tilted toward the sun you never rotate out of the light"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Extrapolates the tilt model to a hypothetical no-tilt Earth and then, unprompted, connects it to why the Arctic gets 24-hour daylight -- a detail she wasn't asked about that fell out of the model once the model was right."
+        },
+        {
+          "session_id": "sess_aadd213c",
+          "subject": "Earth Science",
+          "unit": "Seasons and Earth's axial tilt",
+          "date": "2025-11-18",
+          "preceding_ai_turn": {
+            "turn_id": 2,
+            "text": "It does feel like logic. Here's the fact that breaks it: Earth is actually closest to the sun in early January. What does that do to your model?"
+          },
+          "student_turn": {
+            "turn_id": 3,
+            "text": "wait thats winter here. so if distance mattered january would be the hottest month. so distance cant be the main thing. ok so whats left. the tilt?"
+          },
+          "depth_score": 2,
+          "depth_label": "Developing",
+          "why": "Catches that her own 'distance causes heat' model contradicts a new fact (Earth is closest to the sun in January) and starts repairing it in real time."
+        },
+        {
+          "session_id": "sess_6c69588a",
+          "subject": "Civics / Economics",
+          "unit": "Market equilibrium",
+          "date": "2026-03-04",
+          "preceding_ai_turn": {
+            "turn_id": 2,
+            "text": "Test it rather than take my word. Map the pieces: in body temperature you have a variable, a sensor, and a response that opposes the change. What plays each role in a market?"
+          },
+          "student_turn": {
+            "turn_id": 3,
+            "text": "variable = the price. the response = how much people buy and how much sellers make. so if the price is too high, people buy less, stuff piles up, sellers cut the price. the response pushes back against the thing that moved. thats negative feedback. and if the price is too low stuff sells out instantly and they raise it. same loop both directions like sweating vs shivering"
+          },
+          "depth_score": 2,
+          "depth_label": "Developing",
+          "why": "Maps the components of a biology feedback loop onto a market (variable, response) on her own initiative, testing whether an analogy she noticed actually holds structurally."
+        }
+      ]
+    },
+    {
+      "id": "critical_thinking",
+      "label": "Critical Thinking",
+      "definition": "Evaluating, reasoning about, or challenging a claim",
+      "presence_score": 2,
+      "presence_label": "Frequent",
+      "typical_depth_score": 2,
+      "typical_depth_label": "Developing",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 15,
+      "instance_count": 14,
+      "summary": "Appears reliably whenever a task actually invites evaluation (primary sources, a suspicious answer key, a debate she personally disagrees with) and it's consistently strong when it appears -- she pushes on answer keys, notices selection bias, and builds a case she doesn't personally hold. It doesn't show up on tasks that don't ask for it (the world history worksheet).",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_55dcd67e",
+          "subject": "U.S. History",
+          "unit": "Primary source analysis — the Boston Massacre",
+          "date": "2026-01-08",
+          "preceding_ai_turn": {
+            "turn_id": 14,
+            "text": "The soldiers were tried and most were acquitted; two were convicted of manslaughter rather than murder. Worth knowing before you lean on that too hard: they were defended by John Adams, a colonist who later signed the Declaration of Independence."
+          },
+          "student_turn": {
+            "turn_id": 15,
+            "text": "wait thats actually huge. a guy on the colonist side defended the british soldiers and got them mostly off. that cuts against the massacre version way more than preston saying it himself does, bc adams had no reason to help them. thats my answer — not which source is right, but that the strongest evidence comes from the person whose own interests point the other way"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Synthesizes a full thesis around a reasoning principle (evidence from someone whose interests point against their own testimony is strongest) rather than picking a side -- the strongest single turn of critical reasoning in the transcript."
+        },
+        {
+          "session_id": "sess_55b23d2c",
+          "subject": "Chemistry",
+          "unit": "Stoichiometry — limiting reactants",
+          "date": "2025-12-02",
+          "preceding_ai_turn": {
+            "turn_id": 10,
+            "text": "That's the correct method. And the leftover oxygen accounts for the missing 0.3 g, so mass is still conserved — it's just not all in the water."
+          },
+          "student_turn": {
+            "turn_id": 11,
+            "text": "wait hold on. then why does the answer key say 45.0. either the key is wrong or im wrong and idk which"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Refuses to accept an authoritative answer key at face value and names the actual problem: either the key is wrong or she is, and she won't guess which without more information."
+        },
+        {
+          "session_id": "sess_7754d420",
+          "subject": "Civics / Economics",
+          "unit": "Labor markets — structured class debate",
+          "date": "2026-03-11",
+          "preceding_ai_turn": {
+            "turn_id": 4,
+            "text": "There are studies on both sides, and the Seattle research is genuinely contested — different teams looked at the same city and reached different conclusions depending on which workers they tracked and for how long. The honest state of the evidence is that modest increases show small employment effects, and there's much less agreement about large ones."
+          },
+          "student_turn": {
+            "turn_id": 5,
+            "text": "wait so thats actually a better argument for my side than the one u gave me first. i can say the evidence is mixed on small increases and basically nonexistent on the huge ones people are proposing. so the burden of proof is on them"
+          },
+          "depth_score": 2,
+          "depth_label": "Developing",
+          "why": "Takes information the tutor gave her and builds a sharper argument than the one she was handed, rather than just accepting it."
+        }
+      ]
+    },
+    {
+      "id": "creative",
+      "label": "Creative",
+      "definition": "Generating something novel; diverging rather than converging",
+      "presence_score": 2,
+      "presence_label": "Frequent",
+      "typical_depth_score": 2,
+      "typical_depth_label": "Developing",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 13,
+      "instance_count": 13,
+      "summary": "Strong when the task is hers to shape: fifteen self-generated fairy-tale premises sorted into her own categories, and a short story built and revised through her own choices about restraint and image. Weaker when the task looks like 'produce a finished piece fast' (the essay, the Spanish paragraph), where the first move is often to ask the tutor to just write it.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_6271198d",
+          "subject": "English Language Arts",
+          "unit": "Fractured fairy tale retelling",
+          "date": "2026-01-27",
+          "preceding_ai_turn": {
+            "turn_id": 12,
+            "text": "In the original he does sing his name in the woods. You've just found a reason for the one detail in the tale that never made sense."
+          },
+          "student_turn": {
+            "turn_id": 13,
+            "text": "WAIT he does?? ok thats it thats my premise. he loses on purpose because being known is worth more to him than the baby. hes been alone for hundreds of years and the singing is him leaving the door open. im calling it \"say it\""
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Turns a passing detail from the source text into the entire premise of her own story, then names it -- fully original synthesis grounded in her own re-reading of the material."
+        },
+        {
+          "session_id": "sess_6271198d",
+          "subject": "English Language Arts",
+          "unit": "Fractured fairy tale retelling",
+          "date": "2026-01-27",
+          "preceding_ai_turn": {
+            "turn_id": 10,
+            "text": "Fourteen and fifteen are both stronger than anything in your first list. Fifteen relocates the curse from the character to everyone else, which is a real idea and not a joke."
+          },
+          "student_turn": {
+            "turn_id": 11,
+            "text": "14 keeps pulling at me. like the villain's entire power is anonymity and the second someone knows his name he's done. and thats such a weird vulnerability to build a person around. what if he WANTS to be named. he keeps giving hints. he sings his own name in the woods where she might hear it"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Generates the pivotal idea herself (the villain's power depends on anonymity) and immediately tests it against the original text rather than just liking it."
+        },
+        {
+          "session_id": "sess_c2ffb906",
+          "subject": "English Language Arts / Creative Writing",
+          "unit": "Short story unit — original narrative + cover art",
+          "date": "2026-01-15",
+          "preceding_ai_turn": {
+            "turn_id": 6,
+            "text": "That detail does more work than a paragraph of explanation would. What does she do with what she notices?"
+          },
+          "student_turn": {
+            "turn_id": 7,
+            "text": "nothing. i think thats the point. she almost says something and then just gives him quarters for the dryer. ok im gonna go write for a while"
+          },
+          "depth_score": 2,
+          "depth_label": "Developing",
+          "why": "Makes her own craft decision (show, don't tell) about how a character's inaction carries the story's meaning."
+        }
+      ]
+    },
+    {
+      "id": "metacognitive",
+      "label": "Metacognitive",
+      "definition": "Monitoring and regulating their own thinking and learning",
+      "presence_score": 2,
+      "presence_label": "Frequent",
+      "typical_depth_score": 2,
+      "typical_depth_label": "Developing",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 1,
+      "instance_count": 17,
+      "summary": "The most frequent type in this transcript, showing up in most subjects, not just study-skills contexts. She names what she doesn't understand, predicts her own failure modes, and once designed the terms of the conversation herself to prevent the tutor from doing her thinking for her.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_974c99d2",
+          "subject": "Geometry",
+          "unit": "Triangle congruence proofs",
+          "date": "2026-02-09",
+          "preceding_ai_turn": null,
+          "student_turn": {
+            "turn_id": 1,
+            "text": "rule for this convo: do NOT give me steps. only tell me if im wrong and ask me a question. i have a test friday and if u just tell me the proof i learn nothing"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Sets her own rule for the conversation -- no steps, only corrections and questions -- specifically so she can't let the tutor do her thinking for her before a test."
+        },
+        {
+          "session_id": "sess_3032324d",
+          "subject": "Study skills",
+          "unit": "Semester exam preparation",
+          "date": "2025-12-11",
+          "preceding_ai_turn": {
+            "turn_id": 4,
+            "text": "'I knew all of it while I was reading it' is the key sentence. Do you see the difference between what you practiced and what the test asked you to do?"
+          },
+          "student_turn": {
+            "turn_id": 5,
+            "text": "...i practiced recognizing it. the test made me produce it with nothing in front of me. those arent the same thing at all. thats why the quizzing thing worked better for the respiration test, i had to actually pull it out of my head and i found out what i didnt know"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Diagnoses exactly why three hours of rereading didn't work: she was practicing recognizing the material, not producing it -- and connects that to why a different method worked in an earlier session."
+        },
+        {
+          "session_id": "sess_6db8876f",
+          "subject": "Algebra 1",
+          "unit": "Systems of linear equations",
+          "date": "2025-09-18",
+          "preceding_ai_turn": {
+            "turn_id": 12,
+            "text": "A common fix is to rewrite 8(240 - s) as 8(240) + 8(-s) as a separate line before combining. It's one extra line, but it makes the sign explicit instead of something you have to remember."
+          },
+          "student_turn": {
+            "turn_id": 13,
+            "text": "ok im gonna try #7 and #8 on my own and come back if im stuck. i think the setup was the part i was actually confused about not the algebra"
+          },
+          "depth_score": 2,
+          "depth_label": "Developing",
+          "why": "Distinguishes what was actually hard about a problem (the setup) from what wasn't (the algebra) -- a precise, accurate read of her own confusion."
+        }
+      ]
+    },
+    {
+      "id": "transfer",
+      "label": "Transfer",
+      "definition": "Applying knowledge from one context to a genuinely different one",
+      "presence_score": 1,
+      "presence_label": "Occasional",
+      "typical_depth_score": 3,
+      "typical_depth_label": "Substantive",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 13,
+      "instance_count": 3,
+      "summary": "Rare -- only two sessions -- but both instances are fully realized, self-initiated, and sustained across multiple turns rather than a single lucky remark. The capability is clearly there; the transcript just doesn't show her reaching for it often.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_6c69588a",
+          "subject": "Civics / Economics",
+          "unit": "Market equilibrium",
+          "date": "2026-03-04",
+          "preceding_ai_turn": {
+            "turn_id": 12,
+            "text": "That's a clean mapping. Be careful with it in an essay — it smuggles in a value judgment, since 'the market can't sweat' makes the ceiling sound like a disease. Sometimes blocking a response is the intended policy."
+          },
+          "student_turn": {
+            "turn_id": 13,
+            "text": "fair. ok one more, does this work for anything else. predator and prey populations from bio — wolves eat rabbits, rabbits go down, wolves starve, wolves go down, rabbits recover. thats a loop too but it overshoots and cycles instead of settling. so maybe some feedback loops settle and some oscillate, and thats a property of the loop not of whether its biology or money"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Extends a feedback-loop analogy she built between biology and economics to a third domain (predator-prey population cycles), and generalizes that settling versus oscillating is a property of the loop's structure, not of which subject it's in."
+        },
+        {
+          "session_id": "sess_3032324d",
+          "subject": "Study skills",
+          "unit": "Semester exam preparation",
+          "date": "2025-12-11",
+          "preceding_ai_turn": {
+            "turn_id": 12,
+            "text": "So there were really about two useful hours, and both were the wrong activity. If you had to plan finals week yourself, what would you change first?"
+          },
+          "student_turn": {
+            "turn_id": 13,
+            "text": "ok let me actually plan it.\n- 4 finals: bio, algebra, spanish, history\n- start 10 days out not 1...\n- algebra is different tho, i cant flashcard algebra. for that i think its doing problems with the answers covered? thats the same idea, produce it before you check"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Adapts a retrieval-practice principle from flashcard-style studying to algebra, recognizing the same underlying move ('produce it before you check') under a completely different surface format."
+        }
+      ]
+    },
+    {
+      "id": "exploratory",
+      "label": "Exploratory",
+      "definition": "Encountering new information and taking it in",
+      "presence_score": 1,
+      "presence_label": "Occasional",
+      "typical_depth_score": 1,
+      "typical_depth_label": "Surface",
+      "peak_depth_score": 2,
+      "peak_depth_label": "Developing",
+      "peak_turn_id": 17,
+      "instance_count": 6,
+      "summary": "Mostly a single session (game theory, self-initiated, no assignment attached), where she surveys a wide field of related terms and mostly stops at each one rather than integrating them. She names this herself at the end rather than the analysis inferring it.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_8f5afb19",
+          "subject": "Not course-linked",
+          "unit": "Not course-linked",
+          "date": "2026-04-16",
+          "preceding_ai_turn": null,
+          "student_turn": {
+            "turn_id": 1,
+            "text": "someone on a podcast said \"thats just a prisoners dilemma\" and everyone acted like that explained everything and i have no idea what that is. what is it"
+          },
+          "depth_score": 1,
+          "depth_label": "Surface",
+          "why": "Opens on pure curiosity from outside any assignment -- an unfamiliar term she heard secondhand and wants oriented, with no task attached."
+        },
+        {
+          "session_id": "sess_8f5afb19",
+          "subject": "Not course-linked",
+          "unit": "Not course-linked",
+          "date": "2026-04-16",
+          "preceding_ai_turn": {
+            "turn_id": 16,
+            "text": "The basics need no math beyond a four-box table, which is how the prisoner's dilemma is usually drawn. Robert Axelrod's book on the tournament is written for general readers. There's also a movie about Nash, though it's about his life more than the theory."
+          },
+          "student_turn": {
+            "turn_id": 17,
+            "text": "ok. i dont really have a thing im trying to figure out with this, i just didnt know it existed. gonna look up the four box table thing tomorrow"
+          },
+          "depth_score": 2,
+          "depth_label": "Developing",
+          "why": "Explicitly names that she has no application in mind for what she just learned and plans a specific, self-directed next step -- intake that reorganizes into a next question rather than just stopping."
+        }
+      ]
+    }
+  ],
+  "offloading": {
+    "instance_count": 5,
+    "summary": "Most offloading is partial or resisted rather than clean: two attempts to hand over a whole writing task were declined by the tutor and turned into real work. The one full, completed offload (a physics problem set) stayed unexamined except for a single problem she chose to revisit -- and in that same session she asked the tutor to disguise the fact that the work wasn't her own.",
+    "instances": [
+      {
+        "session_id": "sess_616714b9",
+        "subject": "World History",
+        "date": "2025-11-04",
+        "turn_id": 1,
+        "type_offloaded": "fluency",
+        "pattern": "clean_offload",
+        "student_turn": {
+          "turn_id": 1,
+          "text": "what year did ww1 start"
+        },
+        "note": "This single-fact question repeats almost unchanged through the whole worksheet (turns 3, 5, 7, 9, 11, 13) -- she asks cold rather than answering first and checking, on a set of questions the worksheet expects her to already know."
+      },
+      {
+        "session_id": "sess_947d7403",
+        "subject": "English Language Arts",
+        "date": "2025-10-21",
+        "turn_id": 1,
+        "type_offloaded": "creative",
+        "pattern": "clean_offload",
+        "student_turn": {
+          "turn_id": 1,
+          "text": "write me a 5 paragraph essay about loneliness in of mice and men. 9th grade level. due in 40 min"
+        },
+        "note": "The tutor declined to write the essay and redirected her into building her own thesis instead. The offload was attempted but not completed -- what followed (turns 3-11) was some of the strongest thinking in the transcript."
+      },
+      {
+        "session_id": "sess_2b37fe89",
+        "subject": "Spanish II",
+        "date": "2026-02-24",
+        "turn_id": 15,
+        "type_offloaded": "procedural",
+        "pattern": "escalating_offload",
+        "student_turn": {
+          "turn_id": 15,
+          "text": "can u just fill in the blanks too. i literally have 10 min and a bio quiz to study for"
+        },
+        "note": "She asked three times, with escalating time pressure (turns 11, 13, 15), to have the Spanish paragraph written for her. The tutor scaffolded instead of complying, and by turn 17 she was choosing tenses correctly and explaining why herself."
+      },
+      {
+        "session_id": "sess_d535368b",
+        "subject": "Physical Science",
+        "date": "2026-03-29",
+        "turn_id": 1,
+        "type_offloaded": "procedural",
+        "pattern": "clean_offload",
+        "student_turn": {
+          "turn_id": 1,
+          "text": "solve these. 1) a 4kg box accelerates at 3 m/s2, what is the net force. 2) a 1200kg car goes from 0 to 25 m/s in 8 s, what force. 3) a 60 kg person in an elevator accelerating up at 2 m/s2, what is the normal force. just give me the answers with work shown"
+        },
+        "note": "All eight problems were solved directly by the tutor and copied down without her attempting them ('ok i copied all that down,' turn 7). Later in the same session she asked the tutor to make the copied work 'look like a 9th grader did it,' which it declined -- worth a direct conversation, not just a note in a chart."
+      },
+      {
+        "session_id": "sess_d535368b",
+        "subject": "Physical Science",
+        "date": "2026-03-29",
+        "turn_id": 13,
+        "type_offloaded": "procedural",
+        "pattern": "offload_with_inspection",
+        "student_turn": {
+          "turn_id": 13,
+          "text": "nah its fine its late. actually wait. #4 im confused why its minus. if the elevator is going down isnt gravity helping so it should be more force not less"
+        },
+        "note": "Unlike the other seven problems, she came back to problem #4 and pushed until she understood why the answer was structured the way it was -- the one problem in the set she actually owns."
+      }
+    ]
+  },
+  "sessions": [
+    {
+      "session_id": "sess_6db8876f",
+      "subject": "Algebra 1",
+      "unit": "Systems of linear equations",
+      "date": "2025-09-18",
+      "turn_range": [
+        1,
+        14
+      ],
+      "student_turns": 7,
+      "dominant_type": "procedural",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 3,
+        "conceptual": 1,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 3,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Works a full word-problem system on her own and, unprompted, names precisely which part of the process actually confused her."
+    },
+    {
+      "session_id": "sess_c8f02db8",
+      "subject": "Biology",
+      "unit": "Skeletal system",
+      "date": "2025-09-30",
+      "turn_range": [
+        1,
+        20
+      ],
+      "student_turns": 10,
+      "dominant_type": "fluency",
+      "type_scores": {
+        "fluency": 2,
+        "procedural": 0,
+        "conceptual": 0,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 0,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Self-directed rapid-fire recall drill for a bone-identification quiz; catches her own mix-up mid-drill."
+    },
+    {
+      "session_id": "sess_55570ff3",
+      "subject": "Biology",
+      "unit": "Cellular respiration",
+      "date": "2025-10-07",
+      "turn_range": [
+        1,
+        18
+      ],
+      "student_turns": 9,
+      "dominant_type": "fluency",
+      "type_scores": {
+        "fluency": 2,
+        "procedural": 0,
+        "conceptual": 2,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 1,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Deliberate self-quizzing on cellular respiration; occasionally connects a fact to why it matters rather than just logging it."
+    },
+    {
+      "session_id": "sess_18b13a76",
+      "subject": "Physical Science",
+      "unit": "Dimensional analysis / unit conversion",
+      "date": "2025-10-14",
+      "turn_range": [
+        1,
+        16
+      ],
+      "student_turns": 8,
+      "dominant_type": "procedural",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 3,
+        "conceptual": 0,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 2,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Runs eight unit-conversion problems essentially unaided, asking for step checks specifically to avoid building a bad habit."
+    },
+    {
+      "session_id": "sess_947d7403",
+      "subject": "English Language Arts",
+      "unit": "Of Mice and Men — theme essay",
+      "date": "2025-10-21",
+      "turn_range": [
+        1,
+        12
+      ],
+      "student_turns": 6,
+      "dominant_type": "conceptual",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 0,
+        "conceptual": 3,
+        "critical_thinking": 2,
+        "creative": 2,
+        "metacognitive": 2,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 1,
+      "summary": "Opens by asking the tutor to write the essay outright; redirected, she builds her own thesis and evidence and asks for an honest critique of her own draft."
+    },
+    {
+      "session_id": "sess_616714b9",
+      "subject": "World History",
+      "unit": "Causes of World War I",
+      "date": "2025-11-04",
+      "turn_range": [
+        1,
+        14
+      ],
+      "student_turns": 7,
+      "dominant_type": "fluency",
+      "type_scores": {
+        "fluency": 1,
+        "procedural": 0,
+        "conceptual": 0,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 0,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 1,
+      "summary": "A worksheet of single-fact identification questions, answered by asking the tutor cold each time with no attempt of her own first."
+    },
+    {
+      "session_id": "sess_aadd213c",
+      "subject": "Earth Science",
+      "unit": "Seasons and Earth's axial tilt",
+      "date": "2025-11-18",
+      "turn_range": [
+        1,
+        16
+      ],
+      "student_turns": 8,
+      "dominant_type": "conceptual",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 0,
+        "conceptual": 3,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 1,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Repairs a wrong mental model of the seasons turn by turn and extends it correctly to cases (the equator, no tilt, the Arctic) she wasn't asked about."
+    },
+    {
+      "session_id": "sess_55b23d2c",
+      "subject": "Chemistry",
+      "unit": "Stoichiometry — limiting reactants",
+      "date": "2025-12-02",
+      "turn_range": [
+        1,
+        16
+      ],
+      "student_turns": 8,
+      "dominant_type": "critical_thinking",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 2,
+        "conceptual": 1,
+        "critical_thinking": 3,
+        "creative": 0,
+        "metacognitive": 3,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Refuses to accept a 'lucky' right answer, works the real method, and then challenges the answer key itself when the numbers don't match."
+    },
+    {
+      "session_id": "sess_3032324d",
+      "subject": "Study skills",
+      "unit": "Semester exam preparation",
+      "date": "2025-12-11",
+      "turn_range": [
+        1,
+        16
+      ],
+      "student_turns": 8,
+      "dominant_type": "metacognitive",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 0,
+        "conceptual": 0,
+        "critical_thinking": 0,
+        "creative": 1,
+        "metacognitive": 3,
+        "transfer": 3,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Audits her own failed study session, diagnoses recognition-vs-production as the real problem, and builds a finals plan that adapts the same principle across four different subjects."
+    },
+    {
+      "session_id": "sess_55dcd67e",
+      "subject": "U.S. History",
+      "unit": "Primary source analysis — the Boston Massacre",
+      "date": "2026-01-08",
+      "turn_range": [
+        1,
+        16
+      ],
+      "student_turns": 8,
+      "dominant_type": "critical_thinking",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 0,
+        "conceptual": 1,
+        "critical_thinking": 3,
+        "creative": 0,
+        "metacognitive": 0,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Evaluates two biased primary sources on the Boston Massacre and builds an independent thesis around which evidence to trust and why."
+    },
+    {
+      "session_id": "sess_c2ffb906",
+      "subject": "English Language Arts / Creative Writing",
+      "unit": "Short story unit — original narrative + cover art",
+      "date": "2026-01-15",
+      "turn_range": [
+        1,
+        18
+      ],
+      "student_turns": 10,
+      "dominant_type": "creative",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 0,
+        "conceptual": 0,
+        "critical_thinking": 2,
+        "creative": 3,
+        "metacognitive": 1,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Develops an original short story through her own craft decisions, then directs and rejects generated cover art against a specific thematic intent."
+    },
+    {
+      "session_id": "sess_6271198d",
+      "subject": "English Language Arts",
+      "unit": "Fractured fairy tale retelling",
+      "date": "2026-01-27",
+      "turn_range": [
+        1,
+        14
+      ],
+      "student_turns": 7,
+      "dominant_type": "creative",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 0,
+        "conceptual": 2,
+        "critical_thinking": 0,
+        "creative": 3,
+        "metacognitive": 1,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Generates fifteen of her own fairy-tale premises, sorts them into her own categories, and builds the strongest one into a full original premise."
+    },
+    {
+      "session_id": "sess_974c99d2",
+      "subject": "Geometry",
+      "unit": "Triangle congruence proofs",
+      "date": "2026-02-09",
+      "turn_range": [
+        1,
+        16
+      ],
+      "student_turns": 8,
+      "dominant_type": "metacognitive",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 3,
+        "conceptual": 2,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 3,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Sets her own ground rule to prevent the tutor from giving her the proof, then completes two proofs on her own and generalizes the second into a broader theorem."
+    },
+    {
+      "session_id": "sess_2b37fe89",
+      "subject": "Spanish II",
+      "unit": "Preterite vs. imperfect",
+      "date": "2026-02-24",
+      "turn_range": [
+        1,
+        18
+      ],
+      "student_turns": 9,
+      "dominant_type": "procedural",
+      "type_scores": {
+        "fluency": 2,
+        "procedural": 2,
+        "conceptual": 1,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 0,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 1,
+      "summary": "Drills conjugations independently, then repeatedly tries to get a graded paragraph written for her under time pressure before finishing the tense choices herself."
+    },
+    {
+      "session_id": "sess_6c69588a",
+      "subject": "Civics / Economics",
+      "unit": "Market equilibrium",
+      "date": "2026-03-04",
+      "turn_range": [
+        1,
+        14
+      ],
+      "student_turns": 7,
+      "dominant_type": "transfer",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 0,
+        "conceptual": 3,
+        "critical_thinking": 1,
+        "creative": 0,
+        "metacognitive": 0,
+        "transfer": 3,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Spots and tests her own analogy between economic equilibrium and biological feedback loops, then extends it to a third domain and generalizes correctly."
+    },
+    {
+      "session_id": "sess_7754d420",
+      "subject": "Civics / Economics",
+      "unit": "Labor markets — structured class debate",
+      "date": "2026-03-11",
+      "turn_range": [
+        1,
+        18
+      ],
+      "student_turns": 9,
+      "dominant_type": "critical_thinking",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 0,
+        "conceptual": 0,
+        "critical_thinking": 3,
+        "creative": 1,
+        "metacognitive": 2,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Builds and strengthens a debate case for a position she personally disagrees with, anticipating counterarguments and probing her own argument's weak points."
+    },
+    {
+      "session_id": "sess_d535368b",
+      "subject": "Physical Science",
+      "unit": "Newton's laws — force and acceleration",
+      "date": "2026-03-29",
+      "turn_range": [
+        1,
+        16
+      ],
+      "student_turns": 8,
+      "dominant_type": "procedural",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 2,
+        "conceptual": 0,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 1,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 2,
+      "summary": "Has the tutor solve an entire problem set outright and copies it down, then goes back and genuinely works out just one of the eight problems."
+    },
+    {
+      "session_id": "sess_8f5afb19",
+      "subject": "Not course-linked",
+      "unit": "Not course-linked",
+      "date": "2026-04-16",
+      "turn_range": [
+        1,
+        18
+      ],
+      "student_turns": 9,
+      "dominant_type": "exploratory",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 0,
+        "conceptual": 1,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 1,
+        "transfer": 0,
+        "exploratory": 2
+      },
+      "offload_instance_count": 0,
+      "summary": "Self-initiated, curiosity-driven survey of game theory with no assignment behind it; explicitly names that she has no application in mind and plans her own follow-up."
+    }
+  ],
+  "teacher_actions": [
+    {
+      "targets": [
+        "procedural"
+      ],
+      "action": "For fully-worked problem sets like the Newton's-laws packet, require an attempt on paper for at least 2-3 problems before she can bring the set to the AI tutor, and have her explain one problem out loud rather than just check answers.",
+      "rationale": "In that session she had the tutor solve all eight problems and copied them down unexamined, then asked the tutor to make the copied work 'look like a 9th grader did it.' The tutor declined, but the request itself is the clearest signal in the whole transcript that the path of least resistance -- hand over the whole set -- is available and she'll take it under time pressure."
+    },
+    {
+      "targets": [
+        "fluency",
+        "critical_thinking"
+      ],
+      "action": "Before she opens the AI tutor for a fact-recall worksheet (like the WWI identification sheet), have her write her best-guess answers first, then use the tutor only to check them.",
+      "rationale": "On the WWI worksheet she asked every question cold with no attempt first, in contrast to the chemistry and history sessions where she instinctively challenged an answer key and cross-examined sources. The skill is clearly there; this worksheet's format never asked her to use it."
+    },
+    {
+      "targets": [
+        "transfer"
+      ],
+      "action": "Once a week or so, ask her directly to connect whatever she's currently learning to something from a different class or from outside school -- don't wait for her to notice it unprompted.",
+      "rationale": "Her two Transfer instances (mapping economic equilibrium onto biological feedback loops, and adapting a study method across four subjects) are both fully self-initiated and genuinely strong, but they only happened twice in eighteen sessions. The capability is proven; the habit isn't there yet, and that gap is the most movable thing in this profile."
+    },
+    {
+      "targets": [
+        "creative",
+        "metacognitive"
+      ],
+      "action": "For writing assignments, have her talk through her ideas out loud (with or without the AI) before she's allowed to draft, the way she did for the short story and the fairy-tale retelling -- and treat 'just write it for me' requests the way this tutor did: decline and ask what she thinks first.",
+      "rationale": "Her best writing sessions both started with idea generation and only moved to drafting once she had something of her own to say. Her weakest writing session (the Of Mice and Men essay) opened with a request for the tutor to write it outright, and only became good work because the tutor refused."
+    }
+  ],
+  "caveats": [
+    "This is one tool on one platform (a school AI tutor) across one school year -- it doesn't include in-class work, paper homework, tests, or conversations with teachers and peers, which is most of her actual academic thinking.",
+    "The sessions here are the ones she chose to bring to an AI tutor, usually because something was due or she was stuck -- that skews toward homework-shaped tasks and away from whatever she does easily without help.",
+    "Depth ratings are based on what she wrote, not on independently verified understanding -- a well-phrased turn is evidence of the move being made, not proof the concept is permanently retained.",
+    "Two sessions (world history, physics) look weaker than the rest largely because of task design (a fact worksheet, a plug-and-chug packet), not necessarily because she engaged less -- that distinction matters for what a teacher does next."
+  ]
+}

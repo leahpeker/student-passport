@@ -32,6 +32,7 @@ FAKE_SECTIONS = {
     'how_they_learn': 'Learns.',
     'performance': 'Performs.',
     'behavior': 'Behaves.',
+    'how_they_use_ai': 'Uses AI.',
 }
 
 
@@ -87,6 +88,11 @@ class ApiTestCase(TestCase):
                 student=student, source=StudentRecord.ENGAGEMENT, kind='period_sample',
                 date=date(2026, 3, 4), title='Period 6 sample',
                 data={'period': 6, 'rating': 5},
+            )
+            StudentRecord.objects.create(
+                student=student, source=StudentRecord.COGNITIVE_ANALYSIS,
+                kind='ai_use_analysis', date=date(2026, 3, 5), title='AI-use analysis',
+                data={'evidence_base': {'session_count': 1, 'sufficiency': 'provisional'}},
             )
 
     def sign_in(self, user):
@@ -145,7 +151,7 @@ class PermissionTests(ApiTestCase):
 
 @patch('passport.narrative.complete', return_value='{"overview": {"teacher_voice": "T.", '
        '"guardian_voice": "G.", "student_voice": "S."}, "how_they_learn": "Learns.", '
-       '"performance": "Performs.", "behavior": "Behaves."}')
+       '"performance": "Performs.", "behavior": "Behaves.", "how_they_use_ai": "Uses AI."}')
 class PassportTests(ApiTestCase):
     def test_teacher_passport_is_complete(self, _complete):
         self.sign_in(self.teacher)
@@ -154,18 +160,20 @@ class PassportTests(ApiTestCase):
         self.assertEqual(body['student']['name'], 'Ada Lovelace')
         self.assertEqual(body['student']['pronouns'], 'she/her')
         self.assertEqual([g['name'] for g in body['guardians']], ['One Guardian'])
-        self.assertEqual(body['record_count'], 4)
+        self.assertEqual(body['record_count'], 5)
 
     def test_student_passport_omits_behavior_and_observation(self, _complete):
         self.sign_in(self.mine.user)
         body = self.client.get(f'/api/students/{self.mine.id}/passport/').json()
         self.assertEqual(body['sections']['behavior'], '')
+        self.assertEqual(body['sections']['how_they_use_ai'], '')
         self.assertEqual(body['sections']['how_they_learn'], 'Learns.')
 
         sources = {r['source'] for r in self.client.get(
             f'/api/students/{self.mine.id}/records/').json()}
         self.assertNotIn('behavior', sources)
         self.assertNotIn('observation', sources)
+        self.assertNotIn('cognitive_analysis', sources)
         self.assertIn('assessment', sources)
 
         exported = self.client.get(f'/api/students/{self.mine.id}/export/').json()
@@ -216,7 +224,7 @@ class PassportTests(ApiTestCase):
     def test_export_carries_the_records(self, _complete):
         self.sign_in(self.teacher)
         body = self.client.get(f'/api/students/{self.mine.id}/export/').json()
-        self.assertEqual(len(body['records']), 4)
+        self.assertEqual(len(body['records']), 5)
         self.assertEqual(body['sections'], FAKE_SECTIONS)
 
 

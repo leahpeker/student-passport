@@ -1,0 +1,1256 @@
+[
+  {
+    "turn_id": 1,
+    "role": "student",
+    "text": "\u00bfC\u00f3mo se dice \"denominador\" en ingl\u00e9s? Y \"m\u00ednimo com\u00fan m\u00faltiplo\".",
+    "session": "sess_alina_01",
+    "session_context": {
+      "subject": "Mathematics",
+      "unit": "Geometry, unit 1 vocabulary",
+      "date": "2025-09-15"
+    }
+  },
+  {
+    "turn_id": 2,
+    "role": "ai",
+    "text": "\"Denominador\" is \"denominator\" \u2014 the bottom number in a fraction. \"M\u00ednimo com\u00fan m\u00faltiplo\" is \"least common multiple,\" often shortened to LCM.",
+    "session": "sess_alina_01",
+    "session_context": {
+      "subject": "Mathematics",
+      "unit": "Geometry, unit 1 vocabulary",
+      "date": "2025-09-15"
+    }
+  },
+  {
+    "turn_id": 3,
+    "role": "student",
+    "text": "ok denominator and least common multiple. y el de arriba se llama numerator verdad? quiero estar segura antes de usarlo en clase",
+    "session": "sess_alina_01",
+    "session_context": {
+      "subject": "Mathematics",
+      "unit": "Geometry, unit 1 vocabulary",
+      "date": "2025-09-15"
+    }
+  },
+  {
+    "turn_id": 4,
+    "role": "ai",
+    "text": "Yes, exactly \u2014 the top number is the numerator. You've got it.",
+    "session": "sess_alina_01",
+    "session_context": {
+      "subject": "Mathematics",
+      "unit": "Geometry, unit 1 vocabulary",
+      "date": "2025-09-15"
+    }
+  },
+  {
+    "turn_id": 5,
+    "role": "student",
+    "text": "bien. entonces si tengo 3/4 + 1/6 el LCM de 4 y 6 es 12, cambio a 9/12 + 2/12 = 11/12. is that right in english too or does the method change",
+    "session": "sess_alina_01",
+    "session_context": {
+      "subject": "Mathematics",
+      "unit": "Geometry, unit 1 vocabulary",
+      "date": "2025-09-15"
+    }
+  },
+  {
+    "turn_id": 6,
+    "role": "ai",
+    "text": "The method is identical in English \u2014 find the LCM as the common denominator, convert each fraction, then add the numerators. Your work is correct: 11/12.",
+    "session": "sess_alina_01",
+    "session_context": {
+      "subject": "Mathematics",
+      "unit": "Geometry, unit 1 vocabulary",
+      "date": "2025-09-15"
+    }
+  },
+  {
+    "turn_id": 7,
+    "role": "student",
+    "text": "ok good, the math part i already knew, i just did not know the words for it",
+    "session": "sess_alina_01",
+    "session_context": {
+      "subject": "Mathematics",
+      "unit": "Geometry, unit 1 vocabulary",
+      "date": "2025-09-15"
+    }
+  },
+  {
+    "turn_id": 8,
+    "role": "student",
+    "text": "we started cells today in biology. puedes explicarme que es una organela, en espa\u00f1ol primero",
+    "session": "sess_alina_02",
+    "session_context": {
+      "subject": "Science",
+      "unit": "Biology, cell structure",
+      "date": "2025-09-24"
+    }
+  },
+  {
+    "turn_id": 9,
+    "role": "ai",
+    "text": "S\u00ed \u2014 una organela es una estructura peque\u00f1a dentro de la c\u00e9lula que tiene un trabajo espec\u00edfico, como una f\u00e1brica dentro de una f\u00e1brica m\u00e1s grande. El n\u00facleo, las mitocondrias, y el ret\u00edculo endoplasm\u00e1tico son organelas.",
+    "session": "sess_alina_02",
+    "session_context": {
+      "subject": "Science",
+      "unit": "Biology, cell structure",
+      "date": "2025-09-24"
+    }
+  },
+  {
+    "turn_id": 10,
+    "role": "student",
+    "text": "ok that makes sense. now in english, organelle is like a small factory inside the cell that has one job?",
+    "session": "sess_alina_02",
+    "session_context": {
+      "subject": "Science",
+      "unit": "Biology, cell structure",
+      "date": "2025-09-24"
+    }
+  },
+  {
+    "turn_id": 11,
+    "role": "ai",
+    "text": "That's a good way to put it, yes.",
+    "session": "sess_alina_02",
+    "session_context": {
+      "subject": "Science",
+      "unit": "Biology, cell structure",
+      "date": "2025-09-24"
+    }
+  },
+  {
+    "turn_id": 12,
+    "role": "student",
+    "text": "what is mitochondria called in the notes, the teacher wrote mitochondria is the powerhouse. is powerhouse a real science word or just a saying",
+    "session": "sess_alina_02",
+    "session_context": {
+      "subject": "Science",
+      "unit": "Biology, cell structure",
+      "date": "2025-09-24"
+    }
+  },
+  {
+    "turn_id": 13,
+    "role": "ai",
+    "text": "\"Powerhouse\" here is a common expression, not a technical term \u2014 it just means the mitochondria produce energy (ATP) for the cell. The formal description would be that mitochondria carry out cellular respiration.",
+    "session": "sess_alina_02",
+    "session_context": {
+      "subject": "Science",
+      "unit": "Biology, cell structure",
+      "date": "2025-09-24"
+    }
+  },
+  {
+    "turn_id": 14,
+    "role": "student",
+    "text": "ok i will write both. thank you",
+    "session": "sess_alina_02",
+    "session_context": {
+      "subject": "Science",
+      "unit": "Biology, cell structure",
+      "date": "2025-09-24"
+    }
+  },
+  {
+    "turn_id": 15,
+    "role": "student",
+    "text": "Entiendo el problema pero no entiendo la pregunta. \u00bfMe la puedes explicar m\u00e1s simple?",
+    "session": "sess_alina_03",
+    "session_context": {
+      "subject": "Mathematics",
+      "unit": "Geometry, word problems",
+      "date": "2025-10-07"
+    }
+  },
+  {
+    "turn_id": 16,
+    "role": "ai",
+    "text": "Claro, comparte la pregunta y te la explico de forma m\u00e1s simple.",
+    "session": "sess_alina_03",
+    "session_context": {
+      "subject": "Mathematics",
+      "unit": "Geometry, word problems",
+      "date": "2025-10-07"
+    }
+  },
+  {
+    "turn_id": 17,
+    "role": "student",
+    "text": "it says: \"a ladder leans against a wall. the base is 6 feet from the wall and the ladder is 10 feet long. what is the angle of elevation.\" i understand ladder, wall, 6 feet, 10 feet. i do not understand what \"angle of elevation\" is asking me to find",
+    "session": "sess_alina_03",
+    "session_context": {
+      "subject": "Mathematics",
+      "unit": "Geometry, word problems",
+      "date": "2025-10-07"
+    }
+  },
+  {
+    "turn_id": 18,
+    "role": "ai",
+    "text": "Angle of elevation is just the angle between the ground and the ladder, measured from the ground up. Since you have the two legs of a right triangle (6 ft base, and you can find the height with the Pythagorean theorem), you can use trigonometry to find that angle.",
+    "session": "sess_alina_03",
+    "session_context": {
+      "subject": "Mathematics",
+      "unit": "Geometry, word problems",
+      "date": "2025-10-07"
+    }
+  },
+  {
+    "turn_id": 19,
+    "role": "student",
+    "text": "ok so height is sqrt(100-36) = sqrt(64) = 8. and then the angle from the ground, i use tan porque tengo opuesto y adyacente. tan(angle) = 8/6, angle = arctan(8/6) = 53.13 degrees. is that the angle of elevation or do i need the other one",
+    "session": "sess_alina_03",
+    "session_context": {
+      "subject": "Mathematics",
+      "unit": "Geometry, word problems",
+      "date": "2025-10-07"
+    }
+  },
+  {
+    "turn_id": 20,
+    "role": "ai",
+    "text": "That's exactly the angle of elevation \u2014 the angle between the ground and the ladder. 53.13\u00b0 is correct.",
+    "session": "sess_alina_03",
+    "session_context": {
+      "subject": "Mathematics",
+      "unit": "Geometry, word problems",
+      "date": "2025-10-07"
+    }
+  },
+  {
+    "turn_id": 21,
+    "role": "student",
+    "text": "ok. so the whole problem i could do, the word i did not know was the only part i was stuck on",
+    "session": "sess_alina_03",
+    "session_context": {
+      "subject": "Mathematics",
+      "unit": "Geometry, word problems",
+      "date": "2025-10-07"
+    }
+  },
+  {
+    "turn_id": 22,
+    "role": "student",
+    "text": "tenemos que leer 4 paginas sobre las colonias americanas para ma\u00f1ana. es mucho vocabulario que no conozco. puedes traducir el primer parrafo completo para que pueda empezar",
+    "session": "sess_alina_04",
+    "session_context": {
+      "subject": "Social Studies",
+      "unit": "U.S. History, colonial period",
+      "date": "2025-10-20"
+    }
+  },
+  {
+    "turn_id": 23,
+    "role": "ai",
+    "text": "Puedo traducirlo, pero antes probemos algo: lee la primera oraci\u00f3n t\u00fa misma y dime qu\u00e9 palabras no reconoces. As\u00ed aprendes el vocabulario en vez de solo leer la traducci\u00f3n.",
+    "session": "sess_alina_04",
+    "session_context": {
+      "subject": "Social Studies",
+      "unit": "U.S. History, colonial period",
+      "date": "2025-10-20"
+    }
+  },
+  {
+    "turn_id": 24,
+    "role": "student",
+    "text": "ok. \"the thirteen colonies were established along the atlantic coast.\" entiendo casi todo, \"established\" no se que es",
+    "session": "sess_alina_04",
+    "session_context": {
+      "subject": "Social Studies",
+      "unit": "U.S. History, colonial period",
+      "date": "2025-10-20"
+    }
+  },
+  {
+    "turn_id": 25,
+    "role": "ai",
+    "text": "\"Established\" significa \"fundadas\" o \"establecidas\" \u2014 creadas y puestas en marcha.",
+    "session": "sess_alina_04",
+    "session_context": {
+      "subject": "Social Studies",
+      "unit": "U.S. History, colonial period",
+      "date": "2025-10-20"
+    }
+  },
+  {
+    "turn_id": 26,
+    "role": "student",
+    "text": "ok that helps. pero el resto del parrafo tiene palabras que no conozco tampoco y solo tengo esta noche. puedes traducir el resto, ya aprendi la palabra que necesitaba",
+    "session": "sess_alina_04",
+    "session_context": {
+      "subject": "Social Studies",
+      "unit": "U.S. History, colonial period",
+      "date": "2025-10-20"
+    }
+  },
+  {
+    "turn_id": 27,
+    "role": "ai",
+    "text": "Entendido, aqu\u00ed est\u00e1 el resto traducido: [traducci\u00f3n del p\u00e1rrafo]. Para ma\u00f1ana, intenta subrayar tres palabras nuevas del resto de la p\u00e1gina t\u00fa misma \u2014 as\u00ed no dependes de la traducci\u00f3n completa la pr\u00f3xima vez.",
+    "session": "sess_alina_04",
+    "session_context": {
+      "subject": "Social Studies",
+      "unit": "U.S. History, colonial period",
+      "date": "2025-10-20"
+    }
+  },
+  {
+    "turn_id": 28,
+    "role": "student",
+    "text": "ok voy a intentar eso ma\u00f1ana. gracias por hoy",
+    "session": "sess_alina_04",
+    "session_context": {
+      "subject": "Social Studies",
+      "unit": "U.S. History, colonial period",
+      "date": "2025-10-20"
+    }
+  },
+  {
+    "turn_id": 29,
+    "role": "student",
+    "text": "Necesito explicar mi respuesta en ingl\u00e9s. \u00bfPuedes revisar esta oraci\u00f3n?",
+    "session": "sess_alina_05",
+    "session_context": {
+      "subject": "English",
+      "unit": "Explaining math reasoning in writing",
+      "date": "2025-11-12"
+    }
+  },
+  {
+    "turn_id": 30,
+    "role": "ai",
+    "text": "S\u00ed, comp\u00e1rteme la oraci\u00f3n.",
+    "session": "sess_alina_05",
+    "session_context": {
+      "subject": "English",
+      "unit": "Explaining math reasoning in writing",
+      "date": "2025-11-12"
+    }
+  },
+  {
+    "turn_id": 31,
+    "role": "student",
+    "text": "\"I use the pythagorean theorem because the triangle have a right angle and I want find the missing side.\" is this correct grammar",
+    "session": "sess_alina_05",
+    "session_context": {
+      "subject": "English",
+      "unit": "Explaining math reasoning in writing",
+      "date": "2025-11-12"
+    }
+  },
+  {
+    "turn_id": 32,
+    "role": "ai",
+    "text": "Close. Two fixes: \"the triangle have\" should be \"the triangle has,\" and \"I want find\" should be \"I want to find.\" So: \"I use the Pythagorean theorem because the triangle has a right angle and I want to find the missing side.\"",
+    "session": "sess_alina_05",
+    "session_context": {
+      "subject": "English",
+      "unit": "Explaining math reasoning in writing",
+      "date": "2025-11-12"
+    }
+  },
+  {
+    "turn_id": 33,
+    "role": "student",
+    "text": "ok, has not have, and \"to find\" not just \"find.\" i always forget the \"to\" part. is there a rule for when i need to?",
+    "session": "sess_alina_05",
+    "session_context": {
+      "subject": "English",
+      "unit": "Explaining math reasoning in writing",
+      "date": "2025-11-12"
+    }
+  },
+  {
+    "turn_id": 34,
+    "role": "ai",
+    "text": "Yes \u2014 after \"want,\" \"need,\" \"try,\" and similar verbs, the next verb takes \"to\": \"want to find,\" \"need to go,\" \"try to solve.\" It's called a to-infinitive.",
+    "session": "sess_alina_05",
+    "session_context": {
+      "subject": "English",
+      "unit": "Explaining math reasoning in writing",
+      "date": "2025-11-12"
+    }
+  },
+  {
+    "turn_id": 35,
+    "role": "student",
+    "text": "ok that is helpful, i will remember want-to, need-to, try-to. the math part i was sure about, i only needed the grammar checked",
+    "session": "sess_alina_05",
+    "session_context": {
+      "subject": "English",
+      "unit": "Explaining math reasoning in writing",
+      "date": "2025-11-12"
+    }
+  },
+  {
+    "turn_id": 36,
+    "role": "student",
+    "text": "we did the osmosis lab today with the potato strips. i wrote my conclusion, puedes revisar si mi razonamiento tiene sentido antes de la gramatica",
+    "session": "sess_alina_06",
+    "session_context": {
+      "subject": "Science",
+      "unit": "Biology, osmosis lab",
+      "date": "2025-12-01"
+    }
+  },
+  {
+    "turn_id": 37,
+    "role": "ai",
+    "text": "Of course \u2014 go ahead and share your reasoning.",
+    "session": "sess_alina_06",
+    "session_context": {
+      "subject": "Science",
+      "unit": "Biology, osmosis lab",
+      "date": "2025-12-01"
+    }
+  },
+  {
+    "turn_id": 38,
+    "role": "student",
+    "text": "the potato in salt water lost mass because the water inside the potato moved outside where there was more salt, to make it more even. the potato in plain water gained mass because water moved into the potato instead. is this correct or am i missing something about why it moves that direction",
+    "session": "sess_alina_06",
+    "session_context": {
+      "subject": "Science",
+      "unit": "Biology, osmosis lab",
+      "date": "2025-12-01"
+    }
+  },
+  {
+    "turn_id": 39,
+    "role": "ai",
+    "text": "Your reasoning is correct \u2014 that's osmosis, water moving from an area of lower solute concentration to higher solute concentration across the membrane, trying to equalize both sides. You've explained the mechanism accurately.",
+    "session": "sess_alina_06",
+    "session_context": {
+      "subject": "Science",
+      "unit": "Biology, osmosis lab",
+      "date": "2025-12-01"
+    }
+  },
+  {
+    "turn_id": 40,
+    "role": "student",
+    "text": "ok good, that is what i thought was happening, i wanted to check before i wrote it in english. now can you check the grammar: \"the potato lost mass because the water inside moved outside where there was more salt\"",
+    "session": "sess_alina_06",
+    "session_context": {
+      "subject": "Science",
+      "unit": "Biology, osmosis lab",
+      "date": "2025-12-01"
+    }
+  },
+  {
+    "turn_id": 41,
+    "role": "ai",
+    "text": "That sentence is grammatically correct as written.",
+    "session": "sess_alina_06",
+    "session_context": {
+      "subject": "Science",
+      "unit": "Biology, osmosis lab",
+      "date": "2025-12-01"
+    }
+  },
+  {
+    "turn_id": 42,
+    "role": "student",
+    "text": "great, i will use that for both potatoes then, just changing the direction",
+    "session": "sess_alina_06",
+    "session_context": {
+      "subject": "Science",
+      "unit": "Biology, osmosis lab",
+      "date": "2025-12-01"
+    }
+  },
+  {
+    "turn_id": 43,
+    "role": "student",
+    "text": "we are reading a short story and there is a part where the character says one thing but does another thing. mr boyd called this something in class, i wrote it down but i do not remember what it means",
+    "session": "sess_alina_07",
+    "session_context": {
+      "subject": "English",
+      "unit": "World Literature, short story unit",
+      "date": "2025-12-15"
+    }
+  },
+  {
+    "turn_id": 44,
+    "role": "ai",
+    "text": "That's likely irony, or more specifically situational irony \u2014 when what happens is different from what's expected. Can you tell me the example from the story?",
+    "session": "sess_alina_07",
+    "session_context": {
+      "subject": "English",
+      "unit": "World Literature, short story unit",
+      "date": "2025-12-15"
+    }
+  },
+  {
+    "turn_id": 45,
+    "role": "student",
+    "text": "the character says she does not care about money and then she works extra hours for more money. is that irony or is that just her lying",
+    "session": "sess_alina_07",
+    "session_context": {
+      "subject": "English",
+      "unit": "World Literature, short story unit",
+      "date": "2025-12-15"
+    }
+  },
+  {
+    "turn_id": 46,
+    "role": "ai",
+    "text": "That's a great question. If the story shows the character genuinely believing she doesn't care about money while her actions say otherwise, that's irony \u2014 the audience sees a gap she may not see herself. If the story makes clear she's deliberately lying to others, that's closer to hypocrisy, not irony. What does the story show about whether she's aware of it?",
+    "session": "sess_alina_07",
+    "session_context": {
+      "subject": "English",
+      "unit": "World Literature, short story unit",
+      "date": "2025-12-15"
+    }
+  },
+  {
+    "turn_id": 47,
+    "role": "student",
+    "text": "i think she does not know it about herself, the story does not say she is lying to anyone, she just seems confused about herself",
+    "session": "sess_alina_07",
+    "session_context": {
+      "subject": "English",
+      "unit": "World Literature, short story unit",
+      "date": "2025-12-15"
+    }
+  },
+  {
+    "turn_id": 48,
+    "role": "ai",
+    "text": "Then you've reasoned your way to it \u2014 that's irony, and specifically it's coming from the character's self-perception rather than a deliberate lie. That's a sharper reading than most students land on.",
+    "session": "sess_alina_07",
+    "session_context": {
+      "subject": "English",
+      "unit": "World Literature, short story unit",
+      "date": "2025-12-15"
+    }
+  },
+  {
+    "turn_id": 49,
+    "role": "student",
+    "text": "ok i will write that in my answer, that she does not know it about herself",
+    "session": "sess_alina_07",
+    "session_context": {
+      "subject": "English",
+      "unit": "World Literature, short story unit",
+      "date": "2025-12-15"
+    }
+  },
+  {
+    "turn_id": 50,
+    "role": "student",
+    "text": "What is the English word for the top number in a fraction? I know it in Spanish.",
+    "session": "sess_alina_08",
+    "session_context": {
+      "subject": "Mathematics",
+      "unit": "Geometry, review",
+      "date": "2026-01-14"
+    }
+  },
+  {
+    "turn_id": 51,
+    "role": "ai",
+    "text": "That's the numerator.",
+    "session": "sess_alina_08",
+    "session_context": {
+      "subject": "Mathematics",
+      "unit": "Geometry, review",
+      "date": "2026-01-14"
+    }
+  },
+  {
+    "turn_id": 52,
+    "role": "student",
+    "text": "ok numerator. and bottom is denominator, i remember that one from september. i am trying to only ask in english now instead of spanish first",
+    "session": "sess_alina_08",
+    "session_context": {
+      "subject": "Mathematics",
+      "unit": "Geometry, review",
+      "date": "2026-01-14"
+    }
+  },
+  {
+    "turn_id": 53,
+    "role": "ai",
+    "text": "That's a good habit to build. Numerator and denominator \u2014 you've got both.",
+    "session": "sess_alina_08",
+    "session_context": {
+      "subject": "Mathematics",
+      "unit": "Geometry, review",
+      "date": "2026-01-14"
+    }
+  },
+  {
+    "turn_id": 54,
+    "role": "student",
+    "text": "we have to pick one cause of the american revolution and argue it was the most important. mr boyd gave us four: taxation, representation, british troops staying in the colonies, and enlightenment ideas. i think representation matters more than taxation because people were more angry about not having a voice than about the money itself. does that argument make sense or is it backwards",
+    "session": "sess_alina_09",
+    "session_context": {
+      "subject": "Social Studies",
+      "unit": "U.S. History, causes of the American Revolution",
+      "date": "2026-01-22"
+    }
+  },
+  {
+    "turn_id": 55,
+    "role": "ai",
+    "text": "That's a defensible argument \u2014 a lot of historians would actually agree that \"taxation without representation\" as a slogan was really about the representation half, with taxation as the trigger that made the lack of a voice concrete and personal. Can you find a piece of evidence from the reading that supports that reading rather than the money reading?",
+    "session": "sess_alina_09",
+    "session_context": {
+      "subject": "Social Studies",
+      "unit": "U.S. History, causes of the American Revolution",
+      "date": "2026-01-22"
+    }
+  },
+  {
+    "turn_id": 56,
+    "role": "student",
+    "text": "there was a quote in the reading, someone said something like they did not mind paying if parliament would just ask them first instead of deciding for them. that sounds like it is about the asking not the money",
+    "session": "sess_alina_09",
+    "session_context": {
+      "subject": "Social Studies",
+      "unit": "U.S. History, causes of the American Revolution",
+      "date": "2026-01-22"
+    }
+  },
+  {
+    "turn_id": 57,
+    "role": "ai",
+    "text": "That's a strong piece of evidence for your argument \u2014 use that quote directly.",
+    "session": "sess_alina_09",
+    "session_context": {
+      "subject": "Social Studies",
+      "unit": "U.S. History, causes of the American Revolution",
+      "date": "2026-01-22"
+    }
+  },
+  {
+    "turn_id": 58,
+    "role": "student",
+    "text": "ok now i need to write this in english, can you check this sentence: \"the colonists was not angry about money only, they was angry that parliament decide for them without ask.\"",
+    "session": "sess_alina_09",
+    "session_context": {
+      "subject": "Social Studies",
+      "unit": "U.S. History, causes of the American Revolution",
+      "date": "2026-01-22"
+    }
+  },
+  {
+    "turn_id": 59,
+    "role": "ai",
+    "text": "Fix the verb agreement and tense: \"The colonists were not angry about money only; they were angry that Parliament decided for them without asking.\"",
+    "session": "sess_alina_09",
+    "session_context": {
+      "subject": "Social Studies",
+      "unit": "U.S. History, causes of the American Revolution",
+      "date": "2026-01-22"
+    }
+  },
+  {
+    "turn_id": 60,
+    "role": "student",
+    "text": "were not was, decided not decide, asking not ask. ok i will fix the whole paragraph the same way, i keep making that same mistake",
+    "session": "sess_alina_09",
+    "session_context": {
+      "subject": "Social Studies",
+      "unit": "U.S. History, causes of the American Revolution",
+      "date": "2026-01-22"
+    }
+  },
+  {
+    "turn_id": 61,
+    "role": "student",
+    "text": "we have the lab practical friday, i have to run the protocol by myself and write the discussion in english with no translator this time. i want to practice writing a discussion section tonight",
+    "session": "sess_alina_10",
+    "session_context": {
+      "subject": "Science",
+      "unit": "Biology, lab practical prep",
+      "date": "2026-02-10"
+    }
+  },
+  {
+    "turn_id": 62,
+    "role": "ai",
+    "text": "Good plan. Pick one of the labs we've already done and try writing the discussion cold \u2014 I'll tell you where it's unclear rather than rewriting it for you.",
+    "session": "sess_alina_10",
+    "session_context": {
+      "subject": "Science",
+      "unit": "Biology, lab practical prep",
+      "date": "2026-02-10"
+    }
+  },
+  {
+    "turn_id": 63,
+    "role": "student",
+    "text": "ok, using the osmosis lab. \"the results shows osmosis happen because water molecules move from low concentration to high concentration solute area, to reach equilibrium between both side of membrane.\"",
+    "session": "sess_alina_10",
+    "session_context": {
+      "subject": "Science",
+      "unit": "Biology, lab practical prep",
+      "date": "2026-02-10"
+    }
+  },
+  {
+    "turn_id": 64,
+    "role": "ai",
+    "text": "The science is solid. Grammar: \"the results shows\" should be \"the results show,\" and \"both side\" should be \"both sides.\" Try the sentence again with those two fixes.",
+    "session": "sess_alina_10",
+    "session_context": {
+      "subject": "Science",
+      "unit": "Biology, lab practical prep",
+      "date": "2026-02-10"
+    }
+  },
+  {
+    "turn_id": 65,
+    "role": "student",
+    "text": "\"the results show osmosis happen because water molecules move from low concentration to high concentration solute area, to reach equilibrium between both sides of membrane.\" is \"osmosis happen\" still wrong",
+    "session": "sess_alina_10",
+    "session_context": {
+      "subject": "Science",
+      "unit": "Biology, lab practical prep",
+      "date": "2026-02-10"
+    }
+  },
+  {
+    "turn_id": 66,
+    "role": "ai",
+    "text": "Yes \u2014 \"osmosis happen\" should be \"osmosis happens\" or better, \"osmosis occurs.\" Everything else in that sentence is correct now.",
+    "session": "sess_alina_10",
+    "session_context": {
+      "subject": "Science",
+      "unit": "Biology, lab practical prep",
+      "date": "2026-02-10"
+    }
+  },
+  {
+    "turn_id": 67,
+    "role": "student",
+    "text": "ok, happens not happen. i think i am ready for friday, the writing was the part i needed to practice, i already know how to run the protocol",
+    "session": "sess_alina_10",
+    "session_context": {
+      "subject": "Science",
+      "unit": "Biology, lab practical prep",
+      "date": "2026-02-10"
+    }
+  },
+  {
+    "turn_id": 68,
+    "role": "student",
+    "text": "semester exam is thursday. i went through the review packet, i got all of it right except one, the proof question about similar triangles. i want to try it again before i ask you to check it",
+    "session": "sess_alina_11",
+    "session_context": {
+      "subject": "Mathematics",
+      "unit": "Geometry, semester exam review",
+      "date": "2026-02-19"
+    }
+  },
+  {
+    "turn_id": 69,
+    "role": "ai",
+    "text": "Go ahead and try it \u2014 I'll wait.",
+    "session": "sess_alina_11",
+    "session_context": {
+      "subject": "Mathematics",
+      "unit": "Geometry, semester exam review",
+      "date": "2026-02-19"
+    }
+  },
+  {
+    "turn_id": 70,
+    "role": "student",
+    "text": "ok. \"triangle ABC and triangle DEF, angle A = angle D, angle B = angle E. by AA similarity postulate the triangles are similar, so the sides are proportional. therefore AB/DE = BC/EF.\" is that a complete proof or am i missing a step",
+    "session": "sess_alina_11",
+    "session_context": {
+      "subject": "Mathematics",
+      "unit": "Geometry, semester exam review",
+      "date": "2026-02-19"
+    }
+  },
+  {
+    "turn_id": 71,
+    "role": "ai",
+    "text": "That's essentially complete \u2014 you correctly invoked AA similarity and the resulting proportional sides. One small addition: state explicitly that two pairs of congruent angles is exactly what the AA postulate requires, so the reader sees why you're allowed to conclude similarity, not just that you did.",
+    "session": "sess_alina_11",
+    "session_context": {
+      "subject": "Mathematics",
+      "unit": "Geometry, semester exam review",
+      "date": "2026-02-19"
+    }
+  },
+  {
+    "turn_id": 72,
+    "role": "student",
+    "text": "ok i will add that sentence. so the math reasoning was right the first time, i just did not explain why the postulate applied, only that it did",
+    "session": "sess_alina_11",
+    "session_context": {
+      "subject": "Mathematics",
+      "unit": "Geometry, semester exam review",
+      "date": "2026-02-19"
+    }
+  },
+  {
+    "turn_id": 73,
+    "role": "student",
+    "text": "Is this sentence correct English? \"The cell divide in two identical parts.\"",
+    "session": "sess_alina_12",
+    "session_context": {
+      "subject": "Science",
+      "unit": "Biology, mitosis",
+      "date": "2026-03-04"
+    }
+  },
+  {
+    "turn_id": 74,
+    "role": "ai",
+    "text": "Grammar: \"divide\" should be \"divides.\" But there's also a science issue worth checking \u2014 are the two resulting cells actually identical?",
+    "session": "sess_alina_12",
+    "session_context": {
+      "subject": "Science",
+      "unit": "Biology, mitosis",
+      "date": "2026-03-04"
+    }
+  },
+  {
+    "turn_id": 75,
+    "role": "student",
+    "text": "wait, i thought mitosis makes two identical cells, that is what the diagram showed. are they not identical?",
+    "session": "sess_alina_12",
+    "session_context": {
+      "subject": "Science",
+      "unit": "Biology, mitosis",
+      "date": "2026-03-04"
+    }
+  },
+  {
+    "turn_id": 76,
+    "role": "ai",
+    "text": "They're genetically identical \u2014 same DNA \u2014 but not always identical in size or in exactly which organelles end up in each half, especially if the division isn't perfectly centered. What does your diagram show about where the chromosomes end up?",
+    "session": "sess_alina_12",
+    "session_context": {
+      "subject": "Science",
+      "unit": "Biology, mitosis",
+      "date": "2026-03-04"
+    }
+  },
+  {
+    "turn_id": 77,
+    "role": "student",
+    "text": "the diagram shows the chromosomes split evenly to each side before the cell divides, so the dna is the same, but you are saying the cell parts around it might not split evenly. i did not think about that part before",
+    "session": "sess_alina_12",
+    "session_context": {
+      "subject": "Science",
+      "unit": "Biology, mitosis",
+      "date": "2026-03-04"
+    }
+  },
+  {
+    "turn_id": 78,
+    "role": "ai",
+    "text": "Exactly \u2014 that's a sharper distinction than most students draw. So which word is more accurate for your sentence: genetically identical, or just identical?",
+    "session": "sess_alina_12",
+    "session_context": {
+      "subject": "Science",
+      "unit": "Biology, mitosis",
+      "date": "2026-03-04"
+    }
+  },
+  {
+    "turn_id": 79,
+    "role": "student",
+    "text": "\"the cell divides into two genetically identical parts.\" that is more correct than what i wrote",
+    "session": "sess_alina_12",
+    "session_context": {
+      "subject": "Science",
+      "unit": "Biology, mitosis",
+      "date": "2026-03-04"
+    }
+  },
+  {
+    "turn_id": 80,
+    "role": "student",
+    "text": "we are reading a poem where the writer compares grief to weather, like storms and clouds. is that a metaphor or a simile, i always confuse them",
+    "session": "sess_alina_13",
+    "session_context": {
+      "subject": "English",
+      "unit": "World Literature, poetry unit",
+      "date": "2026-03-20"
+    }
+  },
+  {
+    "turn_id": 81,
+    "role": "ai",
+    "text": "If the poem says grief IS a storm, that's a metaphor. If it says grief is LIKE a storm, that's a simile. Which does the poem use?",
+    "session": "sess_alina_13",
+    "session_context": {
+      "subject": "English",
+      "unit": "World Literature, poetry unit",
+      "date": "2026-03-20"
+    }
+  },
+  {
+    "turn_id": 82,
+    "role": "student",
+    "text": "let me check... it says \"grief moved through her like weather\" so that has like, so simile",
+    "session": "sess_alina_13",
+    "session_context": {
+      "subject": "English",
+      "unit": "World Literature, poetry unit",
+      "date": "2026-03-20"
+    }
+  },
+  {
+    "turn_id": 83,
+    "role": "ai",
+    "text": "Right, that's a simile.",
+    "session": "sess_alina_13",
+    "session_context": {
+      "subject": "English",
+      "unit": "World Literature, poetry unit",
+      "date": "2026-03-20"
+    }
+  },
+  {
+    "turn_id": 84,
+    "role": "student",
+    "text": "ok but then later in the same poem it just says \"the storm in her chest\" with no like. is that a different metaphor building on the first simile, or is that a mistake in the poem",
+    "session": "sess_alina_13",
+    "session_context": {
+      "subject": "English",
+      "unit": "World Literature, poetry unit",
+      "date": "2026-03-20"
+    }
+  },
+  {
+    "turn_id": 85,
+    "role": "ai",
+    "text": "That's not a mistake \u2014 that's a common poetic move. The poet introduces the comparison as a simile first, then drops the \"like\" later and treats it as a direct metaphor, because the reader already has the comparison in mind. It makes the second image feel more embedded, less like a comparison and more like a fact of her body.",
+    "session": "sess_alina_13",
+    "session_context": {
+      "subject": "English",
+      "unit": "World Literature, poetry unit",
+      "date": "2026-03-20"
+    }
+  },
+  {
+    "turn_id": 86,
+    "role": "student",
+    "text": "oh that is actually a good technique, so the simile sets it up and then the metaphor uses it without explaining again. i want to try that in my own poem for this unit",
+    "session": "sess_alina_13",
+    "session_context": {
+      "subject": "English",
+      "unit": "World Literature, poetry unit",
+      "date": "2026-03-20"
+    }
+  },
+  {
+    "turn_id": 87,
+    "role": "student",
+    "text": "we have two accounts of the same event, a british officer and a colonial newspaper, both about the same protest. they disagree about how many people were there and who started it. mr boyd wants us to decide which one to trust more. i do not know how to decide that when i was not there",
+    "session": "sess_alina_14",
+    "session_context": {
+      "subject": "Social Studies",
+      "unit": "U.S. History, primary source analysis",
+      "date": "2026-04-02"
+    }
+  },
+  {
+    "turn_id": 88,
+    "role": "ai",
+    "text": "You don't need to know the true number to evaluate the sources \u2014 you can reason about which account has more reason to shade the truth in a particular direction. What do you know about each source's position?",
+    "session": "sess_alina_14",
+    "session_context": {
+      "subject": "Social Studies",
+      "unit": "U.S. History, primary source analysis",
+      "date": "2026-04-02"
+    }
+  },
+  {
+    "turn_id": 89,
+    "role": "student",
+    "text": "the british officer works for the government that is trying to stop the protests, so he would want to make it look small and like it was started by troublemakers, not like a real movement. the newspaper is colonial so they would want to make it look big and peaceful, like the crowd did not start it",
+    "session": "sess_alina_14",
+    "session_context": {
+      "subject": "Social Studies",
+      "unit": "U.S. History, primary source analysis",
+      "date": "2026-04-02"
+    }
+  },
+  {
+    "turn_id": 90,
+    "role": "ai",
+    "text": "That's exactly the right move \u2014 both sources have a motive to shade the same event in opposite directions. So how do you use that? Does it mean you throw both out?",
+    "session": "sess_alina_14",
+    "session_context": {
+      "subject": "Social Studies",
+      "unit": "U.S. History, primary source analysis",
+      "date": "2026-04-02"
+    }
+  },
+  {
+    "turn_id": 91,
+    "role": "student",
+    "text": "no, i think you can still find the part where they agree even though they disagree on numbers, and that part is probably true because neither of them had a reason to lie about it. i need to reread both and find what they actually agree on instead of just picking the one i believe more",
+    "session": "sess_alina_14",
+    "session_context": {
+      "subject": "Social Studies",
+      "unit": "U.S. History, primary source analysis",
+      "date": "2026-04-02"
+    }
+  },
+  {
+    "turn_id": 92,
+    "role": "ai",
+    "text": "That's a stronger method than most students use, and it's exactly the historian's move \u2014 look for agreement between biased sources rather than trusting one over the other.",
+    "session": "sess_alina_14",
+    "session_context": {
+      "subject": "Social Studies",
+      "unit": "U.S. History, primary source analysis",
+      "date": "2026-04-02"
+    }
+  },
+  {
+    "turn_id": 93,
+    "role": "student",
+    "text": "ok i am going to go back through both texts and make a list of what they both say happened, and use that list as the parts i am confident about",
+    "session": "sess_alina_14",
+    "session_context": {
+      "subject": "Social Studies",
+      "unit": "U.S. History, primary source analysis",
+      "date": "2026-04-02"
+    }
+  },
+  {
+    "turn_id": 94,
+    "role": "student",
+    "text": "we have to write an artist statement in english about our painting for the show. mine is about moving here, i have the ideas in spanish in my head but writing it in english makes it sound simple and boring",
+    "session": "sess_alina_15",
+    "session_context": {
+      "subject": "Visual Arts",
+      "unit": "Studio Art, artist statement",
+      "date": "2026-04-20"
+    }
+  },
+  {
+    "turn_id": 95,
+    "role": "ai",
+    "text": "Tell me the idea in Spanish first, the way it actually sounds in your head \u2014 we can work on the English after.",
+    "session": "sess_alina_15",
+    "session_context": {
+      "subject": "Visual Arts",
+      "unit": "Studio Art, artist statement",
+      "date": "2026-04-20"
+    }
+  },
+  {
+    "turn_id": 96,
+    "role": "student",
+    "text": "la pintura tiene dos mitades, un lado con colores que conozco de casa y el otro lado con colores que todavia no se como se llaman en ingles. es sobre no tener las palabras todavia pero sentir los colores igual",
+    "session": "sess_alina_15",
+    "session_context": {
+      "subject": "Visual Arts",
+      "unit": "Studio Art, artist statement",
+      "date": "2026-04-20"
+    }
+  },
+  {
+    "turn_id": 97,
+    "role": "ai",
+    "text": "That's a strong idea \u2014 \"two halves, one side with colors I know from home, the other with colors I don't have the English words for yet \u2014 about not having the words yet but feeling the colors anyway.\" Does that capture it, or is something missing in translation?",
+    "session": "sess_alina_15",
+    "session_context": {
+      "subject": "Visual Arts",
+      "unit": "Studio Art, artist statement",
+      "date": "2026-04-20"
+    }
+  },
+  {
+    "turn_id": 98,
+    "role": "student",
+    "text": "yes that is it, but can i say it more like a sentence instead of just describing the painting, like starting with the idea about words first",
+    "session": "sess_alina_15",
+    "session_context": {
+      "subject": "Visual Arts",
+      "unit": "Studio Art, artist statement",
+      "date": "2026-04-20"
+    }
+  },
+  {
+    "turn_id": 99,
+    "role": "ai",
+    "text": "You could open with the idea and let the painting illustrate it: something like \"I don't have the English words for some of these colors yet. The painting is what I have instead.\" Does that sound like your voice?",
+    "session": "sess_alina_15",
+    "session_context": {
+      "subject": "Visual Arts",
+      "unit": "Studio Art, artist statement",
+      "date": "2026-04-20"
+    }
+  },
+  {
+    "turn_id": 100,
+    "role": "student",
+    "text": "yes, i like that, i am going to use that as my first sentence and then describe the two sides after",
+    "session": "sess_alina_15",
+    "session_context": {
+      "subject": "Visual Arts",
+      "unit": "Studio Art, artist statement",
+      "date": "2026-04-20"
+    }
+  },
+  {
+    "turn_id": 101,
+    "role": "student",
+    "text": "I want to say this in class tomorrow without reading it. Can you help me practise it?",
+    "session": "sess_alina_16",
+    "session_context": {
+      "subject": "English",
+      "unit": "World Literature, class discussion prep",
+      "date": "2026-05-06"
+    }
+  },
+  {
+    "turn_id": 102,
+    "role": "ai",
+    "text": "Sure \u2014 what's the point you want to make?",
+    "session": "sess_alina_16",
+    "session_context": {
+      "subject": "English",
+      "unit": "World Literature, class discussion prep",
+      "date": "2026-05-06"
+    }
+  },
+  {
+    "turn_id": 103,
+    "role": "student",
+    "text": "in the discussion tomorrow i want to say that the narrator is not reliable because she describes herself as calm in the same paragraph where she admits her hands are shaking. i have never said something out loud in that class since september, i always write it on paper instead",
+    "session": "sess_alina_16",
+    "session_context": {
+      "subject": "English",
+      "unit": "World Literature, class discussion prep",
+      "date": "2026-05-06"
+    }
+  },
+  {
+    "turn_id": 104,
+    "role": "ai",
+    "text": "That's a strong observation to lead with \u2014 it's specific and textual. Try saying it out loud to me now, the way you'd say it in class.",
+    "session": "sess_alina_16",
+    "session_context": {
+      "subject": "English",
+      "unit": "World Literature, class discussion prep",
+      "date": "2026-05-06"
+    }
+  },
+  {
+    "turn_id": 105,
+    "role": "student",
+    "text": "the narrator says she is calm but... her hands are shaking in the same... paragraph. so she is not reliable. that is what i want to say but it comes out slower when i say it than when i write it",
+    "session": "sess_alina_16",
+    "session_context": {
+      "subject": "English",
+      "unit": "World Literature, class discussion prep",
+      "date": "2026-05-06"
+    }
+  },
+  {
+    "turn_id": 106,
+    "role": "ai",
+    "text": "That's completely normal \u2014 speaking under time pressure is a different skill than writing, in any language. The content is exactly right. Want to practice it two more times to build speed, or work on a way to say it that doesn't depend on remembering the exact wording?",
+    "session": "sess_alina_16",
+    "session_context": {
+      "subject": "English",
+      "unit": "World Literature, class discussion prep",
+      "date": "2026-05-06"
+    }
+  },
+  {
+    "turn_id": 107,
+    "role": "student",
+    "text": "let me try it two more times. the narrator says she is calm, but in the same paragraph her hands are shaking, so she is not reliable. ok that one was faster",
+    "session": "sess_alina_16",
+    "session_context": {
+      "subject": "English",
+      "unit": "World Literature, class discussion prep",
+      "date": "2026-05-06"
+    }
+  },
+  {
+    "turn_id": 108,
+    "role": "ai",
+    "text": "Much smoother. You've got it \u2014 that's ready for tomorrow.",
+    "session": "sess_alina_16",
+    "session_context": {
+      "subject": "English",
+      "unit": "World Literature, class discussion prep",
+      "date": "2026-05-06"
+    }
+  },
+  {
+    "turn_id": 109,
+    "role": "student",
+    "text": "ok. i am still nervous but i know what i am going to say now, that is the part i needed",
+    "session": "sess_alina_16",
+    "session_context": {
+      "subject": "English",
+      "unit": "World Literature, class discussion prep",
+      "date": "2026-05-06"
+    }
+  },
+  {
+    "turn_id": 110,
+    "role": "student",
+    "text": "i am reviewing proofs for the final and i noticed something, tell me if this is a real connection or if i am just imagining it. in a geometry proof each step has to follow from the step before with a reason, or the whole proof falls apart. that is the same structure as the history paragraph i wrote in january about the revolution, where mr boyd said i needed each sentence to follow from evidence instead of just stating my opinion",
+    "session": "sess_alina_17",
+    "session_context": {
+      "subject": "Mathematics",
+      "unit": "Geometry, final exam review",
+      "date": "2026-05-20"
+    }
+  },
+  {
+    "turn_id": 111,
+    "role": "ai",
+    "text": "That's a genuine connection, not an imagined one \u2014 you've noticed that both are the same underlying structure: a claim only holds if each step is justified by something before it, whether that's a geometric postulate or a piece of historical evidence. That's the actual logical skeleton under both subjects.",
+    "session": "sess_alina_17",
+    "session_context": {
+      "subject": "Mathematics",
+      "unit": "Geometry, final exam review",
+      "date": "2026-05-20"
+    }
+  },
+  {
+    "turn_id": 112,
+    "role": "student",
+    "text": "so is that why the same mistake felt the same both times, when i skipped explaining why in the similarity proof back in february you said the same thing, that i had the right conclusion but did not show why it was allowed. that is the exact same problem as stating an opinion without evidence in history",
+    "session": "sess_alina_17",
+    "session_context": {
+      "subject": "Mathematics",
+      "unit": "Geometry, final exam review",
+      "date": "2026-05-20"
+    }
+  },
+  {
+    "turn_id": 113,
+    "role": "ai",
+    "text": "Yes \u2014 in both cases the conclusion was correct but unsupported at the step level. That's a genuinely useful thing to notice about your own writing across subjects, not just in math.",
+    "session": "sess_alina_17",
+    "session_context": {
+      "subject": "Mathematics",
+      "unit": "Geometry, final exam review",
+      "date": "2026-05-20"
+    }
+  },
+  {
+    "turn_id": 114,
+    "role": "student",
+    "text": "ok so for the final i am going to check every proof by asking myself the same question i learned to ask in history: does this step follow from the one before it, or am i just skipping to what i already know is true",
+    "session": "sess_alina_17",
+    "session_context": {
+      "subject": "Mathematics",
+      "unit": "Geometry, final exam review",
+      "date": "2026-05-20"
+    }
+  }
+]

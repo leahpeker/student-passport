@@ -1,0 +1,1646 @@
+[
+  {
+    "turn_id": 1,
+    "role": "student",
+    "text": "working on the momentum problem set, #6 is bugging me. two carts collide and stick, m1=2kg at 3m/s, m2=1kg at rest, find v after. I got 2 m/s but the answer key says 2.0 which is the same so idk why I feel unsure",
+    "session": "sess_7a1c9e02",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Momentum and impulse (Fairbrook High School)",
+      "started_at": "2025-09-20T18:10:00",
+      "date": "2025-09-20"
+    }
+  },
+  {
+    "turn_id": 2,
+    "role": "ai",
+    "text": "If the numbers match, what's making you unsure \u2014 the number itself, or something about how you got there?",
+    "session": "sess_7a1c9e02",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Momentum and impulse (Fairbrook High School)",
+      "started_at": "2025-09-20T18:10:00",
+      "date": "2025-09-20"
+    }
+  },
+  {
+    "turn_id": 3,
+    "role": "student",
+    "text": "honestly i just plugged into the formula p1=p2. i didnt really check if momentum should even be conserved here, i just used the equation because its the momentum chapter",
+    "session": "sess_7a1c9e02",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Momentum and impulse (Fairbrook High School)",
+      "started_at": "2025-09-20T18:10:00",
+      "date": "2025-09-20"
+    }
+  },
+  {
+    "turn_id": 4,
+    "role": "ai",
+    "text": "That's worth sitting with for a second. What actually has to be true about a collision for momentum to be conserved?",
+    "session": "sess_7a1c9e02",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Momentum and impulse (Fairbrook High School)",
+      "started_at": "2025-09-20T18:10:00",
+      "date": "2025-09-20"
+    }
+  },
+  {
+    "turn_id": 5,
+    "role": "student",
+    "text": "no external forces on the system i think. so like if theres friction from the table that would mess it up",
+    "session": "sess_7a1c9e02",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Momentum and impulse (Fairbrook High School)",
+      "started_at": "2025-09-20T18:10:00",
+      "date": "2025-09-20"
+    }
+  },
+  {
+    "turn_id": 6,
+    "role": "ai",
+    "text": "Right. So for this problem \u2014 carts on a track \u2014 is that assumption reasonable?",
+    "session": "sess_7a1c9e02",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Momentum and impulse (Fairbrook High School)",
+      "started_at": "2025-09-20T18:10:00",
+      "date": "2025-09-20"
+    }
+  },
+  {
+    "turn_id": 7,
+    "role": "student",
+    "text": "yeah track is basically frictionless in these problems, they always say that or its implied. ok so i think i got it right for the right reason then, i just didnt say the reason to myself while doing it",
+    "session": "sess_7a1c9e02",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Momentum and impulse (Fairbrook High School)",
+      "started_at": "2025-09-20T18:10:00",
+      "date": "2025-09-20"
+    }
+  },
+  {
+    "turn_id": 8,
+    "role": "ai",
+    "text": "That's the difference between an answer and understanding it \u2014 worth noticing.",
+    "session": "sess_7a1c9e02",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Momentum and impulse (Fairbrook High School)",
+      "started_at": "2025-09-20T18:10:00",
+      "date": "2025-09-20"
+    }
+  },
+  {
+    "turn_id": 9,
+    "role": "student",
+    "text": "yeah. ok next one, #9 is a rotational one and I havent started that chapter yet so ill come back",
+    "session": "sess_7a1c9e02",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Momentum and impulse (Fairbrook High School)",
+      "started_at": "2025-09-20T18:10:00",
+      "date": "2025-09-20"
+    }
+  },
+  {
+    "turn_id": 10,
+    "role": "student",
+    "text": "Can you check my derivation for the momentum question? I think I dropped a sign.",
+    "session": "sess_44b0f1d7",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Momentum and impulse (Fairbrook High School)",
+      "started_at": "2025-10-15T19:20:00",
+      "date": "2025-10-15"
+    }
+  },
+  {
+    "turn_id": 11,
+    "role": "ai",
+    "text": "Send me what you've got and I'll follow it through with you.",
+    "session": "sess_44b0f1d7",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Momentum and impulse (Fairbrook High School)",
+      "started_at": "2025-10-15T19:20:00",
+      "date": "2025-10-15"
+    }
+  },
+  {
+    "turn_id": 12,
+    "role": "student",
+    "text": "m1v1i + m2v2i = m1v1f + m2v2f. cart 1 is 3kg going +2, cart 2 is 2kg going -1.5 (opposite direction). after collision cart1 is -0.2. solving for cart2f: 3(2)+2(-1.5)=3(-0.2)+2(v2f) -> 6-3=-0.6+2v2f -> 3=-0.6+2v2f -> 3.6=2v2f -> v2f=1.8",
+    "session": "sess_44b0f1d7",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Momentum and impulse (Fairbrook High School)",
+      "started_at": "2025-10-15T19:20:00",
+      "date": "2025-10-15"
+    }
+  },
+  {
+    "turn_id": 13,
+    "role": "ai",
+    "text": "Walk me through the step from 6-3 to 3. Where did the -3 come from?",
+    "session": "sess_44b0f1d7",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Momentum and impulse (Fairbrook High School)",
+      "started_at": "2025-10-15T19:20:00",
+      "date": "2025-10-15"
+    }
+  },
+  {
+    "turn_id": 14,
+    "role": "student",
+    "text": "2(-1.5) = -3, and 6 + -3 is 3",
+    "session": "sess_44b0f1d7",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Momentum and impulse (Fairbrook High School)",
+      "started_at": "2025-10-15T19:20:00",
+      "date": "2025-10-15"
+    }
+  },
+  {
+    "turn_id": 15,
+    "role": "ai",
+    "text": "Okay, that step's fine. Now check the next line \u2014 you wrote 3 = -0.6 + 2v2f. Where's the -0.6 from?",
+    "session": "sess_44b0f1d7",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Momentum and impulse (Fairbrook High School)",
+      "started_at": "2025-10-15T19:20:00",
+      "date": "2025-10-15"
+    }
+  },
+  {
+    "turn_id": 16,
+    "role": "student",
+    "text": "3(-0.2)... oh wait thats -0.6 which i have right. hold on let me redo the last line. 3.6=2v2f so v2f=1.8. thats what i had",
+    "session": "sess_44b0f1d7",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Momentum and impulse (Fairbrook High School)",
+      "started_at": "2025-10-15T19:20:00",
+      "date": "2025-10-15"
+    }
+  },
+  {
+    "turn_id": 17,
+    "role": "ai",
+    "text": "So where's the sign issue you were worried about?",
+    "session": "sess_44b0f1d7",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Momentum and impulse (Fairbrook High School)",
+      "started_at": "2025-10-15T19:20:00",
+      "date": "2025-10-15"
+    }
+  },
+  {
+    "turn_id": 18,
+    "role": "student",
+    "text": "i think it was earlier, in an old draft i had cart 2 going +1.5 instead of -1.5 because i forgot it was moving the other way. i fixed it but wanted someone to actually check the fixed version instead of just trusting myself",
+    "session": "sess_44b0f1d7",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Momentum and impulse (Fairbrook High School)",
+      "started_at": "2025-10-15T19:20:00",
+      "date": "2025-10-15"
+    }
+  },
+  {
+    "turn_id": 19,
+    "role": "ai",
+    "text": "The fixed version checks out \u2014 1.8 m/s, same direction convention you set up front. What made you not trust yourself on it?",
+    "session": "sess_44b0f1d7",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Momentum and impulse (Fairbrook High School)",
+      "started_at": "2025-10-15T19:20:00",
+      "date": "2025-10-15"
+    }
+  },
+  {
+    "turn_id": 20,
+    "role": "student",
+    "text": "i got it wrong on the practice test last week from exactly that mistake, forgetting a direction sign, so now im double checking every one",
+    "session": "sess_44b0f1d7",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Momentum and impulse (Fairbrook High School)",
+      "started_at": "2025-10-15T19:20:00",
+      "date": "2025-10-15"
+    }
+  },
+  {
+    "turn_id": 21,
+    "role": "student",
+    "text": "im writing about isolation in the novel i picked and i have too many ideas, not too few. how do i pick which one is actually the thesis instead of just a supporting point",
+    "session": "sess_9c22ab41",
+    "session_context": {
+      "subject": "English",
+      "unit": "Independent novel analysis (Fairbrook High School)",
+      "started_at": "2025-11-05T17:45:00",
+      "date": "2025-11-05"
+    }
+  },
+  {
+    "turn_id": 22,
+    "role": "ai",
+    "text": "List the ideas you're choosing between, and I'll help you sort which is load-bearing.",
+    "session": "sess_9c22ab41",
+    "session_context": {
+      "subject": "English",
+      "unit": "Independent novel analysis (Fairbrook High School)",
+      "started_at": "2025-11-05T17:45:00",
+      "date": "2025-11-05"
+    }
+  },
+  {
+    "turn_id": 23,
+    "role": "student",
+    "text": "1) the setting itself isolates him, its a remote research station 2) he isolates himself on purpose even when people are around 3) the ending isnt really about isolation ending, its about him choosing a different kind of isolation",
+    "session": "sess_9c22ab41",
+    "session_context": {
+      "subject": "English",
+      "unit": "Independent novel analysis (Fairbrook High School)",
+      "started_at": "2025-11-05T17:45:00",
+      "date": "2025-11-05"
+    }
+  },
+  {
+    "turn_id": 24,
+    "role": "ai",
+    "text": "Those aren't three separate ideas \u2014 how do 1 and 2 relate to 3?",
+    "session": "sess_9c22ab41",
+    "session_context": {
+      "subject": "English",
+      "unit": "Independent novel analysis (Fairbrook High School)",
+      "started_at": "2025-11-05T17:45:00",
+      "date": "2025-11-05"
+    }
+  },
+  {
+    "turn_id": 25,
+    "role": "student",
+    "text": "oh. 1 and 2 are kind of building blocks and 3 is the actual claim. like the setting forces isolation on him at first but by the end hes choosing it, so the book is arguing isolation isnt really about location its about a decision. thats the thesis",
+    "session": "sess_9c22ab41",
+    "session_context": {
+      "subject": "English",
+      "unit": "Independent novel analysis (Fairbrook High School)",
+      "started_at": "2025-11-05T17:45:00",
+      "date": "2025-11-05"
+    }
+  },
+  {
+    "turn_id": 26,
+    "role": "ai",
+    "text": "That's a real thesis \u2014 it's arguable, not just descriptive. What's your strongest textual evidence for the 'choosing it' part at the end?",
+    "session": "sess_9c22ab41",
+    "session_context": {
+      "subject": "English",
+      "unit": "Independent novel analysis (Fairbrook High School)",
+      "started_at": "2025-11-05T17:45:00",
+      "date": "2025-11-05"
+    }
+  },
+  {
+    "turn_id": 27,
+    "role": "student",
+    "text": "theres a scene where the rescue team finally reaches him and he delays going with them to finish a task nobody asked him to finish. thats the best one i have",
+    "session": "sess_9c22ab41",
+    "session_context": {
+      "subject": "English",
+      "unit": "Independent novel analysis (Fairbrook High School)",
+      "started_at": "2025-11-05T17:45:00",
+      "date": "2025-11-05"
+    }
+  },
+  {
+    "turn_id": 28,
+    "role": "ai",
+    "text": "That's a strong anchor scene. Build the essay outward from that moment rather than starting with the setting \u2014 readers will feel the argument land harder if the strongest evidence isn't buried in the middle.",
+    "session": "sess_9c22ab41",
+    "session_context": {
+      "subject": "English",
+      "unit": "Independent novel analysis (Fairbrook High School)",
+      "started_at": "2025-11-05T17:45:00",
+      "date": "2025-11-05"
+    }
+  },
+  {
+    "turn_id": 29,
+    "role": "student",
+    "text": "ok that actually changes my whole outline, ill restructure it around that scene first",
+    "session": "sess_9c22ab41",
+    "session_context": {
+      "subject": "English",
+      "unit": "Independent novel analysis (Fairbrook High School)",
+      "started_at": "2025-11-05T17:45:00",
+      "date": "2025-11-05"
+    }
+  },
+  {
+    "turn_id": 30,
+    "role": "student",
+    "text": "What is a good way to explain rotational inertia to someone on my team?",
+    "session": "sess_1e77d3aa",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Rotational motion / robotics team prep (Fairbrook High School)",
+      "started_at": "2025-11-10T18:45:00",
+      "date": "2025-11-10"
+    }
+  },
+  {
+    "turn_id": 31,
+    "role": "ai",
+    "text": "What's the context \u2014 are they trying to understand why our robot's arm behaves the way it does, or is this more of a general concept explanation?",
+    "session": "sess_1e77d3aa",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Rotational motion / robotics team prep (Fairbrook High School)",
+      "started_at": "2025-11-10T18:45:00",
+      "date": "2025-11-10"
+    }
+  },
+  {
+    "turn_id": 32,
+    "role": "student",
+    "text": "our arm swings slower than we predicted and one of the freshmen on the team doesnt get why just adding a stronger motor didnt fully fix it. i understand it but i havent had to explain it out loud before",
+    "session": "sess_1e77d3aa",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Rotational motion / robotics team prep (Fairbrook High School)",
+      "started_at": "2025-11-10T18:45:00",
+      "date": "2025-11-10"
+    }
+  },
+  {
+    "turn_id": 33,
+    "role": "ai",
+    "text": "Try this: what's the mass-analog version he already understands? Force and acceleration?",
+    "session": "sess_1e77d3aa",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Rotational motion / robotics team prep (Fairbrook High School)",
+      "started_at": "2025-11-10T18:45:00",
+      "date": "2025-11-10"
+    }
+  },
+  {
+    "turn_id": 34,
+    "role": "student",
+    "text": "yeah f=ma he knows that",
+    "session": "sess_1e77d3aa",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Rotational motion / robotics team prep (Fairbrook High School)",
+      "started_at": "2025-11-10T18:45:00",
+      "date": "2025-11-10"
+    }
+  },
+  {
+    "turn_id": 35,
+    "role": "ai",
+    "text": "So rotational inertia is the rotational version of mass \u2014 it's not just how much stuff there is, it's how far that stuff is from the axis it's spinning around. Where's most of the mass on our arm relative to the pivot?",
+    "session": "sess_1e77d3aa",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Rotational motion / robotics team prep (Fairbrook High School)",
+      "started_at": "2025-11-10T18:45:00",
+      "date": "2025-11-10"
+    }
+  },
+  {
+    "turn_id": 36,
+    "role": "student",
+    "text": "the gripper and the payload are at the far end, away from the pivot",
+    "session": "sess_1e77d3aa",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Rotational motion / robotics team prep (Fairbrook High School)",
+      "started_at": "2025-11-10T18:45:00",
+      "date": "2025-11-10"
+    }
+  },
+  {
+    "turn_id": 37,
+    "role": "ai",
+    "text": "So even with a stronger motor, what happens to the torque needed as that mass sits further out?",
+    "session": "sess_1e77d3aa",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Rotational motion / robotics team prep (Fairbrook High School)",
+      "started_at": "2025-11-10T18:45:00",
+      "date": "2025-11-10"
+    }
+  },
+  {
+    "turn_id": 38,
+    "role": "student",
+    "text": "it needs way more torque because inertia scales with distance squared, not just distance. so a stronger motor helps some but if we couldve moved mass closer to the pivot that wouldve mattered more than the motor upgrade\n\nok i think i can explain that to him now without just saying 'its physics, trust me'. thanks",
+    "session": "sess_1e77d3aa",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Rotational motion / robotics team prep (Fairbrook High School)",
+      "started_at": "2025-11-10T18:45:00",
+      "date": "2025-11-10"
+    }
+  },
+  {
+    "turn_id": 39,
+    "role": "student",
+    "text": "our arm control code has a bug where it overshoots the target angle and oscillates a bit before settling. i think we need some kind of damping but i dont know the right way to do it without just guessing numbers",
+    "session": "sess_5f0e8b2c",
+    "session_context": {
+      "subject": "Computer Science",
+      "unit": "Robotics competition control code (Fairbrook High School)",
+      "started_at": "2025-11-19T20:00:00",
+      "date": "2025-11-19"
+    }
+  },
+  {
+    "turn_id": 40,
+    "role": "ai",
+    "text": "What's the code doing right now \u2014 is it just driving toward the target at full speed until it arrives?",
+    "session": "sess_5f0e8b2c",
+    "session_context": {
+      "subject": "Computer Science",
+      "unit": "Robotics competition control code (Fairbrook High School)",
+      "started_at": "2025-11-19T20:00:00",
+      "date": "2025-11-19"
+    }
+  },
+  {
+    "turn_id": 41,
+    "role": "student",
+    "text": "basically yeah, if current angle < target, go one direction at fixed speed, else go the other direction, repeat. no ramping",
+    "session": "sess_5f0e8b2c",
+    "session_context": {
+      "subject": "Computer Science",
+      "unit": "Robotics competition control code (Fairbrook High School)",
+      "started_at": "2025-11-19T20:00:00",
+      "date": "2025-11-19"
+    }
+  },
+  {
+    "turn_id": 42,
+    "role": "ai",
+    "text": "That's a bang-bang controller \u2014 it'll always overshoot because it doesn't know to slow down before arriving. What would tell the motor 'you're getting close, ease off'?",
+    "session": "sess_5f0e8b2c",
+    "session_context": {
+      "subject": "Computer Science",
+      "unit": "Robotics competition control code (Fairbrook High School)",
+      "started_at": "2025-11-19T20:00:00",
+      "date": "2025-11-19"
+    }
+  },
+  {
+    "turn_id": 43,
+    "role": "student",
+    "text": "the distance to the target? like speed proportional to how far away it still is",
+    "session": "sess_5f0e8b2c",
+    "session_context": {
+      "subject": "Computer Science",
+      "unit": "Robotics competition control code (Fairbrook High School)",
+      "started_at": "2025-11-19T20:00:00",
+      "date": "2025-11-19"
+    }
+  },
+  {
+    "turn_id": 44,
+    "role": "ai",
+    "text": "That's the P in a PID controller \u2014 proportional control. Want to reason through why proportional alone might not be enough either?",
+    "session": "sess_5f0e8b2c",
+    "session_context": {
+      "subject": "Computer Science",
+      "unit": "Robotics competition control code (Fairbrook High School)",
+      "started_at": "2025-11-19T20:00:00",
+      "date": "2025-11-19"
+    }
+  },
+  {
+    "turn_id": 45,
+    "role": "student",
+    "text": "if its purely proportional it might never actually reach the target because as it gets close the speed goes toward zero and gravity or friction could stop it just short. so youd need a little integral term to push through the last bit",
+    "session": "sess_5f0e8b2c",
+    "session_context": {
+      "subject": "Computer Science",
+      "unit": "Robotics competition control code (Fairbrook High School)",
+      "started_at": "2025-11-19T20:00:00",
+      "date": "2025-11-19"
+    }
+  },
+  {
+    "turn_id": 46,
+    "role": "ai",
+    "text": "Exactly right, and that's usually where a naive PID starts oscillating again if the integral term is too aggressive. What would you want to test first before adding the I term?",
+    "session": "sess_5f0e8b2c",
+    "session_context": {
+      "subject": "Computer Science",
+      "unit": "Robotics competition control code (Fairbrook High School)",
+      "started_at": "2025-11-19T20:00:00",
+      "date": "2025-11-19"
+    }
+  },
+  {
+    "turn_id": 47,
+    "role": "student",
+    "text": "just P alone first, tune the gain until it settles close enough without oscillating too much, then only add a small I term if it still falls short. ill try that tonight and see how the arm actually behaves, the math version and the real motor probably wont agree\n\nok tried P alone with gain 0.4, it settles but leaves about a 3 degree gap consistently. going to add a small I term now",
+    "session": "sess_5f0e8b2c",
+    "session_context": {
+      "subject": "Computer Science",
+      "unit": "Robotics competition control code (Fairbrook High School)",
+      "started_at": "2025-11-19T20:00:00",
+      "date": "2025-11-19"
+    }
+  },
+  {
+    "turn_id": 48,
+    "role": "student",
+    "text": "What does this class already know that I would have missed. I started in December.",
+    "session": "sess_616e04d5",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Physics unit 3 (this school) \u2014 catching in mid-unit after transfer",
+      "started_at": "2025-12-08T20:30:00",
+      "date": "2025-12-08"
+    }
+  },
+  {
+    "turn_id": 49,
+    "role": "ai",
+    "text": "Tell me what unit they're in now and I can help you map the gap \u2014 do you have the syllabus or a recent handout?",
+    "session": "sess_616e04d5",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Physics unit 3 (this school) \u2014 catching in mid-unit after transfer",
+      "started_at": "2025-12-08T20:30:00",
+      "date": "2025-12-08"
+    }
+  },
+  {
+    "turn_id": 50,
+    "role": "student",
+    "text": "unit 3, work and energy. i got the packet but not any notes from before i got here",
+    "session": "sess_616e04d5",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Physics unit 3 (this school) \u2014 catching in mid-unit after transfer",
+      "started_at": "2025-12-08T20:30:00",
+      "date": "2025-12-08"
+    }
+  },
+  {
+    "turn_id": 51,
+    "role": "ai",
+    "text": "What's on the packet \u2014 can you list the topic headers?",
+    "session": "sess_616e04d5",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Physics unit 3 (this school) \u2014 catching in mid-unit after transfer",
+      "started_at": "2025-12-08T20:30:00",
+      "date": "2025-12-08"
+    }
+  },
+  {
+    "turn_id": 52,
+    "role": "student",
+    "text": "work-energy theorem, conservation of mechanical energy, springs, power. i know work-energy theorem and conservation of energy fine, thats basically the same as what i did at my old school in september. springs i havent seen the way theyre doing it here, and i dont know what they already covered about power",
+    "session": "sess_616e04d5",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Physics unit 3 (this school) \u2014 catching in mid-unit after transfer",
+      "started_at": "2025-12-08T20:30:00",
+      "date": "2025-12-08"
+    }
+  },
+  {
+    "turn_id": 53,
+    "role": "ai",
+    "text": "So really it's springs and power that are the actual gap, not the whole unit. Want to start with springs since that's the clearest hole?",
+    "session": "sess_616e04d5",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Physics unit 3 (this school) \u2014 catching in mid-unit after transfer",
+      "started_at": "2025-12-08T20:30:00",
+      "date": "2025-12-08"
+    }
+  },
+  {
+    "turn_id": 54,
+    "role": "student",
+    "text": "yeah. do i need to know the differential equation version or just hookes law and energy stored in a spring",
+    "session": "sess_616e04d5",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Physics unit 3 (this school) \u2014 catching in mid-unit after transfer",
+      "started_at": "2025-12-08T20:30:00",
+      "date": "2025-12-08"
+    }
+  },
+  {
+    "turn_id": 55,
+    "role": "ai",
+    "text": "For a first pass, just Hooke's law and spring potential energy \u2014 the calculus version usually comes later if at all. I can walk you through it, or you can try the packet's spring problems first and we check them. Which do you want?",
+    "session": "sess_616e04d5",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Physics unit 3 (this school) \u2014 catching in mid-unit after transfer",
+      "started_at": "2025-12-08T20:30:00",
+      "date": "2025-12-08"
+    }
+  },
+  {
+    "turn_id": 56,
+    "role": "student",
+    "text": "ill just try the first two problems myself first",
+    "session": "sess_616e04d5",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Physics unit 3 (this school) \u2014 catching in mid-unit after transfer",
+      "started_at": "2025-12-08T20:30:00",
+      "date": "2025-12-08"
+    }
+  },
+  {
+    "turn_id": 57,
+    "role": "student",
+    "text": "whats this reading even about, i havent been following",
+    "session": "sess_2a90c113",
+    "session_context": {
+      "subject": "English",
+      "unit": "World Literature \u2014 new unit at this school",
+      "started_at": "2025-12-15T21:05:00",
+      "date": "2025-12-15"
+    }
+  },
+  {
+    "turn_id": 58,
+    "role": "ai",
+    "text": "What have you got so far \u2014 a title, an author, anything from class?",
+    "session": "sess_2a90c113",
+    "session_context": {
+      "subject": "English",
+      "unit": "World Literature \u2014 new unit at this school",
+      "started_at": "2025-12-15T21:05:00",
+      "date": "2025-12-15"
+    }
+  },
+  {
+    "turn_id": 59,
+    "role": "student",
+    "text": "some short story packet, i didnt really read it",
+    "session": "sess_2a90c113",
+    "session_context": {
+      "subject": "English",
+      "unit": "World Literature \u2014 new unit at this school",
+      "started_at": "2025-12-15T21:05:00",
+      "date": "2025-12-15"
+    }
+  },
+  {
+    "turn_id": 60,
+    "role": "ai",
+    "text": "I can help you get into it, but I'd need you to actually open it \u2014 can you paste the first page or a couple paragraphs?",
+    "session": "sess_2a90c113",
+    "session_context": {
+      "subject": "English",
+      "unit": "World Literature \u2014 new unit at this school",
+      "started_at": "2025-12-15T21:05:00",
+      "date": "2025-12-15"
+    }
+  },
+  {
+    "turn_id": 61,
+    "role": "student",
+    "text": "nvm ill just deal with it tomorrow",
+    "session": "sess_2a90c113",
+    "session_context": {
+      "subject": "English",
+      "unit": "World Literature \u2014 new unit at this school",
+      "started_at": "2025-12-15T21:05:00",
+      "date": "2025-12-15"
+    }
+  },
+  {
+    "turn_id": 62,
+    "role": "student",
+    "text": "can you just summarize what causes of the depression they probably want, i have a reading response due tomorrow",
+    "session": "sess_b31f6a90",
+    "session_context": {
+      "subject": "Social Studies",
+      "unit": "U.S. History \u2014 reading catch-up",
+      "started_at": "2026-01-08T21:40:00",
+      "date": "2026-01-08"
+    }
+  },
+  {
+    "turn_id": 63,
+    "role": "ai",
+    "text": "I can help you build that, but I want to check what you actually have first \u2014 did the reading name specific causes, or is this from lecture notes you don't have?",
+    "session": "sess_b31f6a90",
+    "session_context": {
+      "subject": "Social Studies",
+      "unit": "U.S. History \u2014 reading catch-up",
+      "started_at": "2026-01-08T21:40:00",
+      "date": "2026-01-08"
+    }
+  },
+  {
+    "turn_id": 64,
+    "role": "student",
+    "text": "the reading. stock market crash, bank failures, overproduction, something about the fed",
+    "session": "sess_b31f6a90",
+    "session_context": {
+      "subject": "Social Studies",
+      "unit": "U.S. History \u2014 reading catch-up",
+      "started_at": "2026-01-08T21:40:00",
+      "date": "2026-01-08"
+    }
+  },
+  {
+    "turn_id": 65,
+    "role": "ai",
+    "text": "That's most of it already. What's the reading response actually asking \u2014 just list them, or connect them to each other?",
+    "session": "sess_b31f6a90",
+    "session_context": {
+      "subject": "Social Studies",
+      "unit": "U.S. History \u2014 reading catch-up",
+      "started_at": "2026-01-08T21:40:00",
+      "date": "2026-01-08"
+    }
+  },
+  {
+    "turn_id": 66,
+    "role": "student",
+    "text": "connect them i think, it says 'explain how these factors compounded each other'",
+    "session": "sess_b31f6a90",
+    "session_context": {
+      "subject": "Social Studies",
+      "unit": "U.S. History \u2014 reading catch-up",
+      "started_at": "2026-01-08T21:40:00",
+      "date": "2026-01-08"
+    }
+  },
+  {
+    "turn_id": 67,
+    "role": "ai",
+    "text": "Then which one of those four would you say came first in the chain, and what did it trigger next?",
+    "session": "sess_b31f6a90",
+    "session_context": {
+      "subject": "Social Studies",
+      "unit": "U.S. History \u2014 reading catch-up",
+      "started_at": "2026-01-08T21:40:00",
+      "date": "2026-01-08"
+    }
+  },
+  {
+    "turn_id": 68,
+    "role": "student",
+    "text": "crash first, then people panicked and pulled money out of banks which caused the bank failures, and banks failing meant less credit for businesses which is part of why production and spending both dropped. i can write that up myself, i just needed to see if i had the order right",
+    "session": "sess_b31f6a90",
+    "session_context": {
+      "subject": "Social Studies",
+      "unit": "U.S. History \u2014 reading catch-up",
+      "started_at": "2026-01-08T21:40:00",
+      "date": "2026-01-08"
+    }
+  },
+  {
+    "turn_id": 69,
+    "role": "student",
+    "text": "were supposed to pair up for this project. can you just tell me what a solo version of the assignment would look like instead",
+    "session": "sess_d40c8827",
+    "session_context": {
+      "subject": "Computer Science",
+      "unit": "Team project \u2014 pairing",
+      "started_at": "2026-02-03T15:50:00",
+      "date": "2026-02-03"
+    }
+  },
+  {
+    "turn_id": 70,
+    "role": "ai",
+    "text": "I can help either way, but I'm curious what's behind wanting to go solo \u2014 is it the group part specifically, or this project?",
+    "session": "sess_d40c8827",
+    "session_context": {
+      "subject": "Computer Science",
+      "unit": "Team project \u2014 pairing",
+      "started_at": "2026-02-03T15:50:00",
+      "date": "2026-02-03"
+    }
+  },
+  {
+    "turn_id": 71,
+    "role": "student",
+    "text": "i just work better alone",
+    "session": "sess_d40c8827",
+    "session_context": {
+      "subject": "Computer Science",
+      "unit": "Team project \u2014 pairing",
+      "started_at": "2026-02-03T15:50:00",
+      "date": "2026-02-03"
+    }
+  },
+  {
+    "turn_id": 72,
+    "role": "ai",
+    "text": "Fair enough. If you're going to ask the teacher for a solo track, what would you want the scope to be \u2014 same as the paired spec, or scaled down since it's one person?",
+    "session": "sess_d40c8827",
+    "session_context": {
+      "subject": "Computer Science",
+      "unit": "Team project \u2014 pairing",
+      "started_at": "2026-02-03T15:50:00",
+      "date": "2026-02-03"
+    }
+  },
+  {
+    "turn_id": 73,
+    "role": "student",
+    "text": "same scope i think, ill just do more of it. can you give me the spec broken into a checklist so i know what a paired team would split up, so i can cover it all myself",
+    "session": "sess_d40c8827",
+    "session_context": {
+      "subject": "Computer Science",
+      "unit": "Team project \u2014 pairing",
+      "started_at": "2026-02-03T15:50:00",
+      "date": "2026-02-03"
+    }
+  },
+  {
+    "turn_id": 74,
+    "role": "ai",
+    "text": "Here's the spec split into the pieces a pair would typically divide: input handling, core logic, and output/display. If you're doing all three, which would you tackle first?",
+    "session": "sess_d40c8827",
+    "session_context": {
+      "subject": "Computer Science",
+      "unit": "Team project \u2014 pairing",
+      "started_at": "2026-02-03T15:50:00",
+      "date": "2026-02-03"
+    }
+  },
+  {
+    "turn_id": 75,
+    "role": "student",
+    "text": "input handling, its the smallest piece",
+    "session": "sess_d40c8827",
+    "session_context": {
+      "subject": "Computer Science",
+      "unit": "Team project \u2014 pairing",
+      "started_at": "2026-02-03T15:50:00",
+      "date": "2026-02-03"
+    }
+  },
+  {
+    "turn_id": 76,
+    "role": "student",
+    "text": "Is it normal to be worse at something you used to be good at.",
+    "session": "sess_6f188e2c",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Physics semester exam prep / low point",
+      "started_at": "2026-02-17T22:05:00",
+      "date": "2026-02-17"
+    }
+  },
+  {
+    "turn_id": 77,
+    "role": "ai",
+    "text": "That sounds like it's about more than one test. What's bringing this up right now?",
+    "session": "sess_6f188e2c",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Physics semester exam prep / low point",
+      "started_at": "2026-02-17T22:05:00",
+      "date": "2026-02-17"
+    }
+  },
+  {
+    "turn_id": 78,
+    "role": "student",
+    "text": "i got a 64 on the semester exam. i used to be one of the best in my old physics class and here i left two sections blank because i just froze",
+    "session": "sess_6f188e2c",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Physics semester exam prep / low point",
+      "started_at": "2026-02-17T22:05:00",
+      "date": "2026-02-17"
+    }
+  },
+  {
+    "turn_id": 79,
+    "role": "ai",
+    "text": "Froze how \u2014 didn't know the material, or knew it and couldn't get it down in the time?",
+    "session": "sess_6f188e2c",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Physics semester exam prep / low point",
+      "started_at": "2026-02-17T22:05:00",
+      "date": "2026-02-17"
+    }
+  },
+  {
+    "turn_id": 80,
+    "role": "student",
+    "text": "honestly i think i knew some of it but i just stopped trying partway through. i dont really know why. i wasnt like this before",
+    "session": "sess_6f188e2c",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Physics semester exam prep / low point",
+      "started_at": "2026-02-17T22:05:00",
+      "date": "2026-02-17"
+    }
+  },
+  {
+    "turn_id": 81,
+    "role": "ai",
+    "text": "You don't have to have the full explanation right now. But is there a difference between 'I got worse at physics' and 'something changed in December that has nothing to do with physics'?",
+    "session": "sess_6f188e2c",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Physics semester exam prep / low point",
+      "started_at": "2026-02-17T22:05:00",
+      "date": "2026-02-17"
+    }
+  },
+  {
+    "turn_id": 82,
+    "role": "student",
+    "text": "i mean i moved here in december. and left my team and basically my whole life there. i guess thats not nothing. i didnt really think about it like a thing that would show up on a test though",
+    "session": "sess_6f188e2c",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Physics semester exam prep / low point",
+      "started_at": "2026-02-17T22:05:00",
+      "date": "2026-02-17"
+    }
+  },
+  {
+    "turn_id": 83,
+    "role": "ai",
+    "text": "It's a reasonable thing to name. What would you want to do differently on the next one, if the knowledge is mostly there?",
+    "session": "sess_6f188e2c",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Physics semester exam prep / low point",
+      "started_at": "2026-02-17T22:05:00",
+      "date": "2026-02-17"
+    }
+  },
+  {
+    "turn_id": 84,
+    "role": "student",
+    "text": "i dont know yet. maybe just answer every question even a little instead of leaving stuff blank when i lose focus",
+    "session": "sess_6f188e2c",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Physics semester exam prep / low point",
+      "started_at": "2026-02-17T22:05:00",
+      "date": "2026-02-17"
+    }
+  },
+  {
+    "turn_id": 85,
+    "role": "student",
+    "text": "we have to write an artist statement for the piece, whats a normal length",
+    "session": "sess_c9017754",
+    "session_context": {
+      "subject": "Visual Arts",
+      "unit": "Studio Art \u2014 independent piece",
+      "started_at": "2026-02-24T16:20:00",
+      "date": "2026-02-24"
+    }
+  },
+  {
+    "turn_id": 86,
+    "role": "ai",
+    "text": "It varies by teacher \u2014 do you have a rubric, or a sentence or two about what the piece is even about that we could start from?",
+    "session": "sess_c9017754",
+    "session_context": {
+      "subject": "Visual Arts",
+      "unit": "Studio Art \u2014 independent piece",
+      "started_at": "2026-02-24T16:20:00",
+      "date": "2026-02-24"
+    }
+  },
+  {
+    "turn_id": 87,
+    "role": "student",
+    "text": "its fine ill just ask her tomorrow",
+    "session": "sess_c9017754",
+    "session_context": {
+      "subject": "Visual Arts",
+      "unit": "Studio Art \u2014 independent piece",
+      "started_at": "2026-02-24T16:20:00",
+      "date": "2026-02-24"
+    }
+  },
+  {
+    "turn_id": 88,
+    "role": "student",
+    "text": "unit 5 test is friday, its on circular motion and gravity. i actually want to prep properly for this one instead of winging it",
+    "session": "sess_e552a940",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Physics unit 5 test prep \u2014 re-engaging",
+      "started_at": "2026-03-12T18:30:00",
+      "date": "2026-03-12"
+    }
+  },
+  {
+    "turn_id": 89,
+    "role": "ai",
+    "text": "Good starting point \u2014 what feels shakiest so far?",
+    "session": "sess_e552a940",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Physics unit 5 test prep \u2014 re-engaging",
+      "started_at": "2026-03-12T18:30:00",
+      "date": "2026-03-12"
+    }
+  },
+  {
+    "turn_id": 90,
+    "role": "student",
+    "text": "orbital mechanics, specifically why a satellite in a stable orbit is described as 'falling' the whole time. it never fully clicked, i just memorized the phrase",
+    "session": "sess_e552a940",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Physics unit 5 test prep \u2014 re-engaging",
+      "started_at": "2026-03-12T18:30:00",
+      "date": "2026-03-12"
+    }
+  },
+  {
+    "turn_id": 91,
+    "role": "ai",
+    "text": "What do you know about what makes something fall in the first place?",
+    "session": "sess_e552a940",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Physics unit 5 test prep \u2014 re-engaging",
+      "started_at": "2026-03-12T18:30:00",
+      "date": "2026-03-12"
+    }
+  },
+  {
+    "turn_id": 92,
+    "role": "student",
+    "text": "gravity pulls it toward earth. and normally it would hit the ground",
+    "session": "sess_e552a940",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Physics unit 5 test prep \u2014 re-engaging",
+      "started_at": "2026-03-12T18:30:00",
+      "date": "2026-03-12"
+    }
+  },
+  {
+    "turn_id": 93,
+    "role": "ai",
+    "text": "So for a satellite, what's different about how fast it's moving sideways compared to something you drop?",
+    "session": "sess_e552a940",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Physics unit 5 test prep \u2014 re-engaging",
+      "started_at": "2026-03-12T18:30:00",
+      "date": "2026-03-12"
+    }
+  },
+  {
+    "turn_id": 94,
+    "role": "student",
+    "text": "its moving so fast sideways that by the time gravity pulls it down a bit, the curve of the earth has already dropped away underneath it by about the same amount. so its constantly falling toward earth but constantly missing because its going forward fast enough. thats actually a genuinely different way of thinking about it than i had before, i was picturing gravity as basically turned off in orbit which is wrong",
+    "session": "sess_e552a940",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Physics unit 5 test prep \u2014 re-engaging",
+      "started_at": "2026-03-12T18:30:00",
+      "date": "2026-03-12"
+    }
+  },
+  {
+    "turn_id": 95,
+    "role": "ai",
+    "text": "That's the real model, not the memorized phrase. Want to try applying it \u2014 what happens to the orbit if the satellite suddenly slows down?",
+    "session": "sess_e552a940",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Physics unit 5 test prep \u2014 re-engaging",
+      "started_at": "2026-03-12T18:30:00",
+      "date": "2026-03-12"
+    }
+  },
+  {
+    "turn_id": 96,
+    "role": "student",
+    "text": "it would start falling faster than it moves forward, so the orbit would decay and it would spiral in eventually. let me try problem 4 now, its about orbital period",
+    "session": "sess_e552a940",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Physics unit 5 test prep \u2014 re-engaging",
+      "started_at": "2026-03-12T18:30:00",
+      "date": "2026-03-12"
+    }
+  },
+  {
+    "turn_id": 97,
+    "role": "student",
+    "text": "ended up actually pairing with someone for the next project checkpoint instead of asking to go solo again. we split it input/logic/output like i did solo last time but now i only own input and output, hes doing the core logic",
+    "session": "sess_4d612bf1",
+    "session_context": {
+      "subject": "Computer Science",
+      "unit": "Team project \u2014 first real pairing",
+      "started_at": "2026-04-08T15:10:00",
+      "date": "2026-04-08"
+    }
+  },
+  {
+    "turn_id": 98,
+    "role": "ai",
+    "text": "How's that going so far?",
+    "session": "sess_4d612bf1",
+    "session_context": {
+      "subject": "Computer Science",
+      "unit": "Team project \u2014 first real pairing",
+      "started_at": "2026-04-08T15:10:00",
+      "date": "2026-04-08"
+    }
+  },
+  {
+    "turn_id": 99,
+    "role": "student",
+    "text": "weird honestly, i keep wanting to check his logic function even though its not my part. i wrote a couple of test cases for it without telling him, just to see if it breaks",
+    "session": "sess_4d612bf1",
+    "session_context": {
+      "subject": "Computer Science",
+      "unit": "Team project \u2014 first real pairing",
+      "started_at": "2026-04-08T15:10:00",
+      "date": "2026-04-08"
+    }
+  },
+  {
+    "turn_id": 100,
+    "role": "ai",
+    "text": "Did it break?",
+    "session": "sess_4d612bf1",
+    "session_context": {
+      "subject": "Computer Science",
+      "unit": "Team project \u2014 first real pairing",
+      "started_at": "2026-04-08T15:10:00",
+      "date": "2026-04-08"
+    }
+  },
+  {
+    "turn_id": 101,
+    "role": "student",
+    "text": "one edge case did, empty input list crashes it. should i just fix it myself or tell him",
+    "session": "sess_4d612bf1",
+    "session_context": {
+      "subject": "Computer Science",
+      "unit": "Team project \u2014 first real pairing",
+      "started_at": "2026-04-08T15:10:00",
+      "date": "2026-04-08"
+    }
+  },
+  {
+    "turn_id": 102,
+    "role": "ai",
+    "text": "What would you want if the roles were reversed and he'd found a bug in your part?",
+    "session": "sess_4d612bf1",
+    "session_context": {
+      "subject": "Computer Science",
+      "unit": "Team project \u2014 first real pairing",
+      "started_at": "2026-04-08T15:10:00",
+      "date": "2026-04-08"
+    }
+  },
+  {
+    "turn_id": 103,
+    "role": "student",
+    "text": "id want him to tell me, not just quietly fix it. ok ill show him the failing test case and let him fix it, thats more like an actual team thing than what i was doing before which was basically still just doing it all myself quietly",
+    "session": "sess_4d612bf1",
+    "session_context": {
+      "subject": "Computer Science",
+      "unit": "Team project \u2014 first real pairing",
+      "started_at": "2026-04-08T15:10:00",
+      "date": "2026-04-08"
+    }
+  },
+  {
+    "turn_id": 104,
+    "role": "student",
+    "text": "Can you check my derivation again, I want to be sure before I show it in class.",
+    "session": "sess_88a231dc",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Momentum and impulse \u2014 demonstration prep",
+      "started_at": "2026-04-14T19:30:00",
+      "date": "2026-04-14"
+    }
+  },
+  {
+    "turn_id": 105,
+    "role": "ai",
+    "text": "What are you showing, and to who?",
+    "session": "sess_88a231dc",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Momentum and impulse \u2014 demonstration prep",
+      "started_at": "2026-04-14T19:30:00",
+      "date": "2026-04-14"
+    }
+  },
+  {
+    "turn_id": 106,
+    "role": "student",
+    "text": "im demonstrating an apparatus i built for the momentum unit, similar to something i did on my robotics team at my old school. i want the derivation on the board to actually be right, not just close",
+    "session": "sess_88a231dc",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Momentum and impulse \u2014 demonstration prep",
+      "started_at": "2026-04-14T19:30:00",
+      "date": "2026-04-14"
+    }
+  },
+  {
+    "turn_id": 107,
+    "role": "ai",
+    "text": "Send it over.",
+    "session": "sess_88a231dc",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Momentum and impulse \u2014 demonstration prep",
+      "started_at": "2026-04-14T19:30:00",
+      "date": "2026-04-14"
+    }
+  },
+  {
+    "turn_id": 108,
+    "role": "student",
+    "text": "elastic collision, two carts. m1v1i + m2v2i = m1v1f + m2v2f, and separately (1/2)m1v1i^2+(1/2)m2v2i^2 = (1/2)m1v1f^2+(1/2)m2v2f^2 since its elastic. i solved the system and got v1f=((m1-m2)/(m1+m2))v1i and v2f=(2m1/(m1+m2))v1i for cart 2 starting at rest",
+    "session": "sess_88a231dc",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Momentum and impulse \u2014 demonstration prep",
+      "started_at": "2026-04-14T19:30:00",
+      "date": "2026-04-14"
+    }
+  },
+  {
+    "turn_id": 109,
+    "role": "ai",
+    "text": "That's the standard elastic collision result. Walk me through one place where students usually drop a term, so I know you actually derived it and didn't just recall the formula \u2014 what happens to the (v1i - v1f) and (v1f... ) factoring step?",
+    "session": "sess_88a231dc",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Momentum and impulse \u2014 demonstration prep",
+      "started_at": "2026-04-14T19:30:00",
+      "date": "2026-04-14"
+    }
+  },
+  {
+    "turn_id": 110,
+    "role": "student",
+    "text": "you factor the energy equation as difference of squares, m1(v1i^2-v1f^2)=m2(v2f^2-v2i^2), and since v2i is 0 that simplifies, then you divide it by the momentum equation to cancel a shared factor and get a linear relationship instead of quadratic. thats the step people skip because its two equations at once in your head",
+    "session": "sess_88a231dc",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Momentum and impulse \u2014 demonstration prep",
+      "started_at": "2026-04-14T19:30:00",
+      "date": "2026-04-14"
+    }
+  },
+  {
+    "turn_id": 111,
+    "role": "ai",
+    "text": "That's exactly the trap and you named it correctly. Formula's solid \u2014 go show it.",
+    "session": "sess_88a231dc",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Momentum and impulse \u2014 demonstration prep",
+      "started_at": "2026-04-14T19:30:00",
+      "date": "2026-04-14"
+    }
+  },
+  {
+    "turn_id": 112,
+    "role": "student",
+    "text": "cool, thanks. this is the first time all year id rather be doing a physics demo than basically anything else at this school",
+    "session": "sess_88a231dc",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Momentum and impulse \u2014 demonstration prep",
+      "started_at": "2026-04-14T19:30:00",
+      "date": "2026-04-14"
+    }
+  },
+  {
+    "turn_id": 113,
+    "role": "student",
+    "text": "i got a 67 on the comparative essay, teacher said it was thin. i reread it and shes right, its half the length of stuff i used to turn in. i want to actually fix it this time instead of just accepting the grade",
+    "session": "sess_3fe08a17",
+    "session_context": {
+      "subject": "English",
+      "unit": "Comparative essay revision",
+      "started_at": "2026-04-22T20:15:00",
+      "date": "2026-04-22"
+    }
+  },
+  {
+    "turn_id": 114,
+    "role": "ai",
+    "text": "What's thin about it \u2014 not enough evidence, or the evidence is there but underexplained?",
+    "session": "sess_3fe08a17",
+    "session_context": {
+      "subject": "English",
+      "unit": "Comparative essay revision",
+      "started_at": "2026-04-22T20:15:00",
+      "date": "2026-04-22"
+    }
+  },
+  {
+    "turn_id": 115,
+    "role": "student",
+    "text": "underexplained i think. i have quotes from both texts but i just kind of drop them next to each other without saying why theyre being compared",
+    "session": "sess_3fe08a17",
+    "session_context": {
+      "subject": "English",
+      "unit": "Comparative essay revision",
+      "started_at": "2026-04-22T20:15:00",
+      "date": "2026-04-22"
+    }
+  },
+  {
+    "turn_id": 116,
+    "role": "ai",
+    "text": "Pick the pair of quotes you think is closest to working, and tell me out loud why you put them next to each other.",
+    "session": "sess_3fe08a17",
+    "session_context": {
+      "subject": "English",
+      "unit": "Comparative essay revision",
+      "started_at": "2026-04-22T20:15:00",
+      "date": "2026-04-22"
+    }
+  },
+  {
+    "turn_id": 117,
+    "role": "student",
+    "text": "ok so both characters refuse help right when its offered, but one does it because hes proud and the other does it because he doesnt trust the person offering. i think i knew that when i picked the quotes i just didnt write it down, i left it as 'both characters refuse help' and moved on",
+    "session": "sess_3fe08a17",
+    "session_context": {
+      "subject": "English",
+      "unit": "Comparative essay revision",
+      "started_at": "2026-04-22T20:15:00",
+      "date": "2026-04-22"
+    }
+  },
+  {
+    "turn_id": 118,
+    "role": "ai",
+    "text": "That distinction you just said out loud is a real sentence for the essay. Why do you think it didn't make it onto the page the first time?",
+    "session": "sess_3fe08a17",
+    "session_context": {
+      "subject": "English",
+      "unit": "Comparative essay revision",
+      "started_at": "2026-04-22T20:15:00",
+      "date": "2026-04-22"
+    }
+  },
+  {
+    "turn_id": 119,
+    "role": "student",
+    "text": "i think i was just trying to get it done instead of actually caring about it, which is different from before, i used to actually want to get the comparison exactly right\n\nok let me go add that sentence in and check if the other two pairs are missing the same thing",
+    "session": "sess_3fe08a17",
+    "session_context": {
+      "subject": "English",
+      "unit": "Comparative essay revision",
+      "started_at": "2026-04-22T20:15:00",
+      "date": "2026-04-22"
+    }
+  },
+  {
+    "turn_id": 120,
+    "role": "student",
+    "text": "Does this school have a robotics team, and if not how would someone start one.",
+    "session": "sess_a109de62",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Robotics \u2014 extracurricular interest",
+      "started_at": "2026-05-12T18:50:00",
+      "date": "2026-05-12"
+    }
+  },
+  {
+    "turn_id": 121,
+    "role": "ai",
+    "text": "Have you asked anyone here yet, or is this the first step in figuring it out?",
+    "session": "sess_a109de62",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Robotics \u2014 extracurricular interest",
+      "started_at": "2026-05-12T18:50:00",
+      "date": "2026-05-12"
+    }
+  },
+  {
+    "turn_id": 122,
+    "role": "student",
+    "text": "first step. i havent asked because i wasnt sure i wanted to get attached to anything here for a while, but its almost the end of the year and i actually miss building things with people",
+    "session": "sess_a109de62",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Robotics \u2014 extracurricular interest",
+      "started_at": "2026-05-12T18:50:00",
+      "date": "2026-05-12"
+    }
+  },
+  {
+    "turn_id": 123,
+    "role": "ai",
+    "text": "What would starting one actually require, as far as you know from your old team?",
+    "session": "sess_a109de62",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Robotics \u2014 extracurricular interest",
+      "started_at": "2026-05-12T18:50:00",
+      "date": "2026-05-12"
+    }
+  },
+  {
+    "turn_id": 124,
+    "role": "student",
+    "text": "a teacher sponsor, some kind of budget or fundraising, and honestly just a few other students who want to do it. my old coach basically started it that way, one teacher and four kids",
+    "session": "sess_a109de62",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Robotics \u2014 extracurricular interest",
+      "started_at": "2026-05-12T18:50:00",
+      "date": "2026-05-12"
+    }
+  },
+  {
+    "turn_id": 125,
+    "role": "ai",
+    "text": "Who here seems like a plausible sponsor, based on what you know of the teachers?",
+    "session": "sess_a109de62",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Robotics \u2014 extracurricular interest",
+      "started_at": "2026-05-12T18:50:00",
+      "date": "2026-05-12"
+    }
+  },
+  {
+    "turn_id": 126,
+    "role": "student",
+    "text": "chen, my physics teacher. i actually already showed her the apparatus i built a few weeks ago and she asked good questions about it, better than small talk questions",
+    "session": "sess_a109de62",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Robotics \u2014 extracurricular interest",
+      "started_at": "2026-05-12T18:50:00",
+      "date": "2026-05-12"
+    }
+  },
+  {
+    "turn_id": 127,
+    "role": "ai",
+    "text": "That's a real opening, not a cold ask. What would you say to her?",
+    "session": "sess_a109de62",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Robotics \u2014 extracurricular interest",
+      "started_at": "2026-05-12T18:50:00",
+      "date": "2026-05-12"
+    }
+  },
+  {
+    "turn_id": 128,
+    "role": "student",
+    "text": "id ask if shed be willing to sponsor a club if a few of us wanted to start one, and whether the school has done anything like it before. ill talk to her this week instead of waiting until next year",
+    "session": "sess_a109de62",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Robotics \u2014 extracurricular interest",
+      "started_at": "2026-05-12T18:50:00",
+      "date": "2026-05-12"
+    }
+  },
+  {
+    "turn_id": 129,
+    "role": "student",
+    "text": "final is in three weeks, everything cumulative. i want to actually plan this instead of cramming like i did for the semester exam",
+    "session": "sess_ff3c60a8",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Final exam prep",
+      "started_at": "2026-05-27T19:00:00",
+      "date": "2026-05-27"
+    }
+  },
+  {
+    "turn_id": 130,
+    "role": "ai",
+    "text": "What went wrong with how you studied for the semester exam, looking back?",
+    "session": "sess_ff3c60a8",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Final exam prep",
+      "started_at": "2026-05-27T19:00:00",
+      "date": "2026-05-27"
+    }
+  },
+  {
+    "turn_id": 131,
+    "role": "student",
+    "text": "i didnt really study, i just assumed id remember it because i used to be good at this stuff. and then in december specifically i wasnt doing anything, i was kind of checked out from everything not just physics",
+    "session": "sess_ff3c60a8",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Final exam prep",
+      "started_at": "2026-05-27T19:00:00",
+      "date": "2026-05-27"
+    }
+  },
+  {
+    "turn_id": 132,
+    "role": "ai",
+    "text": "How's it different now?",
+    "session": "sess_ff3c60a8",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Final exam prep",
+      "started_at": "2026-05-27T19:00:00",
+      "date": "2026-05-27"
+    }
+  },
+  {
+    "turn_id": 133,
+    "role": "student",
+    "text": "i actually care about this class again, its the one place here that feels like my old school did. so i want to put in real effort instead of coasting on being naturally decent at it",
+    "session": "sess_ff3c60a8",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Final exam prep",
+      "started_at": "2026-05-27T19:00:00",
+      "date": "2026-05-27"
+    }
+  },
+  {
+    "turn_id": 134,
+    "role": "ai",
+    "text": "What's your plan, concretely?",
+    "session": "sess_ff3c60a8",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Final exam prep",
+      "started_at": "2026-05-27T19:00:00",
+      "date": "2026-05-27"
+    }
+  },
+  {
+    "turn_id": 135,
+    "role": "student",
+    "text": "go unit by unit starting with the ones i did worst on, which is work-energy and the early stuff from right after i transferred, and do practice problems instead of just rereading notes, since rereading is what i did in december and it didnt work at all",
+    "session": "sess_ff3c60a8",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Final exam prep",
+      "started_at": "2026-05-27T19:00:00",
+      "date": "2026-05-27"
+    }
+  },
+  {
+    "turn_id": 136,
+    "role": "ai",
+    "text": "That's a real plan, and it's built on a specific failure you identified, not a generic 'study harder.' One more thing worth asking yourself: is there anything about how this year went that you'd actually want to keep doing at a new school, if you ever transferred again?",
+    "session": "sess_ff3c60a8",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Final exam prep",
+      "started_at": "2026-05-27T19:00:00",
+      "date": "2026-05-27"
+    }
+  },
+  {
+    "turn_id": 137,
+    "role": "student",
+    "text": "probably talk to a teacher earlier instead of waiting five months to ask about a robotics club. i sat on that for no real reason",
+    "session": "sess_ff3c60a8",
+    "session_context": {
+      "subject": "Physics",
+      "unit": "Final exam prep",
+      "started_at": "2026-05-27T19:00:00",
+      "date": "2026-05-27"
+    }
+  }
+]
