@@ -15,6 +15,7 @@ from unittest.mock import patch
 from django.contrib.auth.models import User
 from django.test import Client, TestCase
 
+from . import narrative
 from .models import (
     Classroom,
     Guardianship,
@@ -237,6 +238,58 @@ class DigestTests(ApiTestCase):
             data={'app': 'Numeracy Coach', 'subject': 'Maths',
                   'duration_minutes': 12, 'questions': questions},
         )
+
+    def shaped_session(self, student, day, marks, hit_seconds=30, miss_seconds=30,
+                       topic='fractions - adding'):
+        """A session with an exact right/wrong sequence. `marks` is a string of
+        '.' for right and 'X' for wrong, so a test reads as the shape it means."""
+        questions = [
+            {'topic': topic, 'correct': m == '.',
+             'seconds': hit_seconds if m == '.' else miss_seconds}
+            for m in marks
+        ]
+        return StudentRecord.objects.create(
+            student=student, source=StudentRecord.APP_INTEGRATION, kind='practice_session',
+            date=day, title=f'Practice — {topic}',
+            data={'app': 'Numeracy Coach', 'subject': 'Maths',
+                  'duration_minutes': 12, 'questions': questions},
+        )
+
+    def insights_for(self, marks, **kwargs):
+        record = self.shaped_session(self.mine, date(2026, 3, 5), marks, **kwargs)
+        return ' '.join(narrative.session_shape(record))
+
+    def test_a_session_that_fades_reads_differently_from_one_that_warms_up(self, _complete):
+        self.assertIn('faded across the session', self.insights_for('.....XXXXX'))
+        self.assertIn('warmed up', self.insights_for('XXXXX.....'))
+
+    def test_an_even_session_gets_no_trajectory_claim(self, _complete):
+        even = self.insights_for('.X.X.X.X.X')
+        self.assertNotIn('faded', even)
+        self.assertNotIn('warmed up', even)
+
+    def test_misses_running_together_are_called_out(self, _complete):
+        self.assertIn('missed 4 in a row', self.insights_for('..X..XXXX.'))
+        # The same score scattered is a different conversation, so no streak line.
+        self.assertNotIn('in a row', self.insights_for('.X.X.X.X.X'))
+
+    def test_slow_misses_read_as_effort_and_fast_misses_as_clicking_through(self, _complete):
+        worked = self.insights_for('.....XXXXX', hit_seconds=20, miss_seconds=60)
+        self.assertIn('worked at rather than rushed', worked)
+        rushed = self.insights_for('.....XXXXX', hit_seconds=60, miss_seconds=15)
+        self.assertIn('answered quickly rather than worked through', rushed)
+
+    def test_a_short_session_makes_no_shape_claim(self, _complete):
+        """Four questions cannot show a trajectory; do not pretend otherwise."""
+        self.assertEqual(self.insights_for('.XXX'), '')
+
+    def test_insights_reach_the_payload_and_the_prompt(self, complete_mock):
+        self.shaped_session(self.mine, date(2026, 3, 5), '.....XXXXX')
+        self.sign_in(self.teacher)
+        body = self.client.get(
+            f'/api/students/{self.mine.id}/digest/?date=2026-03-05').json()
+        self.assertTrue(any('faded across the session' in i for i in body['insights']))
+        self.assertIn('faded across the session', complete_mock.call_args[0][0])
 
     def test_defaults_to_the_most_recent_day_with_activity(self, _complete):
         self.add_session(self.mine, date(2026, 3, 1))

@@ -548,6 +548,78 @@ def suggested_action(flags):
     return ACTION_CELEBRATE
 
 
+# A session's shape carries as much as its score. These thresholds decide
+# only whether an observation is worth making at all — nothing here can move
+# the triage, which stays on accuracy and pace.
+MIN_QUESTIONS_FOR_SHAPE = 8
+HALF_SPLIT_DELTA = 0.3
+WRONG_STREAK = 3
+PACE_GAP = 1.4
+
+
+def session_shape(record):
+    """Plain observations read out of one session's question sequence.
+
+    Accuracy alone does not tell a teacher what to do. Four misses in a row is
+    hitting a wall; four scattered through the set is carelessness. Wrong
+    answers that came faster than the right ones is clicking through; wrong
+    answers that took longer is genuine effort on something hard. Same score,
+    three different conversations — and it is all already sitting in the
+    per-question data the app partner sends.
+    """
+    data = record.data if isinstance(record.data, dict) else {}
+    questions = [q for q in (data.get('questions') or []) if isinstance(q, dict)]
+    if len(questions) < MIN_QUESTIONS_FOR_SHAPE:
+        return []
+
+    marks = [bool(q.get('correct')) for q in questions]
+    topic = str(questions[0].get('topic') or 'this topic')
+    out = []
+
+    half = len(marks) // 2
+    first, second = marks[:half], marks[half:]
+    opened, closed = sum(first) / len(first), sum(second) / len(second)
+    if opened - closed >= HALF_SPLIT_DELTA:
+        out.append(
+            f'{topic}: faded across the session — {sum(first)} of {len(first)} right to '
+            f'start, {sum(second)} of {len(second)} after that.'
+        )
+    elif closed - opened >= HALF_SPLIT_DELTA:
+        out.append(
+            f'{topic}: warmed up — {sum(first)} of {len(first)} right to start, '
+            f'{sum(second)} of {len(second)} after that.'
+        )
+
+    streak = longest = 0
+    for mark in marks:
+        streak = 0 if mark else streak + 1
+        longest = max(longest, streak)
+    if longest >= WRONG_STREAK:
+        out.append(
+            f'{topic}: missed {longest} in a row at the worst stretch, not scattered misses.'
+        )
+
+    def mean_seconds(want):
+        values = [q['seconds'] for q, mark in zip(questions, marks)
+                  if mark == want and isinstance(q.get('seconds'), (int, float))
+                  and not isinstance(q.get('seconds'), bool)]
+        return sum(values) / len(values) if values else None
+
+    hit, miss = mean_seconds(True), mean_seconds(False)
+    if hit and miss:
+        if miss >= hit * PACE_GAP:
+            out.append(
+                f'{topic}: the misses took longer than the hits ({miss:.0f}s against '
+                f'{hit:.0f}s) — worked at rather than rushed.'
+            )
+        elif hit >= miss * PACE_GAP:
+            out.append(
+                f'{topic}: the misses came faster than the hits ({miss:.0f}s against '
+                f'{hit:.0f}s) — answered quickly rather than worked through.'
+            )
+    return out
+
+
 def app_digest_facts(day_records, day, topic_stats, flags):
     lines = []
     sessions = sorted(day_records, key=lambda r: r.title)
@@ -562,6 +634,7 @@ def app_digest_facts(day_records, day, topic_stats, flags):
             f'Topic "{topic}": {stats["correct"]}/{stats["attempted"]} correct, '
             f'avg {stats["avg_seconds"]:.0f}s per question.'
         )
+    lines += day_insights(sessions)
     if flags:
         lines.append('Computed flags: ' + '; '.join(
             f'{f["topic"]} ({f["kind"]}, {f["severity"]}): {f["detail"]}' for f in flags
@@ -569,6 +642,12 @@ def app_digest_facts(day_records, day, topic_stats, flags):
     else:
         lines.append('No flags met the threshold today.')
     return lines
+
+
+def day_insights(day_records):
+    """Every session's shape for one day, in a stable order."""
+    return [line for record in sorted(day_records, key=lambda r: r.title)
+            for line in session_shape(record)]
 
 
 DIGEST_PROMPT = """{context}
@@ -605,12 +684,18 @@ Reply with JSON only, no prose around it, using exactly these keys:
   explain it, not re-decide it.
 - headline: one sentence, the single most useful thing to know about today.
   Where a flag drove the triage, name that topic in it.
-- narrative: 2-4 sentences, in two moves.
+- narrative: 3-5 sentences, in two moves.
   First, WHAT: name the actual topics behind today's triage, the way a
   teacher would say them out loud — "stuck on adding fractions", "lost the
   thread on the inference questions" — never a bare score and never
-  "one topic". If the action is "celebrate", name what specifically went
-  well, with the same specificity.
+  "one topic". Say HOW the work went, not only how much was right: the
+  facts above tell you whether they faded or warmed up, whether the misses
+  ran together or scattered, and whether the wrong answers were slower than
+  the right ones (working at it) or faster (clicking through). That
+  distinction is the most useful thing on the page, because it changes what
+  the teacher should do — reteach the content, or sit with them while they
+  do it. Use it whenever it is there. If the action is "celebrate", name
+  what specifically went well with the same specificity.
   Then, WHY: a reason from the wider record above, if one is genuinely
   there — an absence, a behaviour entry, a flat period, something home or
   the student wrote, an older observation that shows the same thing. Say
@@ -651,6 +736,9 @@ def build_digest(student, all_records, day):
         'action': action,
         'topics': [{'topic': t, **s} for t, s in sorted(topic_stats.items())],
         'flags': flags,
+        # Computed the same way the flags are, and exposed for the same
+        # reason: a client can show these verbatim without waiting on Claude.
+        'insights': day_insights(day_records),
     }
 
     if not day_records:
