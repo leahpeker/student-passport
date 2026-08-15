@@ -221,11 +221,11 @@ class PassportTests(ApiTestCase):
 
 
 @patch('passport.narrative.complete', return_value=(
-    '{"action": "check_in", "headline": "H.", "narrative": "N."}'
+    '{"action": "watch", "headline": "H.", "narrative": "N."}'
 ))
 class DigestTests(ApiTestCase):
     """A separate synthesis from the passport: one day of app-integration
-    activity, with a check_in / intervene / celebrate triage."""
+    activity, with an intervene / watch / on_track triage."""
 
     def add_session(self, student, day, topic='fractions - adding', accuracy=1.0, n=8, seconds=30):
         correct = round(n * accuracy)
@@ -304,7 +304,7 @@ class DigestTests(ApiTestCase):
         self.assertEqual(response.status_code, 200)
         body = response.json()
         self.assertIsNone(body['date'])
-        self.assertEqual(body['action'], 'check_in')
+        self.assertEqual(body['action'], 'watch')
         self.assertEqual(body['flags'], [])
 
     def test_low_accuracy_triggers_intervene_and_a_real_flag(self, _complete):
@@ -317,13 +317,13 @@ class DigestTests(ApiTestCase):
         self.assertEqual(body['flags'][0]['severity'], 'concern')
         self.assertEqual(body['flags'][0]['topic'], 'fractions - adding')
 
-    def test_high_accuracy_gives_no_flags_and_celebrates(self, _complete):
+    def test_high_accuracy_gives_no_flags_and_reads_on_track(self, _complete):
         self.add_session(self.mine, date(2026, 3, 5), accuracy=1.0, n=8)
         self.sign_in(self.teacher)
         body = self.client.get(
             f'/api/students/{self.mine.id}/digest/?date=2026-03-05').json()
         self.assertEqual(body['flags'], [])
-        self.assertEqual(body['action'], 'celebrate')
+        self.assertEqual(body['action'], 'on_track')
 
     def test_too_few_attempts_never_flags(self, _complete):
         self.add_session(self.mine, date(2026, 3, 5), accuracy=0.0, n=2)
@@ -334,13 +334,13 @@ class DigestTests(ApiTestCase):
 
     def test_model_cannot_override_the_computed_action(self, complete_mock):
         complete_mock.return_value = (
-            '{"action": "celebrate", "headline": "H.", "narrative": "N."}'
+            '{"action": "on_track", "headline": "H.", "narrative": "N."}'
         )
         self.add_session(self.mine, date(2026, 3, 5), accuracy=0.0, n=8)
         self.sign_in(self.teacher)
         body = self.client.get(
             f'/api/students/{self.mine.id}/digest/?date=2026-03-05').json()
-        # The model tried to say celebrate; the concern-level flag wins.
+        # The model tried to say on_track; the concern-level flag wins.
         self.assertEqual(body['action'], 'intervene')
 
     def test_pace_flag_compares_to_the_student_s_own_prior_baseline(self, _complete):
@@ -395,6 +395,195 @@ class DigestTests(ApiTestCase):
         body = self.client.get(
             f'/api/students/{self.mine.id}/digest/?date=not-a-date').json()
         self.assertEqual(body['date'], '2026-03-01')
+
+
+@patch('passport.narrative.complete', return_value=(
+    '{"headline": "H.", "narrative": "N.", "focus": ["Reteach fractions to Ada"]}'
+))
+class ClassroomDigestTests(ApiTestCase):
+    """The same day as the student digest, one altitude up: every student on
+    the roll triaged, and a topic rollup across the class."""
+
+    DAY = date(2026, 3, 5)
+
+    def setUp(self):
+        super().setUp()
+        # A second student on the teacher's roll, so a class has a spread.
+        self.also = make_student('Ben', 'Clarke')
+        self.room.students.add(self.also)
+
+    def session(self, student, marks, day=None, topic='fractions - adding', seconds=30):
+        return StudentRecord.objects.create(
+            student=student, source=StudentRecord.APP_INTEGRATION, kind='practice_session',
+            date=day or self.DAY, title=f'Practice — {topic}',
+            data={'app': 'Numeracy Coach', 'subject': 'Maths', 'duration_minutes': 12,
+                  'questions': [{'topic': topic, 'correct': m == '.', 'seconds': seconds}
+                                for m in marks]},
+        )
+
+    def get(self, **params):
+        query = '&'.join(f'{k}={v}' for k, v in {'date': '2026-03-05', **params}.items())
+        return self.client.get(f'/api/classrooms/{self.room.id}/digest/?{query}')
+
+    def test_roster_counts_and_orders_worst_first(self, _complete):
+        self.session(self.mine, 'XXXXXXXX')          # 0/8  -> intervene
+        self.session(self.also, '........')          # 8/8  -> on_track
+        self.sign_in(self.teacher)
+        body = self.get().json()
+        self.assertEqual(body['counts'], {'intervene': 1, 'watch': 0, 'on_track': 1})
+        self.assertEqual([s['name'] for s in body['students']],
+                         ['Ada Lovelace', 'Ben Clarke'])
+        self.assertEqual(body['students'][0]['action'], 'intervene')
+
+    def test_a_student_with_no_activity_is_named_but_not_counted(self, _complete):
+        """No data is not a tier. Counting it as 'watch' buries the students
+        who actually need something under everyone who skipped the app."""
+        self.session(self.mine, '........')
+        self.sign_in(self.teacher)
+        body = self.get().json()
+        self.assertEqual(body['counts'], {'intervene': 0, 'watch': 0, 'on_track': 1})
+        self.assertEqual(body['no_activity'], ['Ben Clarke'])
+        # Still on the roster, sorted below everyone with real work, and
+        # carrying no tier at all rather than a misleading one.
+        self.assertEqual(body['students'][-1]['name'], 'Ben Clarke')
+        self.assertEqual(body['students'][-1]['sessions'], 0)
+        self.assertIsNone(body['students'][-1]['action'])
+
+    def test_the_prompt_never_labels_a_quiet_student_with_a_tier(self, complete_mock):
+        self.session(self.mine, '........')
+        self.sign_in(self.teacher)
+        self.get()
+        prompt = complete_mock.call_args[0][0]
+        self.assertIn('No app activity at all today, so no triage either', prompt)
+        self.assertNotIn('Ben Clarke \u2014 watch', prompt)
+
+    def test_topic_rollup_aggregates_across_students_and_names_who_struggled(self, _complete):
+        self.session(self.mine, 'XXXXXXXX')
+        self.session(self.also, '....XXXX')
+        self.sign_in(self.teacher)
+        topic = self.get().json()['topics'][0]
+        self.assertEqual(topic['topic'], 'fractions - adding')
+        self.assertEqual((topic['correct'], topic['attempted']), (4, 16))
+        self.assertEqual(topic['students'], 2)
+        self.assertEqual(topic['struggling'], ['Ada Lovelace', 'Ben Clarke'])
+
+    def test_the_whole_roster_costs_one_model_call(self, complete_mock):
+        """The computed half is arithmetic; only the narrative costs Bedrock."""
+        self.session(self.mine, 'XXXXXXXX')
+        self.session(self.also, '........')
+        self.sign_in(self.teacher)
+        self.get()
+        self.assertEqual(complete_mock.call_count, 1)
+
+    def test_focus_and_narrative_come_from_the_model(self, _complete):
+        self.session(self.mine, 'XXXXXXXX')
+        self.sign_in(self.teacher)
+        body = self.get().json()
+        self.assertEqual(body['headline'], 'H.')
+        self.assertEqual(body['focus'], ['Reteach fractions to Ada'])
+
+    def test_a_second_read_is_cached_and_makes_no_model_call(self, complete_mock):
+        self.session(self.mine, 'XXXXXXXX')
+        self.sign_in(self.teacher)
+        self.get()
+        self.get()
+        self.assertEqual(complete_mock.call_count, 1)
+        self.get(refresh=1)
+        self.assertEqual(complete_mock.call_count, 2)
+
+    def test_new_work_after_the_digest_regenerates_it(self, complete_mock):
+        self.session(self.mine, 'XXXXXXXX')
+        self.sign_in(self.teacher)
+        self.get()
+        self.session(self.also, '........')
+        self.get()
+        self.assertEqual(complete_mock.call_count, 2)
+
+    def test_a_teacher_cannot_reach_a_classroom_they_do_not_teach(self, _complete):
+        self.sign_in(self.teacher)
+        self.assertEqual(
+            self.client.get(f'/api/classrooms/{self.other_room.id}/digest/').status_code, 404)
+
+    def test_guardians_and_students_cannot_reach_a_classroom_digest(self, _complete):
+        self.session(self.mine, 'XXXXXXXX')
+        for user in (self.guardian, self.mine.user):
+            self.sign_in(user)
+            self.assertEqual(
+                self.client.get(f'/api/classrooms/{self.room.id}/digest/').status_code, 404)
+
+    def test_a_class_with_no_app_activity_gets_a_placeholder_not_an_error(self, _complete):
+        self.sign_in(self.teacher)
+        response = self.client.get(f'/api/classrooms/{self.room.id}/digest/')
+        self.assertEqual(response.status_code, 200)
+        body = response.json()
+        self.assertIsNone(body['date'])
+        self.assertEqual(body['counts'], {'intervene': 0, 'watch': 0, 'on_track': 0})
+
+    def test_the_day_never_reaches_past_itself(self, _complete):
+        """A past day is triaged from what was known then, not from later work."""
+        self.session(self.mine, 'XXXXXXXX', day=date(2026, 3, 5))
+        self.session(self.mine, '........', day=date(2026, 4, 1))
+        self.sign_in(self.teacher)
+        body = self.get().json()
+        row = next(s for s in body['students'] if s['name'] == 'Ada Lovelace')
+        self.assertEqual(row['topics'][0]['attempted'], 8)
+        self.assertEqual(row['action'], 'intervene')
+
+
+@patch('passport.narrative.complete', return_value='Pull Ada and Ben for fractions.')
+class ClassroomAskTests(ApiTestCase):
+    def setUp(self):
+        super().setUp()
+        StudentRecord.objects.create(
+            student=self.mine, source=StudentRecord.APP_INTEGRATION, kind='practice_session',
+            date=date(2026, 3, 5), title='Practice — fractions',
+            data={'app': 'Numeracy Coach', 'subject': 'Maths', 'duration_minutes': 12,
+                  'questions': [{'topic': 'fractions - adding', 'correct': False, 'seconds': 30}
+                                for _ in range(8)]},
+        )
+
+    def ask(self, room, question='Who should I pull for a small group?'):
+        return self.post(f'/api/classrooms/{room.id}/ask/', {'question': question})
+
+    def test_a_teacher_gets_an_answer_grounded_in_the_roster(self, _complete):
+        self.sign_in(self.teacher)
+        body = self.ask(self.room).json()
+        self.assertEqual(body['answer'], 'Pull Ada and Ben for fractions.')
+        self.assertEqual(body['students_consulted'], 1)
+        self.assertTrue(body['ai'])
+
+    def test_the_class_picture_reaches_the_prompt(self, complete_mock):
+        self.sign_in(self.teacher)
+        self.ask(self.room)
+        prompt = complete_mock.call_args[0][0]
+        self.assertIn('Ada Lovelace', prompt)
+        self.assertIn('fractions - adding', prompt)
+
+    def test_the_prompt_carries_pronouns_so_the_model_never_guesses(self, complete_mock):
+        """The fixture's SIS record holds she/her for Ada."""
+        self.sign_in(self.teacher)
+        self.ask(self.room)
+        self.assertIn('Ada Lovelace (she/her)', complete_mock.call_args[0][0])
+
+    def test_an_empty_question_is_refused(self, _complete):
+        self.sign_in(self.teacher)
+        self.assertEqual(self.ask(self.room, question='  ').status_code, 400)
+
+    def test_asking_about_another_teacher_s_class_is_404(self, _complete):
+        self.sign_in(self.teacher)
+        self.assertEqual(self.ask(self.other_room).status_code, 404)
+
+    def test_guardians_and_students_cannot_ask_about_a_class(self, _complete):
+        for user in (self.guardian, self.mine.user):
+            self.sign_in(user)
+            self.assertEqual(self.ask(self.room).status_code, 404)
+
+    def test_class_ask_writes_no_record(self, _complete):
+        """Unlike student ask/, a class question is not filed against anyone."""
+        before = StudentRecord.objects.count()
+        self.sign_in(self.teacher)
+        self.ask(self.room)
+        self.assertEqual(StudentRecord.objects.count(), before)
 
 
 class AskTests(ApiTestCase):

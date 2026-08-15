@@ -531,12 +531,17 @@ def digest_flags(today_stats, baseline_stats):
     return flags
 
 
-# The one-day triage a teacher or guardian acts on. Computed from the flags,
-# not left to the model: severity already carries the judgment, this just
-# names the response it calls for.
+# The one-day triage a teacher acts on. Computed from the flags, not left to
+# the model: severity already carries the judgment, this just names the
+# response it calls for. A flag's `severity` stays its own vocabulary
+# ('watch'/'concern') — it describes one topic, an action describes a student.
 ACTION_INTERVENE = 'intervene'
-ACTION_CHECK_IN = 'check_in'
-ACTION_CELEBRATE = 'celebrate'
+ACTION_WATCH = 'watch'
+ACTION_ON_TRACK = 'on_track'
+
+# Worst first. Both the roster sort and the class rollup read this order, so
+# adding a tier here is the only place that has to know about it.
+ACTIONS = (ACTION_INTERVENE, ACTION_WATCH, ACTION_ON_TRACK)
 
 
 def suggested_action(flags):
@@ -544,8 +549,8 @@ def suggested_action(flags):
     if 'concern' in severities:
         return ACTION_INTERVENE
     if 'watch' in severities:
-        return ACTION_CHECK_IN
-    return ACTION_CELEBRATE
+        return ACTION_WATCH
+    return ACTION_ON_TRACK
 
 
 # A session's shape carries as much as its score. These thresholds decide
@@ -650,6 +655,145 @@ def day_insights(day_records):
             for line in session_shape(record)]
 
 
+def student_day_triage(app_records, day):
+    """The computed half of one student's day — everything `build_digest`
+    works out before it says a word to Claude.
+
+    Split out because the classroom view needs exactly this for thirty
+    students at once, and it must stay free: no model call, so a roster
+    renders instantly and only a single student's narrative costs a request.
+    `app_records` is that student's APP_INTEGRATION rows up to and including
+    `day`; the baseline is taken strictly before it, as ever.
+    """
+    day_records = [r for r in app_records if r.date == day]
+    baseline_stats = app_topic_stats([r for r in app_records if r.date < day])
+    topic_stats = app_topic_stats(day_records)
+    flags = digest_flags(topic_stats, baseline_stats)
+    return {
+        # No app activity at all is itself worth a look, not a reason to praise.
+        'action': suggested_action(flags) if day_records else ACTION_WATCH,
+        'topics': [{'topic': t, **s} for t, s in sorted(topic_stats.items())],
+        'flags': flags,
+        # Computed the same way the flags are, and exposed for the same
+        # reason: a client can show these verbatim without waiting on Claude.
+        'insights': day_insights(day_records),
+        'sessions': len(day_records),
+    }
+
+
+def _pronouns(student):
+    """' (she/her)' when the school holds pronouns for this student, else ''.
+
+    A class narrative names a lot of students in a few sentences, and a model
+    given only a first name will guess from it. Guessing is how a real student
+    gets misgendered in front of their teacher, so the school's own answer
+    goes in the prompt and no answer means the model has to write around it.
+    """
+    value = getattr(student, 'pronouns_value', None)
+    return f' ({value})' if value else ''
+
+
+def class_topic_rollup(rows):
+    """One line per topic across the whole class, worst accuracy first.
+
+    This is the "who is struggling in what" half of a classroom view, and it
+    is arithmetic — no model involved. `struggling` names the students whose
+    own flags fired on that topic, so a teacher can pull a small group
+    straight off it.
+    """
+    totals = defaultdict(lambda: {'attempted': 0, 'correct': 0,
+                                  'students': [], 'struggling': []})
+    for row in rows:
+        name = row['student'].name
+        for topic in row['topics']:
+            entry = totals[topic['topic']]
+            entry['attempted'] += topic['attempted']
+            entry['correct'] += topic['correct']
+            entry['students'].append(name)
+        for flag in row['flags']:
+            entry = totals[flag['topic']]
+            if name not in entry['struggling']:
+                entry['struggling'].append(name)
+
+    rollup = []
+    for topic, entry in totals.items():
+        attempted = entry['attempted']
+        rollup.append({
+            'topic': topic,
+            'attempted': attempted,
+            'correct': entry['correct'],
+            'accuracy': entry['correct'] / attempted if attempted else 0.0,
+            'students': len(entry['students']),
+            'struggling': sorted(entry['struggling']),
+        })
+    # Worst first, and a topic more students struggle on outranks a tie.
+    return sorted(rollup, key=lambda t: (t['accuracy'], -len(t['struggling'])))
+
+
+def class_facts(classroom, rows, day):
+    """The computed lines a class-level prompt or fallback is built from."""
+    counts = Counter(row['action'] for row in rows)
+    active = [row for row in rows if row['sessions']]
+    lines = [
+        f'{classroom.name} ({classroom.subject}'
+        + (f', period {classroom.period}' if classroom.period else '')
+        + f'): {len(rows)} students on roll, {len(active)} with app activity on {day}.',
+        'Triage: ' + ', '.join(f'{counts.get(a, 0)} {a}' for a in ACTIONS) + '.',
+        # Shape observations are threshold-gated, so a quiet student produces
+        # no line about pace at all. Without the raw seconds below, the model
+        # reads that silence as missing data and tells the teacher there is no
+        # timing information — untrue, and it kills a question worth asking.
+        'Each topic below carries the average seconds per question. Notes on '
+        'how the work went — a fade, a run of misses together, a pace out of '
+        'step with that student\'s own — appear only where they crossed a '
+        'threshold; silence means unremarkable, not missing.',
+    ]
+    for topic in class_topic_rollup(rows):
+        line = (
+            f'Topic "{topic["topic"]}": {topic["correct"]}/{topic["attempted"]} correct '
+            f'across {topic["students"]} student(s), {topic["accuracy"]:.0%}.'
+        )
+        if topic['struggling']:
+            line += ' Flagged for: ' + ', '.join(topic['struggling']) + '.'
+        lines.append(line)
+
+    quiet = []
+    for row in rows:
+        # A student who did no work has no triage to report. Naming a tier
+        # here invites the reader to treat "we know nothing" as "watch".
+        if not row['sessions']:
+            quiet.append(row['student'].name)
+            continue
+        detail = '; '.join(
+            f'{t["topic"]} {t["correct"]}/{t["attempted"]} at {t["avg_seconds"]:.0f}s '
+            'per question' for t in row['topics']
+        )
+        line = f'{row["student"].name}{_pronouns(row["student"])} — {row["action"]}: {detail}.'
+        if row['insights']:
+            line += ' ' + ' '.join(row['insights'])
+        lines.append(line)
+    if quiet:
+        lines.append(
+            f'No app activity at all today, so no triage either, for {len(quiet)} '
+            f'student(s): ' + ', '.join(quiet) + '.'
+        )
+    return lines
+
+
+def sort_rows(rows):
+    """Worst triage first, then most flags, then by name — so the top of a
+    roster is always the student a teacher should look at first.
+
+    Students with no app activity sort last whatever their tier: there is
+    nothing to act on, and they would otherwise crowd out the students who
+    have something worth reading.
+    """
+    order = {action: i for i, action in enumerate(ACTIONS)}
+    return sorted(rows, key=lambda r: (not r['sessions'],
+                                       order.get(r['action'], len(ACTIONS)),
+                                       -len(r['flags']), r['student'].name))
+
+
 DIGEST_PROMPT = """{context}
 
 TODAY'S APP ACTIVITY ({date}):
@@ -661,8 +805,8 @@ TODAY'S APP SESSION RECORDS:
 The computed triage for today, from today's app performance alone, is: {action}
 - intervene: at least one topic is a real concern — accuracy well below
   chance, or a topic taking far longer than this student's own pace.
-- check_in: something is a little off and worth a quick look. Not urgent.
-- celebrate: today's app work was solid or better.
+- watch: something is a little off and worth a quick look. Not urgent.
+- on_track: today's app work was solid or better.
 
 Write a one-day digest for whoever checks in on {name} today. A teacher
 reading this wants to know WHY the day looked this way, not just the score —
@@ -675,7 +819,7 @@ invent a connection that is not supported above.
 Reply with JSON only, no prose around it, using exactly these keys:
 
 {{
-  "action": "intervene" | "check_in" | "celebrate",
+  "action": "intervene" | "watch" | "on_track",
   "headline": "...",
   "narrative": "..."
 }}
@@ -694,7 +838,7 @@ Reply with JSON only, no prose around it, using exactly these keys:
   the right ones (working at it) or faster (clicking through). That
   distinction is the most useful thing on the page, because it changes what
   the teacher should do — reteach the content, or sit with them while they
-  do it. Use it whenever it is there. If the action is "celebrate", name
+  do it. Use it whenever it is there. If the action is "on_track", name
   what specifically went well with the same specificity.
   Then, WHY: a reason from the wider record above, if one is genuinely
   there — an absence, a behaviour entry, a flat period, something home or
@@ -722,24 +866,12 @@ def build_digest(student, all_records, day):
     all_records = [r for r in all_records if r.date <= day]
     app_records = [r for r in all_records if r.source == StudentRecord.APP_INTEGRATION]
     day_records = [r for r in app_records if r.date == day]
-    baseline_records = [r for r in app_records if r.date < day]
 
+    triage = student_day_triage(app_records, day)
     topic_stats = app_topic_stats(day_records)
-    baseline_stats = app_topic_stats(baseline_records)
-    flags = digest_flags(topic_stats, baseline_stats)
-    facts_lines = app_digest_facts(day_records, day, topic_stats, flags)
-    # No app activity at all is itself worth a look, not a reason to praise.
-    action = suggested_action(flags) if day_records else ACTION_CHECK_IN
-
-    base = {
-        'date': str(day),
-        'action': action,
-        'topics': [{'topic': t, **s} for t, s in sorted(topic_stats.items())],
-        'flags': flags,
-        # Computed the same way the flags are, and exposed for the same
-        # reason: a client can show these verbatim without waiting on Claude.
-        'insights': day_insights(day_records),
-    }
+    facts_lines = app_digest_facts(day_records, day, topic_stats, triage['flags'])
+    action = triage['action']
+    base = {'date': str(day), **triage}
 
     if not day_records:
         return {
@@ -789,6 +921,206 @@ def fallback_digest(student, base, facts_lines):
     else:
         headline = f'No flags today for {student.first_name}.'
     return {**base, 'headline': headline, 'narrative': f'{preface} {" ".join(facts_lines)}'.strip()}
+
+
+# ---------------------------------------------------------------------------
+# Classroom view — the same day, one altitude up
+# ---------------------------------------------------------------------------
+
+CLASS_SYSTEM = (
+    'You write the daily classroom digest for a teacher, from what learning-app '
+    'partners logged about a class today.\n'
+    'Rules:\n'
+    '- Ground every sentence in the supplied lines. Name real students, real '
+    'topics and real counts. Never invent a student, a number or a cause.\n'
+    '- You are writing for one teacher about their own class, so use names '
+    'plainly and be direct.\n'
+    '- Use exactly the pronouns given in brackets after a student\'s name. '
+    'Where none are given, write around the pronoun or repeat the name; never '
+    'infer one from a name.\n'
+    '- Plain English. Short sentences. No headings, no bullet lists, no markdown.\n'
+    '- Drop the instrumentation. No sample sizes, no "mean", no parenthesised '
+    'metrics. Round naturally: "about half the class", "most of them".\n'
+    '- A class of thirty cannot all be mentioned. Name the students who need '
+    'something and the ones worth a word, and summarise the rest.\n'
+    'The records are synthetic, written for a demonstration.'
+)
+
+CLASS_DIGEST_PROMPT = """CLASS PICTURE FOR {date}:
+{class_facts}
+
+Each student above already carries a computed triage, worked out from their own
+app data alone against fixed thresholds:
+- intervene: a real concern — accuracy well below chance, or a topic taking far
+  longer than that student's own pace.
+- watch: something a little off, worth a quick look. Not urgent.
+- on_track: today's app work was solid or better.
+
+Write today's digest for the teacher of {name}. Reply with JSON only, no prose
+around it, using exactly these keys:
+
+{{
+  "headline": "...",
+  "narrative": "...",
+  "focus": ["...", "..."]
+}}
+
+- headline: one sentence. The single most useful thing about this class today.
+  If a topic is dragging several students down, that is usually it.
+- narrative: 4-6 sentences for a teacher deciding how to spend the lesson.
+  Lead with the shared problem, if there is one: a topic several students
+  missed is worth more of the lesson than one student having an off day. Name
+  who needs sitting with and who just needs a word. Say what the shape of the
+  work suggests — students whose misses ran together hit a wall and need the
+  content again, students whose misses came fast were clicking through and need
+  a different conversation. Where the class is doing well, say so specifically
+  rather than as a courtesy.
+- focus: 1-3 short strings, each an action worth taking tomorrow, most useful
+  first. Name the topic and the students where it applies, e.g. "Reteach adding
+  fractions to Ada, Ben and Cleo". If the class needs nothing, return [].
+
+Do not restate the triage counts as a list; the teacher can already see them.
+"""
+
+
+def build_class_digest(classroom, rows, day):
+    """(summary, from_model) for one classroom on one day.
+
+    `rows` come from `student_day_triage`, so the whole computed picture —
+    counts, per-student triage, the topic rollup — exists before this function
+    is called and is returned whether or not Claude answers. One model call
+    for the class, never one per student.
+    """
+    facts_lines = class_facts(classroom, rows, day)
+    # Counts cover only students who did app work today. A student with no
+    # session is not a student to watch, they are a student we know nothing
+    # about, and folding the two together buries the three who need help
+    # under twenty-six who simply did not open the app.
+    counts = Counter(row['action'] for row in rows if row['sessions'])
+    base = {
+        'date': str(day),
+        'classroom': {'id': classroom.id, 'name': classroom.name,
+                      'subject': classroom.subject, 'period': classroom.period},
+        'counts': {action: counts.get(action, 0) for action in ACTIONS},
+        'no_activity': [row['student'].name for row in rows if not row['sessions']],
+        'topics': class_topic_rollup(rows),
+        'students': [{
+            'student_id': row['student'].id,
+            'name': row['student'].name,
+            **{k: v for k, v in row.items() if k != 'student'},
+            # Null rather than a tier when there is nothing to go on, so a
+            # client cannot render a "watch" chip for a student we simply
+            # have no data about today.
+            'action': row['action'] if row['sessions'] else None,
+        } for row in rows],
+    }
+
+    if not any(row['sessions'] for row in rows):
+        return {
+            **base,
+            'headline': f'No app activity on file for {classroom.name} on {day}.',
+            'narrative': '',
+            'focus': [],
+        }, False
+
+    try:
+        reply = complete(
+            CLASS_DIGEST_PROMPT.format(
+                date=day,
+                name=classroom.name,
+                class_facts='\n'.join(f'- {line}' for line in facts_lines),
+            ),
+            system=CLASS_SYSTEM,
+            max_tokens=1200,
+        )
+        parsed = _json_object(reply)
+        focus = parsed.get('focus')
+        return {
+            **base,
+            'headline': str(parsed.get('headline') or '').strip(),
+            'narrative': str(parsed.get('narrative') or '').strip(),
+            'focus': [str(f).strip() for f in focus if str(f).strip()]
+                     if isinstance(focus, list) else [],
+        }, True
+    except Exception as error:
+        logger.warning('class digest fell back to records: %s', error)
+        return fallback_class_digest(classroom, base, facts_lines), False
+
+
+def fallback_class_digest(classroom, base, facts_lines):
+    preface = (
+        'The AI narrative is not configured on this server, so this digest is '
+        'assembled from the records themselves.'
+    )
+    worst = next((t for t in base['topics'] if t['struggling']), None)
+    if worst:
+        headline = (
+            f'{worst["topic"]}: {worst["accuracy"]:.0%} across the class, '
+            f'flagged for {", ".join(worst["struggling"])}.'
+        )
+    else:
+        headline = f'No topic met the flag threshold in {classroom.name} today.'
+    return {
+        **base,
+        'headline': headline,
+        'narrative': f'{preface} {" ".join(facts_lines)}'.strip(),
+        'focus': [],
+    }
+
+
+CLASS_ASK_PROMPT = """CLASS PICTURE FOR {date}:
+{class_facts}
+
+TODAY'S DIGEST ALREADY ON FILE:
+{digest}
+
+QUESTION FROM THE TEACHER OF {name}: {question}
+
+Answer in 2 to 5 sentences, for a teacher reading between lessons. Answer the
+question asked, first sentence, before any context. Name the real students and
+topics — an answer that would fit any other class is wrong. If the lines above
+cannot answer the question, say exactly that and say what is missing. Skip
+sample sizes and averages; write it the way you would say it out loud.
+"""
+
+
+def answer_class_question(classroom, question, rows, day, summary=None):
+    """(answer, from_model). Grounded in the same computed class picture the
+    digest is written from, so an answer never reaches past what the roster
+    actually shows."""
+    facts_lines = class_facts(classroom, rows, day)
+    digest = ''
+    if summary:
+        digest = json.dumps({k: summary.get(k) for k in ('headline', 'narrative', 'focus')},
+                            indent=1)
+    try:
+        reply = complete(
+            CLASS_ASK_PROMPT.format(
+                date=day,
+                name=classroom.name,
+                class_facts='\n'.join(f'- {line}' for line in facts_lines),
+                digest=digest or 'None yet.',
+                question=question,
+            ),
+            system=CLASS_SYSTEM,
+            max_tokens=800,
+        )
+    except Exception as error:
+        logger.warning('class ask/ fell back to records: %s', error)
+        return fallback_class_answer(classroom, facts_lines), False
+
+    answer = reply.strip()
+    if not answer:
+        return fallback_class_answer(classroom, facts_lines), False
+    return answer, True
+
+
+def fallback_class_answer(classroom, facts_lines):
+    return (
+        'AI is not configured on this server, so this is not an answer to the '
+        f'question — it is what {classroom.name} looks like today. '
+        + ' '.join(facts_lines)
+    )
 
 
 def fallback_answer(student, question, records):

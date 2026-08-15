@@ -160,3 +160,27 @@ class DailyDigest(models.Model):
 
     def __str__(self):
         return f'Digest for {self.student} on {self.date}'
+
+
+class ClassroomDigest(models.Model):
+    """Cached LLM-written summary of one classroom's day.
+
+    The computed half of a class view — the triage per student, the topic
+    rollup — is arithmetic and never cached; it is cheap enough to recompute
+    on every read. Only the written half costs a model call, and that is what
+    this row holds.
+    """
+
+    classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE, related_name='digests')
+    date = models.DateField()
+    summary = models.JSONField(default=dict)
+    generated_at = models.DateTimeField(auto_now=True)
+    # Sessions across the whole class that day, so the cache notices new work.
+    record_count = models.IntegerField(default=0)
+
+    class Meta:
+        unique_together = [('classroom', 'date')]
+        ordering = ['-date']
+
+    def __str__(self):
+        return f'Digest for {self.classroom} on {self.date}'

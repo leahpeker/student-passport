@@ -23,7 +23,17 @@ from rest_framework.decorators import api_view, authentication_classes, permissi
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-from .models import Classroom, DailyDigest, Guardianship, Passport, Profile, Student, StudentRecord
+from . import narrative
+from .models import (
+    Classroom,
+    ClassroomDigest,
+    DailyDigest,
+    Guardianship,
+    Passport,
+    Profile,
+    Student,
+    StudentRecord,
+)
 from .narrative import answer_question, build_digest, build_sections
 from .serializers import (
     ClassroomSerializer,
@@ -354,7 +364,7 @@ def digest(request, pk):
             'date': None,
             'generated_at': None,
             'record_count': 0,
-            'action': 'check_in',
+            'action': narrative.ACTION_WATCH,
             'headline': f'No app activity is on file for {student.first_name} yet.',
             'narrative': '',
             'topics': [],
@@ -368,6 +378,138 @@ def digest(request, pk):
         'generated_at': generated_at,
         'record_count': record_count,
         **summary,
+    })
+
+
+# ---------------------------------------------------------------------------
+# Classroom view — the same day, one altitude up
+# ---------------------------------------------------------------------------
+
+def visible_classroom(request, pk):
+    """The classroom, or 404 — including when the caller does not teach it.
+
+    Teachers only, for the same reason the student digest is: the roster
+    carries every student's triage and the shape of their work.
+    """
+    room = visible_classrooms(request.user).filter(pk=pk).prefetch_related('students').first()
+    if room is None:
+        raise Http404
+    return room
+
+
+def class_rows(classroom, day):
+    """Every student on the roll with their computed triage for `day`.
+
+    One query for the whole class's app records rather than one per student,
+    and no model call at all — this is what makes a thirty-student roster
+    render immediately.
+    """
+    # students_qs() carries the pronouns annotation, so a class narrative can
+    # refer to a student the way the school does instead of guessing from a name.
+    students = list(students_qs().filter(classrooms=classroom))
+    by_student = {student.id: [] for student in students}
+    records = StudentRecord.objects.filter(
+        student__in=students, source=StudentRecord.APP_INTEGRATION, date__lte=day
+    ).only('student_id', 'date', 'title', 'data')
+    for record in records:
+        by_student[record.student_id].append(record)
+    return narrative.sort_rows([
+        {'student': student, **narrative.student_day_triage(by_student[student.id], day)}
+        for student in students
+    ])
+
+
+def _class_day(classroom, requested):
+    """`requested` if it parses, else the most recent date anyone on this roll
+    has app activity on."""
+    if requested:
+        parsed = parse_date(requested)
+        if parsed:
+            return parsed
+    return (
+        StudentRecord.objects.filter(
+            student__classrooms=classroom, source=StudentRecord.APP_INTEGRATION
+        ).order_by('-date').values_list('date', flat=True).first()
+    )
+
+
+def cached_class_digest(classroom, day, rows, refresh=False):
+    """(summary, generated_at, record_count) for one classroom, one day.
+
+    Drift is measured on sessions across the whole roll, so a student
+    finishing more work after the digest was written regenerates it.
+    """
+    row, _ = ClassroomDigest.objects.get_or_create(classroom=classroom, date=day)
+    sessions = sum(r['sessions'] for r in rows)
+    if not refresh and row.summary and row.record_count == sessions:
+        return row.summary, row.generated_at, row.record_count
+
+    summary, from_model = narrative.build_class_digest(classroom, rows, day)
+    if not from_model:
+        return summary, timezone.now(), sessions
+    row.summary = summary
+    row.record_count = sessions
+    row.save()
+    return row.summary, row.generated_at, row.record_count
+
+
+@api_view(['GET'])
+def classroom_digest(request, pk):
+    """?date=YYYY-MM-DD, defaulting to the most recent day anyone on this roll
+    has app activity. ?refresh=1 forces regeneration."""
+    classroom = visible_classroom(request, pk)
+    day = _class_day(classroom, request.query_params.get('date'))
+    if day is None:
+        return Response({
+            'date': None,
+            'generated_at': None,
+            'record_count': 0,
+            'classroom': ClassroomSerializer(classroom).data,
+            'counts': {action: 0 for action in narrative.ACTIONS},
+            'no_activity': [],
+            'topics': [],
+            'students': [],
+            'headline': f'No app activity is on file for {classroom.name} yet.',
+            'narrative': '',
+            'focus': [],
+        })
+
+    rows = class_rows(classroom, day)
+    refresh = request.query_params.get('refresh') in ('1', 'true', 'yes')
+    summary, generated_at, record_count = cached_class_digest(
+        classroom, day, rows, refresh=refresh
+    )
+    return Response({'generated_at': generated_at, 'record_count': record_count, **summary})
+
+
+@api_view(['POST'])
+def classroom_ask(request, pk):
+    """One question about the class, grounded in the same computed picture the
+    digest is written from."""
+    classroom = visible_classroom(request, pk)
+    question = (request.data.get('question') or '').strip()
+    if not question:
+        return Response({'detail': 'A question is required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    day = _class_day(classroom, request.query_params.get('date'))
+    if day is None:
+        return Response(
+            {'detail': f'No app activity is on file for {classroom.name} yet.'},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
+    rows = class_rows(classroom, day)
+    cached = ClassroomDigest.objects.filter(classroom=classroom, date=day).first()
+    answer, from_model = narrative.answer_class_question(
+        classroom, question, rows, day, summary=cached.summary if cached else None
+    )
+    return Response({
+        'classroom_id': classroom.id,
+        'date': str(day),
+        'question': question,
+        'answer': answer,
+        'students_consulted': len(rows),
+        'ai': from_model,
     })
 
 
