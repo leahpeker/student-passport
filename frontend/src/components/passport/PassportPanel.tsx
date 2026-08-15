@@ -3,7 +3,7 @@ import { exportPassport, getDigest, getPassport } from '../../api/client';
 import type { Me, Passport, StudentRecord } from '../../api/types';
 import { useAsync } from '../../lib/useAsync';
 import { formatDate } from '../../lib/school';
-import { getPulse, hasDigestActivity, pulseFromDigest } from '../../lib/pulse';
+import { getPulse, hasAuthoredPulse, hasDigestActivity, pulseFromDigest } from '../../lib/pulse';
 import { showsAiUse, showsBehavior } from '../../lib/access';
 import { AsyncState } from '../AsyncState';
 import { Tabs, type TabItem } from '../Tabs';
@@ -82,7 +82,10 @@ export function PassportPanel({ studentId, me }: { studentId: number; me: Me }) 
   if (!data) return null;
 
   const { student, sections, records, guardians } = data;
-  const pulse = hasDigestActivity(digest) ? pulseFromDigest(digest, student.first_name) : getPulse(student.name);
+  const pulse =
+    !hasAuthoredPulse(student.name) && hasDigestActivity(digest)
+      ? pulseFromDigest(digest, student.first_name)
+      : getPulse(student.name);
   const sourceCount = new Set(records.map((r) => r.source)).size;
   const initials = `${student.first_name[0] ?? ''}${student.last_name[0] ?? ''}`.toUpperCase();
 

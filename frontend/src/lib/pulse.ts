@@ -250,6 +250,22 @@ export function pulseTone(studentName: string): PulseTone {
 }
 
 /**
+ * Whether this student has a hand-written pulse — the six story-arc students,
+ * each tied to a `cognitive-analysis-files/students/<name>` report (Priya's
+ * offloading count, Maya's late-night AI-tutor pattern, etc).
+ *
+ * Callers use this to pin those six to the authored card unconditionally,
+ * never handing them off to `pulseFromDigest`. Without that guard, the first
+ * real day of AI-tutor activity the live app records for one of them — which
+ * is ordinary, expected traffic, not a data problem — would silently replace
+ * their curated story with a generic one-day read, exactly the regression
+ * this function exists to prevent.
+ */
+export function hasAuthoredPulse(studentName: string): boolean {
+  return studentName in PULSES;
+}
+
+/**
  * Whether a digest actually describes a day of app activity.
  *
  * The endpoint is tolerant by design: a student with no app-integration
