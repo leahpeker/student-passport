@@ -1,37 +1,14 @@
 import { useCallback, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getClassrooms, getDigest } from '../../api/client';
+import { getClassrooms } from '../../api/client';
 import type { Classroom, Me, Student } from '../../api/types';
 import { useAsync } from '../../lib/useAsync';
-import {
-  hasAuthoredPulse,
-  hasDigestActivity,
-  pulseFromDigest,
-  pulseTone,
-  type PulseTone,
-} from '../../lib/pulse';
+import { usePulse } from '../../lib/useRosterPulse';
 import { toneDot } from './tone';
 import { AiBadge } from '../AiBadge';
 
-/**
- * The dot's colour for one roster row. The six story-arc students always keep
- * their authored dot — see `hasAuthoredPulse` — so ordinary AI-tutor traffic
- * on the live app never quietly replaces their curated pulse. Everyone else
- * is real when the backend has a digest with actual activity behind it
- * (teacher only — see `getDigest`); the green default otherwise, so a
- * guardian, a student, a still-loading row, or a student with no app activity
- * on file never renders as a broken, missing, or falsely amber dot.
- */
-function useRosterTone(studentId: number, studentName: string): PulseTone {
-  const load = useCallback(() => getDigest(studentId), [studentId]);
-  const { data: digest } = useAsync(load);
-  return !hasAuthoredPulse(studentName) && hasDigestActivity(digest)
-    ? pulseFromDigest(digest, '').tone
-    : pulseTone(studentName);
-}
-
-/** One roster dot. Its own component so `useRosterTone` gets one hook
- * instance per student rather than being called inside a `.map()`. */
+/** One roster dot. Its own component so `usePulse` gets one hook instance
+ * per student rather than being called inside a `.map()`. */
 function RosterDot({
   studentId,
   studentName,
@@ -41,7 +18,7 @@ function RosterDot({
   studentName: string;
   className: string;
 }) {
-  const tone = useRosterTone(studentId, studentName);
+  const tone = usePulse(studentId, studentName).tone;
   return <span aria-hidden="true" className={`${className} ${toneDot[tone]}`} />;
 }
 
@@ -175,4 +152,3 @@ function SidebarGroup({
     </div>
   );
 }
-

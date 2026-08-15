@@ -737,27 +737,30 @@ Reply with JSON only, no prose around it, using exactly these keys:
   explain it, not re-decide it.
 - headline: one sentence, the single most useful thing to know about today.
   Where a flag drove the triage, name that topic in it.
-- narrative: 3-5 sentences, in two moves.
-  First, WHAT: name the actual topics behind today's triage, the way a
-  teacher would say them out loud — "stuck on adding fractions", "lost the
+- narrative: 2-4 sentences, never more, in two moves.
+  First, WHAT: name the actual topic behind today's triage, the way a
+  teacher would say it out loud — "stuck on adding fractions", "lost the
   thread on the inference questions" — never a bare score and never
-  "one topic". Say HOW the work went, not only how much was right: the
-  facts above tell you whether they faded or warmed up, whether the misses
-  ran together or scattered, and whether the wrong answers were slower than
-  the right ones (working at it) or faster (clicking through). That
-  distinction is the most useful thing on the page, because it changes what
-  the teacher should do — reteach the content, or sit with them while they
-  do it. Use it whenever it is there. If the action is "celebrate", name
-  what specifically went well with the same specificity.
-  Then, WHY: a reason from the wider record above, if one is genuinely
-  there — an absence, a behaviour entry, a flat period, something home or
-  the student wrote, an older observation that shows the same thing. Say
-  plainly that the day stands on its own if nothing in the record explains
-  it. A cause you cannot point at a record for is an invention; so is a
-  number or a flag that is not above.
+  "one topic". Say HOW the work went, not only how much was right, in the
+  same sentence: the facts above tell you whether they faded or warmed up,
+  whether the misses ran together or scattered, and whether the wrong
+  answers were slower than the right ones (working at it) or faster
+  (clicking through). Use that distinction when it's there — it's the most
+  useful thing on the page — but state it, don't unpack it. If the action
+  is "celebrate", name what specifically went well with the same
+  specificity.
+  Then, in one sentence, WHY: a reason from the wider record above, only if
+  one is genuinely there — an absence, a behaviour entry, a flat period,
+  something home or the student wrote, an older observation that shows the
+  same thing. Say plainly that the day stands on its own if nothing in the
+  record explains it, and stop — don't add a reason to fill space. A cause
+  you cannot point at a record for is an invention; so is a number or a
+  flag that is not above.
 
-This is read by an adult deciding whether {name} needs anything today, so be
-direct. Skip sample sizes and jargon: "about half" not "50% (n=8)".
+This is read by an adult deciding whether {name} needs anything today
+between classes, so be direct and brief. Skip sample sizes and jargon:
+"about half" not "50% (n=8)". Every sentence must earn its place — cut
+anything that only restates the headline.
 """
 
 
@@ -841,7 +844,12 @@ def fallback_digest(student, base, facts_lines):
         headline = f"{watching[0]['topic']}: {watching[0]['detail']}"
     else:
         headline = f'No flags today for {student.first_name}.'
-    return {**base, 'headline': headline, 'narrative': f'{preface} {" ".join(facts_lines)}'.strip()}
+    # A couple of lines, not the whole fact dump: the headline already
+    # carries the sharpest single fact, so the narrative only needs the
+    # session summary and the flag verdict — matching the AI path's length
+    # instead of running every topic and session-shape line into one blob.
+    summary_lines = [facts_lines[0], facts_lines[-1]] if len(facts_lines) > 1 else facts_lines
+    return {**base, 'headline': headline, 'narrative': f'{preface} {" ".join(summary_lines)}'.strip()}
 
 
 def fallback_answer(student, question, records):
