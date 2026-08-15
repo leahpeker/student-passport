@@ -120,6 +120,8 @@ interface ArcSpec {
   engagement_step?: { month: number; delta: number };
   sections: PassportSections;
   extras: Extra[];
+  /** Whether a `cognitive_analysis` record exists for this student. */
+  has_ai_analysis: boolean;
 }
 
 const ROTATING_KINDS = ['quiz', 'unit test', 'project', 'timed test'];
@@ -127,6 +129,7 @@ const ROTATING_KINDS = ['quiz', 'unit test', 'project', 'timed test'];
 const HERO_ARCS: ArcSpec[] = [
   {
     id: 1,
+    has_ai_analysis: true,
     first_name: 'Maya',
     last_name: 'Okonkwo',
     grade: '10',
@@ -246,6 +249,7 @@ const HERO_ARCS: ArcSpec[] = [
   },
   {
     id: 2,
+    has_ai_analysis: true,
     first_name: 'Deshawn',
     last_name: 'Carter',
     grade: '9',
@@ -347,6 +351,7 @@ const HERO_ARCS: ArcSpec[] = [
   },
   {
     id: 3,
+    has_ai_analysis: true,
     first_name: 'Alina',
     last_name: 'Restrepo',
     grade: '9',
@@ -448,6 +453,7 @@ const HERO_ARCS: ArcSpec[] = [
   },
   {
     id: 4,
+    has_ai_analysis: true,
     first_name: 'Jordan',
     last_name: 'Whitaker',
     grade: '10',
@@ -549,6 +555,7 @@ const HERO_ARCS: ArcSpec[] = [
   },
   {
     id: 5,
+    has_ai_analysis: true,
     first_name: 'Sam',
     last_name: 'Nakamura',
     grade: '11',
@@ -655,6 +662,7 @@ const HERO_ARCS: ArcSpec[] = [
   },
   {
     id: 6,
+    has_ai_analysis: true,
     first_name: 'Priya',
     last_name: 'Raghunathan',
     grade: '11',
@@ -858,6 +866,7 @@ function fillerArc(
         body: 'I would rather have the deadline early than be reminded about it later.',
       },
     ],
+    has_ai_analysis: false,
   };
 }
 
@@ -867,6 +876,9 @@ const ARCS: ArcSpec[] = [
 ];
 
 export const HERO_STUDENT_IDS = HERO_ARCS.map((a) => a.id);
+
+/** The pulse fixtures in `lib/pulse.ts` are keyed by this name, not by id. */
+export const HERO_STUDENT_NAMES = HERO_ARCS.map((a) => `${a.first_name} ${a.last_name}`);
 
 // ---------------------------------------------------------------------------
 // Record generation
@@ -1045,6 +1057,7 @@ function toStudent(arc: ArcSpec): Student {
     grade: arc.grade,
     date_of_birth: arc.date_of_birth,
     pronouns: arc.pronouns,
+    has_ai_analysis: arc.has_ai_analysis,
   };
 }
 
@@ -1264,7 +1277,8 @@ export function passportFor(studentId: number): Passport | null {
  * exercised the same way whether the data came from here or from Django.
  */
 export function digestFor(studentId: number): Digest {
-  const pulse = getPulse(studentId);
+  // `getPulse` is keyed by name, not id — see `lib/pulse.ts`.
+  const pulse = getPulse(students.find((s) => s.id === studentId)?.name ?? '');
   const action: DigestAction =
     pulse.tone === 'red' ? 'intervene' : pulse.tone === 'amber' ? 'check_in' : 'celebrate';
   return {

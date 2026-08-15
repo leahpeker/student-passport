@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getClassrooms } from '../api/client';
 import type { Classroom, Student } from '../api/types';
+import { AiBadge } from '../components/AiBadge';
 import { AsyncState } from '../components/AsyncState';
 import { Tabs } from '../components/Tabs';
 import { useAsync } from '../lib/useAsync';
@@ -26,6 +27,7 @@ function Roster({ classroom }: { classroom: Classroom }) {
               <span className="truncate text-[13.5px] font-medium text-text">
                 {student.name}
               </span>
+              {student.has_ai_analysis && <AiBadge />}
             </div>
             <span className="text-[11px] text-muted">
               Grade {student.grade} · {student.pronouns}

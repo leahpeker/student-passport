@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import type { Student } from '../api/types';
+import { AiBadge } from './AiBadge';
 
 function initialsOf(student: Student): string {
   return `${student.first_name[0] ?? ''}${student.last_name[0] ?? ''}`.toUpperCase();
@@ -22,6 +23,7 @@ export function StudentCards({ students }: { students: Student[] }) {
               <span className="truncate text-[13.5px] font-medium text-text">
                 {student.name}
               </span>
+              {student.has_ai_analysis && <AiBadge />}
             </div>
             <span className="text-[11px] text-muted">
               Grade {student.grade}

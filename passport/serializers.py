@@ -4,14 +4,15 @@ Field names match `frontend/src/api/types.ts` exactly, so a response can be
 assigned to those types unchanged.
 """
 
-from django.db.models import OuterRef, Subquery
+from django.db.models import Exists, OuterRef, Subquery
 from rest_framework import serializers
 
 from .models import Classroom, Guardianship, Student, StudentRecord
 
 
 def students_qs():
-    """Students annotated with the pronouns the frontend prints.
+    """Students annotated with the pronouns the frontend prints, and whether
+    a `cognitive_analysis` record is on file.
 
     `Student` has no pronouns column and must not gain one, so the value is
     read off whichever seeded record carries it. Missing is normal: the
@@ -22,7 +23,13 @@ def students_qs():
         .order_by('date')
         .values('data__pronouns')[:1]
     )
-    return Student.objects.annotate(pronouns_value=Subquery(carrier))
+    ai_analysis = StudentRecord.objects.filter(
+        student=OuterRef('pk'), source='cognitive_analysis'
+    )
+    return Student.objects.annotate(
+        pronouns_value=Subquery(carrier),
+        has_ai_analysis=Exists(ai_analysis),
+    )
 
 
 def display_name(user):
@@ -35,10 +42,14 @@ def display_name(user):
 class StudentSerializer(serializers.ModelSerializer):
     name = serializers.CharField(read_only=True)
     pronouns = serializers.SerializerMethodField()
+    has_ai_analysis = serializers.BooleanField(read_only=True, default=False)
 
     class Meta:
         model = Student
-        fields = ['id', 'first_name', 'last_name', 'name', 'grade', 'date_of_birth', 'pronouns']
+        fields = [
+            'id', 'first_name', 'last_name', 'name', 'grade', 'date_of_birth',
+            'pronouns', 'has_ai_analysis',
+        ]
 
     def get_pronouns(self, obj):
         return getattr(obj, 'pronouns_value', None) or ''

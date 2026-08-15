@@ -63,6 +63,8 @@ export interface Student {
   date_of_birth: string | null;
   /** How the student refers to themselves, e.g. "she/her". */
   pronouns: string;
+  /** Whether a `cognitive_analysis` record exists for this student. */
+  has_ai_analysis: boolean;
 }
 
 /** `Guardianship`, flattened onto the student it concerns. */

@@ -82,7 +82,7 @@ export function PassportPanel({ studentId, me }: { studentId: number; me: Me }) 
   if (!data) return null;
 
   const { student, sections, records, guardians } = data;
-  const pulse = digest ? pulseFromDigest(digest, student.first_name) : getPulse(studentId);
+  const pulse = digest ? pulseFromDigest(digest, student.first_name) : getPulse(student.name);
   const sourceCount = new Set(records.map((r) => r.source)).size;
   const initials = `${student.first_name[0] ?? ''}${student.last_name[0] ?? ''}`.toUpperCase();
 
