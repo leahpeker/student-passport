@@ -3,10 +3,21 @@
 All data written here is synthetic.
 """
 
+from pathlib import Path
+
+from django.core.management import call_command
 from django.core.management.base import BaseCommand
 
 from passport.seed.arcs import DEMO_PASSWORD
 from passport.seed.generate import run
+
+# The story arcs carry every record except the AI-use analyses, which live in
+# the repo as cognitive-task-analysis report folders. Both the "How they use
+# AI" section and the roster's AI badge read `cognitive_analysis` records, so
+# a database seeded without them looks correct everywhere else and silently
+# drops those two — which is what the deployed demo did, since Railway's
+# preDeployCommand runs this command and nothing else.
+ANALYSIS_DIR = Path('cognitive-analysis-files/students')
 
 
 class Command(BaseCommand):
@@ -29,6 +40,14 @@ class Command(BaseCommand):
             '{students} students ({heroes} story arcs), {teachers} teachers, '
             '{guardians} guardians, {classrooms} classrooms, {records} records'.format(**summary)
         ))
+
+        if ANALYSIS_DIR.is_dir():
+            call_command('import_cognitive_analysis', str(ANALYSIS_DIR))
+        else:
+            self.stdout.write(self.style.WARNING(
+                f'{ANALYSIS_DIR} not found — seeded without AI-use analyses, so '
+                'the "How they use AI" section and the roster AI badges will be empty.'
+            ))
 
         if options['quiet_logins']:
             return

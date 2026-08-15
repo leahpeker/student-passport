@@ -155,32 +155,19 @@ export function HowTheyUseAiSection({
             Where the sessions went
           </h3>
 
-          <div className="mb-4 flex flex-wrap items-start gap-x-8 gap-y-3">
-            <div>
-              <div className="mb-1.5 text-[10.5px] font-medium tracking-[0.08em] text-muted uppercase">
-                Subject
-              </div>
-              <div className="flex flex-wrap gap-1.5">
-                <FilterPill
-                  label={ALL_SUBJECTS}
-                  active={subject === ALL_SUBJECTS}
-                  onClick={() => setSubject(ALL_SUBJECTS)}
-                />
-                {subjects.map((s) => (
-                  <FilterPill key={s} label={s} active={subject === s} onClick={() => setSubject(s)} />
-                ))}
-              </div>
+          <div className="mb-4">
+            <div className="mb-1.5 text-[10.5px] font-medium tracking-[0.08em] text-muted uppercase">
+              Subject
             </div>
-            <div>
-              <div className="mb-1.5 text-[10.5px] font-medium tracking-[0.08em] text-muted uppercase">
-                Tutor
-              </div>
-              <div className="flex flex-wrap gap-1.5">
-                <FilterPill label={ALL_SUBJECTS} active onClick={() => {}} />
-              </div>
-              <p className="mt-1.5 text-[11px] text-muted">
-                One AI tutor is used throughout this app, so there is nothing to filter by yet.
-              </p>
+            <div className="flex flex-wrap gap-1.5">
+              <FilterPill
+                label={ALL_SUBJECTS}
+                active={subject === ALL_SUBJECTS}
+                onClick={() => setSubject(ALL_SUBJECTS)}
+              />
+              {subjects.map((s) => (
+                <FilterPill key={s} label={s} active={subject === s} onClick={() => setSubject(s)} />
+              ))}
             </div>
           </div>
 
