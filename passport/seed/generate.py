@@ -219,6 +219,58 @@ def engagement_records(student, rng, spec, rooms, teachers, enrolled=None):
     return out
 
 
+def app_integration_records(student, rng, rooms, base, enrolled=None, per_week=1):
+    """Practice/reading-app sessions, one dominant topic per session so a
+    topic accumulates enough attempts to be worth flagging.
+
+    Driven by the same per-period baseline that shapes engagement, rather
+    than a second hand-authored curve: a period that is already strong or
+    weak for a student looks the same way here too. A global tendency, not a
+    model of learning — the point is a real, checkable signal to synthesize
+    from, not a simulation.
+    """
+    on_roll = DAY_SET if enrolled is None else set(enrolled)
+    periods = [p for p in sorted(rooms) if rooms[p]['subject'] in arcs.APP_TOPICS]
+    if not periods:
+        return []
+    topic_cursor = {}
+    out = []
+    for week in WEEKS:
+        days = [d for d in week if d in on_roll]
+        if not days:
+            continue
+        for period in sorted(rng.sample(periods, min(per_week, len(periods)))):
+            room = rooms[period]
+            subject = room['subject']
+            topics = arcs.APP_TOPICS[subject]
+            d = days[rng.randrange(len(days))]
+            rating = base.get(period, 3.0)
+            accuracy = max(0.2, min(0.97, 0.32 + 0.13 * rating))
+            pace = max(12, min(95, 70 - 9 * rating))
+            n = rng.randint(8, 14)
+            idx = topic_cursor.get(period, 0)
+            topic = topics[idx % len(topics)]
+            topic_cursor[period] = idx + 1
+
+            questions = []
+            for _ in range(n):
+                seconds = max(4, round(rng.gauss(pace, pace * 0.25)))
+                questions.append({
+                    'topic': topic, 'correct': rng.random() < accuracy, 'seconds': seconds,
+                })
+            correct = sum(1 for q in questions if q['correct'])
+            duration = round(sum(q['seconds'] for q in questions) / 60, 1)
+            app_name = arcs.APP_NAME.get(subject, 'Practice App')
+            kind = 'reading_session' if subject in arcs.READING_SUBJECTS else 'practice_session'
+            out.append(SR(
+                student=student, source=SR.APP_INTEGRATION, kind=kind, date=d,
+                title=f'{app_name} — {topic} ({correct}/{n})',
+                data={'app': app_name, 'subject': subject,
+                      'duration_minutes': duration, 'questions': questions},
+            ))
+    return out
+
+
 def attendance_records(student, rng, spec, enrolled=None, in_school=()):
     """`in_school` are days an authored record already puts the student in the
     building, so a full-day absence can never contradict one."""
@@ -479,6 +531,8 @@ def run(reset=False):
                                  arc.get('ai_tutor_fill'))
         records += engagement_records(student, rng, arc['engagement'], period_rooms, teachers,
                                       enrolled)
+        records += app_integration_records(student, rng, period_rooms, arc['engagement']['base'],
+                                           enrolled, per_week=2)
         for e in arc.get('observations', []):
             records.append(SR(
                 student=student, source=SR.OBSERVATION, kind=e.get('kind', 'note'),
@@ -571,6 +625,7 @@ def filler_records(student, rng, period_rooms, teachers, f):
                               {'base': base, 'trend': rng.uniform(-0.5, 0.6),
                                'jitter': 0.45, 'per_week': 1},
                               period_rooms, teachers)
+    out += app_integration_records(student, rng, period_rooms, base, per_week=1)
 
     if rng.random() < 0.55:
         out += behavior_records(

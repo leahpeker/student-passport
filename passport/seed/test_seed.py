@@ -74,6 +74,7 @@ class SeedTests(TransactionTestCase):
         self.check_named_teachers()
         self.check_no_hand_written_counts()
         self.check_cited_attendance()
+        self.check_app_integration()
 
         self.check_deshawn()
         self.check_maya()
@@ -108,7 +109,7 @@ class SeedTests(TransactionTestCase):
         but those carry no author here and no attendance, behaviour or
         engagement row of ours.
         """
-        ours = {SR.ATTENDANCE, SR.BEHAVIOR, SR.ENGAGEMENT}
+        ours = {SR.ATTENDANCE, SR.BEHAVIOR, SR.ENGAGEMENT, SR.APP_INTEGRATION}
         checked = 0
         for s in Student.objects.all():
             arrivals = [r.date for r in s.records.filter(source=SR.SIS, kind='enrollment')
@@ -210,6 +211,55 @@ class SeedTests(TransactionTestCase):
                     f'support (absences {real["absence"]}, tardies {real["tardy"]}): {body}'
                 )
         assert seen, 'no document cites attendance counts; the substitution path is untested'
+
+    def check_app_integration(self):
+        """App-integration sessions exist, have a sane question shape, and the
+        accuracy they carry actually correlates with the same per-period
+        baseline that drives engagement — the two sources should agree, since
+        one is derived from the other."""
+        sessions = list(StudentRecord.objects.filter(source=SR.APP_INTEGRATION))
+        assert sessions, 'no app_integration records were seeded at all'
+
+        for record in sessions:
+            questions = record.data.get('questions')
+            assert questions, f'{record.id} has no question breakdown'
+            for q in questions:
+                assert isinstance(q['correct'], bool), f'{record.id}: correct is not a bool'
+                assert q['seconds'] > 0, f'{record.id}: non-positive seconds'
+                assert q['topic'], f'{record.id}: blank topic'
+
+        # A hero's strongest engagement period should score higher in the app
+        # than their weakest — same rng-independent signal both sources share.
+        checked = 0
+        for arc in arcs.ARCS:
+            base = arc['engagement']['base']
+            if len(base) < 2:
+                continue
+            s = Student.objects.get(first_name=arc['first'], last_name=arc['last'])
+            best_period = max(base, key=base.get)
+            worst_period = min(base, key=base.get)
+            # Sessions carry a subject, not a period; map back through the
+            # classroom that period belongs to.
+            by_period = {c['period']: c['subject'] for c in arcs.CLASSROOMS}
+            best_subject = by_period.get(best_period)
+            worst_subject = by_period.get(worst_period)
+            if not best_subject or not worst_subject or best_subject == worst_subject:
+                continue
+
+            def accuracy_for(subject):
+                qs = [q for r in s.records.filter(source=SR.APP_INTEGRATION, data__subject=subject)
+                      for q in r.data['questions']]
+                return sum(1 for q in qs if q['correct']) / len(qs) if qs else None
+
+            best_acc, worst_acc = accuracy_for(best_subject), accuracy_for(worst_subject)
+            if best_acc is None or worst_acc is None:
+                continue
+            checked += 1
+            assert best_acc >= worst_acc, (
+                f'{arc["key"]}: app accuracy in their best period ({best_subject}, '
+                f'{best_acc:.2f}) is not >= their worst ({worst_subject}, {worst_acc:.2f})'
+            )
+        assert checked, 'no arc had both a best- and worst-period subject to compare'
 
     # -- arc signals -------------------------------------------------------
 

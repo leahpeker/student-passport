@@ -126,6 +126,40 @@ ENGAGEMENT_NOTES = {
     ],
 }
 
+# APP_INTEGRATION: what a practice or reading app would log for a session in
+# each subject. One dominant topic per session, drawn from here, so a topic
+# gets enough attempts across a few sessions to be worth flagging.
+APP_NAME = {
+    'Mathematics': 'Numeracy Coach',
+    'Science': 'LabPrep',
+    'English': 'ReadWell',
+    'Social Studies': 'SourceCheck',
+    'Visual Arts': 'StudioLog',
+    'Computer Science': 'CodeReps',
+}
+APP_TOPICS = {
+    'Mathematics': [
+        'fractions - adding', 'fractions - simplifying', 'linear equations',
+        'ratios and proportions', 'exponents',
+    ],
+    'Science': [
+        'cell structure', 'forces and motion', 'the water cycle', 'chemical reactions',
+    ],
+    'English': [
+        'main idea', 'inference', 'vocabulary in context', "author's purpose",
+    ],
+    'Social Studies': [
+        'reading a primary source', 'cause and effect', 'map skills',
+    ],
+    'Visual Arts': [
+        'color theory', 'composition basics',
+    ],
+    'Computer Science': [
+        'loops', 'variables', 'debugging practice',
+    ],
+}
+READING_SUBJECTS = {'English', 'Social Studies'}
+
 
 # ---------------------------------------------------------------------------
 # Hero arcs

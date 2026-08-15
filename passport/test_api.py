@@ -219,6 +219,131 @@ class PassportTests(ApiTestCase):
         self.assertEqual(body['sections'], FAKE_SECTIONS)
 
 
+@patch('passport.narrative.complete', return_value=(
+    '{"action": "check_in", "headline": "H.", "narrative": "N."}'
+))
+class DigestTests(ApiTestCase):
+    """A separate synthesis from the passport: one day of app-integration
+    activity, with a check_in / intervene / celebrate triage."""
+
+    def add_session(self, student, day, topic='fractions - adding', accuracy=1.0, n=8, seconds=30):
+        correct = round(n * accuracy)
+        questions = [
+            {'topic': topic, 'correct': i < correct, 'seconds': seconds} for i in range(n)
+        ]
+        return StudentRecord.objects.create(
+            student=student, source=StudentRecord.APP_INTEGRATION, kind='practice_session',
+            date=day, title=f'Practice — {topic}',
+            data={'app': 'Numeracy Coach', 'subject': 'Maths',
+                  'duration_minutes': 12, 'questions': questions},
+        )
+
+    def test_defaults_to_the_most_recent_day_with_activity(self, _complete):
+        self.add_session(self.mine, date(2026, 3, 1))
+        self.add_session(self.mine, date(2026, 3, 10))
+        self.sign_in(self.teacher)
+        body = self.client.get(f'/api/students/{self.mine.id}/digest/').json()
+        self.assertEqual(body['date'], '2026-03-10')
+
+    def test_a_student_with_no_app_activity_gets_a_placeholder_not_an_error(self, _complete):
+        self.sign_in(self.teacher)
+        response = self.client.get(f'/api/students/{self.mine.id}/digest/')
+        self.assertEqual(response.status_code, 200)
+        body = response.json()
+        self.assertIsNone(body['date'])
+        self.assertEqual(body['action'], 'check_in')
+        self.assertEqual(body['flags'], [])
+
+    def test_low_accuracy_triggers_intervene_and_a_real_flag(self, _complete):
+        self.add_session(self.mine, date(2026, 3, 5), accuracy=0.0, n=8)
+        self.sign_in(self.teacher)
+        body = self.client.get(
+            f'/api/students/{self.mine.id}/digest/?date=2026-03-05').json()
+        self.assertEqual(body['action'], 'intervene')
+        self.assertEqual(len(body['flags']), 1)
+        self.assertEqual(body['flags'][0]['severity'], 'concern')
+        self.assertEqual(body['flags'][0]['topic'], 'fractions - adding')
+
+    def test_high_accuracy_gives_no_flags_and_celebrates(self, _complete):
+        self.add_session(self.mine, date(2026, 3, 5), accuracy=1.0, n=8)
+        self.sign_in(self.teacher)
+        body = self.client.get(
+            f'/api/students/{self.mine.id}/digest/?date=2026-03-05').json()
+        self.assertEqual(body['flags'], [])
+        self.assertEqual(body['action'], 'celebrate')
+
+    def test_too_few_attempts_never_flags(self, _complete):
+        self.add_session(self.mine, date(2026, 3, 5), accuracy=0.0, n=2)
+        self.sign_in(self.teacher)
+        body = self.client.get(
+            f'/api/students/{self.mine.id}/digest/?date=2026-03-05').json()
+        self.assertEqual(body['flags'], [])
+
+    def test_model_cannot_override_the_computed_action(self, complete_mock):
+        complete_mock.return_value = (
+            '{"action": "celebrate", "headline": "H.", "narrative": "N."}'
+        )
+        self.add_session(self.mine, date(2026, 3, 5), accuracy=0.0, n=8)
+        self.sign_in(self.teacher)
+        body = self.client.get(
+            f'/api/students/{self.mine.id}/digest/?date=2026-03-05').json()
+        # The model tried to say celebrate; the concern-level flag wins.
+        self.assertEqual(body['action'], 'intervene')
+
+    def test_pace_flag_compares_to_the_student_s_own_prior_baseline(self, _complete):
+        self.add_session(self.mine, date(2026, 2, 1), seconds=20, n=8)
+        self.add_session(self.mine, date(2026, 3, 5), seconds=60, n=8)
+        self.sign_in(self.teacher)
+        body = self.client.get(
+            f'/api/students/{self.mine.id}/digest/?date=2026-03-05').json()
+        kinds = {f['kind'] for f in body['flags']}
+        self.assertIn('pace', kinds)
+
+    def test_baseline_excludes_the_digest_day_itself(self, _complete):
+        # A single day cannot be its own baseline: pace flags need history.
+        self.add_session(self.mine, date(2026, 3, 5), seconds=60, n=8)
+        self.sign_in(self.teacher)
+        body = self.client.get(
+            f'/api/students/{self.mine.id}/digest/?date=2026-03-05').json()
+        self.assertEqual({f['kind'] for f in body['flags']}, set())
+
+    def test_no_record_after_the_day_reaches_the_model(self, complete_mock):
+        """A digest for a past day is written from what was known that day."""
+        self.add_session(self.mine, date(2026, 3, 5), accuracy=0.0, n=8)
+        StudentRecord.objects.create(
+            student=self.mine, source=StudentRecord.OBSERVATION, date=date(2026, 5, 1),
+            title='Later observation', body='UNSEEABLE-FUTURE-NOTE',
+        )
+        self.sign_in(self.teacher)
+        self.client.get(f'/api/students/{self.mine.id}/digest/?date=2026-03-05')
+        prompt = complete_mock.call_args[0][0]
+        self.assertNotIn('UNSEEABLE-FUTURE-NOTE', prompt)
+
+    def test_only_teachers_reach_the_digest(self, _complete):
+        """The narrative draws on behaviour and observations, so it is not a
+        surface a guardian or a student may read."""
+        self.add_session(self.mine, date(2026, 3, 5), accuracy=0.0, n=8)
+        url = f'/api/students/{self.mine.id}/digest/?date=2026-03-05'
+        for user in (self.guardian, self.mine.user):
+            self.sign_in(user)
+            self.assertEqual(self.client.get(url).status_code, 404, f'{user} reached the digest')
+        self.sign_in(self.teacher)
+        self.assertEqual(self.client.get(url).status_code, 200)
+
+    def test_a_teacher_cannot_see_a_student_they_do_not_teach(self, _complete):
+        self.add_session(self.theirs, date(2026, 3, 5))
+        self.sign_in(self.teacher)
+        self.assertEqual(
+            self.client.get(f'/api/students/{self.theirs.id}/digest/').status_code, 404)
+
+    def test_invalid_date_falls_back_to_most_recent(self, _complete):
+        self.add_session(self.mine, date(2026, 3, 1))
+        self.sign_in(self.teacher)
+        body = self.client.get(
+            f'/api/students/{self.mine.id}/digest/?date=not-a-date').json()
+        self.assertEqual(body['date'], '2026-03-01')
+
+
 class AskTests(ApiTestCase):
     ANSWER = (
         'She scored 88 on the Maths unit test of 2026-03-01 and rates 5 out of 5 '
