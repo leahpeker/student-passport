@@ -1,6 +1,7 @@
-import { Link, Navigate, useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import type { Me } from '../api/types';
 import { PassportPanel } from '../components/passport/PassportPanel';
+import { StudentSidebar } from '../components/passport/StudentSidebar';
 import { canViewStudent, landingPath } from '../lib/access';
 
 export function PassportView({ me }: { me: Me }) {
@@ -13,19 +14,9 @@ export function PassportView({ me }: { me: Me }) {
     return <Navigate to={landingPath(me)} replace />;
   }
 
-  const backTo = me.role === 'teacher' ? '/teacher' : '/guardian';
-  const backLabel =
-    me.role === 'teacher' ? '← Back to your classrooms' : '← Back to your students';
-
   return (
-    <div>
-      {me.role !== 'student' && (
-        <p className="mb-4">
-          <Link to={backTo} className="btn btn-ghost -ml-2">
-            {backLabel}
-          </Link>
-        </p>
-      )}
+    <div className="grid gap-5 lg:grid-cols-[236px_1fr]">
+      <StudentSidebar me={me} activeStudentId={id} />
       <PassportPanel studentId={id} me={me} />
     </div>
   );

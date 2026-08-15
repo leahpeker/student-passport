@@ -1,15 +1,19 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { exportPassport, getPassport } from '../../api/client';
 import type { Me, Passport, StudentRecord } from '../../api/types';
 import { useAsync } from '../../lib/useAsync';
 import { formatDate } from '../../lib/school';
+import { getPulse } from '../../lib/pulse';
+import { showsBehavior } from '../../lib/access';
 import { AsyncState } from '../AsyncState';
+import { Tabs, type TabItem } from '../Tabs';
 import { BehaviorSection } from './BehaviorSection';
 import { HowTheyLearnSection } from './HowTheyLearnSection';
 import { InputSection } from './InputSection';
 import { OverviewSection } from './OverviewSection';
 import { PerformanceSection } from './PerformanceSection';
-import { QuestionBox } from './QuestionBox';
+import { PassportAssistant, type AssistantHandle } from './PassportAssistant';
+import { PulseHero } from './PulseHero';
 
 function Stat({ label, value }: { label: string; value: string }) {
   return (
@@ -26,6 +30,9 @@ export function PassportPanel({ studentId, me }: { studentId: number; me: Me }) 
   const load = useCallback(() => getPassport(studentId), [studentId]);
   const { data, error, loading, setData } = useAsync(load);
   const [exportError, setExportError] = useState<string | null>(null);
+  const [tab, setTab] = useState('overview');
+  const assistantRef = useRef<AssistantHandle>(null);
+  const ask = useCallback((prompt?: string) => assistantRef.current?.ask(prompt), []);
 
   const addRecord = useCallback(
     (record: StudentRecord) => {
@@ -35,6 +42,16 @@ export function PassportPanel({ studentId, me }: { studentId: number; me: Me }) 
     },
     [setData],
   );
+
+  const tabs = useMemo<TabItem[]>(() => {
+    const list: TabItem[] = [
+      { id: 'overview', label: 'Overview' },
+      { id: 'learning', label: 'Learning' },
+      { id: 'performance', label: 'Performance over time' },
+    ];
+    if (showsBehavior(me.role)) list.push({ id: 'behavior', label: 'Behaviour' });
+    return list;
+  }, [me.role]);
 
   async function onExport() {
     setExportError(null);
@@ -59,80 +76,99 @@ export function PassportPanel({ studentId, me }: { studentId: number; me: Me }) 
   if (!data) return null;
 
   const { student, sections, records, guardians } = data;
+  const pulse = getPulse(studentId);
   const sourceCount = new Set(records.map((r) => r.source)).size;
-
   const initials = `${student.first_name[0] ?? ''}${student.last_name[0] ?? ''}`.toUpperCase();
 
+  const active = tabs.some((t) => t.id === tab) ? tab : 'overview';
+
   return (
-    <article className="space-y-6">
-      <header className="elev-sm rounded-lg bg-surface p-[19px]">
-        <div className="flex flex-wrap items-start gap-4">
-          <span aria-hidden="true" className="avatar h-[54px] w-[54px] text-[19px]">
-            {initials}
-          </span>
-          <div>
-            <h1 className="text-[26px] font-medium tracking-[-0.02em] text-text">
-              {student.name}
-            </h1>
-            <p className="mt-1 text-[12.5px] text-muted">
-              Grade {student.grade} · {student.pronouns}
-            </p>
+    <article>
+      {/* top row: student info (~1/3) + pulse hero (~2/3) */}
+      <div className="grid gap-4 lg:grid-cols-[1fr_2fr]">
+        <header className="rounded-lg bg-surface p-[19px] elev-sm">
+          <div className="flex items-start gap-3">
+            <span aria-hidden="true" className="avatar h-[46px] w-[46px] text-[17px]">
+              {initials}
+            </span>
+            <div className="min-w-0">
+              <h1 className="truncate text-[21px] font-medium tracking-[-0.02em] text-text">
+                {student.name}
+              </h1>
+              <p className="mt-0.5 text-[12px] text-muted">
+                Grade {student.grade} · {student.pronouns}
+              </p>
+            </div>
           </div>
-          <button type="button" onClick={onExport} className="btn btn-secondary ml-auto">
+          <hr className="hr mt-4" />
+          <dl className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3">
+            <Stat label="Records" value={String(records.length)} />
+            <Stat label="Sources" value={String(sourceCount)} />
+            <Stat
+              label="Guardians"
+              value={guardians.map((g) => g.name).join(', ') || 'None on file'}
+            />
+            <Stat label="Assembled" value={formatDate(data.generated_at.slice(0, 10))} />
+          </dl>
+          <button type="button" onClick={onExport} className="btn btn-secondary mt-4 w-full">
             Export as JSON
           </button>
-        </div>
-        {exportError && (
-          <p role="alert" className="mt-3 text-[13px] text-red-300">
-            {exportError}
-          </p>
-        )}
-        <hr className="hr mt-5" />
-        <dl className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-4">
-          <Stat label="Records" value={String(records.length)} />
-          <Stat label="Sources" value={String(sourceCount)} />
-          <Stat
-            label="Guardians"
-            value={guardians.map((g) => g.name).join(', ') || 'None on file'}
-          />
-          <Stat
-            label="Assembled"
-            value={formatDate(data.generated_at.slice(0, 10))}
-          />
-        </dl>
-      </header>
+          {exportError && (
+            <p role="alert" className="mt-2 text-[12.5px] text-red-300">
+              {exportError}
+            </p>
+          )}
+        </header>
 
-      <OverviewSection student={student} sections={sections} />
-      <HowTheyLearnSection records={records} narrative={sections.how_they_learn} />
-      <PerformanceSection records={records} narrative={sections.performance} />
-      <BehaviorSection records={records} narrative={sections.behavior} />
+        <PulseHero student={student} pulse={pulse} onAsk={ask} />
+      </div>
 
-      <InputSection
-        id="guardian-input"
-        title="Guardian input"
-        lead="What the people at home have asked the school to know. Nothing here comes from a system; it was written by a guardian."
-        source="parent_input"
-        studentId={studentId}
-        records={records.filter((r) => r.source === 'parent_input')}
-        canWrite={me.role === 'guardian'}
-        formLabel="Add a note from home"
-        onAdded={addRecord}
-      />
+      {/* category nav */}
+      <div className="mt-6">
+        <Tabs label="Passport sections" tabs={tabs} activeId={active} onChange={setTab}>
+          {active === 'overview' && (
+            <div className="space-y-6">
+              <OverviewSection student={student} sections={sections} />
+              <InputSection
+                id="guardian-input"
+                title="Guardian input"
+                lead="What the people at home have asked the school to know. Nothing here comes from a system; it was written by a guardian."
+                source="parent_input"
+                studentId={studentId}
+                records={records.filter((r) => r.source === 'parent_input')}
+                canWrite={me.role === 'guardian'}
+                formLabel="Add a note from home"
+                onAdded={addRecord}
+              />
+              <InputSection
+                id="student-input"
+                title="Student input"
+                lead={`What ${student.first_name} has asked to be passed on. This is the only section the student writes.`}
+                source="student_input"
+                studentId={studentId}
+                records={records.filter((r) => r.source === 'student_input')}
+                canWrite={me.role === 'student' && me.student_id === studentId}
+                formLabel="Add something in your own words"
+                onAdded={addRecord}
+              />
+            </div>
+          )}
+          {active === 'learning' && (
+            <HowTheyLearnSection records={records} narrative={sections.how_they_learn} />
+          )}
+          {active === 'performance' && (
+            <PerformanceSection records={records} narrative={sections.performance} />
+          )}
+          {active === 'behavior' && (
+            <BehaviorSection records={records} narrative={sections.behavior} />
+          )}
+        </Tabs>
+      </div>
 
-      <InputSection
-        id="student-input"
-        title="Student input"
-        lead={`What ${student.first_name} has asked to be passed on. This is the only section the student writes.`}
-        source="student_input"
-        studentId={studentId}
-        records={records.filter((r) => r.source === 'student_input')}
-        canWrite={me.role === 'student' && me.student_id === studentId}
-        formLabel="Add something in your own words"
-        onAdded={addRecord}
-      />
-
-      <QuestionBox
+      <PassportAssistant
+        ref={assistantRef}
         student={student}
+        pulse={pulse}
         onAnswered={(answer) => addRecord(answer.record)}
       />
     </article>
