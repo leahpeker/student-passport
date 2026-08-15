@@ -12,6 +12,7 @@ const SOURCE_TAG_CLASS: Record<StudentRecord['source'], string> = {
   parent_input: 'tag-accent',
   student_input: 'tag-accent',
   ai_tutor: 'tag-accent',
+  cognitive_analysis: 'tag-accent2',
   question: 'tag-accent',
 };
 

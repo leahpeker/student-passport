@@ -5,7 +5,7 @@
  * a second source of data. Nothing here reads the network or the fixtures.
  */
 
-import type { StudentRecord } from '../api/types';
+import type { CognitiveAnalysis, StudentRecord } from '../api/types';
 
 /** School year 2025-09-02 to 2026-06-05. */
 export const YEAR_START_MS = Date.UTC(2025, 8, 2);
@@ -197,4 +197,72 @@ export function behaviorByPeriod(records: StudentRecord[]): Record<number, numbe
     if (period != null && period in counts) counts[period] += 1;
   }
   return counts;
+}
+
+/** The most recent `cognitive_analysis` record's `data`, or null if there is none. */
+export function latestCognitiveAnalysis(records: StudentRecord[]): CognitiveAnalysis | null {
+  const rows = records.filter((r) => r.source === 'cognitive_analysis');
+  if (rows.length === 0) return null;
+  const latest = rows.reduce((a, b) => (a.date > b.date ? a : b));
+  return latest.data as unknown as CognitiveAnalysis;
+}
+
+export interface CognitiveTypePoint {
+  label: string;
+  typical: number;
+  peak: number;
+}
+
+/** Typical vs peak depth (0-3) per cognitive type, in the skill's canonical order. */
+export function cognitiveTypePoints(analysis: CognitiveAnalysis): CognitiveTypePoint[] {
+  return analysis.cognitive_types.map((t) => ({
+    label: t.label,
+    typical: t.typical_depth_score,
+    peak: t.peak_depth_score,
+  }));
+}
+
+export interface CognitiveTypeShare {
+  id: string;
+  label: string;
+  count: number;
+  /** 0-100. */
+  share: number;
+}
+
+/** How the recorded instances split across cognitive types, in canonical order. */
+export function cognitiveTypeShares(analysis: CognitiveAnalysis): CognitiveTypeShare[] {
+  const total = analysis.cognitive_types.reduce((sum, t) => sum + t.instance_count, 0);
+  return analysis.cognitive_types.map((t) => ({
+    id: t.id,
+    label: t.label,
+    count: t.instance_count,
+    share: total > 0 ? (t.instance_count / total) * 100 : 0,
+  }));
+}
+
+/** Distinct subjects the analysed sessions cover, in first-seen order. */
+export function cognitiveSubjects(analysis: CognitiveAnalysis): string[] {
+  return [...new Set(analysis.sessions.map((s) => s.subject))];
+}
+
+/**
+ * The same shape as `cognitiveTypeShares`, scoped to one subject.
+ *
+ * The skill's `instance_count` rollup isn't broken out by subject, so within
+ * a subject this counts sessions where that type showed any depth instead —
+ * a coarser but real, session-grounded number, not a fabricated one.
+ */
+export function cognitiveTypeSharesBySubject(
+  analysis: CognitiveAnalysis,
+  subject: string,
+): CognitiveTypeShare[] {
+  const sessions = analysis.sessions.filter((s) => s.subject === subject);
+  const counts = analysis.cognitive_types.map((t) => ({
+    id: t.id,
+    label: t.label,
+    count: sessions.filter((s) => (s.type_scores[t.id] ?? 0) > 0).length,
+  }));
+  const total = counts.reduce((sum, c) => sum + c.count, 0);
+  return counts.map((c) => ({ ...c, share: total > 0 ? (c.count / total) * 100 : 0 }));
 }

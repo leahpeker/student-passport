@@ -2,21 +2,32 @@ import { useCallback, useMemo } from 'react';
 import { getDigest } from '../api/client';
 import type { Student } from '../api/types';
 import { useAsync } from './useAsync';
-import { getPulse, pulseFromDigest, type Pulse } from './pulse';
+import {
+  getPulse,
+  hasAuthoredPulse,
+  hasDigestActivity,
+  pulseFromDigest,
+  type Pulse,
+} from './pulse';
 
 /**
- * The full pulse for one student. Real when the backend has a computed
- * digest for this viewer (teacher only — see `getDigest`); the authored
- * fixture otherwise, so a guardian, a student, or a still-loading row never
- * renders as broken or missing. Shared by anything that renders one
- * student's own dot/card (the sidebar); `useClassroomPulses` below is the
- * equivalent for a whole roster that needs to bucket by tone before it can
- * render at all.
+ * The full pulse for one student. The six story-arc students always keep
+ * their authored pulse — see `hasAuthoredPulse` — so ordinary AI-tutor
+ * traffic on the live app never quietly replaces their curated story. Real
+ * for everyone else when the backend has a digest with actual activity
+ * behind it (teacher only — see `getDigest`); the authored fixture
+ * otherwise, so a guardian, a student, a still-loading row, or a student
+ * with no app activity on file never renders as broken, missing, or falsely
+ * amber. Shared by anything that renders one student's own dot/card (the
+ * sidebar); `useClassroomPulses` below is the equivalent for a whole roster
+ * that needs to bucket by tone before it can render at all.
  */
-export function usePulse(studentId: number, firstName = ''): Pulse {
+export function usePulse(studentId: number, studentName: string, firstName = ''): Pulse {
   const load = useCallback(() => getDigest(studentId), [studentId]);
   const { data: digest } = useAsync(load);
-  return digest ? pulseFromDigest(digest, firstName) : getPulse(studentId);
+  return !hasAuthoredPulse(studentName) && hasDigestActivity(digest)
+    ? pulseFromDigest(digest, firstName)
+    : getPulse(studentName);
 }
 
 /**
@@ -33,7 +44,7 @@ export function usePulse(studentId: number, firstName = ''): Pulse {
 export function useClassroomPulses(students: Student[]): Record<number, Pulse> {
   const ids = students.map((s) => s.id).join(',');
   const fixture = useMemo(
-    () => Object.fromEntries(students.map((s) => [s.id, getPulse(s.id)])),
+    () => Object.fromEntries(students.map((s) => [s.id, getPulse(s.name)])),
     // eslint-disable-next-line react-hooks/exhaustive-deps -- `ids` is the real dependency; `students` is re-created every render.
     [ids],
   );
@@ -41,7 +52,10 @@ export function useClassroomPulses(students: Student[]): Record<number, Pulse> {
     const entries = await Promise.all(
       students.map(async (s) => {
         const digest = await getDigest(s.id);
-        return [s.id, digest ? pulseFromDigest(digest, s.first_name) : getPulse(s.id)] as const;
+        const pulse = !hasAuthoredPulse(s.name) && hasDigestActivity(digest)
+          ? pulseFromDigest(digest, s.first_name)
+          : getPulse(s.name);
+        return [s.id, pulse] as const;
       }),
     );
     return Object.fromEntries(entries);

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import type { Classroom, Student } from '../api/types';
 import { useClassroomPulses } from '../lib/useRosterPulse';
 import type { Pulse, PulseTone } from '../lib/pulse';
+import { AiBadge } from './AiBadge';
 import { toneCard, toneDot, toneLabel } from './passport/tone';
 
 function initialsOf(student: Student): string {
@@ -25,6 +26,7 @@ function StudentCard({ student, pulse }: { student: Student; pulse: Pulse }) {
           <span className="truncate text-[13.5px] font-medium text-text">
             {student.name}
           </span>
+          {student.has_ai_analysis && <AiBadge />}
           <span
             aria-hidden="true"
             className={`ml-auto h-2 w-2 shrink-0 rounded-full ${toneDot[pulse.tone]}`}

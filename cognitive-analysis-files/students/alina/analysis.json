@@ -1,0 +1,974 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-08-15T00:00:00Z",
+  "source_files": [
+    "full_corpus.json"
+  ],
+  "student": {
+    "student_id": "alina",
+    "grade": 9,
+    "school_year": "2025-2026"
+  },
+  "evidence_base": {
+    "session_count": 17,
+    "total_turns": 114,
+    "student_turns": 65,
+    "student_words": 1991,
+    "date_range": {
+      "start": "2025-09-15",
+      "end": "2026-05-20"
+    },
+    "subjects": [
+      "Mathematics",
+      "Science",
+      "Social Studies",
+      "English",
+      "Visual Arts"
+    ],
+    "sufficiency": "strong",
+    "sufficiency_note": "17 sessions across 8 months and 5 subjects supports a genuine profile, including a clear within-year trend (English-first requests replacing Spanish-first ones, an offload pattern that appears only once and early)."
+  },
+  "cognitive_types": [
+    {
+      "id": "fluency",
+      "label": "Fluency",
+      "definition": "Retrieving or recalling known material fast and automatically",
+      "presence_score": 2,
+      "presence_label": "Frequent",
+      "typical_depth_score": 1,
+      "typical_depth_label": "Surface",
+      "peak_depth_score": 2,
+      "peak_depth_label": "Developing",
+      "peak_turn_id": 24,
+      "instance_count": 9,
+      "summary": "Frequent vocabulary and terminology lookups, almost always English-side rather than content-side — she already has the concept and needs the word for it, and by January she starts asking in English first instead of Spanish first.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_alina_01",
+          "subject": "Mathematics",
+          "unit": "Geometry, unit 1 vocabulary",
+          "date": "2025-09-15",
+          "preceding_ai_turn": {
+            "turn_id": null,
+            "text": ""
+          },
+          "student_turn": {
+            "turn_id": 1,
+            "text": "¿Cómo se dice \"denominador\" en inglés? Y \"mínimo común múltiplo\"."
+          },
+          "depth_score": 1,
+          "depth_label": "Surface",
+          "why": "Straightforward vocabulary lookup for terms she already uses correctly in Spanish."
+        },
+        {
+          "session_id": "sess_alina_04",
+          "subject": "Social Studies",
+          "unit": "U.S. History, colonial period",
+          "date": "2025-10-20",
+          "preceding_ai_turn": {
+            "turn_id": 23,
+            "text": "Puedo traducirlo, pero antes probemos algo: lee la primera oración tú misma y dime qué palabras no reconoces. Así aprendes el vocabulario en vez de solo leer la traducción."
+          },
+          "student_turn": {
+            "turn_id": 24,
+            "text": "ok. \"the thirteen colonies were established along the atlantic coast.\" entiendo casi todo, \"established\" no se que es"
+          },
+          "depth_score": 2,
+          "depth_label": "Developing",
+          "why": "She reads the sentence herself and narrows to the one word she doesn't know, rather than asking for a full translation."
+        },
+        {
+          "session_id": "sess_alina_08",
+          "subject": "Mathematics",
+          "unit": "Geometry, review",
+          "date": "2026-01-14",
+          "preceding_ai_turn": {
+            "turn_id": null,
+            "text": ""
+          },
+          "student_turn": {
+            "turn_id": 52,
+            "text": "ok numerator. and bottom is denominator, i remember that one from september. i am trying to only ask in english now instead of spanish first"
+          },
+          "depth_score": 2,
+          "depth_label": "Developing",
+          "why": "Names her own shift from asking in Spanish first to asking in English first — a self-directed change in how she uses the tool."
+        }
+      ]
+    },
+    {
+      "id": "procedural",
+      "label": "Procedural",
+      "definition": "Executing a known sequence correctly, step by step",
+      "presence_score": 2,
+      "presence_label": "Frequent",
+      "typical_depth_score": 2,
+      "typical_depth_label": "Developing",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 19,
+      "instance_count": 6,
+      "summary": "Reliable, independent execution once the question itself is understood — she shows full working and asks the AI to confirm rather than to solve, in math and in lab write-ups alike.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_alina_03",
+          "subject": "Mathematics",
+          "unit": "Geometry, word problems",
+          "date": "2025-10-07",
+          "preceding_ai_turn": {
+            "turn_id": 18,
+            "text": "Angle of elevation is just the angle between the ground and the ladder, measured from the ground up. Since you have the two legs of a right triangle (6 ft base, and you can find the height with the Pythagorean theorem), you can use trigonometry to find that angle."
+          },
+          "student_turn": {
+            "turn_id": 19,
+            "text": "ok so height is sqrt(100-36) = sqrt(64) = 8. and then the angle from the ground, i use tan porque tengo opuesto y adyacente. tan(angle) = 8/6, angle = arctan(8/6) = 53.13 degrees. is that the angle of elevation or do i need the other one"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Full independent trigonometric solution, self-verified, with only the vocabulary term checked against the AI rather than the method."
+        },
+        {
+          "session_id": "sess_alina_11",
+          "subject": "Mathematics",
+          "unit": "Geometry, semester exam review",
+          "date": "2026-02-19",
+          "preceding_ai_turn": {
+            "turn_id": 69,
+            "text": "Go ahead and try it — I'll wait."
+          },
+          "student_turn": {
+            "turn_id": 70,
+            "text": "ok. \"triangle ABC and triangle DEF, angle A = angle D, angle B = angle E. by AA similarity postulate the triangles are similar, so the sides are proportional. therefore AB/DE = BC/EF.\" is that a complete proof or am i missing a step"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Produces a complete similarity proof on her own before asking for a check, invoking the correct postulate and conclusion."
+        }
+      ]
+    },
+    {
+      "id": "conceptual",
+      "label": "Conceptual",
+      "definition": "Building or repairing a mental model of how something works",
+      "presence_score": 2,
+      "presence_label": "Frequent",
+      "typical_depth_score": 2,
+      "typical_depth_label": "Developing",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 77,
+      "instance_count": 5,
+      "summary": "Her clearest strength once language stops being the bottleneck: she states her own model, notices when a new fact breaks it, and repairs it herself rather than accepting a correction passively.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_alina_12",
+          "subject": "Science",
+          "unit": "Biology, mitosis",
+          "date": "2026-03-04",
+          "preceding_ai_turn": {
+            "turn_id": 74,
+            "text": "Grammar: \"divide\" should be \"divides.\" But there's also a science issue worth checking — are the two resulting cells actually identical?"
+          },
+          "student_turn": {
+            "turn_id": 75,
+            "text": "wait, i thought mitosis makes two identical cells, that is what the diagram showed. are they not identical?"
+          },
+          "depth_score": 2,
+          "depth_label": "Developing",
+          "why": "Productive confusion: her diagram-based model says mitosis produces identical cells, and she says so plainly when that's challenged, rather than just accepting the correction."
+        },
+        {
+          "session_id": "sess_alina_12",
+          "subject": "Science",
+          "unit": "Biology, mitosis",
+          "date": "2026-03-04",
+          "preceding_ai_turn": {
+            "turn_id": 76,
+            "text": "They're genetically identical — same DNA — but not always identical in size or in exactly which organelles end up in each half, especially if the division isn't perfectly centered. What does your diagram show about where the chromosomes end up?"
+          },
+          "student_turn": {
+            "turn_id": 77,
+            "text": "the diagram shows the chromosomes split evenly to each side before the cell divides, so the dna is the same, but you are saying the cell parts around it might not split evenly. i did not think about that part before"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Repairs her own model with the new distinction (genetically identical vs. structurally identical) and explains it back using her own diagram as evidence — the clearest 'model appearing in the transcript' moment in the corpus."
+        },
+        {
+          "session_id": "sess_alina_06",
+          "subject": "Science",
+          "unit": "Biology, osmosis lab",
+          "date": "2025-12-01",
+          "preceding_ai_turn": {
+            "turn_id": 37,
+            "text": "Of course — go ahead and share your reasoning."
+          },
+          "student_turn": {
+            "turn_id": 38,
+            "text": "the potato in salt water lost mass because the water inside the potato moved outside where there was more salt, to make it more even. the potato in plain water gained mass because water moved into the potato instead. is this correct or am i missing something about why it moves that direction"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "States her own mechanistic model of osmosis in full, unprompted, and asks specifically about the one part of the mechanism she's unsure of rather than asking for the whole explanation."
+        }
+      ]
+    },
+    {
+      "id": "critical_thinking",
+      "label": "Critical Thinking",
+      "definition": "Evaluating, reasoning about, or challenging a claim",
+      "presence_score": 2,
+      "presence_label": "Frequent",
+      "typical_depth_score": 2,
+      "typical_depth_label": "Developing",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 91,
+      "instance_count": 5,
+      "summary": "Builds her own evaluative arguments rather than asking the AI to judge for her — most fully in a primary-source comparison where she designs her own method for weighing two biased accounts against each other.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_alina_14",
+          "subject": "Social Studies",
+          "unit": "U.S. History, primary source analysis",
+          "date": "2026-04-02",
+          "preceding_ai_turn": {
+            "turn_id": 88,
+            "text": "You don't need to know the true number to evaluate the sources — you can reason about which account has more reason to shade the truth in a particular direction. What do you know about each source's position?"
+          },
+          "student_turn": {
+            "turn_id": 89,
+            "text": "the british officer works for the government that is trying to stop the protests, so he would want to make it look small and like it was started by troublemakers, not like a real movement. the newspaper is colonial so they would want to make it look big and peaceful, like the crowd did not start it"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Independently reasons out each source's motive to distort the same event in opposite directions — a full comparative bias analysis with no scaffolding from the AI."
+        },
+        {
+          "session_id": "sess_alina_14",
+          "subject": "Social Studies",
+          "unit": "U.S. History, primary source analysis",
+          "date": "2026-04-02",
+          "preceding_ai_turn": {
+            "turn_id": 90,
+            "text": "That's exactly the right move — both sources have a motive to shade the same event in opposite directions. So how do you use that? Does it mean you throw both out?"
+          },
+          "student_turn": {
+            "turn_id": 91,
+            "text": "no, i think you can still find the part where they agree even though they disagree on numbers, and that part is probably true because neither of them had a reason to lie about it. i need to reread both and find what they actually agree on instead of just picking the one i believe more"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Proposes her own method for adjudicating between biased sources (trust what they agree on) and states a concrete plan to apply it — the strongest single turn in the corpus."
+        },
+        {
+          "session_id": "sess_alina_09",
+          "subject": "Social Studies",
+          "unit": "U.S. History, causes of the American Revolution",
+          "date": "2026-01-22",
+          "preceding_ai_turn": {
+            "turn_id": null,
+            "text": ""
+          },
+          "student_turn": {
+            "turn_id": 54,
+            "text": "we have to pick one cause of the american revolution and argue it was the most important. mr boyd gave us four: taxation, representation, british troops staying in the colonies, and enlightenment ideas. i think representation matters more than taxation because people were more angry about not having a voice than about the money itself. does that argument make sense or is it backwards"
+          },
+          "depth_score": 2,
+          "depth_label": "Developing",
+          "why": "Builds a comparative argument (representation over taxation) and states her own reasoning before asking whether it holds."
+        }
+      ]
+    },
+    {
+      "id": "creative",
+      "label": "Creative",
+      "definition": "Generating something novel; diverging rather than converging",
+      "presence_score": 1,
+      "presence_label": "Occasional",
+      "typical_depth_score": 2,
+      "typical_depth_label": "Developing",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 96,
+      "instance_count": 3,
+      "summary": "Thin in volume but real when it appears — her strongest original material surfaces when she's invited to think in Spanish first and translate second, rather than compose in English from the start.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_alina_15",
+          "subject": "Visual Arts",
+          "unit": "Studio Art, artist statement",
+          "date": "2026-04-20",
+          "preceding_ai_turn": {
+            "turn_id": 95,
+            "text": "Tell me the idea in Spanish first, the way it actually sounds in your head — we can work on the English after."
+          },
+          "student_turn": {
+            "turn_id": 96,
+            "text": "la pintura tiene dos mitades, un lado con colores que conozco de casa y el otro lado con colores que todavia no se como se llaman en ingles. es sobre no tener las palabras todavia pero sentir los colores igual"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Original, fully-realized idea for her artist statement — a two-halves metaphor for her painting — generated in her own words before any English drafting began."
+        },
+        {
+          "session_id": "sess_alina_15",
+          "subject": "Visual Arts",
+          "unit": "Studio Art, artist statement",
+          "date": "2026-04-20",
+          "preceding_ai_turn": {
+            "turn_id": 97,
+            "text": "That's a strong idea — \"two halves, one side with colors I know from home, the other with colors I don't have the English words for yet — about not having the words yet but feeling the colors anyway.\" Does that capture it, or is something missing in translation?"
+          },
+          "student_turn": {
+            "turn_id": 98,
+            "text": "yes that is it, but can i say it more like a sentence instead of just describing the painting, like starting with the idea about words first"
+          },
+          "depth_score": 2,
+          "depth_label": "Developing",
+          "why": "Directs a structural revision of the AI's draft rather than accepting it as-is, asking to lead with the idea instead of the description."
+        }
+      ]
+    },
+    {
+      "id": "metacognitive",
+      "label": "Metacognitive",
+      "definition": "Monitoring and regulating their own thinking and learning",
+      "presence_score": 2,
+      "presence_label": "Frequent",
+      "typical_depth_score": 2,
+      "typical_depth_label": "Developing",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 105,
+      "instance_count": 14,
+      "summary": "The most frequent type in the transcript by a wide margin, and unusually precise: in session after session she names exactly which part of a task was language and which part was content, rather than treating a struggle as one undifferentiated thing.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_alina_03",
+          "subject": "Mathematics",
+          "unit": "Geometry, word problems",
+          "date": "2025-10-07",
+          "preceding_ai_turn": {
+            "turn_id": 20,
+            "text": "That's exactly the angle of elevation — the angle between the ground and the ladder. 53.13° is correct."
+          },
+          "student_turn": {
+            "turn_id": 21,
+            "text": "ok. so the whole problem i could do, the word i did not know was the only part i was stuck on"
+          },
+          "depth_score": 2,
+          "depth_label": "Developing",
+          "why": "Closes by drawing the precise line between what she understood (the whole problem) and what she didn't (one phrase) — the throughline of her whole profile."
+        },
+        {
+          "session_id": "sess_alina_16",
+          "subject": "English",
+          "unit": "World Literature, class discussion prep",
+          "date": "2026-05-06",
+          "preceding_ai_turn": {
+            "turn_id": 104,
+            "text": "That's a strong observation to lead with — it's specific and textual. Try saying it out loud to me now, the way you'd say it in class."
+          },
+          "student_turn": {
+            "turn_id": 105,
+            "text": "the narrator says she is calm but... her hands are shaking in the same... paragraph. so she is not reliable. that is what i want to say but it comes out slower when i say it than when i write it"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Real-time self-monitoring while attempting a spoken rehearsal: she notices and names the specific gap between how the idea comes out in writing versus out loud, as it's happening."
+        },
+        {
+          "session_id": "sess_alina_16",
+          "subject": "English",
+          "unit": "World Literature, class discussion prep",
+          "date": "2026-05-06",
+          "preceding_ai_turn": {
+            "turn_id": 108,
+            "text": "Much smoother. You've got it — that's ready for tomorrow."
+          },
+          "student_turn": {
+            "turn_id": 109,
+            "text": "ok. i am still nervous but i know what i am going to say now, that is the part i needed"
+          },
+          "depth_score": 2,
+          "depth_label": "Developing",
+          "why": "Distinguishes residual nervousness from actual readiness rather than conflating the two — a specific, accurate self-assessment."
+        }
+      ]
+    },
+    {
+      "id": "transfer",
+      "label": "Transfer",
+      "definition": "Applying something known to a genuinely different context",
+      "presence_score": 1,
+      "presence_label": "Occasional",
+      "typical_depth_score": 3,
+      "typical_depth_label": "Substantive",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 112,
+      "instance_count": 3,
+      "summary": "Rare — confined to a single final-exam-review session — but fully self-initiated and sustained across three turns: she recognizes that a geometry proof and a history argument share the same underlying requirement, that every step be justified by what came before it.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_alina_17",
+          "subject": "Mathematics",
+          "unit": "Geometry, final exam review",
+          "date": "2026-05-20",
+          "preceding_ai_turn": {
+            "turn_id": null,
+            "text": ""
+          },
+          "student_turn": {
+            "turn_id": 110,
+            "text": "i am reviewing proofs for the final and i noticed something, tell me if this is a real connection or if i am just imagining it. in a geometry proof each step has to follow from the step before with a reason, or the whole proof falls apart. that is the same structure as the history paragraph i wrote in january about the revolution, where mr boyd said i needed each sentence to follow from evidence instead of just stating my opinion"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Notices, unprompted, that geometry proofs and her January history paragraph share the same logical structure, and explicitly checks whether the connection is real rather than assuming it."
+        },
+        {
+          "session_id": "sess_alina_17",
+          "subject": "Mathematics",
+          "unit": "Geometry, final exam review",
+          "date": "2026-05-20",
+          "preceding_ai_turn": {
+            "turn_id": 111,
+            "text": "That's a genuine connection, not an imagined one — you've noticed that both are the same underlying structure: a claim only holds if each step is justified by something before it, whether that's a geometric postulate or a piece of historical evidence. That's the actual logical skeleton under both subjects."
+          },
+          "student_turn": {
+            "turn_id": 112,
+            "text": "so is that why the same mistake felt the same both times, when i skipped explaining why in the similarity proof back in february you said the same thing, that i had the right conclusion but did not show why it was allowed. that is the exact same problem as stating an opinion without evidence in history"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Extends the connection further, mapping a specific past math mistake onto the exact same pattern in a specific past history mistake — two concrete instances tied together, not just a general resemblance."
+        }
+      ]
+    },
+    {
+      "id": "exploratory",
+      "label": "Exploratory",
+      "definition": "Encountering new information and taking it in",
+      "presence_score": 1,
+      "presence_label": "Occasional",
+      "typical_depth_score": 1,
+      "typical_depth_label": "Surface",
+      "peak_depth_score": 1,
+      "peak_depth_label": "Surface",
+      "peak_turn_id": 43,
+      "instance_count": 3,
+      "summary": "Present only as a brief on-ramp into unfamiliar material (a new science term, an unfamiliar literary device) before the conversation moves into Conceptual or Critical Thinking work — she doesn't linger in pure intake.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_alina_07",
+          "subject": "English",
+          "unit": "World Literature, short story unit",
+          "date": "2025-12-15",
+          "preceding_ai_turn": {
+            "turn_id": null,
+            "text": ""
+          },
+          "student_turn": {
+            "turn_id": 43,
+            "text": "we are reading a short story and there is a part where the character says one thing but does another thing. mr boyd called this something in class, i wrote it down but i do not remember what it means"
+          },
+          "depth_score": 1,
+          "depth_label": "Surface",
+          "why": "Orients to an unfamiliar literary term she half-remembers from class, before the conversation moves into real interpretive work in the next turn."
+        },
+        {
+          "session_id": "sess_alina_13",
+          "subject": "English",
+          "unit": "World Literature, poetry unit",
+          "date": "2026-03-20",
+          "preceding_ai_turn": {
+            "turn_id": null,
+            "text": ""
+          },
+          "student_turn": {
+            "turn_id": 80,
+            "text": "we are reading a poem where the writer compares grief to weather, like storms and clouds. is that a metaphor or a simile, i always confuse them"
+          },
+          "depth_score": 1,
+          "depth_label": "Surface",
+          "why": "Opens by naming a persistent point of confusion (metaphor vs. simile) before applying the distinction herself."
+        }
+      ]
+    }
+  ],
+  "offloading": {
+    "instance_count": 1,
+    "summary": "Only one real offload in the corpus, and it's a reasonable, explicitly-negotiated trade under time pressure rather than a pattern: she does the targeted vocabulary work herself, then hands off the rest of a dense reading under a same-night deadline.",
+    "instances": [
+      {
+        "session_id": "sess_alina_04",
+        "subject": "Social Studies",
+        "date": "2025-10-20",
+        "turn_id": 26,
+        "type_offloaded": "fluency",
+        "pattern": "scaffolded_offload",
+        "student_turn": {
+          "turn_id": 26,
+          "text": "ok that helps. pero el resto del parrafo tiene palabras que no conozco tampoco y solo tengo esta noche. puedes traducir el resto, ya aprendi la palabra que necesitaba"
+        },
+        "note": "After identifying and learning the one word she needed herself (turn 24), she asks for the rest of the four-page reading translated, citing a single evening to finish it. She explicitly agrees to try highlighting new words herself next time — a self-aware trade, not an attempt to avoid the reading altogether."
+      }
+    ]
+  },
+  "sessions": [
+    {
+      "session_id": "sess_alina_01",
+      "subject": "Mathematics",
+      "unit": "Geometry, unit 1 vocabulary",
+      "date": "2025-09-15",
+      "turn_range": [
+        1,
+        7
+      ],
+      "student_turns": 4,
+      "dominant_type": "metacognitive",
+      "type_scores": {
+        "fluency": 1,
+        "procedural": 2,
+        "conceptual": 0,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 2,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Vocabulary check that closes with a precise self-diagnosis: the math was never the problem, only the English words for it."
+    },
+    {
+      "session_id": "sess_alina_02",
+      "subject": "Science",
+      "unit": "Biology, cell structure",
+      "date": "2025-09-24",
+      "turn_range": [
+        8,
+        14
+      ],
+      "student_turns": 4,
+      "dominant_type": "conceptual",
+      "type_scores": {
+        "fluency": 1,
+        "procedural": 0,
+        "conceptual": 2,
+        "critical_thinking": 1,
+        "creative": 0,
+        "metacognitive": 0,
+        "transfer": 0,
+        "exploratory": 1
+      },
+      "offload_instance_count": 0,
+      "summary": "Proposes her own factory analogy for an organelle and questions whether a term is technical or colloquial."
+    },
+    {
+      "session_id": "sess_alina_03",
+      "subject": "Mathematics",
+      "unit": "Geometry, word problems",
+      "date": "2025-10-07",
+      "turn_range": [
+        15,
+        21
+      ],
+      "student_turns": 4,
+      "dominant_type": "procedural",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 3,
+        "conceptual": 0,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 2,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Full independent trigonometric solution once a single phrase is clarified; names exactly where the barrier was and wasn't."
+    },
+    {
+      "session_id": "sess_alina_04",
+      "subject": "Social Studies",
+      "unit": "U.S. History, colonial period",
+      "date": "2025-10-20",
+      "turn_range": [
+        22,
+        28
+      ],
+      "student_turns": 4,
+      "dominant_type": "fluency",
+      "type_scores": {
+        "fluency": 2,
+        "procedural": 0,
+        "conceptual": 0,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 1,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 1,
+      "summary": "Does the targeted vocabulary work herself, then negotiates a time-pressured, self-aware offload of the rest of a dense reading."
+    },
+    {
+      "session_id": "sess_alina_05",
+      "subject": "English",
+      "unit": "Explaining math reasoning in writing",
+      "date": "2025-11-12",
+      "turn_range": [
+        29,
+        35
+      ],
+      "student_turns": 4,
+      "dominant_type": "metacognitive",
+      "type_scores": {
+        "fluency": 1,
+        "procedural": 0,
+        "conceptual": 0,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 2,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Grammar check on her own correct math reasoning; names a recurring personal error pattern and asks for the general rule behind it."
+    },
+    {
+      "session_id": "sess_alina_06",
+      "subject": "Science",
+      "unit": "Biology, osmosis lab",
+      "date": "2025-12-01",
+      "turn_range": [
+        36,
+        42
+      ],
+      "student_turns": 4,
+      "dominant_type": "conceptual",
+      "type_scores": {
+        "fluency": 1,
+        "procedural": 1,
+        "conceptual": 3,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 1,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "States a full, correct mechanistic model of osmosis unprompted, checking only the one part she's genuinely unsure of."
+    },
+    {
+      "session_id": "sess_alina_07",
+      "subject": "English",
+      "unit": "World Literature, short story unit",
+      "date": "2025-12-15",
+      "turn_range": [
+        43,
+        49
+      ],
+      "student_turns": 4,
+      "dominant_type": "conceptual",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 0,
+        "conceptual": 3,
+        "critical_thinking": 2,
+        "creative": 0,
+        "metacognitive": 0,
+        "transfer": 0,
+        "exploratory": 1
+      },
+      "offload_instance_count": 0,
+      "summary": "Builds her own textual reading of a character's self-deception, weighing two interpretations before landing on one with evidence."
+    },
+    {
+      "session_id": "sess_alina_08",
+      "subject": "Mathematics",
+      "unit": "Geometry, review",
+      "date": "2026-01-14",
+      "turn_range": [
+        50,
+        53
+      ],
+      "student_turns": 2,
+      "dominant_type": "fluency",
+      "type_scores": {
+        "fluency": 1,
+        "procedural": 0,
+        "conceptual": 0,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 1,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Quick vocabulary check, notable mainly for a self-reported shift to asking in English first."
+    },
+    {
+      "session_id": "sess_alina_09",
+      "subject": "Social Studies",
+      "unit": "U.S. History, causes of the American Revolution",
+      "date": "2026-01-22",
+      "turn_range": [
+        54,
+        60
+      ],
+      "student_turns": 4,
+      "dominant_type": "critical_thinking",
+      "type_scores": {
+        "fluency": 1,
+        "procedural": 0,
+        "conceptual": 0,
+        "critical_thinking": 2,
+        "creative": 0,
+        "metacognitive": 2,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Builds and supports her own comparative historical argument, then names a recurring grammar mistake while fixing it."
+    },
+    {
+      "session_id": "sess_alina_10",
+      "subject": "Science",
+      "unit": "Biology, lab practical prep",
+      "date": "2026-02-10",
+      "turn_range": [
+        61,
+        67
+      ],
+      "student_turns": 4,
+      "dominant_type": "procedural",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 2,
+        "conceptual": 0,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 2,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Deliberately rehearses the exact skill she'll need solo on the practical, and correctly identifies writing rather than procedure as the remaining gap."
+    },
+    {
+      "session_id": "sess_alina_11",
+      "subject": "Mathematics",
+      "unit": "Geometry, semester exam review",
+      "date": "2026-02-19",
+      "turn_range": [
+        68,
+        72
+      ],
+      "student_turns": 3,
+      "dominant_type": "procedural",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 3,
+        "conceptual": 0,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 2,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Attempts a full similarity proof herself before asking for a check, and correctly diagnoses that only the justification step, not the conclusion, was missing."
+    },
+    {
+      "session_id": "sess_alina_12",
+      "subject": "Science",
+      "unit": "Biology, mitosis",
+      "date": "2026-03-04",
+      "turn_range": [
+        73,
+        79
+      ],
+      "student_turns": 4,
+      "dominant_type": "conceptual",
+      "type_scores": {
+        "fluency": 1,
+        "procedural": 0,
+        "conceptual": 3,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 0,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "A grammar question surfaces a real model gap, which she repairs herself using her own diagram as evidence."
+    },
+    {
+      "session_id": "sess_alina_13",
+      "subject": "English",
+      "unit": "World Literature, poetry unit",
+      "date": "2026-03-20",
+      "turn_range": [
+        80,
+        86
+      ],
+      "student_turns": 4,
+      "dominant_type": "conceptual",
+      "type_scores": {
+        "fluency": 1,
+        "procedural": 1,
+        "conceptual": 2,
+        "critical_thinking": 0,
+        "creative": 1,
+        "metacognitive": 0,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Applies a simile/metaphor rule herself, then probes an edge case in the poem's craft and plans to use the technique in her own writing."
+    },
+    {
+      "session_id": "sess_alina_14",
+      "subject": "Social Studies",
+      "unit": "U.S. History, primary source analysis",
+      "date": "2026-04-02",
+      "turn_range": [
+        87,
+        93
+      ],
+      "student_turns": 4,
+      "dominant_type": "critical_thinking",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 1,
+        "conceptual": 0,
+        "critical_thinking": 3,
+        "creative": 0,
+        "metacognitive": 2,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Designs her own method for weighing two biased primary sources against each other — the strongest single session in the corpus."
+    },
+    {
+      "session_id": "sess_alina_15",
+      "subject": "Visual Arts",
+      "unit": "Studio Art, artist statement",
+      "date": "2026-04-20",
+      "turn_range": [
+        94,
+        100
+      ],
+      "student_turns": 4,
+      "dominant_type": "creative",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 0,
+        "conceptual": 0,
+        "critical_thinking": 0,
+        "creative": 3,
+        "metacognitive": 1,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Generates an original central metaphor for her artist statement in Spanish, then directs its English structure herself."
+    },
+    {
+      "session_id": "sess_alina_16",
+      "subject": "English",
+      "unit": "World Literature, class discussion prep",
+      "date": "2026-05-06",
+      "turn_range": [
+        101,
+        109
+      ],
+      "student_turns": 5,
+      "dominant_type": "metacognitive",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 1,
+        "conceptual": 0,
+        "critical_thinking": 2,
+        "creative": 0,
+        "metacognitive": 3,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Rehearses speaking a claim aloud for the first time all year, monitoring the gap between her written and spoken English as it happens."
+    },
+    {
+      "session_id": "sess_alina_17",
+      "subject": "Mathematics",
+      "unit": "Geometry, final exam review",
+      "date": "2026-05-20",
+      "turn_range": [
+        110,
+        114
+      ],
+      "student_turns": 3,
+      "dominant_type": "transfer",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 0,
+        "conceptual": 0,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 2,
+        "transfer": 3,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Self-initiated, sustained transfer: recognizes and extends the same argument-structure requirement across geometry and history."
+    }
+  ],
+  "teacher_actions": [
+    {
+      "targets": [
+        "critical_thinking"
+      ],
+      "action": "Give her a written channel to show the source-evaluation work she's already doing — a short 'which source, and why' memo option alongside class discussion.",
+      "rationale": "Her strongest Critical Thinking (turns 89 and 91, sess_alina_14) is fully independent and sophisticated, but it surfaced in a tutoring session, not in the class where she's been silent since September (per Mr. Boyd's observation). Writing is where her English confidence is highest; use that channel to let this strength register."
+    },
+    {
+      "targets": [
+        "transfer"
+      ],
+      "action": "Ask her directly, roughly monthly, to name a connection between what she's currently learning and something from a different class.",
+      "rationale": "She made a genuine, sustained cross-subject connection (geometry proofs and history argument structure) entirely on her own, but only once, in the last month of school. The capability is proven; the habit isn't there yet, and it's the kind of thing that needs an occasion to run rather than more instruction."
+    },
+    {
+      "targets": [
+        "creative"
+      ],
+      "action": "For open-ended writing tasks in any subject, let her think or draft in Spanish first and translate second, rather than requiring English-first composition.",
+      "rationale": "Her one fully realized piece of original material (the two-halves artist statement, turn 96) only appeared once she was explicitly invited to think in Spanish before English. Requiring English-first composition may be costing her access to her own best ideas, not just costing her time."
+    },
+    {
+      "targets": [
+        "fluency"
+      ],
+      "action": "Front-load a short glossary or reading guide before dense, text-heavy homework, rather than leaving translation support to be requested under same-night time pressure.",
+      "rationale": "The one offload in the corpus (turn 26) was a reasonable trade she negotiated herself, but it happened because a four-page reading with unfamiliar vocabulary landed with only one evening to complete it. She has consistently shown she'll do the vocabulary work herself when there's time to."
+    }
+  ],
+  "caveats": [
+    "This covers one AI tutoring tool across one school year — it doesn't capture her in-class spoken participation, paper homework, or conversations with teachers, and Mr. Boyd's own observations note she has been effectively silent in class since September, which this transcript can't confirm or explain.",
+    "Sessions are self-selected: she brought these conversations to the tutor, which skews the sample toward homework she was actively working through rather than everything she does independently without help.",
+    "Code-switching between Spanish and English was read for content, not scored as a language error; a monolingual read of this transcript could undercount her reasoning by conflating language gaps with content gaps, which is exactly the distinction she herself draws throughout the year.",
+    "Depth ratings reflect what she wrote or said in the moment, not independently verified retention or in-class performance."
+  ]
+}

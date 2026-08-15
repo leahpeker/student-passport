@@ -1,0 +1,500 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-08-15T00:00:00Z",
+  "source_files": ["full_corpus.json"],
+
+  "student": {
+    "student_id": "sam",
+    "grade": 11,
+    "school_year": "2025-2026"
+  },
+
+  "evidence_base": {
+    "session_count": 17,
+    "total_turns": 137,
+    "student_turns": 77,
+    "student_words": 2225,
+    "date_range": {"start": "2025-09-20", "end": "2026-05-27"},
+    "subjects": ["Physics", "English", "Social Studies", "Visual Arts", "Computer Science"],
+    "sufficiency": "strong",
+    "sufficiency_note": "17 sessions across 9 months, including a mid-year transfer, is enough to see change over time rather than just a snapshot -- the transfer itself is the most useful structural feature of this corpus."
+  },
+
+  "cognitive_types": [
+    {
+      "id": "fluency",
+      "label": "Fluency",
+      "definition": "Retrieving or recalling known material fast and automatically",
+      "presence_score": 1,
+      "presence_label": "Occasional",
+      "typical_depth_score": 1,
+      "typical_depth_label": "Surface",
+      "peak_depth_score": 1,
+      "peak_depth_label": "Surface",
+      "peak_turn_id": 64,
+      "instance_count": 3,
+      "summary": "Shows up as quick, correct fact retrieval (a formula he already knows, a list of causes he already read) -- present but never the point of a session.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_b31f6a90",
+          "subject": "Social Studies",
+          "unit": "U.S. History -- reading catch-up",
+          "date": "2026-01-08",
+          "preceding_ai_turn": {"turn_id": 63, "text": "I can help you build that, but I want to check what you actually have first — did the reading name specific causes, or is this from lecture notes you don't have?"},
+          "student_turn": {"turn_id": 64, "text": "the reading. stock market crash, bank failures, overproduction, something about the fed"},
+          "depth_score": 1,
+          "depth_label": "Surface",
+          "why": "Fast, correct recall of material he actually read, produced without prompting."
+        }
+      ]
+    },
+    {
+      "id": "procedural",
+      "label": "Procedural",
+      "definition": "Executing a known sequence correctly, step by step",
+      "presence_score": 2,
+      "presence_label": "Frequent",
+      "typical_depth_score": 2,
+      "typical_depth_label": "Developing",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 47,
+      "instance_count": 9,
+      "summary": "Reliable and honest about his own work: he shows full derivations and asks for a check rather than an answer, and once tests a real fix against real hardware and reports back what actually happened.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_5f0e8b2c",
+          "subject": "Computer Science",
+          "unit": "Robotics competition control code (Fairbrook High School)",
+          "date": "2025-11-19",
+          "preceding_ai_turn": {"turn_id": 46, "text": "Exactly right, and that's usually where a naive PID starts oscillating again if the integral term is too aggressive. What would you want to test first before adding the I term?"},
+          "student_turn": {"turn_id": 47, "text": "just P alone first, tune the gain until it settles close enough without oscillating too much, then only add a small I term if it still falls short. ill try that tonight and see how the arm actually behaves, the math version and the real motor probably wont agree"},
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "He designed the test order himself and predicted the theory-practice gap before seeing it; his next message in the same turn reports back an actual measured result from testing it on the real arm."
+        },
+        {
+          "session_id": "sess_88a231dc",
+          "subject": "Physics",
+          "unit": "Momentum and impulse -- demonstration prep",
+          "date": "2026-04-14",
+          "preceding_ai_turn": {"turn_id": 107, "text": "Send it over."},
+          "student_turn": {"turn_id": 108, "text": "elastic collision, two carts. m1v1i + m2v2i = m1v1f + m2v2f, and separately (1/2)m1v1i^2+(1/2)m2v2i^2 = (1/2)m1v1f^2+(1/2)m2v2f^2 since its elastic. i solved the system and got v1f=((m1-m2)/(m1+m2))v1i and v2f=(2m1/(m1+m2))v1i for cart 2 starting at rest"},
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Full multi-step derivation produced and shown before asking for a check, not requested from the AI."
+        }
+      ]
+    },
+    {
+      "id": "conceptual",
+      "label": "Conceptual",
+      "definition": "Building or repairing a mental model of how something works",
+      "presence_score": 2,
+      "presence_label": "Frequent",
+      "typical_depth_score": 2,
+      "typical_depth_label": "Developing",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 94,
+      "instance_count": 10,
+      "summary": "His clearest strength: several sessions show a memorized phrase or a shaky assumption being turned into an actual working model, in physics most often but not only there.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_e552a940",
+          "subject": "Physics",
+          "unit": "Physics unit 5 test prep -- re-engaging",
+          "date": "2026-03-12",
+          "preceding_ai_turn": {"turn_id": 93, "text": "So for a satellite, what's different about how fast it's moving sideways compared to something you drop?"},
+          "student_turn": {"turn_id": 94, "text": "its moving so fast sideways that by the time gravity pulls it down a bit, the curve of the earth has already dropped away underneath it by about the same amount. so its constantly falling toward earth but constantly missing because its going forward fast enough. thats actually a genuinely different way of thinking about it than i had before, i was picturing gravity as basically turned off in orbit which is wrong"},
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "A memorized phrase ('falling') is replaced with a real mechanism, and he names the wrong model he's discarding."
+        },
+        {
+          "session_id": "sess_b31f6a90",
+          "subject": "Social Studies",
+          "unit": "U.S. History -- reading catch-up",
+          "date": "2026-01-08",
+          "preceding_ai_turn": {"turn_id": 67, "text": "Then which one of those four would you say came first in the chain, and what did it trigger next?"},
+          "student_turn": {"turn_id": 68, "text": "crash first, then people panicked and pulled money out of banks which caused the bank failures, and banks failing meant less credit for businesses which is part of why production and spending both dropped. i can write that up myself, i just needed to see if i had the order right"},
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Builds the actual causal chain himself instead of receiving it; this happens in his lowest-engagement subject, during his lowest month."
+        }
+      ]
+    },
+    {
+      "id": "critical_thinking",
+      "label": "Critical Thinking",
+      "definition": "Evaluating, reasoning about, or challenging a claim",
+      "presence_score": 1,
+      "presence_label": "Occasional",
+      "typical_depth_score": 2,
+      "typical_depth_label": "Developing",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 117,
+      "instance_count": 6,
+      "summary": "Real when it appears -- comparative literary analysis, unprompted testing of a teammate's code -- but confined to a handful of sessions rather than a habit.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_3fe08a17",
+          "subject": "English",
+          "unit": "Comparative essay revision",
+          "date": "2026-04-22",
+          "preceding_ai_turn": {"turn_id": 116, "text": "Pick the pair of quotes you think is closest to working, and tell me out loud why you put them next to each other."},
+          "student_turn": {"turn_id": 117, "text": "ok so both characters refuse help right when its offered, but one does it because hes proud and the other does it because he doesnt trust the person offering. i think i knew that when i picked the quotes i just didnt write it down, i left it as 'both characters refuse help' and moved on"},
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Identifies the actual distinction between two texts on his own terms, not just that a comparison exists."
+        },
+        {
+          "session_id": "sess_4d612bf1",
+          "subject": "Computer Science",
+          "unit": "Team project -- first real pairing",
+          "date": "2026-04-08",
+          "preceding_ai_turn": {"turn_id": 98, "text": "How's that going so far?"},
+          "student_turn": {"turn_id": 99, "text": "weird honestly, i keep wanting to check his logic function even though its not my part. i wrote a couple of test cases for it without telling him, just to see if it breaks"},
+          "depth_score": 2,
+          "depth_label": "Developing",
+          "why": "Applies his own testing standard to someone else's work, unprompted, though he initially does it without telling his partner."
+        }
+      ]
+    },
+    {
+      "id": "creative",
+      "label": "Creative",
+      "definition": "Generating something novel; diverging rather than converging",
+      "presence_score": 1,
+      "presence_label": "Occasional",
+      "typical_depth_score": 2,
+      "typical_depth_label": "Developing",
+      "peak_depth_score": 2,
+      "peak_depth_label": "Developing",
+      "peak_turn_id": 23,
+      "instance_count": 2,
+      "summary": "Thin outside one strong essay-planning session -- when it appears, the ideas are his own, generated before the AI does anything with them.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_9c22ab41",
+          "subject": "English",
+          "unit": "Independent novel analysis (Fairbrook High School)",
+          "date": "2025-11-05",
+          "preceding_ai_turn": {"turn_id": 22, "text": "List the ideas you're choosing between, and I'll help you sort which is load-bearing."},
+          "student_turn": {"turn_id": 23, "text": "1) the setting itself isolates him, its a remote research station 2) he isolates himself on purpose even when people are around 3) the ending isnt really about isolation ending, its about him choosing a different kind of isolation"},
+          "depth_score": 2,
+          "depth_label": "Developing",
+          "why": "Three original interpretive framings, generated before the AI shapes any of them."
+        }
+      ]
+    },
+    {
+      "id": "metacognitive",
+      "label": "Metacognitive",
+      "definition": "Monitoring and regulating their own thinking and learning",
+      "presence_score": 2,
+      "presence_label": "Frequent",
+      "typical_depth_score": 2,
+      "typical_depth_label": "Developing",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 82,
+      "instance_count": 22,
+      "summary": "The most frequent type by a wide margin, and the throughline of the whole corpus -- he names precisely what he knows and doesn't, tracks his own decline honestly, and eventually connects it to the actual cause.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_6f188e2c",
+          "subject": "Physics",
+          "unit": "Physics semester exam prep / low point",
+          "date": "2026-02-17",
+          "preceding_ai_turn": {"turn_id": 81, "text": "You don't have to have the full explanation right now. But is there a difference between 'I got worse at physics' and 'something changed in December that has nothing to do with physics'?"},
+          "student_turn": {"turn_id": 82, "text": "i mean i moved here in december. and left my team and basically my whole life there. i guess thats not nothing. i didnt really think about it like a thing that would show up on a test though"},
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "The single most important turn in the corpus -- he makes the connection between the transfer and his academic performance himself, out loud, for what reads like the first time."
+        },
+        {
+          "session_id": "sess_a109de62",
+          "subject": "Physics",
+          "unit": "Robotics -- extracurricular interest",
+          "date": "2026-05-12",
+          "preceding_ai_turn": {"turn_id": 121, "text": "Have you asked anyone here yet, or is this the first step in figuring it out?"},
+          "student_turn": {"turn_id": 122, "text": "first step. i havent asked because i wasnt sure i wanted to get attached to anything here for a while, but its almost the end of the year and i actually miss building things with people"},
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Names his own avoidance and its motive, and correctly identifies that it has an expiration date."
+        }
+      ]
+    },
+    {
+      "id": "transfer",
+      "label": "Transfer",
+      "definition": "Applying something known to a genuinely different context",
+      "presence_score": 1,
+      "presence_label": "Occasional",
+      "typical_depth_score": 2,
+      "typical_depth_label": "Developing",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 38,
+      "instance_count": 5,
+      "summary": "Rare, but real and consequential each time -- a physics concept applied to an actual engineering decision, a club-founding process applied to a new school, a lesson about his own year generalized for the future.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_1e77d3aa",
+          "subject": "Physics",
+          "unit": "Rotational motion / robotics team prep (Fairbrook High School)",
+          "date": "2025-11-10",
+          "preceding_ai_turn": {"turn_id": 37, "text": "So even with a stronger motor, what happens to the torque needed as that mass sits further out?"},
+          "student_turn": {"turn_id": 38, "text": "it needs way more torque because inertia scales with distance squared, not just distance. so a stronger motor helps some but if we couldve moved mass closer to the pivot that wouldve mattered more than the motor upgrade"},
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "A classroom formula becomes a real engineering conclusion with a real consequence for the team's robot, not just a new set of numbers in the same kind of problem."
+        },
+        {
+          "session_id": "sess_ff3c60a8",
+          "subject": "Physics",
+          "unit": "Final exam prep",
+          "date": "2026-05-27",
+          "preceding_ai_turn": {"turn_id": 136, "text": "That's a real plan, and it's built on a specific failure you identified, not a generic 'study harder.' One more thing worth asking yourself: is there anything about how this year went that you'd actually want to keep doing at a new school, if you ever transferred again?"},
+          "student_turn": {"turn_id": 137, "text": "probably talk to a teacher earlier instead of waiting five months to ask about a robotics club. i sat on that for no real reason"},
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Generalizes a lesson from this specific year into a portable rule for a different, hypothetical future situation."
+        }
+      ]
+    },
+    {
+      "id": "exploratory",
+      "label": "Exploratory",
+      "definition": "Encountering new information and taking it in",
+      "presence_score": 1,
+      "presence_label": "Occasional",
+      "typical_depth_score": 1,
+      "typical_depth_label": "Surface",
+      "peak_depth_score": 2,
+      "peak_depth_label": "Developing",
+      "peak_turn_id": 120,
+      "instance_count": 4,
+      "summary": "Mostly thin and often abandoned mid-orientation during the low months; the one exception -- asking about a robotics club -- gets followed all the way into a concrete plan.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_a109de62",
+          "subject": "Physics",
+          "unit": "Robotics -- extracurricular interest",
+          "date": "2026-05-12",
+          "preceding_ai_turn": {"turn_id": null, "text": null},
+          "student_turn": {"turn_id": 120, "text": "Does this school have a robotics team, and if not how would someone start one."},
+          "depth_score": 2,
+          "depth_label": "Developing",
+          "why": "Opens into unfamiliar territory and, unlike his other Exploratory turns, gets followed through to a real next step."
+        }
+      ]
+    }
+  ],
+
+  "offloading": {
+    "instance_count": 2,
+    "summary": "Genuine completed offloading is rare in this transcript -- what looks like offloading more often turns out to be avoidance of a subject or a person rather than avoidance of thinking, and it shows up as disengagement, not delegation.",
+    "instances": [
+      {
+        "session_id": "sess_2a90c113",
+        "subject": "English",
+        "date": "2025-12-15",
+        "turn_id": 59,
+        "type_offloaded": "exploratory",
+        "pattern": "clean_offload",
+        "student_turn": {"turn_id": 59, "text": "some short story packet, i didnt really read it"},
+        "note": "He asked the tutor to stand in for a reading he hadn't done. The tutor declined without the actual text, and rather than doing the reading, he disengaged entirely ('nvm ill just deal with it tomorrow') -- this is the less reassuring version of a refused offload: no work happened afterward, in either direction."
+      },
+      {
+        "session_id": "sess_d40c8827",
+        "subject": "Computer Science",
+        "date": "2026-02-03",
+        "turn_id": 73,
+        "type_offloaded": "procedural",
+        "pattern": "scaffolded_offload",
+        "student_turn": {"turn_id": 73, "text": "same scope i think, ill just do more of it. can you give me the spec broken into a checklist so i know what a paired team would split up, so i can cover it all myself"},
+        "note": "Delegated the task-decomposition step so he could focus on actually building all three pieces solo. A reasonable trade in isolation, but it's in service of avoiding the pairing itself, which is the more interesting pattern in this session."
+      }
+    ]
+  },
+
+  "sessions": [
+    {
+      "session_id": "sess_7a1c9e02", "subject": "Physics",
+      "unit": "Momentum and impulse (Fairbrook High School)", "date": "2025-09-20",
+      "turn_range": [1, 9], "student_turns": 5, "dominant_type": "metacognitive",
+      "type_scores": {"fluency": 0, "procedural": 1, "conceptual": 2, "critical_thinking": 0, "creative": 0, "metacognitive": 3, "transfer": 0, "exploratory": 0},
+      "offload_instance_count": 0,
+      "summary": "Gets a right answer, then insists on knowing why it's right before moving on."
+    },
+    {
+      "session_id": "sess_44b0f1d7", "subject": "Physics",
+      "unit": "Momentum and impulse (Fairbrook High School)", "date": "2025-10-15",
+      "turn_range": [10, 20], "student_turns": 6, "dominant_type": "procedural",
+      "type_scores": {"fluency": 0, "procedural": 3, "conceptual": 0, "critical_thinking": 0, "creative": 0, "metacognitive": 2, "transfer": 0, "exploratory": 0},
+      "offload_instance_count": 0,
+      "summary": "Full derivation shown and self-corrected before asking for a check, driven by a specific past mistake he names."
+    },
+    {
+      "session_id": "sess_9c22ab41", "subject": "English",
+      "unit": "Independent novel analysis (Fairbrook High School)", "date": "2025-11-05",
+      "turn_range": [21, 29], "student_turns": 5, "dominant_type": "critical_thinking",
+      "type_scores": {"fluency": 0, "procedural": 0, "conceptual": 2, "critical_thinking": 3, "creative": 2, "metacognitive": 1, "transfer": 0, "exploratory": 0},
+      "offload_instance_count": 0,
+      "summary": "Generates three original readings, then synthesizes them into a single arguable thesis himself."
+    },
+    {
+      "session_id": "sess_1e77d3aa", "subject": "Physics",
+      "unit": "Rotational motion / robotics team prep (Fairbrook High School)", "date": "2025-11-10",
+      "turn_range": [30, 38], "student_turns": 5, "dominant_type": "transfer",
+      "type_scores": {"fluency": 1, "procedural": 0, "conceptual": 2, "critical_thinking": 0, "creative": 0, "metacognitive": 2, "transfer": 3, "exploratory": 0},
+      "offload_instance_count": 0,
+      "summary": "Turns a classroom formula into a real design decision for his team's robot."
+    },
+    {
+      "session_id": "sess_5f0e8b2c", "subject": "Computer Science",
+      "unit": "Robotics competition control code (Fairbrook High School)", "date": "2025-11-19",
+      "turn_range": [39, 47], "student_turns": 5, "dominant_type": "conceptual",
+      "type_scores": {"fluency": 0, "procedural": 3, "conceptual": 3, "critical_thinking": 0, "creative": 0, "metacognitive": 1, "transfer": 0, "exploratory": 0},
+      "offload_instance_count": 0,
+      "summary": "Derives the idea behind proportional control himself, predicts its limitation, then tests a fix on the real robot."
+    },
+    {
+      "session_id": "sess_616e04d5", "subject": "Physics",
+      "unit": "Physics unit 3 (this school) -- catching in mid-unit after transfer", "date": "2025-12-08",
+      "turn_range": [48, 56], "student_turns": 5, "dominant_type": "metacognitive",
+      "type_scores": {"fluency": 0, "procedural": 0, "conceptual": 0, "critical_thinking": 0, "creative": 0, "metacognitive": 2, "transfer": 1, "exploratory": 1},
+      "offload_instance_count": 0,
+      "summary": "First session at the new school. Precisely audits what he does and doesn't know rather than assuming either extreme, and opts to try the packet himself first."
+    },
+    {
+      "session_id": "sess_2a90c113", "subject": "English",
+      "unit": "World Literature -- new unit at this school", "date": "2025-12-15",
+      "turn_range": [57, 61], "student_turns": 3, "dominant_type": "exploratory",
+      "type_scores": {"fluency": 0, "procedural": 0, "conceptual": 0, "critical_thinking": 0, "creative": 0, "metacognitive": 0, "transfer": 0, "exploratory": 1},
+      "offload_instance_count": 1,
+      "summary": "Hadn't done the reading, asked for a substitute, and disengaged when refused rather than doing it."
+    },
+    {
+      "session_id": "sess_b31f6a90", "subject": "Social Studies",
+      "unit": "U.S. History -- reading catch-up", "date": "2026-01-08",
+      "turn_range": [62, 68], "student_turns": 4, "dominant_type": "conceptual",
+      "type_scores": {"fluency": 1, "procedural": 0, "conceptual": 3, "critical_thinking": 0, "creative": 0, "metacognitive": 2, "transfer": 0, "exploratory": 0},
+      "offload_instance_count": 0,
+      "summary": "Opens by asking for a summary, but turns out to already have the material and builds the causal chain himself."
+    },
+    {
+      "session_id": "sess_d40c8827", "subject": "Computer Science",
+      "unit": "Team project -- pairing", "date": "2026-02-03",
+      "turn_range": [69, 75], "student_turns": 4, "dominant_type": "procedural",
+      "type_scores": {"fluency": 0, "procedural": 1, "conceptual": 0, "critical_thinking": 0, "creative": 0, "metacognitive": 1, "transfer": 0, "exploratory": 0},
+      "offload_instance_count": 1,
+      "summary": "Asks to avoid the assigned pairing and do the whole project solo instead."
+    },
+    {
+      "session_id": "sess_6f188e2c", "subject": "Physics",
+      "unit": "Physics semester exam prep / low point", "date": "2026-02-17",
+      "turn_range": [76, 84], "student_turns": 5, "dominant_type": "metacognitive",
+      "type_scores": {"fluency": 0, "procedural": 0, "conceptual": 0, "critical_thinking": 0, "creative": 0, "metacognitive": 3, "transfer": 0, "exploratory": 0},
+      "offload_instance_count": 0,
+      "summary": "The low point of the year, and the session where he first connects the transfer to his grades out loud."
+    },
+    {
+      "session_id": "sess_c9017754", "subject": "Visual Arts",
+      "unit": "Studio Art -- independent piece", "date": "2026-02-24",
+      "turn_range": [85, 87], "student_turns": 2, "dominant_type": "fluency",
+      "type_scores": {"fluency": 1, "procedural": 0, "conceptual": 0, "critical_thinking": 0, "creative": 0, "metacognitive": 0, "transfer": 0, "exploratory": 0},
+      "offload_instance_count": 0,
+      "summary": "Two-turn logistics question, abandoned without engagement -- the thinnest session in the corpus."
+    },
+    {
+      "session_id": "sess_e552a940", "subject": "Physics",
+      "unit": "Physics unit 5 test prep -- re-engaging", "date": "2026-03-12",
+      "turn_range": [88, 96], "student_turns": 5, "dominant_type": "conceptual",
+      "type_scores": {"fluency": 0, "procedural": 0, "conceptual": 3, "critical_thinking": 0, "creative": 0, "metacognitive": 2, "transfer": 1, "exploratory": 0},
+      "offload_instance_count": 0,
+      "summary": "First session where he plans ahead rather than reacting. Repairs a genuinely wrong mental model about orbits."
+    },
+    {
+      "session_id": "sess_4d612bf1", "subject": "Computer Science",
+      "unit": "Team project -- first real pairing", "date": "2026-04-08",
+      "turn_range": [97, 103], "student_turns": 4, "dominant_type": "metacognitive",
+      "type_scores": {"fluency": 0, "procedural": 0, "conceptual": 0, "critical_thinking": 2, "creative": 0, "metacognitive": 3, "transfer": 0, "exploratory": 0},
+      "offload_instance_count": 0,
+      "summary": "Pairs with a partner for the first time since arriving, catches a bug in his partner's code, and works through the honest way to raise it."
+    },
+    {
+      "session_id": "sess_88a231dc", "subject": "Physics",
+      "unit": "Momentum and impulse -- demonstration prep", "date": "2026-04-14",
+      "turn_range": [104, 112], "student_turns": 5, "dominant_type": "conceptual",
+      "type_scores": {"fluency": 0, "procedural": 3, "conceptual": 3, "critical_thinking": 0, "creative": 0, "metacognitive": 2, "transfer": 1, "exploratory": 0},
+      "offload_instance_count": 0,
+      "summary": "Preps to demonstrate a robotics-team-style apparatus in class and explains why the derivation's trickiest step works, not just how to do it."
+    },
+    {
+      "session_id": "sess_3fe08a17", "subject": "English",
+      "unit": "Comparative essay revision", "date": "2026-04-22",
+      "turn_range": [113, 119], "student_turns": 4, "dominant_type": "critical_thinking",
+      "type_scores": {"fluency": 0, "procedural": 1, "conceptual": 0, "critical_thinking": 3, "creative": 0, "metacognitive": 3, "transfer": 0, "exploratory": 0},
+      "offload_instance_count": 0,
+      "summary": "Diagnoses his own thin essay accurately and traces the cause to motivation rather than ability."
+    },
+    {
+      "session_id": "sess_a109de62", "subject": "Physics",
+      "unit": "Robotics -- extracurricular interest", "date": "2026-05-12",
+      "turn_range": [120, 128], "student_turns": 5, "dominant_type": "metacognitive",
+      "type_scores": {"fluency": 0, "procedural": 0, "conceptual": 0, "critical_thinking": 1, "creative": 0, "metacognitive": 3, "transfer": 2, "exploratory": 1},
+      "offload_instance_count": 0,
+      "summary": "Names his own avoidance of getting attached to this school, decides it's expired, and plans a real conversation with a teacher this week."
+    },
+    {
+      "session_id": "sess_ff3c60a8", "subject": "Physics",
+      "unit": "Final exam prep", "date": "2026-05-27",
+      "turn_range": [129, 137], "student_turns": 5, "dominant_type": "metacognitive",
+      "type_scores": {"fluency": 0, "procedural": 1, "conceptual": 0, "critical_thinking": 0, "creative": 0, "metacognitive": 3, "transfer": 3, "exploratory": 0},
+      "offload_instance_count": 0,
+      "summary": "Builds a study plan directly from a named past failure and generalizes a lesson about this whole year for the future."
+    }
+  ],
+
+  "teacher_actions": [
+    {
+      "targets": ["metacognitive"],
+      "action": "Have a direct, low-stakes conversation naming the December transfer as the likely cause of the semester dip, rather than treating the blank exam sections as only a physics problem.",
+      "rationale": "He already made this connection himself in February (T82) but called it something he 'didn't really think about... like a thing that would show up on a test' -- an adult naming it back to him would confirm a diagnosis he's already made, not deliver news."
+    },
+    {
+      "targets": ["conceptual", "transfer"],
+      "action": "Give him a real, visible way to bring the robotics apparatus and his old-team experience into this school's physics class -- the demonstration he did in April, or the club he asked about in May.",
+      "rationale": "His strongest and most independent thinking all year clusters around physics and robotics specifically (T38, T94, T108-110); it's also where his engagement and his sense of belonging visibly recover together."
+    },
+    {
+      "targets": ["critical_thinking", "creative"],
+      "action": "In English, ask him directly to name the real difference between two things being compared, not just that a comparison exists -- and keep pairing him for group work now that session 13 shows he can do it well.",
+      "rationale": "His comparative thesis work (T25, T117) is genuinely strong once he engages, but two of his weakest sessions (T57-61, and initially avoiding the CS pairing) show a pattern of withdrawing from a task rather than attempting it during his low months."
+    },
+    {
+      "targets": ["exploratory"],
+      "action": "Follow up this week, not next fall, on the robotics club he asked about on May 12 -- he already identified Ms. Chen as a plausible sponsor and named a concrete reason why.",
+      "rationale": "He named his own reason for the five-month delay ('I sat on that for no real reason') and the specific action he wants to take; the window to catch that motivation is now, not in September."
+    }
+  ],
+
+  "caveats": [
+    "This is one AI tutor across one school year and does not capture in-class work, paper homework, tests, robotics or club time, or conversations with teachers and peers.",
+    "The sample is skewed toward homework-shaped and troubleshooting sessions -- that's when he opens the tool -- which likely undercounts whatever he does easily without help, especially in physics.",
+    "The three earliest sessions reflect a different school's curriculum and pacing before the December transfer; comparing pre- and post-transfer sessions should account for unfamiliar content at the new school, not only the disruption itself.",
+    "Depth ratings reflect what he wrote in the moment, not independently verified understanding or retention."
+  ]
+}

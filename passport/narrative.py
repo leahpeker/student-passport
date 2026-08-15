@@ -127,6 +127,47 @@ def absences_by_weekday(records):
     return counts
 
 
+def ai_use_facts(records):
+    """Lines summarising the latest cognitive-task-analysis record, if any.
+
+    `records` is already filtered to `COGNITIVE_ANALYSIS`. The full structured
+    analysis lives in `data`; only the rollup a teacher would actually scan is
+    surfaced here, not the per-session or per-snippet detail.
+    """
+    if not records:
+        return []
+    latest = max(records, key=lambda r: r.date)
+    data = latest.data if isinstance(latest.data, dict) else {}
+    types = data.get('cognitive_types') or []
+    evidence = data.get('evidence_base') or {}
+    offloading = data.get('offloading') or {}
+    lines = []
+
+    sessions = evidence.get('session_count')
+    if sessions:
+        lines.append(
+            f'AI-use analysis: {sessions} tutor sessions analysed '
+            f'({evidence.get("sufficiency", "unrated")} evidence base).'
+        )
+
+    frequent = [t for t in types if t.get('presence_score', 0) >= 2
+                and t.get('typical_depth_score', 0) >= 2]
+    if frequent:
+        named = ', '.join(t['label'] for t in frequent)
+        lines.append(f'AI-use analysis, consistent strengths: {named}.')
+
+    thin = [t for t in types if t.get('peak_depth_score', 0) == 0]
+    if thin:
+        named = ', '.join(t['label'] for t in thin)
+        lines.append(f'AI-use analysis, never observed: {named}.')
+
+    count = offloading.get('instance_count')
+    if count:
+        lines.append(f'AI-use analysis, offloading: {count} instances. {offloading.get("summary", "")}'.strip())
+
+    return lines
+
+
 def facts(records):
     """Short factual lines. One source of truth for the prompt and the fallback."""
     grouped = by_source(records)
@@ -194,6 +235,8 @@ def facts(records):
         lines.append(
             f'AI tutor: {len(hours)} sessions, {late} of them between 10pm and 4am.'
         )
+
+    lines.extend(ai_use_facts(grouped.get(StudentRecord.COGNITIVE_ANALYSIS, [])))
 
     for source, label in (
         (StudentRecord.PARENT_INPUT, 'Guardian input'),
@@ -288,7 +331,8 @@ exactly these keys:
   }},
   "how_they_learn": "...",
   "performance": "...",
-  "behavior": "..."
+  "behavior": "...",
+  "how_they_use_ai": "..."
 }}
 
 - overview.teacher_voice: 2-4 sentences. What a teacher who knows {name} would
@@ -306,13 +350,20 @@ exactly these keys:
   is going and roughly how far; a couple of real scores, not a table in prose.
 - behavior: 2-4 sentences on what the behaviour and attendance records show and
   where they cluster. Adults only, so be direct without being clinical.
+- how_they_use_ai: 2-4 sentences on the pattern in how {name} uses an AI tutor,
+  grounded in the AI-use analysis record if one is on file: what kind of
+  thinking actually shows up, where the work gets handed off instead, and one
+  concrete thing a teacher could do about it. If there is no analysis on file,
+  say so in one sentence and stop. Adults only, so be direct without being
+  clinical — this may describe offloading a student would not want read back
+  to them.
 
 Every other section may be read by the student themselves, so keep them true but
 supportive, and keep disciplinary detail out of them.
 """
 
 VOICES = ('teacher_voice', 'guardian_voice', 'student_voice')
-FLAT_SECTIONS = ('how_they_learn', 'performance', 'behavior')
+FLAT_SECTIONS = ('how_they_learn', 'performance', 'behavior', 'how_they_use_ai')
 
 
 def _json_object(text):
@@ -371,6 +422,7 @@ def fallback_sections(student, records):
     engagement = pick('engagement') or 'No engagement samples are on file.'
     scores = pick('assessment,') or 'No scored assessments are on file.'
     conduct = pick('behaviour', 'attendance') or 'No behaviour or attendance entries are on file.'
+    ai_use = pick('ai-use analysis') or 'No AI-use analysis is on file for this student yet.'
     observations = [
         f'{r.date}: {r.title}' for r in
         sorted(grouped.get(StudentRecord.OBSERVATION, []), key=lambda r: r.date, reverse=True)[:3]
@@ -395,6 +447,7 @@ def fallback_sections(student, records):
         ])),
         'performance': scores,
         'behavior': conduct,
+        'how_they_use_ai': ai_use,
     }
 
 

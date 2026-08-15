@@ -1,0 +1,836 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-08-15T00:00:00Z",
+  "source_files": [
+    "full_corpus.json"
+  ],
+  "student": {
+    "student_id": "deshawn",
+    "grade": 9,
+    "school_year": "2025-2026"
+  },
+  "evidence_base": {
+    "session_count": 17,
+    "total_turns": 170,
+    "student_turns": 91,
+    "student_words": 1528,
+    "date_range": {
+      "start": "2025-09-18",
+      "end": "2026-05-11"
+    },
+    "subjects": [
+      "Science",
+      "Mathematics",
+      "Social Studies",
+      "English",
+      "Study Skills",
+      "Visual Arts"
+    ],
+    "sufficiency": "strong",
+    "sufficiency_note": "17 sessions across 8 months and 6 subjects supports a genuine profile, including which patterns are habitual versus one-off."
+  },
+  "cognitive_types": [
+    {
+      "id": "fluency",
+      "label": "Fluency",
+      "definition": "Retrieving or recalling known material fast and automatically",
+      "presence_score": 2,
+      "presence_label": "Frequent",
+      "typical_depth_score": 2,
+      "typical_depth_label": "Developing",
+      "peak_depth_score": 2,
+      "peak_depth_label": "Developing",
+      "peak_turn_id": 13,
+      "instance_count": 5,
+      "summary": "Deliberate self-quizzing on organelles, vocabulary and DNA replication enzymes — confident recall, and one real-time self-correction on a recurring mix-up.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_7a2c9e01",
+          "subject": "Science",
+          "unit": "Cell structure and function",
+          "date": "2025-09-18",
+          "preceding_ai_turn": {
+            "turn_id": 12,
+            "text": "What's in a plant cell that's not in an animal cell?"
+          },
+          "student_turn": {
+            "turn_id": 13,
+            "text": "cell wall, chloroplast, and a big vacuole. animal cells have small vacuoles or none"
+          },
+          "depth_score": 2,
+          "depth_label": "Developing",
+          "why": "Confident, correct recall across a full self-drilled quiz round before a test."
+        },
+        {
+          "session_id": "sess_7a2c9e10",
+          "subject": "Science",
+          "unit": "Semester 1 review: cell processes",
+          "date": "2026-01-12",
+          "preceding_ai_turn": {
+            "turn_id": 104,
+            "text": "Close — that's the one that builds the new strand. The one that unzips it is helicase."
+          },
+          "student_turn": {
+            "turn_id": 105,
+            "text": "oh right i always mix those two up"
+          },
+          "depth_score": 2,
+          "depth_label": "Developing",
+          "why": "Names his own recurring mix-up by name rather than just accepting the correction and moving on."
+        }
+      ]
+    },
+    {
+      "id": "procedural",
+      "label": "Procedural",
+      "definition": "Executing a known sequence correctly, step by step",
+      "presence_score": 2,
+      "presence_label": "Frequent",
+      "typical_depth_score": 2,
+      "typical_depth_label": "Developing",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 157,
+      "instance_count": 5,
+      "summary": "Reliable once he's caught up on content — shows his own work, applies newly reconstructed rules correctly, and once catches and fixes his own procedural error mid-answer.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_7a2c9e15",
+          "subject": "Science",
+          "unit": "Genetics: Punnett squares",
+          "date": "2026-04-09",
+          "preceding_ai_turn": {
+            "turn_id": 156,
+            "text": "Good catch stopping yourself — you're right that WW doesn't reappear the same way. In incomplete dominance there's no W allele at all, just R and a different allele, call it R'. Rr is really RR' here. Want to redo it with that fixed?"
+          },
+          "student_turn": {
+            "turn_id": 157,
+            "text": "yeah so RR' x RR' — 1 RR red, 2 RR' pink, 1 R'R' white. 1:2:1 phenotype same as genotype since none of them are fully dominant"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Re-executes the cross correctly immediately after catching his own model error, with the reasoning visible in his own words."
+        },
+        {
+          "session_id": "sess_7a2c9e03",
+          "subject": "Mathematics",
+          "unit": "Parallel lines and transversals",
+          "date": "2025-10-06",
+          "preceding_ai_turn": {
+            "turn_id": 40,
+            "text": "A transversal crosses two parallel lines. One of the angles formed measures 65°. Find the corresponding angle, the alternate interior angle, and the co-interior angle at the other intersection."
+          },
+          "student_turn": {
+            "turn_id": 41,
+            "text": "corresponding would be 65, alternate interior would also be 65, and co-interior would be 115 since 180-65"
+          },
+          "depth_score": 2,
+          "depth_label": "Developing",
+          "why": "Applies three angle relationships correctly to a new problem right after reconstructing them himself."
+        }
+      ]
+    },
+    {
+      "id": "conceptual",
+      "label": "Conceptual",
+      "definition": "Building or repairing a mental model of how something works",
+      "presence_score": 2,
+      "presence_label": "Frequent",
+      "typical_depth_score": 2,
+      "typical_depth_label": "Developing",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 22,
+      "instance_count": 7,
+      "summary": "His clearest strength when he's caught up on missed content — rebuilds why a process works, not just what it does, and predicts unstated relationships before being told them.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_7a2c9e02",
+          "subject": "Science",
+          "unit": "Mitosis and meiosis",
+          "date": "2025-09-29",
+          "preceding_ai_turn": {
+            "turn_id": 21,
+            "text": "Correct. So why does meiosis need to make 4 instead of 2 — what's it for that mitosis isn't?"
+          },
+          "student_turn": {
+            "turn_id": 22,
+            "text": "growing/repairing vs making eggs and sperm. so meiosis has to cut the chromosome number in half so when they combine it goes back to normal"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "States the actual causal reason meiosis halves the chromosome count, not just the fact that it does — his own model, externalized."
+        },
+        {
+          "session_id": "sess_7a2c9e03",
+          "subject": "Mathematics",
+          "unit": "Parallel lines and transversals",
+          "date": "2025-10-06",
+          "preceding_ai_turn": {
+            "turn_id": 36,
+            "text": "Correct. One more — co-interior, also called same-side interior. Any guess what's true about those, given the other two are both equal?"
+          },
+          "student_turn": {
+            "turn_id": 37,
+            "text": "if the other ones are equal maybe these add up to something instead. 180?"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Predicts an unstated angle relationship by reasoning from the two he already has, rather than asking for it."
+        }
+      ]
+    },
+    {
+      "id": "critical_thinking",
+      "label": "Critical Thinking",
+      "definition": "Evaluating, reasoning about, or challenging a claim",
+      "presence_score": 1,
+      "presence_label": "Occasional",
+      "typical_depth_score": 3,
+      "typical_depth_label": "Substantive",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 130,
+      "instance_count": 1,
+      "summary": "Appears once in the corpus, in a DBQ source-evaluation session, and is fully realized when it does — he builds his own method for weighing two self-interested sources against each other.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_7a2c9e12",
+          "subject": "Social Studies",
+          "unit": "DBQ source evaluation: labor strikes",
+          "date": "2026-02-09",
+          "preceding_ai_turn": {
+            "turn_id": 129,
+            "text": "Right. So neither is neutral. Does that mean you can't use either one?"
+          },
+          "student_turn": {
+            "turn_id": 130,
+            "text": "no i think you can still use both, you just gotta say why each one might be slanted. like use the newspaper for what actually happened logistically but not for who to blame"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Builds his own method for using biased sources — separating factual claims from interpretive ones — instead of picking a side or discarding both."
+        }
+      ]
+    },
+    {
+      "id": "creative",
+      "label": "Creative",
+      "definition": "Generating something novel; diverging rather than converging",
+      "presence_score": 1,
+      "presence_label": "Occasional",
+      "typical_depth_score": 3,
+      "typical_depth_label": "Substantive",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 121,
+      "instance_count": 2,
+      "summary": "Strong both times it appears, and only after the tutor declined to just generate for him — a fully self-designed studio art piece, and a self-written essay opening line.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_7a2c9e11",
+          "subject": "Visual Arts",
+          "unit": "Studio Art: place-based piece",
+          "date": "2026-01-26",
+          "preceding_ai_turn": {
+            "turn_id": 120,
+            "text": "Do you want to work in a medium that can hold stillness, or do you want movement in it somehow — light changing, steam from something?"
+          },
+          "student_turn": {
+            "turn_id": 121,
+            "text": "steam. like from the kettle. that could be the one moving thing in a still picture"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Supplies the piece's entire original concept himself — subject, mood, and the one deliberate motion in an otherwise still image."
+        },
+        {
+          "session_id": "sess_7a2c9e07",
+          "subject": "English",
+          "unit": "Personal narrative essay",
+          "date": "2025-12-01",
+          "preceding_ai_turn": {
+            "turn_id": 76,
+            "text": "That's your thesis, basically — a shift from expecting things to be handled to just handling them. Want to try writing the first two sentences yourself, and I'll tell you honestly if they land?"
+          },
+          "student_turn": {
+            "turn_id": 77,
+            "text": "ok. 'nobody told me the morning was mine now. it just was, one day, and i had to figure out what that meant.'"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Writes an original opening line himself, after the tutor declined his initial request to write the paragraph for him."
+        }
+      ]
+    },
+    {
+      "id": "metacognitive",
+      "label": "Metacognitive",
+      "definition": "Monitoring and regulating their own thinking and learning",
+      "presence_score": 2,
+      "presence_label": "Frequent",
+      "typical_depth_score": 2,
+      "typical_depth_label": "Developing",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 82,
+      "instance_count": 7,
+      "summary": "The most frequent type in the transcript — he plans ahead of absences instead of just reacting to them, and once diagnoses on his own that three behind subjects need three different kinds of catch-up.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_7a2c9e08",
+          "subject": "Study Skills",
+          "unit": "Finals study planning",
+          "date": "2025-12-15",
+          "preceding_ai_turn": {
+            "turn_id": 81,
+            "text": "Which three, and for each one — is the problem that you don't understand the material, or that you haven't seen enough of it yet?"
+          },
+          "student_turn": {
+            "turn_id": 82,
+            "text": "bio and geometry i think i understand it when i catch up, its history where i actually dont get some of it, not just missed days"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Diagnoses that his three behind subjects need different kinds of help before being told, and is specific about which is a content gap versus an understanding gap."
+        },
+        {
+          "session_id": "sess_7a2c9e05",
+          "subject": "Mathematics",
+          "unit": "Similar triangles",
+          "date": "2025-11-03",
+          "preceding_ai_turn": null,
+          "student_turn": {
+            "turn_id": 54,
+            "text": "what did geometry cover today, im not going to be there"
+          },
+          "depth_score": 2,
+          "depth_label": "Developing",
+          "why": "Proactively asks what he'll miss before an absence happens, instead of catching up after the fact."
+        }
+      ]
+    },
+    {
+      "id": "transfer",
+      "label": "Transfer",
+      "definition": "Applying something known to a genuinely different context",
+      "presence_score": 1,
+      "presence_label": "Occasional",
+      "typical_depth_score": 3,
+      "typical_depth_label": "Substantive",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 166,
+      "instance_count": 1,
+      "summary": "Appears once, in May, and is fully realized — he notices unprompted that a geometry proof and a history source-evaluation method share the same underlying structure, and extends the pattern to how he checks his own biology work.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_7a2c9e17",
+          "subject": "Mathematics",
+          "unit": "Geometry final review",
+          "date": "2026-05-11",
+          "preceding_ai_turn": {
+            "turn_id": 165,
+            "text": "Say more about that — what's the structural similarity you're seeing?"
+          },
+          "student_turn": {
+            "turn_id": 166,
+            "text": "like in the proof you use two different facts (alternate angles and corresponding angles) that both independently prove the lines are parallel. and with the history documents, two sources that disagree on blame still both independently confirmed the same date and injuries. its like using two paths to the same answer to make it more solid"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Recognizes the same 'independent lines of evidence' structure under two completely different surfaces, unprompted, and later extends it to a third (checking his own biology answers)."
+        }
+      ]
+    },
+    {
+      "id": "exploratory",
+      "label": "Exploratory",
+      "definition": "Encountering new information and taking it in",
+      "presence_score": 0,
+      "presence_label": "Not observed",
+      "typical_depth_score": 0,
+      "typical_depth_label": "Not observed",
+      "peak_depth_score": 0,
+      "peak_depth_label": "Not observed",
+      "peak_turn_id": null,
+      "instance_count": 0,
+      "summary": "No session in this corpus is open-ended or curiosity-driven; every one is tied to an assignment, a test, or an absence.",
+      "absence_reason": "task_never_required_it",
+      "snippets": []
+    }
+  ],
+  "offloading": {
+    "instance_count": 1,
+    "summary": "One clean offload in the whole corpus, isolated to a single evening and a single class, under real time pressure the night before a test.",
+    "instances": [
+      {
+        "session_id": "sess_7a2c9e14",
+        "subject": "Social Studies",
+        "date": "2026-03-16",
+        "turn_id": 146,
+        "type_offloaded": "fluency",
+        "pattern": "escalating_offload",
+        "student_turn": {
+          "turn_id": 146,
+          "text": "i really dont have time tonight, my night got messed up. can u just give me all of them"
+        },
+        "note": "He had worked most of the study guide himself and had three sections left the night before the test. When the tutor offered to scaffold the first answer so he could find the pattern, he said there wasn't time and asked for everything, which the tutor then gave. He copied it down with no follow-up questions. His History unit exam three days later (2026-03-19) was his lowest score of the school year."
+      }
+    ]
+  },
+  "sessions": [
+    {
+      "session_id": "sess_7a2c9e01",
+      "subject": "Science",
+      "unit": "Cell structure and function",
+      "date": "2025-09-18",
+      "turn_range": [
+        1,
+        15
+      ],
+      "student_turns": 8,
+      "dominant_type": "fluency",
+      "type_scores": {
+        "fluency": 2,
+        "procedural": 0,
+        "conceptual": 0,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 1,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Deliberate self-quiz on cell organelles before a test — fast, accurate recall throughout."
+    },
+    {
+      "session_id": "sess_7a2c9e02",
+      "subject": "Science",
+      "unit": "Mitosis and meiosis",
+      "date": "2025-09-29",
+      "turn_range": [
+        16,
+        26
+      ],
+      "student_turns": 6,
+      "dominant_type": "conceptual",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 0,
+        "conceptual": 3,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 1,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Rebuilds the difference between mitosis and meiosis after missing the lesson, reasoning out why meiosis has to halve the chromosome count rather than just repeating the fact."
+    },
+    {
+      "session_id": "sess_7a2c9e03",
+      "subject": "Mathematics",
+      "unit": "Parallel lines and transversals",
+      "date": "2025-10-06",
+      "turn_range": [
+        27,
+        42
+      ],
+      "student_turns": 8,
+      "dominant_type": "conceptual",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 2,
+        "conceptual": 3,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 0,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Reconstructs the transversal angle relationships himself after missing the lesson, then applies all three correctly to a new problem."
+    },
+    {
+      "session_id": "sess_7a2c9e04",
+      "subject": "Social Studies",
+      "unit": "Colonial America vocabulary",
+      "date": "2025-10-16",
+      "turn_range": [
+        43,
+        53
+      ],
+      "student_turns": 6,
+      "dominant_type": "fluency",
+      "type_scores": {
+        "fluency": 2,
+        "procedural": 0,
+        "conceptual": 0,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 0,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Straightforward vocabulary self-quiz for a colonial-era history test."
+    },
+    {
+      "session_id": "sess_7a2c9e05",
+      "subject": "Mathematics",
+      "unit": "Similar triangles",
+      "date": "2025-11-03",
+      "turn_range": [
+        54,
+        64
+      ],
+      "student_turns": 6,
+      "dominant_type": "metacognitive",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 2,
+        "conceptual": 0,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 2,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Asks what he'll miss before an absence instead of catching up after, then applies the similar-triangles method correctly."
+    },
+    {
+      "session_id": "sess_7a2c9e06",
+      "subject": "Mathematics",
+      "unit": "Triangle congruence proofs",
+      "date": "2025-11-20",
+      "turn_range": [
+        65,
+        70
+      ],
+      "student_turns": 3,
+      "dominant_type": "procedural",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 2,
+        "conceptual": 2,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 0,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Brings his own triangle congruence proof for a check and explains, unprompted, why a related shortcut (SSA) doesn't work."
+    },
+    {
+      "session_id": "sess_7a2c9e07",
+      "subject": "English",
+      "unit": "Personal narrative essay",
+      "date": "2025-12-01",
+      "turn_range": [
+        71,
+        79
+      ],
+      "student_turns": 5,
+      "dominant_type": "creative",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 0,
+        "conceptual": 0,
+        "critical_thinking": 0,
+        "creative": 3,
+        "metacognitive": 2,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Opens by asking the tutor to write his personal narrative, then writes his own opening line after being redirected toward what actually changed for him."
+    },
+    {
+      "session_id": "sess_7a2c9e08",
+      "subject": "Study Skills",
+      "unit": "Finals study planning",
+      "date": "2025-12-15",
+      "turn_range": [
+        80,
+        89
+      ],
+      "student_turns": 5,
+      "dominant_type": "metacognitive",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 0,
+        "conceptual": 2,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 3,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Diagnoses that his three behind subjects need different kinds of catch-up, then builds and tests a cause-and-effect study method for history on his own."
+    },
+    {
+      "session_id": "sess_7a2c9e09",
+      "subject": "Social Studies",
+      "unit": "American Revolution: Lexington and Concord",
+      "date": "2026-01-05",
+      "turn_range": [
+        90,
+        98
+      ],
+      "student_turns": 5,
+      "dominant_type": "metacognitive",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 0,
+        "conceptual": 1,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 2,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Efficiently catches up on two missed days of Revolutionary War content by reasoning out part of it himself before being told."
+    },
+    {
+      "session_id": "sess_7a2c9e10",
+      "subject": "Science",
+      "unit": "Semester 1 review: cell processes",
+      "date": "2026-01-12",
+      "turn_range": [
+        99,
+        112
+      ],
+      "student_turns": 7,
+      "dominant_type": "fluency",
+      "type_scores": {
+        "fluency": 2,
+        "procedural": 0,
+        "conceptual": 0,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 1,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Self-quiz for the biology final; catches and corrects his own recurring mix-up between helicase and polymerase."
+    },
+    {
+      "session_id": "sess_7a2c9e11",
+      "subject": "Visual Arts",
+      "unit": "Studio Art: place-based piece",
+      "date": "2026-01-26",
+      "turn_range": [
+        113,
+        123
+      ],
+      "student_turns": 6,
+      "dominant_type": "creative",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 0,
+        "conceptual": 0,
+        "critical_thinking": 0,
+        "creative": 3,
+        "metacognitive": 0,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Designs an entire studio art piece himself — subject, mood, and its one moving element — after twenty minutes of not knowing where to start."
+    },
+    {
+      "session_id": "sess_7a2c9e12",
+      "subject": "Social Studies",
+      "unit": "DBQ source evaluation: labor strikes",
+      "date": "2026-02-09",
+      "turn_range": [
+        124,
+        134
+      ],
+      "student_turns": 6,
+      "dominant_type": "critical_thinking",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 0,
+        "conceptual": 0,
+        "critical_thinking": 3,
+        "creative": 0,
+        "metacognitive": 0,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Builds his own method for weighing two biased historical sources against each other for a DBQ."
+    },
+    {
+      "session_id": "sess_7a2c9e13",
+      "subject": "Mathematics",
+      "unit": "Similar triangles and transversals review",
+      "date": "2026-02-23",
+      "turn_range": [
+        135,
+        143
+      ],
+      "student_turns": 5,
+      "dominant_type": "metacognitive",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 1,
+        "conceptual": 0,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 2,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Works out a scheduling fix for a make-up test that keeps his lunch period free, then reviews the unit."
+    },
+    {
+      "session_id": "sess_7a2c9e14",
+      "subject": "Social Studies",
+      "unit": "American Revolution: causes of war study guide",
+      "date": "2026-03-16",
+      "turn_range": [
+        144,
+        148
+      ],
+      "student_turns": 3,
+      "dominant_type": "fluency",
+      "type_scores": {
+        "fluency": 1,
+        "procedural": 0,
+        "conceptual": 0,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 0,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 1,
+      "summary": "Under time pressure the night before a test, asks for and receives a full set of study guide answers with no follow-up."
+    },
+    {
+      "session_id": "sess_7a2c9e15",
+      "subject": "Science",
+      "unit": "Genetics: Punnett squares",
+      "date": "2026-04-09",
+      "turn_range": [
+        149,
+        158
+      ],
+      "student_turns": 5,
+      "dominant_type": "conceptual",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 3,
+        "conceptual": 3,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 1,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Tests himself on Punnett squares without notes, catches a conceptual mix-up mid-answer, and corrects it himself."
+    },
+    {
+      "session_id": "sess_7a2c9e16",
+      "subject": "Mathematics",
+      "unit": "Triangle congruence and parallelogram proofs",
+      "date": "2026-04-13",
+      "turn_range": [
+        159,
+        163
+      ],
+      "student_turns": 3,
+      "dominant_type": "procedural",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 2,
+        "conceptual": 1,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 0,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Quick proof check from the library before it closes; explains the definitional logic behind his last step."
+    },
+    {
+      "session_id": "sess_7a2c9e17",
+      "subject": "Mathematics",
+      "unit": "Geometry final review",
+      "date": "2026-05-11",
+      "turn_range": [
+        164,
+        170
+      ],
+      "student_turns": 4,
+      "dominant_type": "transfer",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 0,
+        "conceptual": 1,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 0,
+        "transfer": 3,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Notices, unprompted, that a geometry proof and a history source-evaluation method share the same underlying structure, and extends the pattern to how he checks his own biology answers."
+    }
+  ],
+  "teacher_actions": [
+    {
+      "targets": [
+        "exploratory"
+      ],
+      "action": "Deshawn doesn't get open-ended, curiosity-driven time with the tutor — every session is assignment- or catch-up-driven. On a lighter week, point him at one no-stakes 'just curious' question with no due date attached, in a subject he isn't behind in.",
+      "rationale": "All 17 sessions are tied to an assignment, a test, or an absence; the profile has no exploratory sessions at all. That likely reflects how little slack his schedule has rather than a lack of curiosity — his Studio Art and Transfer sessions show real range whenever he has the room for it."
+    },
+    {
+      "targets": [
+        "fluency",
+        "metacognitive"
+      ],
+      "action": "Watch for the pattern from 2026-03-16: under real time pressure the night before a History test, he asked for and got a full set of study-guide answers with no follow-up, and his score on that unit exam (79) was his lowest of the year. A standing 'flag it by Wednesday, not the night before' check-in for that class specifically could catch the next one before it happens.",
+      "rationale": "This is the one clean offload in the whole corpus, it's isolated to a single class, and it lines up with a real dip in that subject's exam score three days later."
+    },
+    {
+      "targets": [
+        "metacognitive"
+      ],
+      "action": "He already invented a real study strategy on his own (2025-12-15 — different methods for different subjects, cause-and-effect chains for history specifically) and a scheduling fix for his make-up tests (2026-02-23 — asking for a before-school slot instead of losing lunch). Ask him directly, once, whether either is still working — he isn't likely to bring it up unprompted.",
+      "rationale": "Both are self-generated, practical fixes to real constraints in his day, and the kind of thing that's easy to miss because he never announces it — he just does it."
+    },
+    {
+      "targets": [
+        "transfer"
+      ],
+      "action": "He made a genuine cross-subject connection unprompted in May — geometry proofs and historical source evaluation share the same 'independent lines of evidence' structure — and extended it to how he checks his own biology work. Ask him, roughly monthly, whether something from one class reminds him of another.",
+      "rationale": "Transfer appeared exactly once in 17 sessions but was fully realized when it did, the same 'proven capability, not yet a habit' pattern that's worth deliberately cultivating."
+    }
+  ],
+  "caveats": [
+    "This is one AI tutor on one platform across one school year — it doesn't capture in-class work, paper homework, tests, or conversations with teachers and peers.",
+    "Sessions are self-selected: he brought these conversations to the tutor, almost always early morning before school or in the library in the afternoon, which skews the sample toward catch-up and homework-shaped tasks rather than however he engages with material when he isn't behind.",
+    "Depth ratings reflect what he wrote in the moment, not independently verified retention.",
+    "The single offloading instance is real but isolated to one evening and one subject — one instance in 17 sessions is a flagged event, not yet a demonstrated pattern."
+  ]
+}

@@ -10,7 +10,7 @@
  */
 
 import assert from 'node:assert/strict';
-import { pulseFromDigest } from './pulse';
+import { hasDigestActivity, pulseFromDigest } from './pulse';
 import type { Digest } from '../api/types';
 
 let checks = 0;
@@ -115,6 +115,21 @@ check('no app activity on file still produces a well-formed, honest pulse', () =
   assert.ok(pulse.why.length > 0, 'why must never be blank, even with no narrative');
   assert.equal(pulse.signals.length, 0);
   assert.equal(pulse.context.length, 0);
+});
+
+// The guard callers use to decide whether that "honest but empty" pulse above
+// should be shown at all. A dateless digest is the backend's placeholder for a
+// student it has no session data on — painting them amber "Check in" would be
+// a verdict drawn from nothing, so callers fall back to the authored fixture.
+check('a digest with no date carries no real signal', () => {
+  assert.equal(hasDigestActivity(digest({ date: null })), false);
+  assert.equal(hasDigestActivity(null), false);
+  assert.equal(hasDigestActivity(undefined), false);
+});
+
+check('a digest with a date does carry real signal', () => {
+  assert.equal(hasDigestActivity(digest()), true);
+  assert.equal(hasDigestActivity(digest({ date: '2026-01-09', flags: [] })), true);
 });
 
 console.log(`\n${checks} checks passed.`);

@@ -1,0 +1,1021 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-08-15T00:00:00Z",
+  "source_files": [
+    "full_corpus.json"
+  ],
+  "student": {
+    "student_id": "jordan",
+    "grade": 10,
+    "school_year": "2025-2026"
+  },
+  "evidence_base": {
+    "session_count": 16,
+    "total_turns": 233,
+    "student_turns": 120,
+    "student_words": 2666,
+    "date_range": {
+      "start": "2025-09-24",
+      "end": "2026-05-27"
+    },
+    "subjects": [
+      "Mathematics",
+      "Computer Science",
+      "English",
+      "Social Studies",
+      "Visual Arts"
+    ],
+    "sufficiency": "strong",
+    "sufficiency_note": "16 sessions across nine months and five subjects is enough to distinguish a one-off moment from a habitual pattern, including a strategy that became more independent over time."
+  },
+  "cognitive_types": [
+    {
+      "id": "fluency",
+      "label": "Fluency",
+      "definition": "Fast retrieval and automatic recall",
+      "presence_score": 1,
+      "presence_label": "Occasional",
+      "typical_depth_score": 1,
+      "typical_depth_label": "Surface",
+      "peak_depth_score": 2,
+      "peak_depth_label": "Developing",
+      "peak_turn_id": 224,
+      "instance_count": 3,
+      "summary": "Shows up almost only in the last review session, where drilled recall is genuinely fast and correct; elsewhere fluency-shaped moments turn out to be memorized steps without the reasoning behind them.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_j16",
+          "subject": "Mathematics",
+          "unit": "Final exam review",
+          "date": "2026-05-27",
+          "preceding_ai_turn": {
+            "turn_id": 223,
+            "text": "Quiz yourself, five problems, method first then solve."
+          },
+          "student_turn": {
+            "turn_id": 224,
+            "text": "x^2-9=0, factors, (x-3)(x+3)=0, x=3 or -3"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Executes a full method-first recall correctly and fast, the intended shape of fluency practice."
+        },
+        {
+          "session_id": "sess_j12",
+          "subject": "Mathematics",
+          "unit": "Rational expressions - unit 7 test",
+          "date": "2026-03-25",
+          "preceding_ai_turn": {
+            "turn_id": 179,
+            "text": "One clarifying question first: when you say \"don't ask me to explain it\" - is that because you've got it, or because you don't want to slow down right now?"
+          },
+          "student_turn": {
+            "turn_id": 180,
+            "text": "honestly i dont fully get why you flip the fraction when you divide, i just remember to do it"
+          },
+          "depth_score": 1,
+          "depth_label": "Surface",
+          "why": "Names a procedure they can execute (flipping the fraction) but admits it is memorized rather than understood - the boundary between real fluency and rote recall."
+        }
+      ]
+    },
+    {
+      "id": "procedural",
+      "label": "Procedural",
+      "definition": "Executing a known sequence correctly, step by step",
+      "presence_score": 2,
+      "presence_label": "Frequent",
+      "typical_depth_score": 2,
+      "typical_depth_label": "Developing",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 133,
+      "instance_count": 16,
+      "summary": "Reliable across math and code whenever the format lets them show their steps; this is the type most visibly damaged by a timed, written format, which is the throughline of the whole transcript.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_j02",
+          "subject": "Computer Science",
+          "unit": "Loops and iteration",
+          "date": "2025-10-08",
+          "preceding_ai_turn": {
+            "turn_id": 28,
+            "text": "Yes. Build me a tiny broken one, on purpose, that would infinite loop, and then fix it."
+          },
+          "student_turn": {
+            "turn_id": 29,
+            "text": "while x < 5: print(x). thats broken bc x never changes. fixed: while x < 5: print(x), x = x+1"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Builds a broken loop on purpose and fixes it, demonstrating the mechanism rather than reciting it."
+        },
+        {
+          "session_id": "sess_j08",
+          "subject": "Mathematics",
+          "unit": "Quadratics unit 4 test prep",
+          "date": "2026-01-21",
+          "preceding_ai_turn": {
+            "turn_id": 132,
+            "text": "Correct and fast. One more, and this time it asks for vertex form specifically."
+          },
+          "student_turn": {
+            "turn_id": 133,
+            "text": "thats line 3 regardless of whether it factors, complete the square. x^2+6x+5, half of 6 is 3, 3 squared is 9, so (x+3)^2 -9+5 = (x+3)^2-4"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Completes the square correctly under a simulated timed-practice condition, applying a method they chose themselves from a list they built."
+        },
+        {
+          "session_id": "sess_j16",
+          "subject": "Mathematics",
+          "unit": "Final exam review",
+          "date": "2026-05-27",
+          "preceding_ai_turn": {
+            "turn_id": 229,
+            "text": "Next."
+          },
+          "student_turn": {
+            "turn_id": 230,
+            "text": "(x+2)/(x-3) divided by (x+2)/(x+5), excluded values first, x cant be 3 or -5 or -2, then flip and multiply, (x+2)/(x-3) times (x+5)/(x+2), the x+2 cancels, leaves (x+5)/(x-3)"
+          },
+          "depth_score": 2,
+          "depth_label": "Developing",
+          "why": "Executes a multi-step rational expression correctly, stating excluded values before manipulating the fraction."
+        }
+      ]
+    },
+    {
+      "id": "conceptual",
+      "label": "Conceptual",
+      "definition": "Building or repairing a mental model of how something works",
+      "presence_score": 2,
+      "presence_label": "Frequent",
+      "typical_depth_score": 2,
+      "typical_depth_label": "Developing",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 164,
+      "instance_count": 17,
+      "summary": "The clearest strength in the transcript once the request is for an underlying mechanism rather than a memorized rule - shows up as self-generated analogies and causal reasoning, not just restated definitions.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_j01",
+          "subject": "Mathematics",
+          "unit": "Systems of equations",
+          "date": "2025-09-24",
+          "preceding_ai_turn": {
+            "turn_id": 16,
+            "text": "I can give you three more equation pairs, but I'm not going to keep re-skinning every one as ropes - that's you doing the translating, and that's the part that's actually sticking. Try building the picture yourself for the next one and tell me what you pictured."
+          },
+          "student_turn": {
+            "turn_id": 17,
+            "text": "fine. 3x - y = 5, x + y = 3\n\ni picture like. one side is heavy with x's and the other has to balance with less y. if i add them the y cancels bc -y and +y"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Builds an original physical analogy (rope tension) for elimination unprompted, after the tutor declined to keep supplying one."
+        },
+        {
+          "session_id": "sess_j11",
+          "subject": "Computer Science",
+          "unit": "Functions, scope, and recursion",
+          "date": "2026-03-11",
+          "preceding_ai_turn": {
+            "turn_id": 163,
+            "text": "That's most of the diagram already, in your own words. What would break if recursive calls shared one scope instead of getting their own?"
+          },
+          "student_turn": {
+            "turn_id": 164,
+            "text": "then every call would be changing the same variables as every other call so itd probably just overwrite everything and give a wrong answer, or maybe infinite loop bc the base case variable never actually gets its own separate value"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Reasons through what would break mechanically if recursive calls shared one scope, arriving at the actual cause of stack-based recursion from first principles."
+        },
+        {
+          "session_id": "sess_j05",
+          "subject": "Visual Arts",
+          "unit": "Figure sculpture - wire armature",
+          "date": "2025-11-18",
+          "preceding_ai_turn": {
+            "turn_id": 88,
+            "text": "What's different structurally between \"more wraps\" and the actual source of wobble, which is probably the drill hole itself being loose in the wood?"
+          },
+          "student_turn": {
+            "turn_id": 89,
+            "text": "oh maybe the hole is too wide for the wire so its just rocking in the hole not actually anchored"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Diagnoses a real structural problem in their own sculpture armature (a loose drill hole, not a weight problem) through reasoning rather than trial and error."
+        }
+      ]
+    },
+    {
+      "id": "critical_thinking",
+      "label": "Critical Thinking",
+      "definition": "Evaluating, reasoning about, or challenging a claim",
+      "presence_score": 2,
+      "presence_label": "Frequent",
+      "typical_depth_score": 2,
+      "typical_depth_label": "Developing",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 210,
+      "instance_count": 10,
+      "summary": "Strong and consistent whenever a task asks for a defensible interpretation or judgment - literature and history sessions in particular show a repeated, self-driven thesis-then-evidence structure that becomes fully independent by the last essay of the year.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_j15",
+          "subject": "English",
+          "unit": "Final essay - character comparison",
+          "date": "2026-05-13",
+          "preceding_ai_turn": {
+            "turn_id": 209,
+            "text": "Yes - bring me your boxes when you have them."
+          },
+          "student_turn": {
+            "turn_id": 210,
+            "text": "topic is free choice, comparing two characters who make the same choice for different reasons. book 1: gregor stays quiet about his transformation to protect his family at first. book 2: odysseus lies constantly to protect himself, not others. box 1: both characters hide the truth. box 2: gregor's hiding is selfless, protects the family from the truth about him. box 3: odysseus's hiding is self interested even when he frames it as protecting others"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Produces a complete, well-structured thesis and evidence set with no scaffolding from the tutor - the same move that took multiple prompted turns in September now happens in one turn."
+        },
+        {
+          "session_id": "sess_j10",
+          "subject": "Social Studies",
+          "unit": "Progressive Era research project",
+          "date": "2026-02-18",
+          "preceding_ai_turn": {
+            "turn_id": 156,
+            "text": "I can point you to your reading, but you built the whole design already - pick the events from what you've already read and tell me which ten you'd choose and why one didn't make the cut."
+          },
+          "student_turn": {
+            "turn_id": 157,
+            "text": "ok muckrakers, trust busting, 19th amendment, fords assembly line, sinking of the lusitania, zimmerman telegram... i need to actually go back and check dates for the rest\n\ni left out the panama canal bc it didnt really cause anything later it was just a thing that happened"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Selects ten historical events for a project and explicitly justifies excluding one on a stated causal-relevance criterion, rather than accepting a supplied list."
+        },
+        {
+          "session_id": "sess_j09",
+          "subject": "English",
+          "unit": "The Odyssey - lying and judgment",
+          "date": "2026-02-04",
+          "preceding_ai_turn": {
+            "turn_id": 141,
+            "text": "Good, that's a real thesis with a real contrast. You know the drill now - build your version of the boxes."
+          },
+          "student_turn": {
+            "turn_id": 142,
+            "text": "box 1: odysseus lies = smart, praised. box 2: cyclops name trick, works, hes celebrated for it. box 3: suitors lie about intentions, punished with death at the end. so the difference is who the story is rooting for not whether lying is actually right or wrong"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Builds an evidence set and then notices, unprompted, that one piece of it is doing more argumentative work than the others."
+        }
+      ]
+    },
+    {
+      "id": "creative",
+      "label": "Creative",
+      "definition": "Generating something novel; diverging rather than converging",
+      "presence_score": 2,
+      "presence_label": "Frequent",
+      "typical_depth_score": 2,
+      "typical_depth_label": "Developing",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 185,
+      "instance_count": 12,
+      "summary": "Consistently strong when the student supplies the original direction - a game mechanic, a sculpture concept, an essay's opening line - and the tutor develops it rather than generating it.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_j13",
+          "subject": "Visual Arts",
+          "unit": "Final piece concept",
+          "date": "2026-04-08",
+          "preceding_ai_turn": {
+            "turn_id": 184,
+            "text": "Not dumb. What's the version of it that isn't literal?"
+          },
+          "student_turn": {
+            "turn_id": 185,
+            "text": "maybe something about how a lot of little separate motions add up to one whole thing only if you step back, like up close its chaos but from far away its a shape"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Proposes an original visual metaphor for a personal theme (individual chaos resolving into a shape from a distance) before any technical discussion of materials."
+        },
+        {
+          "session_id": "sess_j07",
+          "subject": "Computer Science",
+          "unit": "Final project design",
+          "date": "2025-12-15",
+          "preceding_ai_turn": {
+            "turn_id": 117,
+            "text": "So which formula do you want?"
+          },
+          "student_turn": {
+            "turn_id": 118,
+            "text": "speed = base_speed * (1.01 ^ timer) or something like that"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Chooses and writes their own mathematical model for a game mechanic, then revises it from linear to exponential after reasoning about the intended feel."
+        },
+        {
+          "session_id": "sess_j09",
+          "subject": "English",
+          "unit": "The Odyssey - lying and judgment",
+          "date": "2026-02-04",
+          "preceding_ai_turn": {
+            "turn_id": 143,
+            "text": "That third box is doing more work than the other two - it's your actual argument, not just evidence. Might be worth starting the essay there instead of ending there."
+          },
+          "student_turn": {
+            "turn_id": 144,
+            "text": "oh like open with \"the odyssey doesnt punish lying it punishes losing\" or something"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Produces an original, quotable thesis sentence in the moment, arrived at by thinking out loud rather than by request."
+        }
+      ]
+    },
+    {
+      "id": "metacognitive",
+      "label": "Metacognitive",
+      "definition": "Monitoring and regulating their own thinking and learning",
+      "presence_score": 2,
+      "presence_label": "Frequent",
+      "typical_depth_score": 2,
+      "typical_depth_label": "Developing",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 121,
+      "instance_count": 19,
+      "summary": "The most frequent type in the transcript and the clearest throughline: this student diagnoses their own performance gaps with unusual precision and converts each diagnosis into a strategy they then reuse, unprompted, in other subjects.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_j08",
+          "subject": "Mathematics",
+          "unit": "Quadratics unit 4 test prep",
+          "date": "2026-01-21",
+          "preceding_ai_turn": {
+            "turn_id": 120,
+            "text": "What's \"this,\" specifically - what's the exam on?"
+          },
+          "student_turn": {
+            "turn_id": 121,
+            "text": "quadratics, all of unit 4. i can do every problem type if you just talk to me or if i have a whiteboard, but a written test with a clock i just blank"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Names the exact shape of their own performance gap: full command of the material out loud or with a whiteboard, and a blank page under a written, timed format."
+        },
+        {
+          "session_id": "sess_j08",
+          "subject": "Mathematics",
+          "unit": "Quadratics unit 4 test prep",
+          "date": "2026-01-21",
+          "preceding_ai_turn": {
+            "turn_id": 134,
+            "text": "You just built yourself a test strategy in real time. That's the same move as the essay boxes and the history skim, it's a pattern for you now - decide the method before you touch the problem."
+          },
+          "student_turn": {
+            "turn_id": 135,
+            "text": "yeah i guess thats three times ive done this now"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Recognizes, in the moment, that they have now built the same kind of self-made study strategy three separate times across three different subjects."
+        },
+        {
+          "session_id": "sess_j16",
+          "subject": "Mathematics",
+          "unit": "Final exam review",
+          "date": "2026-05-27",
+          "preceding_ai_turn": {
+            "turn_id": 231,
+            "text": "Last one."
+          },
+          "student_turn": {
+            "turn_id": 232,
+            "text": "wait i need to double check the excluded values, x cant be 3 bc first denominator, cant be -5 bc second denominator, and x+2 in the numerator being zero isnt excluded its just where the whole thing is zero, i think i had that wrong a second ago"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Catches and corrects a mistake in their own reasoning mid-answer, under simulated time pressure, without being prompted."
+        }
+      ]
+    },
+    {
+      "id": "transfer",
+      "label": "Transfer",
+      "definition": "Applying something known to a genuinely different context",
+      "presence_score": 2,
+      "presence_label": "Frequent",
+      "typical_depth_score": 3,
+      "typical_depth_label": "Substantive",
+      "peak_depth_score": 3,
+      "peak_depth_label": "Substantive",
+      "peak_turn_id": 220,
+      "instance_count": 6,
+      "summary": "Rare in most transcripts; here it is the standout finding, because it is not just proven but already habitual. This student independently ported a self-built exam strategy across four unrelated subjects over the year without ever being told to generalize it.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_j04",
+          "subject": "Social Studies",
+          "unit": "Progressive Era reforms",
+          "date": "2025-11-05",
+          "preceding_ai_turn": {
+            "turn_id": 70,
+            "text": "Say more."
+          },
+          "student_turn": {
+            "turn_id": 71,
+            "text": "like for the essay i made the three boxes before writing sentences, and for this i made the three headings mean something before reading paragraphs. its the same move just for reading instead of writing"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Explicitly connects a reading-comprehension strategy (skim structure, predict, then confirm) to the essay-writing strategy from a different subject weeks earlier, naming it as the same underlying move."
+        },
+        {
+          "session_id": "sess_j07",
+          "subject": "Computer Science",
+          "unit": "Final project design",
+          "date": "2025-12-15",
+          "preceding_ai_turn": {
+            "turn_id": 113,
+            "text": "That's the same shape as the compound interest formula we did in algebra, principal plus a rate times time - different subject, same structure."
+          },
+          "student_turn": {
+            "turn_id": 114,
+            "text": "oh yeah thats actually the same thing just plus instead of times. wait is it different bc mine is linear and thats compound which is multiplying"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Recognizes that their own game-speed formula has the same structure as a compound interest formula from math class, then corrects themselves on whether the growth should be linear or exponential."
+        },
+        {
+          "session_id": "sess_j16",
+          "subject": "Mathematics",
+          "unit": "Final exam review",
+          "date": "2026-05-27",
+          "preceding_ai_turn": {
+            "turn_id": 219,
+            "text": "When did you notice that?"
+          },
+          "student_turn": {
+            "turn_id": 220,
+            "text": "i think in art actually, when i said the skeleton thing was the same problem as november. i didnt plan to start doing that everywhere i just kept doing it bc it worked the first time"
+          },
+          "depth_score": 3,
+          "depth_label": "Substantive",
+          "why": "Traces their own recurring habit of building a method list before starting a task back to a specific sculpture session seven months earlier, unprompted."
+        }
+      ]
+    },
+    {
+      "id": "exploratory",
+      "label": "Exploratory",
+      "definition": "Encountering new information and taking it in",
+      "presence_score": 1,
+      "presence_label": "Occasional",
+      "typical_depth_score": 1,
+      "typical_depth_label": "Surface",
+      "peak_depth_score": 2,
+      "peak_depth_label": "Developing",
+      "peak_turn_id": 65,
+      "instance_count": 3,
+      "summary": "Nearly absent as its own category, because almost every session in this transcript is assignment-shaped rather than open-ended; the one clear instance shows the same structure-first instinct that shows up everywhere else, applied to reading rather than writing.",
+      "absence_reason": null,
+      "snippets": [
+        {
+          "session_id": "sess_j04",
+          "subject": "Social Studies",
+          "unit": "Progressive Era reforms",
+          "date": "2025-11-05",
+          "preceding_ai_turn": {
+            "turn_id": 64,
+            "text": "That's the actual strategy - skim the structure first, predict what each part is doing, then read to confirm or correct the prediction. Want to try that on the rest of the four pages right now?"
+          },
+          "student_turn": {
+            "turn_id": 65,
+            "text": "yeah give me like 30 seconds to skim the rest of the headings\n\nok headings are muckrakers, trust busting, and womens suffrage. so probably journalists expose stuff, then government breaks up monopolies, then voting rights expands"
+          },
+          "depth_score": 2,
+          "depth_label": "Developing",
+          "why": "Skims the headings of an unfamiliar reading and predicts the shape of all three sections before reading any of them closely."
+        }
+      ]
+    }
+  ],
+  "offloading": {
+    "instance_count": 5,
+    "summary": "Every offload attempt in this transcript is for a sub-part of a task (a metaphor, an outline, a formatting pass, a ready-made list) rather than the whole thing, and every one that the tutor declined was converted into real work the student then did themselves in the next turn or two. Nothing here shows a full assignment handed over and returned unexamined.",
+    "instances": [
+      {
+        "session_id": "sess_j01",
+        "subject": "Mathematics",
+        "date": "2025-09-24",
+        "turn_id": 15,
+        "type_offloaded": "conceptual",
+        "pattern": "clean_offload",
+        "student_turn": {
+          "turn_id": 15,
+          "text": "ok that one actually made sense as ropes. can you give me like three more but make them physical too so i remember it that way"
+        },
+        "note": "Asked the tutor to keep generating physical analogies instead of building their own; the tutor declined, and the student produced a correct original analogy two turns later."
+      },
+      {
+        "session_id": "sess_j03",
+        "subject": "English",
+        "date": "2025-10-21",
+        "turn_id": 49,
+        "type_offloaded": "creative",
+        "pattern": "clean_offload",
+        "student_turn": {
+          "turn_id": 49,
+          "text": "can you just make the outline for me now so i have it ready for the actual essay"
+        },
+        "note": "Asked the tutor to write the essay outline for them; declined, and the student produced their own three-part outline in the very next turn."
+      },
+      {
+        "session_id": "sess_j06",
+        "subject": "Mathematics",
+        "date": "2025-12-02",
+        "turn_id": 94,
+        "type_offloaded": "procedural",
+        "pattern": "scaffolded_offload",
+        "student_turn": {
+          "turn_id": 94,
+          "text": "i dont really have time to show work for all of them can u just do the first five so i can see the method then ill do the rest"
+        },
+        "note": "Asked for worked answers to a whole practice set; the tutor worked one problem and required the student to do the rest, which surfaced a real copying error the student then caught and fixed on their own."
+      },
+      {
+        "session_id": "sess_j10",
+        "subject": "Social Studies",
+        "date": "2026-02-18",
+        "turn_id": 155,
+        "type_offloaded": "fluency",
+        "pattern": "clean_offload",
+        "student_turn": {
+          "turn_id": 155,
+          "text": "can u list the ten most important events so i know what to put on it"
+        },
+        "note": "Asked for a ready-made list of the ten most important events; declined, and the student picked their own ten and justified excluding one on a stated criterion."
+      },
+      {
+        "session_id": "sess_j11",
+        "subject": "Computer Science",
+        "date": "2026-03-11",
+        "turn_id": 168,
+        "type_offloaded": "creative",
+        "pattern": "scaffolded_offload",
+        "student_turn": {
+          "turn_id": 168,
+          "text": "can you clean it up and make it look nice though"
+        },
+        "note": "Asked the tutor to reformat a diagram they had already reasoned out themselves; granted, since the conceptual work was already the student's own and formatting carries no cognitive content."
+      }
+    ]
+  },
+  "sessions": [
+    {
+      "session_id": "sess_j01",
+      "subject": "Mathematics",
+      "unit": "Systems of equations",
+      "date": "2025-09-24",
+      "turn_range": [
+        1,
+        20
+      ],
+      "student_turns": 10,
+      "dominant_type": "conceptual",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 2,
+        "conceptual": 3,
+        "critical_thinking": 0,
+        "creative": 1,
+        "metacognitive": 2,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 1,
+      "summary": "Built an original physical analogy for elimination after the tutor declined to keep supplying one."
+    },
+    {
+      "session_id": "sess_j02",
+      "subject": "Computer Science",
+      "unit": "Loops and iteration",
+      "date": "2025-10-08",
+      "turn_range": [
+        21,
+        38
+      ],
+      "student_turns": 9,
+      "dominant_type": "conceptual",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 3,
+        "conceptual": 3,
+        "critical_thinking": 0,
+        "creative": 2,
+        "metacognitive": 0,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Reasoned out a countdown-timer's loop structure completely before writing any code."
+    },
+    {
+      "session_id": "sess_j03",
+      "subject": "English",
+      "unit": "The Metamorphosis - alienation theme",
+      "date": "2025-10-21",
+      "turn_range": [
+        39,
+        52
+      ],
+      "student_turns": 7,
+      "dominant_type": "metacognitive",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 0,
+        "conceptual": 2,
+        "critical_thinking": 3,
+        "creative": 1,
+        "metacognitive": 3,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 1,
+      "summary": "Diagnosed exactly why a strong idea disappears on the page under a clock, then built the fix themselves after an offload attempt was declined."
+    },
+    {
+      "session_id": "sess_j04",
+      "subject": "Social Studies",
+      "unit": "Progressive Era reforms",
+      "date": "2025-11-05",
+      "turn_range": [
+        53,
+        72
+      ],
+      "student_turns": 10,
+      "dominant_type": "transfer",
+      "type_scores": {
+        "fluency": 1,
+        "procedural": 0,
+        "conceptual": 2,
+        "critical_thinking": 1,
+        "creative": 0,
+        "metacognitive": 3,
+        "transfer": 3,
+        "exploratory": 2
+      },
+      "offload_instance_count": 0,
+      "summary": "Independently connected a reading strategy to the essay strategy from a different subject weeks earlier."
+    },
+    {
+      "session_id": "sess_j05",
+      "subject": "Visual Arts",
+      "unit": "Figure sculpture - wire armature",
+      "date": "2025-11-18",
+      "turn_range": [
+        73,
+        91
+      ],
+      "student_turns": 10,
+      "dominant_type": "conceptual",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 2,
+        "conceptual": 3,
+        "critical_thinking": 0,
+        "creative": 2,
+        "metacognitive": 0,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Solved a real structural engineering problem in their own sculpture through reasoning, twice."
+    },
+    {
+      "session_id": "sess_j06",
+      "subject": "Mathematics",
+      "unit": "Quadratics - semester exam prep",
+      "date": "2025-12-02",
+      "turn_range": [
+        92,
+        103
+      ],
+      "student_turns": 6,
+      "dominant_type": "procedural",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 2,
+        "conceptual": 0,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 2,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 1,
+      "summary": "Attempted to offload a whole practice set, was scaffolded back to doing the work, and caught their own copying error."
+    },
+    {
+      "session_id": "sess_j07",
+      "subject": "Computer Science",
+      "unit": "Final project design",
+      "date": "2025-12-15",
+      "turn_range": [
+        104,
+        118
+      ],
+      "student_turns": 8,
+      "dominant_type": "transfer",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 2,
+        "conceptual": 2,
+        "critical_thinking": 2,
+        "creative": 3,
+        "metacognitive": 0,
+        "transfer": 3,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Recognized their own game formula shared its structure with compound interest, then corrected linear to exponential."
+    },
+    {
+      "session_id": "sess_j08",
+      "subject": "Mathematics",
+      "unit": "Quadratics unit 4 test prep",
+      "date": "2026-01-21",
+      "turn_range": [
+        119,
+        135
+      ],
+      "student_turns": 9,
+      "dominant_type": "metacognitive",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 3,
+        "conceptual": 1,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 3,
+        "transfer": 3,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Built a timed-test strategy from a pattern they had already used twice before, and named the pattern themselves."
+    },
+    {
+      "session_id": "sess_j09",
+      "subject": "English",
+      "unit": "The Odyssey - lying and judgment",
+      "date": "2026-02-04",
+      "turn_range": [
+        136,
+        146
+      ],
+      "student_turns": 6,
+      "dominant_type": "critical_thinking",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 0,
+        "conceptual": 1,
+        "critical_thinking": 3,
+        "creative": 3,
+        "metacognitive": 2,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Used the same essay strategy independently and landed on a sharper thesis than the original."
+    },
+    {
+      "session_id": "sess_j10",
+      "subject": "Social Studies",
+      "unit": "Progressive Era research project",
+      "date": "2026-02-18",
+      "turn_range": [
+        147,
+        157
+      ],
+      "student_turns": 6,
+      "dominant_type": "creative",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 0,
+        "conceptual": 1,
+        "critical_thinking": 2,
+        "creative": 3,
+        "metacognitive": 0,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 1,
+      "summary": "Designed an original information-display method for a timeline, then chose and justified its content themselves after an offload was declined."
+    },
+    {
+      "session_id": "sess_j11",
+      "subject": "Computer Science",
+      "unit": "Functions, scope, and recursion",
+      "date": "2026-03-11",
+      "turn_range": [
+        158,
+        169
+      ],
+      "student_turns": 6,
+      "dominant_type": "conceptual",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 1,
+        "conceptual": 3,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 1,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 1,
+      "summary": "Reasoned out the mechanism behind recursive scope from a guess, correctly, before being shown it."
+    },
+    {
+      "session_id": "sess_j12",
+      "subject": "Mathematics",
+      "unit": "Rational expressions - unit 7 test",
+      "date": "2026-03-25",
+      "turn_range": [
+        170,
+        182
+      ],
+      "student_turns": 7,
+      "dominant_type": "metacognitive",
+      "type_scores": {
+        "fluency": 1,
+        "procedural": 0,
+        "conceptual": 0,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 3,
+        "transfer": 0,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Reflected on the social cost of their own accommodation, then admitted a procedure was memorized rather than understood."
+    },
+    {
+      "session_id": "sess_j13",
+      "subject": "Visual Arts",
+      "unit": "Final piece concept",
+      "date": "2026-04-08",
+      "turn_range": [
+        183,
+        193
+      ],
+      "student_turns": 6,
+      "dominant_type": "creative",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 1,
+        "conceptual": 1,
+        "critical_thinking": 0,
+        "creative": 3,
+        "metacognitive": 1,
+        "transfer": 2,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Designed an original, personally meaningful art concept and recognized its engineering problem as one they had already solved."
+    },
+    {
+      "session_id": "sess_j14",
+      "subject": "Social Studies",
+      "unit": "Causes of WWI - essay",
+      "date": "2026-04-29",
+      "turn_range": [
+        194,
+        207
+      ],
+      "student_turns": 7,
+      "dominant_type": "conceptual",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 1,
+        "conceptual": 3,
+        "critical_thinking": 1,
+        "creative": 1,
+        "metacognitive": 2,
+        "transfer": 2,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Negotiated a legitimate format accommodation after the tutor explained why a model couldn't fully replace the essay."
+    },
+    {
+      "session_id": "sess_j15",
+      "subject": "English",
+      "unit": "Final essay - character comparison",
+      "date": "2026-05-13",
+      "turn_range": [
+        208,
+        215
+      ],
+      "student_turns": 4,
+      "dominant_type": "critical_thinking",
+      "type_scores": {
+        "fluency": 0,
+        "procedural": 0,
+        "conceptual": 2,
+        "critical_thinking": 3,
+        "creative": 1,
+        "metacognitive": 3,
+        "transfer": 1,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Ran the full thesis-and-evidence strategy independently, with no scaffolding, for the first time."
+    },
+    {
+      "session_id": "sess_j16",
+      "subject": "Mathematics",
+      "unit": "Final exam review",
+      "date": "2026-05-27",
+      "turn_range": [
+        216,
+        233
+      ],
+      "student_turns": 9,
+      "dominant_type": "metacognitive",
+      "type_scores": {
+        "fluency": 2,
+        "procedural": 3,
+        "conceptual": 1,
+        "critical_thinking": 0,
+        "creative": 0,
+        "metacognitive": 3,
+        "transfer": 2,
+        "exploratory": 0
+      },
+      "offload_instance_count": 0,
+      "summary": "Recognized their own year-long habit of building method lists and traced it back to its origin, unprompted."
+    }
+  ],
+  "teacher_actions": [
+    {
+      "targets": [
+        "metacognitive",
+        "transfer"
+      ],
+      "action": "Ask Jordan directly, roughly monthly, where else they've used a strategy that worked once - out loud, not as an assignment.",
+      "rationale": "Across the year they independently reused the same self-built strategy (decide the method or structure before starting) in at least four different subjects without ever being told to generalize it, and named the pattern themselves twice. That habit is already strong; naming it out loud with an adult would make it a deliberate tool rather than something that happens to keep working."
+    },
+    {
+      "targets": [
+        "procedural"
+      ],
+      "action": "Let Jordan write their own 'method-first' list at the start of any timed test, as a standing accommodation rather than something to reinvent each time.",
+      "rationale": "This transcript shows a repeated, large gap between what Jordan can do live or hands-on and what shows up on a timed written test - and shows them closing that exact gap themselves once they had a way to decide the method before starting to solve. Making that step official protects a fix that is already proven to work."
+    },
+    {
+      "targets": [
+        "metacognitive"
+      ],
+      "action": "Treat a 'can I do it differently' request (a model instead of an essay, a diagram instead of a list) as self-advocacy worth a real answer, not a compliance problem - and use the same move the tutor used: the alternate format is for thinking, the assignment's format is for stating the answer.",
+      "rationale": "The WWI session shows Jordan asking to swap a written assignment for a physical model, accepting a real explanation of why the assignment specifically wants writing, and negotiating a genuinely useful compromise (a sketched prewriting step) instead of either being shut down or handed a loophole."
+    },
+    {
+      "targets": [
+        "fluency",
+        "conceptual"
+      ],
+      "action": "When Jordan describes a procedure as something they 'just remember,' spend two minutes on why it works before more practice problems.",
+      "rationale": "The rational-expressions session shows a real gap hiding behind fluent execution - dividing fractions correctly while admitting they don't know why the reciprocal step works. That's exactly the kind of gap that survives homework and breaks on an unfamiliar problem."
+    }
+  ],
+  "caveats": [
+    "One AI tutor on one platform across one school year - it doesn't capture class time, paper homework, tests, or conversations with teachers and peers, which make up most of Jordan's actual academic day.",
+    "Sessions are self-selected: Jordan brought these conversations to the tutor, usually because something was due or they were stuck, which skews the sample toward homework-shaped tasks.",
+    "Depth ratings reflect what appears in the chat text, not independently verified retention or in-class performance on the same material.",
+    "This transcript and analysis were authored for a product demonstration and do not represent a real student."
+  ]
+}

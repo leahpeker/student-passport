@@ -5,11 +5,20 @@ import type { Classroom, Me, Student } from '../../api/types';
 import { useAsync } from '../../lib/useAsync';
 import { usePulse } from '../../lib/useRosterPulse';
 import { toneDot } from './tone';
+import { AiBadge } from '../AiBadge';
 
 /** One roster dot. Its own component so `usePulse` gets one hook instance
  * per student rather than being called inside a `.map()`. */
-function RosterDot({ studentId, className }: { studentId: number; className: string }) {
-  const tone = usePulse(studentId).tone;
+function RosterDot({
+  studentId,
+  studentName,
+  className,
+}: {
+  studentId: number;
+  studentName: string;
+  className: string;
+}) {
+  const tone = usePulse(studentId, studentName).tone;
   return <span aria-hidden="true" className={`${className} ${toneDot[tone]}`} />;
 }
 
@@ -34,7 +43,6 @@ export function StudentSidebar({
     [isTeacher],
   );
   const { data: classrooms } = useAsync(load);
-  const [collapsed, setCollapsed] = useState(false);
 
   // Non-teachers get one flat group; teachers get a group per class.
   const groups = useMemo(() => {
@@ -49,33 +57,15 @@ export function StudentSidebar({
     return [{ id: 'mine', title: 'Your students', hint: '', students: me.students }];
   }, [isTeacher, classrooms, me.students]);
 
-  if (collapsed) {
-    return (
-      <CollapsedRail
-        groups={groups}
-        activeStudentId={activeStudentId}
-        onExpand={() => setCollapsed(false)}
-      />
-    );
-  }
-
   return (
     <nav
       aria-label="Students"
       className="sticky top-4 flex max-h-[calc(100vh-120px)] flex-col overflow-y-auto rounded-lg bg-surface p-3 elev-sm"
     >
-      <div className="mb-2 flex items-center justify-between px-1">
+      <div className="mb-2 px-1">
         <span className="text-[10.5px] font-medium tracking-[0.1em] text-muted uppercase">
           {isTeacher ? 'Your classrooms' : 'Passport'}
         </span>
-        <button
-          type="button"
-          onClick={() => setCollapsed(true)}
-          aria-label="Collapse the roster"
-          className="btn btn-secondary px-2 py-1 text-[12px]"
-        >
-          ‹
-        </button>
       </div>
 
       {groups.map((group) => (
@@ -142,12 +132,17 @@ function SidebarGroup({
                       : 'hover:bg-neutral-800/40'
                   }`}
                 >
-                  <RosterDot studentId={student.id} className="h-2 w-2 shrink-0 rounded-full" />
+                  <RosterDot
+                    studentId={student.id}
+                    studentName={student.name}
+                    className="h-2 w-2 shrink-0 rounded-full"
+                  />
                   <span
                     className={`truncate text-[12.5px] ${active ? 'font-medium text-text' : 'text-text/85'}`}
                   >
                     {student.name}
                   </span>
+                  {student.has_ai_analysis && <AiBadge />}
                 </Link>
               </li>
             );
@@ -155,53 +150,5 @@ function SidebarGroup({
         </ul>
       )}
     </div>
-  );
-}
-
-/** The thin dots-only rail shown when the roster is collapsed. */
-function CollapsedRail({
-  groups,
-  activeStudentId,
-  onExpand,
-}: {
-  groups: { students: Student[] }[];
-  activeStudentId: number;
-  onExpand: () => void;
-}) {
-  const students = groups.flatMap((g) => g.students);
-  return (
-    <nav
-      aria-label="Students"
-      className="sticky top-4 flex flex-col items-center gap-3 rounded-lg bg-surface py-3 elev-sm"
-    >
-      <button
-        type="button"
-        onClick={onExpand}
-        aria-label="Expand the roster"
-        className="btn btn-secondary px-2 py-1 text-[12px]"
-      >
-        ›
-      </button>
-      {students.map((student) => {
-        const active = student.id === activeStudentId;
-        return (
-          <Link
-            key={student.id}
-            to={`/students/${student.id}`}
-            aria-label={student.name}
-            title={student.name}
-            aria-current={active ? 'page' : undefined}
-            className="grid place-items-center"
-          >
-            <RosterDot
-              studentId={student.id}
-              className={`h-2.5 w-2.5 rounded-full ${
-                active ? 'ring-2 ring-accent ring-offset-2 ring-offset-surface' : ''
-              }`}
-            />
-          </Link>
-        );
-      })}
-    </nav>
   );
 }
