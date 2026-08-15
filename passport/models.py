@@ -84,6 +84,7 @@ class StudentRecord(models.Model):
     PARENT_INPUT = 'parent_input'
     STUDENT_INPUT = 'student_input'
     QUESTION = 'question'
+    APP_INTEGRATION = 'app_integration'
     SOURCES = [
         (SIS, 'Student information system'),
         (ASSESSMENT, 'Assessment'),
@@ -96,8 +97,16 @@ class StudentRecord(models.Model):
         (PARENT_INPUT, 'Guardian input'),
         (STUDENT_INPUT, 'Student input'),
         (QUESTION, 'Asked question'),
+        (APP_INTEGRATION, 'Learning-app activity (practice or reading session)'),
     ]
 
+    # APP_INTEGRATION rows are one per practice or reading session. `data` shape:
+    #   {"app": "Fraction Fluency", "subject": "Mathematics",
+    #    "duration_minutes": 18,
+    #    "questions": [{"topic": "fractions - adding", "correct": true, "seconds": 22}, ...]}
+    # `kind` is 'practice_session' or 'reading_session'. Every helper that reads
+    # `questions` must tolerate it being absent — a session record with no
+    # question breakdown is still a valid record.
     student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='records')
     source = models.CharField(max_length=24, choices=SOURCES)
     kind = models.CharField(max_length=64, blank=True)
@@ -129,3 +138,25 @@ class Passport(models.Model):
 
     def __str__(self):
         return f'Passport for {self.student}'
+
+
+class DailyDigest(models.Model):
+    """Cached LLM-written summary of one day's APP_INTEGRATION activity.
+
+    Separate from `Passport`: the passport is the whole-year narrative,
+    this is a single day's, and a student can have many. Regenerated the
+    same way — on demand, or when the day's record count has drifted.
+    """
+
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='digests')
+    date = models.DateField()
+    summary = models.JSONField(default=dict)
+    generated_at = models.DateTimeField(auto_now=True)
+    record_count = models.IntegerField(default=0)
+
+    class Meta:
+        unique_together = [('student', 'date')]
+        ordering = ['-date']
+
+    def __str__(self):
+        return f'Digest for {self.student} on {self.date}'

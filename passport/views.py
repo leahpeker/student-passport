@@ -17,13 +17,14 @@ from django.db.models import Q
 from django.http import Http404
 from django.middleware.csrf import get_token
 from django.utils import timezone
+from django.utils.dateparse import parse_date
 from rest_framework import status
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-from .models import Classroom, Guardianship, Passport, Profile, Student, StudentRecord
-from .narrative import answer_question, build_sections
+from .models import Classroom, DailyDigest, Guardianship, Passport, Profile, Student, StudentRecord
+from .narrative import answer_question, build_digest, build_sections
 from .serializers import (
     ClassroomSerializer,
     GuardianSerializer,
@@ -277,6 +278,96 @@ def ask(request, pk):
         'question': question,
         'answer': answer,
         'cited_record_ids': cited,
+    })
+
+
+# ---------------------------------------------------------------------------
+# Daily digest — a single day's APP_INTEGRATION activity, not the passport
+# ---------------------------------------------------------------------------
+
+def _digest_day(student, requested):
+    """`requested` (an ISO date string) if it parses, else the most recent
+    date this student has app-integration activity on."""
+    if requested:
+        parsed = parse_date(requested)
+        if parsed:
+            return parsed
+    return (
+        student.records.filter(source=StudentRecord.APP_INTEGRATION)
+        .order_by('-date').values_list('date', flat=True).first()
+    )
+
+
+def cached_digest(student, day, refresh=False):
+    """(summary, generated_at, record_count) for one student, one day.
+
+    Same regeneration policy as the passport: refresh, nothing cached, or the
+    day's record count has drifted. That count is the day's app sessions only,
+    so a record written elsewhere in the file does not re-run the model.
+
+    `build_digest` gets the whole file rather than the day's app rows. The
+    triage stays computed from app data alone, but the reason behind it
+    usually sits in another source, and that is what the narrative is for. It
+    splits the day from its prior baseline itself, so a digest never compares
+    a pace against a future the student has not lived yet.
+    """
+    row, _ = DailyDigest.objects.get_or_create(student=student, date=day)
+    day_count = student.records.filter(
+        source=StudentRecord.APP_INTEGRATION, date=day
+    ).count()
+    if not refresh and row.summary and row.record_count == day_count:
+        return row.summary, row.generated_at, row.record_count
+
+    # Questions are excluded for the same reason the passport excludes them:
+    # the narrative must not be built out of earlier narratives.
+    records = list(
+        student.records.select_related('author').exclude(source=StudentRecord.QUESTION)
+    )
+    summary, from_model = build_digest(student, records, day)
+    if not from_model:
+        return summary, timezone.now(), day_count
+    row.summary = summary
+    row.record_count = day_count
+    row.save()
+    return row.summary, row.generated_at, row.record_count
+
+
+@api_view(['GET'])
+def digest(request, pk):
+    """?date=YYYY-MM-DD, defaulting to the student's most recent day of app
+    activity. ?refresh=1 forces regeneration. A student with no app activity
+    at all gets a placeholder, not an error — tolerant by design.
+
+    Teachers only. The narrative is written from the whole file, so it can
+    quote a behaviour entry or an observation — the two sources a student may
+    not read. One prose blob has no field to blank the way the passport
+    blanks `sections['behavior']`, so the boundary has to be the endpoint.
+    404, not 403, to match every other student-scoped view here.
+    """
+    if role_of(request.user) != Profile.TEACHER:
+        raise Http404
+    student = visible_student(request, pk)
+    day = _digest_day(student, request.query_params.get('date'))
+    if day is None:
+        return Response({
+            'student_id': student.id,
+            'date': None,
+            'generated_at': None,
+            'record_count': 0,
+            'action': 'check_in',
+            'headline': f'No app activity is on file for {student.first_name} yet.',
+            'narrative': '',
+            'topics': [],
+            'flags': [],
+        })
+
+    refresh = request.query_params.get('refresh') in ('1', 'true', 'yes')
+    summary, generated_at, record_count = cached_digest(student, day, refresh=refresh)
+    return Response({
+        'student_id': student.id,
+        'generated_at': generated_at,
+        'record_count': record_count,
+        **summary,
     })
 
 

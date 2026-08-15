@@ -33,6 +33,7 @@ PER_SOURCE_CAP = {
     StudentRecord.ENGAGEMENT: 12,
     StudentRecord.ATTENDANCE: 14,
     StudentRecord.ASSESSMENT: 20,
+    StudentRecord.APP_INTEGRATION: 8,
 }
 DEFAULT_CAP = 30
 BODY_CHARS = 400
@@ -201,7 +202,35 @@ def facts(records):
     ):
         lines.append(f'{label}: {len(grouped.get(source, []))} on file.')
 
+    app_line = app_activity_facts(grouped.get(StudentRecord.APP_INTEGRATION, []))
+    if app_line:
+        lines.append(app_line)
+
     return lines
+
+
+def app_activity_facts(app_records):
+    """One overview line across a student's whole app history — not a single
+    day. Gives the passport and ask/ a cheap sense that this source exists,
+    the way every other source already gets one line here."""
+    if not app_records:
+        return None
+    stats = app_topic_stats(app_records)
+    attempted = sum(s['attempted'] for s in stats.values())
+    if not attempted:
+        return None
+    correct = sum(s['correct'] for s in stats.values())
+    weakest = min(
+        (kv for kv in stats.items() if kv[1]['attempted'] >= MIN_ATTEMPTS_FOR_FLAG),
+        key=lambda kv: kv[1]['accuracy'], default=None,
+    )
+    line = (
+        f'App activity: {len(app_records)} sessions on file, '
+        f'{correct / attempted:.0%} overall accuracy across {len(stats)} topics.'
+    )
+    if weakest:
+        line += f' Weakest so far: {weakest[0]} at {weakest[1]["accuracy"]:.0%}.'
+    return line
 
 
 # ---------------------------------------------------------------------------
@@ -427,6 +456,339 @@ def answer_question(student, question, records, sections=None, role='teacher'):
     if not answer:
         return fallback_answer(student, question, records), consulted, False
     return answer, cited or consulted, True
+
+
+def app_topic_stats(records):
+    """{topic: {'attempted', 'correct', 'accuracy', 'avg_seconds'}} from a set
+    of APP_INTEGRATION session records. Ignores sessions with no question
+    breakdown — a session record is still valid without one."""
+    totals = defaultdict(lambda: {'attempted': 0, 'correct': 0, 'seconds': 0})
+    for record in records:
+        data = record.data if isinstance(record.data, dict) else {}
+        for question in data.get('questions') or []:
+            if not isinstance(question, dict):
+                continue
+            topic = str(question.get('topic') or 'unspecified')
+            row = totals[topic]
+            row['attempted'] += 1
+            row['correct'] += 1 if question.get('correct') else 0
+            seconds = question.get('seconds')
+            if isinstance(seconds, (int, float)) and not isinstance(seconds, bool):
+                row['seconds'] += seconds
+
+    stats = {}
+    for topic, row in totals.items():
+        n = row['attempted']
+        stats[topic] = {
+            'attempted': n,
+            'correct': row['correct'],
+            'accuracy': row['correct'] / n if n else 0.0,
+            'avg_seconds': row['seconds'] / n if n else 0.0,
+        }
+    return stats
+
+
+# A topic needs this many attempts before a flag means anything; three wrong
+# out of three is noise, three wrong out of twelve is a pattern.
+MIN_ATTEMPTS_FOR_FLAG = 4
+ACCURACY_CONCERN = 0.5
+ACCURACY_WATCH = 0.7
+# Flagged when a topic takes this much longer than the student's own baseline
+# for it — a personal comparison, not a fixed number of seconds.
+PACE_RATIO_CONCERN = 1.8
+
+
+def digest_flags(today_stats, baseline_stats):
+    """Deterministic flags from computed accuracy and pace. Never left to the
+    model to invent: a flag is either backed by a real threshold or it does
+    not exist."""
+    flags = []
+    for topic, stats in sorted(today_stats.items()):
+        if stats['attempted'] < MIN_ATTEMPTS_FOR_FLAG:
+            continue
+        if stats['accuracy'] < ACCURACY_CONCERN:
+            flags.append({
+                'topic': topic, 'kind': 'accuracy', 'severity': 'concern',
+                'detail': f"{stats['correct']} of {stats['attempted']} correct today.",
+            })
+        elif stats['accuracy'] < ACCURACY_WATCH:
+            flags.append({
+                'topic': topic, 'kind': 'accuracy', 'severity': 'watch',
+                'detail': f"{stats['correct']} of {stats['attempted']} correct today.",
+            })
+
+        base = baseline_stats.get(topic)
+        if base and base['avg_seconds'] > 0 and stats['avg_seconds'] > 0:
+            ratio = stats['avg_seconds'] / base['avg_seconds']
+            if ratio >= PACE_RATIO_CONCERN:
+                flags.append({
+                    'topic': topic, 'kind': 'pace', 'severity': 'watch',
+                    'detail': (
+                        f"Taking about {ratio:.1f}x as long per question on this "
+                        'topic as their own average.'
+                    ),
+                })
+    return flags
+
+
+# The one-day triage a teacher or guardian acts on. Computed from the flags,
+# not left to the model: severity already carries the judgment, this just
+# names the response it calls for.
+ACTION_INTERVENE = 'intervene'
+ACTION_CHECK_IN = 'check_in'
+ACTION_CELEBRATE = 'celebrate'
+
+
+def suggested_action(flags):
+    severities = {f['severity'] for f in flags}
+    if 'concern' in severities:
+        return ACTION_INTERVENE
+    if 'watch' in severities:
+        return ACTION_CHECK_IN
+    return ACTION_CELEBRATE
+
+
+# A session's shape carries as much as its score. These thresholds decide
+# only whether an observation is worth making at all — nothing here can move
+# the triage, which stays on accuracy and pace.
+MIN_QUESTIONS_FOR_SHAPE = 8
+HALF_SPLIT_DELTA = 0.3
+WRONG_STREAK = 3
+PACE_GAP = 1.4
+
+
+def session_shape(record):
+    """Plain observations read out of one session's question sequence.
+
+    Accuracy alone does not tell a teacher what to do. Four misses in a row is
+    hitting a wall; four scattered through the set is carelessness. Wrong
+    answers that came faster than the right ones is clicking through; wrong
+    answers that took longer is genuine effort on something hard. Same score,
+    three different conversations — and it is all already sitting in the
+    per-question data the app partner sends.
+    """
+    data = record.data if isinstance(record.data, dict) else {}
+    questions = [q for q in (data.get('questions') or []) if isinstance(q, dict)]
+    if len(questions) < MIN_QUESTIONS_FOR_SHAPE:
+        return []
+
+    marks = [bool(q.get('correct')) for q in questions]
+    topic = str(questions[0].get('topic') or 'this topic')
+    out = []
+
+    half = len(marks) // 2
+    first, second = marks[:half], marks[half:]
+    opened, closed = sum(first) / len(first), sum(second) / len(second)
+    if opened - closed >= HALF_SPLIT_DELTA:
+        out.append(
+            f'{topic}: faded across the session — {sum(first)} of {len(first)} right to '
+            f'start, {sum(second)} of {len(second)} after that.'
+        )
+    elif closed - opened >= HALF_SPLIT_DELTA:
+        out.append(
+            f'{topic}: warmed up — {sum(first)} of {len(first)} right to start, '
+            f'{sum(second)} of {len(second)} after that.'
+        )
+
+    streak = longest = 0
+    for mark in marks:
+        streak = 0 if mark else streak + 1
+        longest = max(longest, streak)
+    if longest >= WRONG_STREAK:
+        out.append(
+            f'{topic}: missed {longest} in a row at the worst stretch, not scattered misses.'
+        )
+
+    def mean_seconds(want):
+        values = [q['seconds'] for q, mark in zip(questions, marks)
+                  if mark == want and isinstance(q.get('seconds'), (int, float))
+                  and not isinstance(q.get('seconds'), bool)]
+        return sum(values) / len(values) if values else None
+
+    hit, miss = mean_seconds(True), mean_seconds(False)
+    if hit and miss:
+        if miss >= hit * PACE_GAP:
+            out.append(
+                f'{topic}: the misses took longer than the hits ({miss:.0f}s against '
+                f'{hit:.0f}s) — worked at rather than rushed.'
+            )
+        elif hit >= miss * PACE_GAP:
+            out.append(
+                f'{topic}: the misses came faster than the hits ({miss:.0f}s against '
+                f'{hit:.0f}s) — answered quickly rather than worked through.'
+            )
+    return out
+
+
+def app_digest_facts(day_records, day, topic_stats, flags):
+    lines = []
+    sessions = sorted(day_records, key=lambda r: r.title)
+    if not sessions:
+        return ['No app activity on file for this date.']
+    lines.append(
+        f'{len(sessions)} session(s) on {day}: '
+        + '; '.join(f'{r.title} ({int(_num(r, "duration_minutes") or 0)} min)' for r in sessions)
+    )
+    for topic, stats in sorted(topic_stats.items()):
+        lines.append(
+            f'Topic "{topic}": {stats["correct"]}/{stats["attempted"]} correct, '
+            f'avg {stats["avg_seconds"]:.0f}s per question.'
+        )
+    lines += day_insights(sessions)
+    if flags:
+        lines.append('Computed flags: ' + '; '.join(
+            f'{f["topic"]} ({f["kind"]}, {f["severity"]}): {f["detail"]}' for f in flags
+        ))
+    else:
+        lines.append('No flags met the threshold today.')
+    return lines
+
+
+def day_insights(day_records):
+    """Every session's shape for one day, in a stable order."""
+    return [line for record in sorted(day_records, key=lambda r: r.title)
+            for line in session_shape(record)]
+
+
+DIGEST_PROMPT = """{context}
+
+TODAY'S APP ACTIVITY ({date}):
+{app_facts}
+
+TODAY'S APP SESSION RECORDS:
+{app_records}
+
+The computed triage for today, from today's app performance alone, is: {action}
+- intervene: at least one topic is a real concern — accuracy well below
+  chance, or a topic taking far longer than this student's own pace.
+- check_in: something is a little off and worth a quick look. Not urgent.
+- celebrate: today's app work was solid or better.
+
+Write a one-day digest for whoever checks in on {name} today. A teacher
+reading this wants to know WHY the day looked this way, not just the score —
+so use everything above, not only today's app numbers. If the wider record
+(attendance, behaviour, engagement, a guardian or student note, a past
+observation) offers a plausible reason for today's pattern, name it. If
+nothing in the record explains it, say the day stands on its own; do not
+invent a connection that is not supported above.
+
+Reply with JSON only, no prose around it, using exactly these keys:
+
+{{
+  "action": "intervene" | "check_in" | "celebrate",
+  "headline": "...",
+  "narrative": "..."
+}}
+
+- action: must match the computed triage above exactly. Your job is to
+  explain it, not re-decide it.
+- headline: one sentence, the single most useful thing to know about today.
+  Where a flag drove the triage, name that topic in it.
+- narrative: 3-5 sentences, in two moves.
+  First, WHAT: name the actual topics behind today's triage, the way a
+  teacher would say them out loud — "stuck on adding fractions", "lost the
+  thread on the inference questions" — never a bare score and never
+  "one topic". Say HOW the work went, not only how much was right: the
+  facts above tell you whether they faded or warmed up, whether the misses
+  ran together or scattered, and whether the wrong answers were slower than
+  the right ones (working at it) or faster (clicking through). That
+  distinction is the most useful thing on the page, because it changes what
+  the teacher should do — reteach the content, or sit with them while they
+  do it. Use it whenever it is there. If the action is "celebrate", name
+  what specifically went well with the same specificity.
+  Then, WHY: a reason from the wider record above, if one is genuinely
+  there — an absence, a behaviour entry, a flat period, something home or
+  the student wrote, an older observation that shows the same thing. Say
+  plainly that the day stands on its own if nothing in the record explains
+  it. A cause you cannot point at a record for is an invention; so is a
+  number or a flag that is not above.
+
+This is read by an adult deciding whether {name} needs anything today, so be
+direct. Skip sample sizes and jargon: "about half" not "50% (n=8)".
+"""
+
+
+def build_digest(student, all_records, day):
+    """(summary, from_model). `all_records` is the student's whole record set,
+    the same as the passport uses — the reason an app score dipped usually
+    lives in a different source (attendance, a guardian note, engagement),
+    not in the app data alone. The triage itself stays computed from app data
+    only, so it never depends on what the model decides to notice.
+
+    Nothing dated after `day` reaches the model. A digest for a past day is
+    written from what was known that day, so the "why" can never be a record
+    the student had not lived yet.
+    """
+    all_records = [r for r in all_records if r.date <= day]
+    app_records = [r for r in all_records if r.source == StudentRecord.APP_INTEGRATION]
+    day_records = [r for r in app_records if r.date == day]
+    baseline_records = [r for r in app_records if r.date < day]
+
+    topic_stats = app_topic_stats(day_records)
+    baseline_stats = app_topic_stats(baseline_records)
+    flags = digest_flags(topic_stats, baseline_stats)
+    facts_lines = app_digest_facts(day_records, day, topic_stats, flags)
+    # No app activity at all is itself worth a look, not a reason to praise.
+    action = suggested_action(flags) if day_records else ACTION_CHECK_IN
+
+    base = {
+        'date': str(day),
+        'action': action,
+        'topics': [{'topic': t, **s} for t, s in sorted(topic_stats.items())],
+        'flags': flags,
+        # Computed the same way the flags are, and exposed for the same
+        # reason: a client can show these verbatim without waiting on Claude.
+        'insights': day_insights(day_records),
+    }
+
+    if not day_records:
+        return {
+            **base,
+            'headline': f'No app activity on file for {student.first_name} on {day}.',
+            'narrative': '',
+        }, False
+
+    try:
+        reply = complete(
+            DIGEST_PROMPT.format(
+                context=context_block(student, all_records),
+                name=student.first_name,
+                date=day,
+                action=action,
+                app_facts='\n'.join(f'- {line}' for line in facts_lines),
+                app_records='\n'.join(record_lines(day_records)),
+            ),
+            system=SYSTEM,
+            max_tokens=700,
+        )
+        parsed = _json_object(reply)
+        # `base['action']` is already the computed triage. The model was asked
+        # to echo it so the prompt keeps it in view while writing, but its
+        # copy is never read back — only `headline`/`narrative` are its own.
+        return {
+            **base,
+            'headline': str(parsed.get('headline') or '').strip(),
+            'narrative': str(parsed.get('narrative') or '').strip(),
+        }, True
+    except Exception as error:
+        logger.warning('digest fell back to records: %s', error)
+        return fallback_digest(student, base, facts_lines), False
+
+
+def fallback_digest(student, base, facts_lines):
+    preface = (
+        'The AI narrative is not configured on this server, so this digest is '
+        'assembled from the records themselves.'
+    )
+    concerning = [f for f in base['flags'] if f['severity'] == 'concern']
+    watching = [f for f in base['flags'] if f['severity'] == 'watch']
+    if concerning:
+        headline = f"{concerning[0]['topic']}: {concerning[0]['detail']}"
+    elif watching:
+        headline = f"{watching[0]['topic']}: {watching[0]['detail']}"
+    else:
+        headline = f'No flags today for {student.first_name}.'
+    return {**base, 'headline': headline, 'narrative': f'{preface} {" ".join(facts_lines)}'.strip()}
 
 
 def fallback_answer(student, question, records):
