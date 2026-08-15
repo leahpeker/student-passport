@@ -1,44 +1,9 @@
 import { useCallback, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { getClassrooms } from '../api/client';
-import type { Classroom, Student } from '../api/types';
 import { AsyncState } from '../components/AsyncState';
 import { Tabs } from '../components/Tabs';
+import { TeacherRoster } from '../components/TeacherRoster';
 import { useAsync } from '../lib/useAsync';
-
-function initialsOf(student: Student): string {
-  return `${student.first_name[0] ?? ''}${student.last_name[0] ?? ''}`.toUpperCase();
-}
-
-function Roster({ classroom }: { classroom: Classroom }) {
-  return (
-    <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-      {classroom.students.map((student: Student) => (
-        <li key={student.id}>
-          <Link
-            to={`/students/${student.id}`}
-            className="card elev-sm block h-full transition-colors hover:bg-neutral-800/40"
-          >
-            <div className="flex items-center gap-2.5">
-              <span aria-hidden="true" className="avatar h-7 w-7 text-[11px]">
-                {initialsOf(student)}
-              </span>
-              <span className="truncate text-[13.5px] font-medium text-text">
-                {student.name}
-              </span>
-            </div>
-            <span className="text-[11px] text-muted">
-              Grade {student.grade} · {student.pronouns}
-            </span>
-            <span className="mt-1 text-[12px] font-medium text-accent">
-              Open passport
-            </span>
-          </Link>
-        </li>
-      ))}
-    </ul>
-  );
-}
 
 export function TeacherView() {
   const load = useCallback(() => getClassrooms(), []);
@@ -75,7 +40,7 @@ export function TeacherView() {
         onChange={setActiveId}
       >
         <h2 className="sr-only">{active.name} roster</h2>
-        <Roster classroom={active} />
+        <TeacherRoster classroom={active} />
       </Tabs>
     </div>
   );

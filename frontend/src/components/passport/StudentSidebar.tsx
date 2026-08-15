@@ -1,27 +1,15 @@
 import { useCallback, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getClassrooms, getDigest } from '../../api/client';
+import { getClassrooms } from '../../api/client';
 import type { Classroom, Me, Student } from '../../api/types';
 import { useAsync } from '../../lib/useAsync';
-import { pulseFromDigest, pulseTone, type PulseTone } from '../../lib/pulse';
+import { usePulse } from '../../lib/useRosterPulse';
 import { toneDot } from './tone';
 
-/**
- * The dot's colour for one roster row. Real when the backend has a computed
- * digest for this viewer (teacher only — see `getDigest`); the authored
- * fixture otherwise, so a guardian, a student, or a still-loading row never
- * renders as a broken or missing dot.
- */
-function useRosterTone(studentId: number): PulseTone {
-  const load = useCallback(() => getDigest(studentId), [studentId]);
-  const { data: digest } = useAsync(load);
-  return digest ? pulseFromDigest(digest, '').tone : pulseTone(studentId);
-}
-
-/** One roster dot. Its own component so `useRosterTone` gets one hook
- * instance per student rather than being called inside a `.map()`. */
+/** One roster dot. Its own component so `usePulse` gets one hook instance
+ * per student rather than being called inside a `.map()`. */
 function RosterDot({ studentId, className }: { studentId: number; className: string }) {
-  const tone = useRosterTone(studentId);
+  const tone = usePulse(studentId).tone;
   return <span aria-hidden="true" className={`${className} ${toneDot[tone]}`} />;
 }
 
